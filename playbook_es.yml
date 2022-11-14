@@ -1,0 +1,16 @@
+---
+## --------------------------------------------------------------------
+## Elasticsearch
+## --------------------------------------------------------------------
+- hosts: es
+  tags:
+    - elasticsearch
+  roles:
+    - role: filesystem
+      filesystem_list: "{{ elasticsearch_filesystem_list }}"
+      tags:
+        - elasticsearch
+    - role: elasticsearch
+      tags:
+        - elasticsearch
+

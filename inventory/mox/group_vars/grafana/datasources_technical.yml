@@ -1,0 +1,92 @@
+grafana_datasources_technical_version: 1
+
+grafana_datasources_technical        :
+  ido_noe_qual :
+    url                          : "{{ haproxy_vip_noe_qual }}:9200"
+    pass                         : "{{ grafana_c1_ido_password }}"
+    pass_c3                      : "{{ grafana_c3_ido_password }}"
+    max_concurrent_shard_requests: 32
+    datasources                  :
+      - name         : metrics_deploy_rin_noe
+        index        : "[metrics_c1_deploy_]YYYY"
+        interval     : Yearly
+        group_by_time: "1h"
+      - name         : metrics_debug_ido_rin_noe
+        index        : "[metrics_c1_debug_ido_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "1m"
+      - name         : metrics_ida_rin_noe
+        index        : "[metrics_c1_app_ida_ido_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "1m"
+      - name         : metrics_debug_system_ido_rin_noe
+        index        : "[metrics_c1_system_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: 1m
+
+  ido_pacy_qual:
+    url                          : "{{ haproxy_vip_pacy_qual }}:9200"
+    pass                         : "{{ grafana_c1_ido_password }}"
+    pass_c3                      : "{{ grafana_c3_ido_password }}"
+    max_concurrent_shard_requests: 32
+    datasources                  :
+      - name         : metrics_deploy_rin_pacy
+        index        : "[metrics_c1_deploy_]YYYY"
+        interval     : Yearly
+        group_by_time: "1h"
+      - name         : metrics_debug_ido_rin_pacy
+        index        : "[metrics_c1_debug_ido_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "1m"
+      - name         : metrics_ida_rin_pacy
+        index        : "[metrics_c1_app_ida_ido_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "1m"
+      - name         : metrics_debug_system_ido_rin_pacy
+        index        : "[metrics_c1_system_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: 1m
+
+  idi_pacy_qual:
+    url                          : "{{ haproxy_vip_pacy_qual }}:9202"
+    pass                         : "{{ grafana_c1_idi_password }}"
+    pass_c3                      : "{{ grafana_c3_idi_password }}"
+    max_concurrent_shard_requests: 24
+    datasources                  :
+      - name         : metrics_debug_idi_rin_pacy
+        index        : "[metrics_c1_debug_idi_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "1m"
+
+  idl_pacy_qual:
+    url                          : "{{ haproxy_vip_pacy_qual }}:9201"
+    pass                         : "{{ grafana_c1_idl_password }}"
+    pass_c3                      : "{{ grafana_c3_idl_password }}"
+    max_concurrent_shard_requests: 24
+    datasources                  :
+      - name         : metrics_debug_idl_zse_pacy
+        index        : "[metrics_c1_debug_idl_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "1m"
+
+  ida_pacy_dev :
+    url                          : "{{ haproxy_vip_pacy_dev }}:9203"
+    pass                         : "{{ grafana_c1_ida_password }}"
+    pass_c3                      : "{{ grafana_c3_ida_password }}"
+    max_concurrent_shard_requests: 24
+    datasources                  :
+      - name         : metrics_ida_dev_pacy
+        index        : "[metrics_c1_app_ida_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: "10m"
+        zs2          : true
+      - name         : metrics_debug_ida_dev_pacy
+        index        : "[metrics_c1_debug_ida_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: 1m
+        zs2          : true
+      - name         : metrics_debug_system_ida_dev_pacy
+        index        : "[metrics_c1_system_]YYYY.MM.DD"
+        interval     : Daily
+        group_by_time: 1m
+        zs2          : true

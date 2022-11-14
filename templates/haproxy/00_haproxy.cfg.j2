@@ -1,0 +1,88 @@
+# reference: http://www.haproxy.org/download/2.0/doc/configuration.txt
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    log         127.0.0.1 local3 err
+
+    # logging notes
+    # 1) configuration above sends haproxy events to local syslog as local2
+    #
+    # 2) configuration for rsyslog is in /etc/rsyslog.d/haproxy.conf
+    #
+    # 3) optionally disable local2 events going to /var/log/messages
+    #    by editing /etc/rsyslog.conf
+    #
+    #    # Don't log local2/haproxy events in messages
+    #    *.info;mail.none;authpriv.none;cron.none;local2.none    /var/log/messages
+    #
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    user        haproxy
+    group       haproxy
+    ca-base     {{ haproxy_certs_path }}
+    crt-base    {{ haproxy_certs_path }}
+    master-worker
+    maxconn     {{ haproxy_maxconn }}
+
+    # turn on stats unix socket
+    stats socket {{ haproxy_socket }}
+    ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+    ssl-default-server-options ssl-min-ver TLSv1.2 no-tls-tickets
+
+    # https://confluence.enedis.fr/x/c5-XBw: HAP_SEC_AAA_03
+    ssl-default-bind-ciphers          {{ haproxy_ssl_ciphers }}
+    ssl-default-server-ciphers        {{ haproxy_ssl_ciphers }}
+
+    tune.ssl.default-dh-param 2048
+    ssl-load-extra-files bundle key
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    tcp
+    log                     global
+    option                  dontlognull
+    option                  dontlog-normal
+    option                  redispatch
+    option                  log-separate-errors
+    retries                 3
+    timeout queue           1m
+    timeout connect         5s
+    timeout client          5m
+    timeout server          5m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    balance                 roundrobin
+    log-format              %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tw/%Tc/%Tt\ %B\ %ts\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %sslv\ %sslc
+    errorfile 503           {{ haproxy_config_folder }}/503.html
+
+{# https://www.haproxy.com/fr/blog/haproxy-log-customization/ #}
+{# log-format explanation #}
+{# %ci client IP #}
+{# %cp client port #}
+{# %t datetime (with millisecond resolution) #}
+{# %ft frontend name transport (‘~’ suffix for SSL) #}
+{# %b backend name #}
+{# %s server name #}
+{# %Tw #}
+{# %Tc time to establish TCP connection to server #}
+{# %Tt total session duration time #}
+{# %B bytes read #}
+{# %ts termination state #}
+{# %ac process concurrent connections #}
+{# %fc frontend concurrent connections #}
+{# %bc backend concurrent connections #}
+{# %sc server concurrent connections #}
+{# %rc number of retries #}
+{# %sq server queue #}
+{# %bq backend queue #}
+{# %sslv SSL version (e.g. TSLv1) #}
+{# %sslc SSL cipher used (e.g. AES-SHA) #}
+
+{#                                           %ci         :%cp   %ft           %b          /%s     %Tw/%Tc/%Tt %B  %ts %ac/%fc/%bc/%sc/%rc %sq/%bq #}
+{# Dec 11 09:52:05 localhost haproxy[26253]: 10.205.36.88:58754 frontend_ido~ backend_ido/<NOSRV> -1/-1 /1    211 PR  237/58 /1  /0  /3   0  / 0 #}
+

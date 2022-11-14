@@ -1,0 +1,50 @@
+---
+- name: ajout des rêgles iptables
+  become: true
+  iptables:
+    action: insert
+    chain: INPUT
+    protocol: tcp
+    ctstate: NEW,ESTABLISHED
+    match: tcp
+    destination_port: "{{ grafana_http_port }}"
+    jump: ACCEPT
+    state: present
+  notify: grafana - sauvegarde de la configuration iptables
+  when: grafana_enable_iptables|bool
+  tags: iptables
+
+- name: Création du dossier DATASOURCES
+  become: true
+  file:
+    path: "{{ grafana_datasources_dir }}"
+    owner: "{{ grafana_owner }}"
+    group: "{{ grafana_group }}"
+    mode: "0750"
+    state: directory
+  when: grafana_datasources_dir is not none
+
+- name: création des répertoires dashboards, notifiers et plugins
+  become: true
+  file:
+    path: "/var/lib/grafana/{{ item }}"
+    owner: "{{ grafana_owner }}"
+    group: "{{ grafana_group }}"
+    mode: "0750"
+    state: directory
+  loop:
+    - notifiers
+    - dashboards
+    - plugins
+
+- name: sécurisation des dossiers
+  become: true
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(grafana_owner) }}"
+    group: "{{ item.group | default(grafana_group) }}"
+    mode: "{{ item.mode | default('g-w,o-rwx') }}"
+    state: directory
+    recurse: true
+  loop: "{{ grafana_system_directories }}"
+

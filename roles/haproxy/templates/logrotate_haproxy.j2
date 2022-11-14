@@ -1,0 +1,27 @@
+{{ haproxy_log_dir }}/haproxy-error.log {
+    daily
+    rotate 30
+    maxsize {{ haproxy_logrotate_max_size }}
+    missingok
+    notifempty
+    compress
+    delaycompress
+    sharedscripts
+    postrotate
+        /bin/kill -HUP `cat /var/run/*syslogd.pid 2> /dev/null` 2> /dev/null || true
+    endscript
+}
+
+{{ haproxy_log_dir }}/haproxy.log {
+    daily
+    rotate 10
+    maxsize {{ haproxy_logrotate_max_size }}
+    missingok
+    notifempty
+    compress
+    delaycompress
+    sharedscripts
+    postrotate
+        /bin/kill -HUP `cat /var/run/syslogd.pid 2> /dev/null` 2> /dev/null || true
+    endscript
+}

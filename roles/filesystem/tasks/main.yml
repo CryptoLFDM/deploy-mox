@@ -1,0 +1,98 @@
+---
+
+# A propos des namespace de montage:
+# la demande de sécurité CSS_45 requiert l'isolation des espaces temporaires
+# (/tmp, /var/tmp) pour chaque session utilisateur.
+# Dans ce cas, le montage d'un FS par le module ansible 'mount' ne sera
+# réalisé QUE pour la session de l'utilisateur courant et non pas pour "tout le
+# monde" (namespace global).
+# Lors du montage d'un FS par ansible, il faut donc ensuite monter ce FS dans le
+# namespace global (celui du PID 1) pour qu'il soit monté dans toutes les
+# sessions utilisateurs, ce qui évite de rebooter pour qu'un tel montage soit
+# disponible globalement.
+
+- name: LVM vg | Création/extension des LVM VolumeGroup
+  include_tasks: lvm_vg_create_extend.yml
+  when: filesystem_lvm_vg_list | length > 0
+
+- name: LVM pvs | Extention des LVM PhysicalVolume
+  include_tasks: disk_pvs_extend.yml
+  when: filesystem_lvm_vg_extend_pvs_all or filesystem_lvm_vg_extend_pvs_list | length > 0
+
+- name: LVM lv | ré-ordonne filesystem_list par le path
+  set_fact:
+    filesystem_list: "{{ filesystem_list | sort(attribute='path') }}"
+
+- name: LVM lv | teste si le lv existe déjà
+  stat:
+    path: "/dev/{{ item.vg }}/{{ item.lv }}"
+    follow: yes
+  loop: "{{ filesystem_list }}"
+
+- name: LVM lv | crée/redimensionne le lv
+  become: true
+  lvol:
+    vg: "{{ item.vg }}"
+    lv: "{{ item.lv }}"
+    size: "{{ item.size }}"
+    shrink: "{{ item.shrink|default('no') }}"
+    force: "{{ item.force|default('no') }}"
+  loop: "{{ filesystem_list }}"
+
+- name: LVM lv | formate (creation) ou agrandit le fs
+  become: true
+  filesystem:
+    fstype: "{{ item.fstype }}"
+    dev: "/dev/{{ item.vg }}/{{ item.lv }}"
+    resizefs: "{{ item.resizefs | default('yes') }}"
+    # etre sur de ne pas massacrer un FS existant
+    force: no
+  loop: "{{ filesystem_list }}"
+
+- name: Namespace mount | evaluation isolation active ou pas
+  become: True
+  # renvoie 0 si ns isole, 1 sinon (error ou 1 seul namespace)
+  shell: |
+    set -e
+    [ -x /usr/bin/lsns ] || exit 1
+    ns_courant="$(/usr/bin/lsns -t mnt -n -p $$ | awk '{print $1}')"
+    ns_global="$(/usr/bin/lsns -t mnt -n -p 1 | awk '{print $1}')"
+    echo "ns_courant=${ns_courant} ns_global=${ns_global}"
+    [ "${ns_courant}" = "" ] && exit 1
+    [ "${ns_courant}" = "${ns_global}" ] && exit 1
+    exit 0
+  #end shell
+  register: filesystem_ns_isolated
+  ignore_errors: true
+
+# si des FS sont imbriqués, chaque FS doit etre immediatement (globalement) disponible.
+- name: LVM lv FS | montage de chaque FS
+  include_tasks: each/fs_mount.yml
+  loop: "{{ filesystem_list }}"
+  loop_control:
+    loop_var: filesystem_item
+
+- name: LVM lv fs | modification du owner
+  become: true
+  file:
+    path : "{{ item.path }}"
+    owner: "{{ item.owner }}"
+  when: item.owner is defined
+  loop: "{{ filesystem_list }}"
+
+- name: LVM lv fs | modification du group
+  become: true
+  file:
+    path : "{{ item.path }}"
+    group: "{{ item.group }}"
+  when: item.group is defined
+  loop: "{{ filesystem_list }}"
+
+- name: LVM lv fs | modification du mode
+  become: true
+  file:
+    path : "{{ item.path }}"
+    mode: "{{ item.mode }}"
+  when: item.mode is defined
+  loop: "{{ filesystem_list }}"
+

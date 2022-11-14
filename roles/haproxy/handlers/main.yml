@@ -1,0 +1,22 @@
+---
+
+- name: haproxy restart rsyslog
+  become: true
+  systemd:
+    name: rsyslog
+    state: restarted
+
+- name: haproxy fact restart
+  set_fact:
+    haproxy_action: "restarted"
+
+- name: haproxy service action
+  become: true
+  systemd :
+    name: haproxy
+    state: "{{ haproxy_action | default('reloaded') }}"
+    daemon_reload: yes
+
+- name: haproxy sauvegarde de la configuration iptables
+  become: true
+  command: service iptables save

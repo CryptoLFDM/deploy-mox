@@ -1,0 +1,14 @@
+---
+#==================================================================
+# HAPROXY
+#==================================================================
+- hosts: haproxy
+  roles:
+    - role: filesystem
+      filesystem_list: "{{ haproxy_offset_filesystem_list }}"
+      tags:
+        - filesystem
+        - haproxy
+    - role: haproxy
+      tags:
+        - haproxy

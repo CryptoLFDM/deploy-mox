@@ -1,0 +1,11 @@
+---
+- name: Templatise les fichiers de configurations
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(elasticsearch_owner) }}"
+    group: "{{ item.group | default(elasticsearch_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ elasticsearch_custom_templates | union(elasticsearch_templates) }}"
+  notify: elasticsearch_need_restart

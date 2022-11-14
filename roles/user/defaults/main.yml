@@ -1,0 +1,33 @@
+---
+# Le nom du groupe
+user_group:
+
+# Le gid du groupe
+user_gid:
+
+# Le nom de l'utilisateur
+user_name:
+
+# L'uid de l'utilisateur
+user_uid:
+
+# Le shell de l'utilisateur
+user_shell: "/bin/bash"
+
+# Le commentaire de l'utilisateur
+user_comment:
+
+# Les groupes à ajouter à l'utilisateur
+user_groups:
+
+# Le nombre de jour avant expiration de l'utilisateur (-1 pour désactiver)
+user_expires: -1
+
+# Le nombre de jour avant expiration du mot de passe (-1 pour désactiver)
+user_password_expires: -1
+
+user_caccia_bin_path: "/usr/cac/bin/caccia_remote_access.sh"
+
+user_unlock_caccia: false
+
+user_changed: false

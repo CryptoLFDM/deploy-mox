@@ -1,0 +1,23 @@
+#---------------------------------------------------
+# Frontend for kibana (02_frontend.cfg)
+#---------------------------------------------------
+
+{% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
+{% if groups['kibana']|intersect(groups[stack_name])|length > 0 %}
+#---------------------------------------------------
+# Backend for kibana-{{ stack_name }}:5601 [http]
+#---------------------------------------------------
+backend backend_kibana-{{ stack_name }}
+    mode http
+{% if stack_name == 'ida' %}
+    default-server check ssl force-tlsv12 verify required ca-file ca-bundle.crt fall 2 rise 2
+{% else %}
+    default-server check ssl force-tlsv12 verify required ca-file {{ idatha_autority_file }} {% if not network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} fall 2 rise 2
+{% endif %}
+    http-request set-path %[path,regsub(/kibana_{{ stack_name }}/,/)]
+{% for item in groups['kibana']|intersect(groups[stack_name])|intersect(groups[site]) %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:5601 verifyhost {{ hostvars[item]['ansible_host'] }}
+{% endfor %}
+
+{% endif %}
+{% endfor %}

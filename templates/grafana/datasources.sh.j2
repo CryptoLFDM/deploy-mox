@@ -1,0 +1,183 @@
+#!/bin/bash
+
+### functions  ###
+
+function switch_datasource {
+  sed -i s/$1:$3/$2:$3/g {{ grafana_datasources_dir }}/datasources_project.yaml
+}
+
+function show_usage() {
+  echo -e "\nBascule les datasources Grafana VERS le cluster désiré.\n\nUtilisation :"
+  echo -e "\tdatasources <clusterName> -r/--restart (Optionnel)"
+  echo -e "\tValeurs acceptées : all-noe, all-pacy, all-zhb-noe, all-zhb-pacy, all-prod-zse-noe, all-prod-zse-pacy, all-hp-za-noe, all-hp-za-pacy, ido-noe, ido-pacy, idi-noe, idi-pacy, ido-noe-zse, ido-pacy-zse, idl-noe-zse, idl-pacy-zse, ido-noe-hp, ido-pacy-hp, idl-noe-hp, idl-pacy-hp"
+  echo -e "\t -r --restart (optionnel : redémarre Grafana après la bascule)"
+}
+if [[ "$#" -eq 0 ]]; then
+  show_usage
+elif [[ "$#" -ge 1 ]]; then
+  if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    show_usage
+    exit
+  fi
+  case "$1" in
+
+    all-noe) echo "Bascule de toutes les datasources vers NOE..."
+        #ido_noe
+        switch_datasource {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} {{ haproxy_vip_noe_rin | urlsplit('hostname') }} 9200
+        #idi_noe
+        switch_datasource {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} {{ haproxy_vip_noe_rin | urlsplit('hostname') }} 9202
+        #ido_noe_qual
+        switch_datasource {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} {{ haproxy_vip_noe_qual | urlsplit('hostname') }} 9200
+        #idl_noe_qual
+        switch_datasource {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} {{ haproxy_vip_noe_qual | urlsplit('hostname') }} 9201
+        #idi_noe_qual
+        switch_datasource {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} {{ haproxy_vip_noe_qual | urlsplit('hostname') }} 9202
+        #ido_noe_zse
+        switch_datasource {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} 9200
+        #idl_noe_zse
+        switch_datasource {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} 9201
+        #ido_noe_hp
+        switch_datasource {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} 9200
+        #idl_noe_hp
+        switch_datasource {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} 9201
+        ;;
+
+    all-pacy) echo "Bascule de toutes les datasources vers PACY..."
+        #ido_pacy
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9200
+        #idi_pacy
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9202
+        #ido_pacy_qual
+        switch_datasource {{ haproxy_vip_noe_qual | urlsplit('hostname') }} {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} 9200
+        #idl_pacy_qual
+        switch_datasource {{ haproxy_vip_noe_qual | urlsplit('hostname') }} {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} 9201
+        #idi_pacy_qual
+        switch_datasource {{ haproxy_vip_noe_qual | urlsplit('hostname') }} {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} 9202
+        #ido_pacy_zse
+        switch_datasource {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} 9200
+        #idl_pacy_zse
+        switch_datasource {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} 9201
+        #ido_pacy_hp
+        switch_datasource {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} 9200
+        #idl_pacy_hp
+        switch_datasource {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} 9201
+        ;;
+
+    all-zhb-noe) echo "Bascule de toutes les datasources de la zone ZHB vers NOE..."
+        #ido_noe
+        switch_datasource {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} {{ haproxy_vip_noe_rin | urlsplit('hostname') }} 9200
+        #idi_noe
+        switch_datasource {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} {{ haproxy_vip_noe_rin | urlsplit('hostname') }} 9202
+        ;;
+
+    all-zhb-pacy) echo "Bascule de toutes les datasources de la zone ZHB vers PACY..."
+        #ido_pacy
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9200
+        #idi_pacy
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9202
+        ;;
+
+    all-qual-noe) echo "Bascule de toutes les datasources de la zone QUAL vers NOE..."
+        #ido_noe_qual
+        switch_datasource {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} {{ haproxy_vip_noe_qual | urlsplit('hostname') }} 9200
+        #idl_noe_qual
+        switch_datasource {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} {{ haproxy_vip_noe_qual | urlsplit('hostname') }} 9201
+        #idi_noe_qual
+        switch_datasource {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} {{ haproxy_vip_noe_qual | urlsplit('hostname') }} 9202
+        ;;
+
+    all-qual-pacy) echo "Bascule de toutes les datasources de la zone QUAL vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9202
+        #ido_pacy_qual
+        switch_datasource {{ haproxy_vip_noe_qual | urlsplit('hostname') }} {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} 9200
+        #idl_pacy_qual
+        switch_datasource {{ haproxy_vip_noe_qual | urlsplit('hostname') }} {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} 9201
+        #idi_pacy_qual
+        switch_datasource {{ haproxy_vip_noe_qual | urlsplit('hostname') }} {{ haproxy_vip_pacy_qual | urlsplit('hostname') }} 9202
+        ;;
+
+    all-prod-zse-noe) echo "Bascule de toutes les datasources de la zone PROD ZSE vers NOE..."
+        #ido_noe_zse
+        switch_datasource {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} 9200
+        #idl_noe_zse
+        switch_datasource {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} 9201
+        ;;
+
+    all-prod-zse-pacy) echo "Bascule de toutes les datasources de la zone PROD ZSE vers PACY..."
+        #ido_pacy_zse
+        switch_datasource {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} 9200
+        #idl_pacy_zse
+        switch_datasource {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} 9201
+        ;;
+
+    all-hp-za-noe) echo "Bascule de toutes les datasources de la zone HP ZA vers NOE..."
+        #ido_noe_hp
+        switch_datasource {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} 9200
+        #idl_noe_hp
+        switch_datasource {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} 9201
+        ;;
+
+    all-hp-za-pacy) echo "Bascule de toutes les datasources de la zone HP ZA vers PACY..."
+        #ido_pacy_hp
+        switch_datasource {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} 9200
+        #idl_pacy_hp
+        switch_datasource {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} 9201
+        ;;
+
+    ido-noe) echo "Bascule des datasources OI vers NOE..."
+        switch_datasource {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} {{ haproxy_vip_noe_rin | urlsplit('hostname') }} 9200
+        ;;
+
+    ido-pacy) echo "Bascule des datasources OI vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9200
+        ;;
+
+    idi-noe) echo "Bascule des datasources ICAM/PRISME vers NOE..."
+        switch_datasource {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} {{ haproxy_vip_noe_rin | urlsplit('hostname') }} 9202
+        ;;
+
+    idi-pacy) echo "Bascule des datasources ICAM/PRISME vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_rin | urlsplit('hostname') }} {{ haproxy_vip_pacy_rin | urlsplit('hostname') }} 9202
+        ;;
+
+    ido-noe-zse) echo "Bascule des datasources OI ZSE vers NOE..."
+        switch_datasource {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} 9200
+        ;;
+
+    ido-pacy-zse) echo "Bascule des datasources OI ZSE vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} 9200
+        ;;
+
+    idl-noe-zse) echo "Bascule des datasources LINKY vers NOE..."
+        switch_datasource {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} 9201
+        ;;
+
+    idl-pacy-zse) echo "Bascule des datasources LINKY vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }} 9201
+        ;;
+
+    ido-noe-hp) echo "Bascule des datasources OI HP vers NOE..."
+        switch_datasource {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} 9200
+        ;;
+
+    ido-pacy-hp) echo "Bascule des datasources OI HP vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} 9200
+        ;;
+
+    idl-noe-hp) echo "Bascule des datasources LINKY HP vers NOE..."
+        switch_datasource {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} 9201
+        ;;
+
+    idl-pacy-hp) echo "Bascule des datasources LINKY HP vers PACY..."
+        switch_datasource {{ haproxy_vip_noe_ccma | urlsplit('hostname') }} {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }} 9201
+        ;;
+
+    *) echo "Argument invalide."
+        echo "Valeurs acceptées : all-noe, all-pacy, all-zhb-noe, all-zhb-pacy, all-prod-zse-noe, all-prod-zse-pacy, all-hp-za-noe, all-hp-za-pacy, ido-noe, ido-pacy, idi-noe, idi-pacy, ido-noe-zse, ido-pacy-zse, idl-noe-zse, idl-pacy-zse, ido-noe-hp, ido-pacy-hp, idl-noe-hp, idl-pacy-hp"
+        exit 1;;
+    esac
+  if [[ "$2" == "-r" ]] || [[ "$2" == "--restart" ]]; then
+    echo "Redémarrage de Grafana en cours..."
+    systemctl restart grafana-server
+  fi
+fi

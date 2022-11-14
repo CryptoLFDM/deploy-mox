@@ -1,0 +1,28 @@
+---
+- name: installation des packages
+  include: install.yml
+
+- name: configuration du ssl
+  include: ssl.yml
+  when: haproxy_ssl_enabled
+
+- name: configuration de haproxy
+  include: config.yml
+
+- name: haproxy | start rhel 7
+  become: true
+  systemd:
+    name: haproxy
+    state: "{{ haproxy_state }}"
+    daemon_reload: true
+    enabled: true
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version|int >= 7
+
+- name: haproxy | start rhel 6
+  become: true
+  service:
+    name: haproxy
+    state: "{{ haproxy_state }}"
+    enabled: true
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version|int < 7
+

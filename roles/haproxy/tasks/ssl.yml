@@ -1,0 +1,23 @@
+---
+- name: création du certificat haproxy à base de variable
+  become: true
+  template:
+    src: certificate.pem.j2
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  with_items: "{{ haproxy_ssl_certificates }}"
+  when:
+    - item.cert is defined
+    - item.key is defined
+  no_log: "{{ haproxy_no_log_enabled }}"
+  notify: haproxy service action
+
+- name: création du certificat haproxy à base de fichier
+  include: ssl_from_file.yml cert_conf={{ item }}
+  with_items: "{{ haproxy_ssl_certificates }}"
+  no_log: "{{ haproxy_no_log_enabled }}"
+  when:
+    - item.cert_file is defined
+    - item.key_file is defined

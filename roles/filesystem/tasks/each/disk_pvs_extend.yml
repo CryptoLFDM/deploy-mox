@@ -1,0 +1,50 @@
+---
+
+# Chaque LVM vg est hébergé par un ou plusieurs LVM pvs, qui sont des
+# partitions ('/dev/sda2') ou des disques complets ('/dev/sdc').
+# Quand un disque change de taille, le PV de type partition bénéficiera de la
+# place supplémentaire une fois que:
+# - table des partitions mise à jour pour refléter nouvelle taille de disque
+# - allouer l'espace disponible present apres une partition existante qui est un pv de ce VG
+# - rescan des LVM PV pour que le VG qui s'appuie dessus en tienne compte
+# Pas de resize pour les disques complets.
+#
+# variable d'input:
+# - le VG sur lequel travailler: lvm_vg_item
+# - les infos de pvs mode json : filesystem_pvs_raw
+
+- name : "(loop) LVM pv | travail sur le VolumeGroup '{{ lvm_vg_item }}'"
+  set_fact:
+    query_pv_list: "report[0].pv[?vg_name=='{{ lvm_vg_item }}'].pv_name"
+
+- name: (loop) Recupération de sa liste de PV
+  set_fact:
+    filesystem_pvlist: "{{ filesystem_pvs_raw.stdout | from_json | json_query(query_pv_list) }}"
+
+- name: (loop) liste des PV (info)
+  debug:
+    msg: "VG '{{ lvm_vg_item }}' => PV list= {{ filesystem_pvlist }}"
+
+# le module ansible 'parted' ne permet pas (encore) de demander l'agrandissement
+# d'une partition. cf https://github.com/ansible/ansible/issues/23914
+- name: (loop) agrandissement des PV qui sont des partitions (si possible)
+  become: True
+  command: "parted {{ blockdev[:8] }} resizepart {{ blockdev[8] }} 100%"
+  loop: "{{ filesystem_pvlist }}"
+  loop_control:
+    loop_var: blockdev
+  when:
+    # uniquement si pv est une partition (/dev/{sd,vd}[a-z][0-9])
+    - blockdev | length == 9
+    - blockdev[:7] in ['/dev/sd', '/dev/vd']
+
+- name: (loop) rescan des PV partitions pour prise en compte nouvelle taille
+  become: true
+  command: "pvresize {{ blockdev }}"
+  loop: "{{ filesystem_pvlist }}"
+  loop_control:
+    loop_var: blockdev
+  when:
+    # uniquement si pv est une partition (/dev/{sd,vd}[a-z][0-9])
+    - blockdev | length == 9
+    - blockdev[:7] in ['/dev/sd', '/dev/vd']

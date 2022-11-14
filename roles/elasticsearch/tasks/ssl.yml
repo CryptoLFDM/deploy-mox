@@ -1,0 +1,31 @@
+---
+- name: Cree le répertoire contenant le keystore
+  become: true
+  file:
+    path: "{{ elasticsearch_path_ssl }}"
+    state: directory
+    owner: "{{ elasticsearch_owner }}"
+    group: "{{ elasticsearch_group }}"
+    mode: "0750"
+
+- name: Ramene le keystore jks
+  become: true
+  copy:
+    remote_src: true
+    src: "{{ elasticsearch_jks_config_keystore_path }}"
+    dest: "{{ elasticsearch_ssl_keystore_path_tmp }}"
+    owner: "{{ elasticsearch_owner }}"
+    group: "{{ elasticsearch_group }}"
+    mode: "0640"
+  when: not ansible_check_mode
+
+- name: Change les mots de passe du keystore et de la keypass
+  become: true
+  command: >-
+    {{ elasticsearch_jks_config_scripts_dir }}/jks_change.sh
+    {{ elasticsearch_ssl_keystore_path_tmp }}
+    {{ elasticsearch_ssl_keystore_password }}
+    {{ elasticsearch_ssl_keystore_path }}
+  no_log: "{{ elasticsearch_no_log_enabled }}"
+  when: not ansible_check_mode
+  notify: elasticsearch_need_restart

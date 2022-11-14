@@ -1,0 +1,62 @@
+---
+elasticsearch_path_data: /var/lib/elasticsearch
+elasticsearch_path_bin: /usr/share/elasticsearch
+
+elasticsearch_version: 8.5.0
+
+
+elasticsearch_rpm: "elasticsearch-{{ elasticsearch_version }}"
+
+elasticsearch_directory:
+  - path: /etc/systemd/system/elasticsearch.service.d
+    owner: root
+    group: root
+  - path: /var/run/elasticsearch
+  - path: "{{ elasticsearch_tmp_dir }}"
+    mode: "0750"
+
+elasticsearch_rpms:
+  - "{{ elasticsearch_rpm }}"
+
+
+elasticsearch_path_config: /etc/elasticsearch
+elasticsearch_custom_templates: []
+
+elasticsearch_ssl_enabled: false
+elasticsearch_path_ssl: "{{ elasticsearch_path_config }}/ssl"
+elasticsearch_ssl_keystore_path: "{{ elasticsearch_path_ssl }}/keystore.jks"
+elasticsearch_ssl_keystore_password:
+elasticsearch_ssl_keystore_reset: false
+
+elasticsearch_ssl_certificate:
+elasticsearch_ssl_private_key:
+elasticsearch_ssl_ca_certificates: []
+
+
+elasticsearch_license_enabled: false
+
+elasticsearch_elastic_password:
+elasticsearch_elastic_current_password:
+elasticsearch_kibana_password:
+
+elasticsearch_protocol: http
+elasticsearch_host: localhost
+
+elasticsearch_wait_for_timeout: 60
+elasticsearch_license_content:
+
+elasticsearch_plugin_xpack_roles_files: []
+
+elasticsearch_plugin_xpack_role_mappings_files: []
+elasticsearch_plugin_xpack_users_files: []
+elasticsearch_cluster_users:
+  - name: kibana_system
+    password: "{{ elasticsearch_kibana_password }}"
+  - name: elastic
+    password: "{{ elasticsearch_elastic_password }}"
+
+elasticsearch_index_templates: []
+elasticsearch_max_time_api: 30
+elasticsearch_config:
+  number_of_shards: 3
+  number_of_replicas: 1

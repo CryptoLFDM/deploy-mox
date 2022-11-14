@@ -1,0 +1,40 @@
+{% for stack_name in haproxy_reverse_target_stack %}
+#---------------------------------------------------
+# {{ stack_name }}:{{ haproxy_frontend_es_ports[stack_name] }}
+#---------------------------------------------------
+frontend frontend_{{ stack_name }}
+{% if network_zone == 'da' %}
+    bind *:{{ haproxy_frontend_es_ports[stack_name] }} ssl crt {{ idatha_external_crt }}.pem ca-file {{ idatha_autority_front_file }} crt {{ ansible_host }}_chain.pem ca-file {{ idatha_autority_file }} verify required
+{% else %}
+    bind *:{{ haproxy_frontend_es_ports[stack_name] }} ssl crt {{ ansible_host }}{% if network_zone in ['hp_zs2', 'prod_zs2'] %}_chain{% endif %}.pem ca-file {{ idatha_autority_file }} {% if not network_zone in ['hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} verify required
+{% endif %}
+
+    default_backend backend_{{ stack_name }}
+
+#---------------------------------------------------------------------
+# Backend settings for {{ stack_name }}
+#---------------------------------------------------------------------
+backend backend_{{ stack_name }}
+    option httpchk
+    default-server check ssl force-tlsv12 verify required ca-file {{ idatha_autority_file }} {% if not network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} fall 2 rise 2
+
+    acl cert_{% if network_zone == 'da' %}from_{% endif %}frontend ssl_c_s_dn(CN) -m reg ^front01\.prod\.(noe|pacy)\.zhb\.ida\.(distribution\.edf\.fr|enedis\.fr)$
+{% if stack_name == 'idl' %}
+    acl cert_idatha_prisme ssl_c_s_dn(CN) -m reg ^ipm\.enedis\.fr$
+    acl src_idatha_prisme src 10.205.66.156 10.205.66.111 10.205.66.158 10.205.66.147 10.205.66.145 10.205.66.137
+{% endif %}
+
+    tcp-response inspect-delay 2s
+{% if network_zone == 'da' %}
+    tcp-response content reject unless cert_from_frontend
+{% else %}
+    tcp-response content reject unless cert_frontend {% if stack_name == 'idl' %}or src_idatha_prisme cert_idatha_prisme{% endif %}
+{% endif %}
+
+{% if network_zone == 'da' %}
+    server srv_pull01 {{ dns_prefix }}pull.{{ haproxy_reverse_proxy }}:{{ haproxy_frontend_es_ports[stack_name] }} verifyhost {{ dns_prefix }}pull.{{ haproxy_reverse_proxy }}
+{% else %}
+    server srv_pull01 pull01.{{ haproxy_reverse_proxy }}:{{ haproxy_frontend_es_ports[stack_name] }} verifyhost pull01.{{ haproxy_reverse_proxy }}
+{% endif %}
+
+{% endfor %}

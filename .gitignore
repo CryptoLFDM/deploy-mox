@@ -1,0 +1,21 @@
+# IntelliJ IDEA #
+.idea/
+.vault*
+*.iml
+atlassian-ide-plugin.xml
+*.pyc
+*.fact
+*#
+*~
+.#*
+tmp/
+
+# virtualenv #
+virtualenv_ansible_*
+
+# ansible #
+*.retry
+vault.key
+
+# launcher local
+/*_local.sh

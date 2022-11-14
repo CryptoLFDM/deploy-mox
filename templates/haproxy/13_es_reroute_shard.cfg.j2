@@ -1,0 +1,149 @@
+#---------------------------------------------------
+# es-reroute-shard:9210 [http]
+#---------------------------------------------------
+frontend es-reroute-shard
+mode http
+log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tq/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %CC\ %CS\ %tsc\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %hr\ %hs\ %sslv\ %sslc\ %{+Q}r
+
+bind *:9210 ssl crt {{ ansible_host }}.pem ca-file {{ idatha_autority_file }} crl-file crl-bundle.pem verify optional
+
+acl ido-ccmm-noe_acl path_beg /ido-ccmm-noe
+acl idl-ccmm-noe_acl path_beg /idl-ccmm-noe
+acl ido-rin-noe_acl path_beg /ido-rin-noe
+acl idi-rin-noe_acl path_beg /idi-rin-noe
+acl ido-ccma-noe_acl path_beg /ido-ccma-noe
+acl ido-ccma-noe_acl path_beg /ido-ccma-noe
+acl ida-hp-zs2-noe_acl path_beg /ida-hp-zs2-noe
+acl ida-prd-zs2-noe_acl path_beg /ida-prd-zs2-noe
+
+acl ido-ccmm-pacy_acl path_beg /ido-ccmm-pacy
+acl idl-ccmm-pacy_acl path_beg /idl-ccmm-pacy
+acl ido-rin-pacy_acl path_beg /ido-rin-pacy
+acl idi-rin-pacy_acl path_beg /idi-rin-pacy
+acl ido-ccma-pacy_acl path_beg /ido-ccma-pacy
+acl ido-ccma-pacy_acl path_beg /ido-ccma-pacy
+acl ida-hp-zs2-pacy_acl path_beg /ida-hp-zs2-pacy
+acl ida-prd-zs2-pacy_acl path_beg /ida-prd-zs2-pacy
+
+use_backend es-reroute-shard-ido-ccmm-noe if  ido-ccmm-noe_acl
+use_backend es-reroute-shard-idl-ccmm-noe if  idl-ccmm-noe_acl
+use_backend es-reroute-shard-ido-rin-noe if  ido-rin-noe_acl
+use_backend es-reroute-shard-idi-rin-noe if  idi-rin-noe_acl
+use_backend es-reroute-shard-ido-ccma-noe if  ido-ccma-noe_acl
+use_backend es-reroute-shard-ido-ccma-noe if  ido-ccma-noe_acl
+use_backend es-reroute-shard-ida-hp-zs2-noe if  ida-hp-zs2-noe_acl
+use_backend es-reroute-shard-ida-prd-zs2-noe if  ida-prd-zs2-noe_acl
+
+use_backend es-reroute-shard-ido-ccmm-pacy if  ido-ccmm-pacy_acl
+use_backend es-reroute-shard-idl-ccmm-pacy if  idl-ccmm-pacy_acl
+use_backend es-reroute-shard-ido-rin-pacy if  ido-rin-pacy_acl
+use_backend es-reroute-shard-idi-rin-pacy if  idi-rin-pacy_acl
+use_backend es-reroute-shard-ido-ccma-pacy if  ido-ccma-pacy_acl
+use_backend es-reroute-shard-ido-ccma-pacy if  ido-ccma-pacy_acl
+use_backend es-reroute-shard-ida-hp-zs2-pacy if  ida-hp-zs2-pacy_acl
+use_backend es-reroute-shard-ida-prd-zs2-pacy if  ida-prd-zs2-pacy_acl
+
+
+{% if env == 'qual' %}
+backend es-reroute-shard-ido-ccmm-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccmm-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-rin-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idi-rin-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idi'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-ccma-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccma-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-hp-zs2-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-prd-zs2-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+
+backend es-reroute-shard-ido-ccmm-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccmm-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-rin-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idi-rin-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idi'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-ccma-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccma-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-hp-zs2-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-prd-zs2-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_qual | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+{% endif %}
+{% if env == 'prod_zhb' %}
+
+backend es-reroute-shard-ido-ccmm-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccmm-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_ccmm | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-rin-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_rin | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idi-rin-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_rin | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idi'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-ccma-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_ccma | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccma-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_ccma | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-hp-zs2-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_hp_zs2 | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-prd-zs2-noe
+  mode http
+  server srv_idatha {{ haproxy_vip_noe_prod_zs2 | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+
+backend es-reroute-shard-ido-ccmm-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccmm-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_ccmm | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-rin-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_rin | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idi-rin-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_rin | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idi'] }} check fall 2 rise 2
+backend es-reroute-shard-ido-ccma-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ido'] }} check fall 2 rise 2
+backend es-reroute-shard-idl-ccma-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_ccma | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['idl'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-hp-zs2-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_hp_zs2 | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+backend es-reroute-shard-ida-prd-zs2-pacy
+  mode http
+  server srv_idatha {{ haproxy_vip_pacy_prod_zs2 | urlsplit('hostname') }}:{{ haproxy_frontend_es_ports['ida'] }} check fall 2 rise 2
+{% endif %}

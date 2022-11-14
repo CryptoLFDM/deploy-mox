@@ -1,0 +1,81 @@
+---
+# License
+elasticsearch_license_enabled: false
+
+elasticsearch_heap_young_generation_lg: 160m
+
+elasticsearch_nb_gc_log_file: 10
+elasticsearch_plugin_xpack_enabled: true
+
+elasticsearch_templates:
+  - src: elasticsearch/elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+
+elasticsearch_node_name: "{{ inventory_hostname }}"
+elasticsearch_cluster_name: ether-source
+
+elasticsearch_publish_host: "{{ ansible_host }}"
+
+elasticsearch_initial_master_nodes: "{{ groups['es'] | map('extract', hostvars, ['ansible_hostname']) | list | sort }}"
+
+elasticsearch_unicast_hosts: "{{ groups['es'] | map('extract', hostvars, ['ansible_host']) | list | sort }}"
+
+elasticsearch_expected_nodes: "{{ groups['es'] | length }}"
+
+elasticsearch_quorum_nodes: "{{ (groups['es'] | length / 2 + 1) | round(0, 'floor') | int }}"
+
+elasticsearch_kibana_password:
+
+# création des users alt
+elasticsearch_template_xpack_users_minimal:
+  - name: admin
+    content: "{{ lookup('template', 'templates/elasticsearch/xpack_common/user-admin.json.j2') }}"
+  - name: grafana
+    content: "{{ lookup('template', 'templates/elasticsearch/xpack_common/user-grafana.json.j2') }}"
+
+elasticsearch_ssl_keystore_password: "{{ es_keystore_password }}"
+elasticsearch_ssl_certificate:
+elasticsearch_ssl_private_key:
+elasticsearch_ssl_ca_certificates:
+
+## Logical Volume / Volume Group
+elasticsearch_filesystem_list:
+  - lv: lv_es_data
+    vg: data_vg
+    size: "{{ elasticsearch_fs_data_size }}"
+    path: "{{ elasticsearch_path_data }}"
+    owner: elasticsearch
+    group: elasticsearch
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+
+  - lv: lv_es_log
+    vg: data_vg
+    size: "{{ elasticsearch_fs_log_size }}"
+    path: "{{ elasticsearch_path_log }}"
+    owner: elasticsearch
+    group: elasticsearch
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+
+elasticsearch_protocol: https
+elasticsearch_host: "{{ dns_prefix | default('') }}data01.{{ dns_suffix }}"
+elasticsearch_ssl_protocols: TLSv1.2
+
+elasticsearch_plugin_xpack_roles_files: >-
+  {{ elasticsearch_template_xpack_roles_common
+  | union(lookup('vars', 'elasticsearch_template_xpack_roles_' + stack))
+  | unique }}
+elasticsearch_plugin_xpack_users_files: >-
+  {{ elasticsearch_template_xpack_users_minimal
+  | union(elasticsearch_template_xpack_users_common)
+  | union(lookup('vars', 'elasticsearch_template_xpack_users_' + stack))
+
+
+elasticsearch_remote_indexing_enabled: false
+elasticsearch_number_of_shards_small: 1
+elasticsearch_wait_for_timeout: 120

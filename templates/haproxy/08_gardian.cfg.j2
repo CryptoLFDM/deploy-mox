@@ -1,0 +1,22 @@
+#---------------------------------------------------
+# Frontend settings
+#---------------------------------------------------
+frontend ldap
+# If no SNI is provided by the client or if the SSL library does not support
+# TLS extensions, or if the client provides an SNI hostname which does not
+# match any certificate, then the first loaded certificate will be presented.
+# => L'ordre des certificats est important
+{% if network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}
+    bind *:{{ haproxy_gardian_port }} ssl crt {{ ansible_host }}_chain.pem ca-file {{ idatha_autority_file }} verify optional
+{% else %}
+    bind *:{{ haproxy_gardian_port }} ssl crt {{ ansible_host }}.pem ca-file {{ idatha_autority_file }} crl-file crl-bundle.pem verify optional
+{% endif %}
+
+    default_backend backend_ldap
+
+#---------------------------------------------------
+# Backend settings
+#---------------------------------------------------
+backend backend_ldap
+    default-server check ssl force-tlsv12 verify required ca-file {{ idatha_autority_file }} {% if not network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} fall 2 rise 2
+    server srv_ldap {{ haproxy_gardian_host }}:{{ haproxy_gardian_port }}

@@ -1,0 +1,37 @@
+#---------------------------------------------------------------------
+# Stats settings
+#---------------------------------------------------------------------
+listen stats
+    bind {{ haproxy_mng_ip }}:{{ haproxy_mng_port }}
+    mode http
+    balance
+    timeout client 5000
+    timeout connect 4000
+    timeout server 30000
+
+    #This is the virtual URL to access the stats page
+    stats uri /haproxy_stats
+
+    #autorefresh value
+    stats refresh 5s
+
+    #Authentication realm. This can be set to anything. Escape space characters with a backslash.
+    stats realm HAProxy\ Statistics
+
+    #The user/pass you want to use. Change this password!
+    stats auth {{ haproxy_mng_user }}:{{ haproxy_mng_psw }}
+
+    #This allows you to take down and bring up back end servers.
+    #This will produce an error on older versions of HAProxy.
+    stats admin if TRUE
+
+#---------------------------------------------------------------------
+# Backend settings
+#---------------------------------------------------------------------
+
+#---------------------------------------------------
+# haproxy_stats:443 [http]
+#---------------------------------------------------
+backend backend_haproxy_stats
+    mode http
+    server srv_haproxy_stats 127.0.0.1:9090 check  fall 2 rise 2

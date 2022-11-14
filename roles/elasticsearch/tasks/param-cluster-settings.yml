@@ -1,0 +1,14 @@
+---
+- name: Active la selection adaptative des replicas
+  run_once: true
+  no_log: "{{ elasticsearch_no_log_enabled }}"
+  uri:
+    method: PUT
+    url: "{{ elasticsearch_http_base_url }}/_cluster/settings"
+    body: "{\"transient\":{\"cluster.routing.use_adaptive_replica_selection\":true}}"
+    body_format: json
+    status_code: 200
+    timeout: "30"
+    force_basic_auth: yes
+    user: "{{ elasticsearch_elastic_user }}"
+    password: "{{ elasticsearch_elastic_password }}"

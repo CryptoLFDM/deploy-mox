@@ -1,0 +1,2 @@
+---
+grafana_download_repo: "{{ repository_url }}/artifactory/ida-generic-releases/grafana_plugin/"

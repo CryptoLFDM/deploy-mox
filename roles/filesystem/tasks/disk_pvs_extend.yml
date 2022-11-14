@@ -1,0 +1,21 @@
+---
+
+- name: LVM pv extend | Récuperation informations sur les LVM pv
+  become: true
+  shell: pvs --reportformat json
+  register: filesystem_pvs_raw
+
+- set_fact:
+     filesystem_tmp_list: "{{ filesystem_lvm_vg_extend_pvs_list }}"
+
+- name: LVM pv extend | source des VG depuis variable filesystem_list
+  set_fact:
+     filesystem_tmp_list: "{{ filesystem_list | map(attribute='vg') | list | unique }}"
+  when: filesystem_lvm_vg_extend_pvs_all
+
+- name: LVM pv extend | travail sur chaque LVM vg et ses pv
+  include_tasks: each/disk_pvs_extend.yml
+  loop: "{{ filesystem_tmp_list }}"
+  loop_control:
+    loop_var: lvm_vg_item
+

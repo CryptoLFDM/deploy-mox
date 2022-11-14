@@ -1,0 +1,38 @@
+{% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
+{% if groups['es']|intersect(groups[stack_name])|length > 0 %}
+#---------------------------------------------------
+# {{ stack_name }}:{{ haproxy_frontend_es_ports[stack_name] }}
+#---------------------------------------------------
+frontend frontend_{{ stack_name }}
+# If no SNI is provided by the client or if the SSL library does not support
+# TLS extensions, or if the client provides an SNI hostname which does not
+# match any certificate, then the first loaded certificate will be presented.
+# => L'ordre des certificats est important
+{% if network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}
+    bind *:{{ haproxy_frontend_es_ports[stack_name] }} ssl crt {{ ansible_host }}_chain.pem ca-file {{ idatha_autority_file }} verify optional
+{% else %}
+    bind *:{{ haproxy_frontend_es_ports[stack_name] }} ssl crt {{ ansible_host }}.pem ca-file {{ idatha_autority_file }} crl-file crl-bundle.pem verify optional
+{% endif %}
+
+    default_backend backend_{{ stack_name }}
+
+#---------------------------------------------------------------------
+# Backend settings for {{ stack_name }}
+#---------------------------------------------------------------------
+backend backend_{{ stack_name }}
+{% if stack_name == 'ido' and haproxy_stack[stack_name].mode is defined and haproxy_stack[stack_name].mode == 'http' %}
+    mode http
+{% endif %}
+    option httpchk
+    default-server check ssl force-tlsv12 verify required ca-file {{ idatha_autority_file }} {% if not network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} fall 2 rise 2
+{% for item in groups['es']|intersect(groups[stack_name])|intersect(groups[site]) %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:9200 verifyhost {{ hostvars[item]['ansible_host'] }}
+{% endfor %}
+{% if stack_name != 'ido' and env == 'qual' and site == 'noe' %}
+{% for item in groups['es']|intersect(groups[stack_name])|intersect(groups['pacy']) %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:9200 verifyhost {{ hostvars[item]['ansible_host'] }}
+{% endfor %}
+{% endif %}
+
+{% endif %}
+{% endfor %}

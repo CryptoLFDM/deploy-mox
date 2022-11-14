@@ -1,0 +1,13 @@
+---
+- name: grafana - sauvegarde de la configuration iptables # noqa 303
+  become: true
+  command: service iptables save
+  changed_when: false
+
+- name: grafana - redémarrage
+  become: true
+  systemd:
+    name: "{{ grafana_service_name }}"
+    state: "restarted"
+    daemon_reload: true
+    enabled: true

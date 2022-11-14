@@ -1,0 +1,53 @@
+#---------------------------------------------------
+# Master postgres:{{ idatha_postgres_master_port }}
+#---------------------------------------------------
+frontend postgres_master
+    bind *:{{ idatha_postgres_master_port }}
+
+    default_backend postgres_master
+
+{% if postgresql10_binode_master_backup_enabled %}
+#---------------------------------------------------
+# Slave postgres:{{ idatha_postgres_slave_port }}
+#---------------------------------------------------
+frontend postgres_slave
+    bind *:{{ idatha_postgres_slave_port }}
+
+    default_backend postgres_slave
+{% endif %}
+#---------------------------------------------------------------------
+# Backend settings
+#---------------------------------------------------------------------
+
+#---------------------------------------------------
+# Master postgres:{{ idatha_postgres_master_port }}
+#---------------------------------------------------
+backend postgres_master
+    option tcp-check
+    tcp-check expect string master\ is\ running
+
+    default-server port {{ idatha_postgres_check_port }} inter {{ idatha_postgres_inter_check }} downinter {{ idatha_postgres_down_inter_check }} rise 2 fall 2
+{% if postgresql10_binode_noe_address is defined %}
+    server noe {{ postgresql10_binode_noe_address }}:{{ idatha_postgres_port }} check
+{% endif %}
+{% if postgresql10_binode_pacy_address is defined %}
+    server pacy {{ postgresql10_binode_pacy_address }}:{{ idatha_postgres_port }} check
+{% endif %}
+
+
+{% if postgresql10_binode_master_backup_enabled %}
+#---------------------------------------------------
+# Slave postgres:{{ idatha_postgres_slave_port }}
+#---------------------------------------------------
+backend postgres_slave
+    option tcp-check
+    tcp-check expect string slave\ is\ running
+
+    default-server port {{ idatha_postgres_check_port }} inter {{ idatha_postgres_inter_check }} downinter {{ idatha_postgres_down_inter_check }} rise 2 fall 2
+{% if postgresql10_binode_pacy_address is defined %}
+    server pacy {{ postgresql10_binode_pacy_address }}:{{ idatha_postgres_port }} check
+{% endif %}
+{% if postgresql10_binode_noe_address is defined %}
+    server noe {{ postgresql10_binode_noe_address }}:{{ idatha_postgres_port }} check
+{% endif %}
+{% endif %}

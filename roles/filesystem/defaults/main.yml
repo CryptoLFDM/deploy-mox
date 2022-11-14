@@ -1,0 +1,53 @@
+---
+
+# Liste des lv (lvm) à créer. Comprend la création des FileSystem.
+filesystem_list: []
+
+# exemple de creation/agrandissement de vg et/ou lv et/ou systeme de fichiers:
+#
+# filesystem_list:
+#   - lv: lv_logstash_db
+#     vg: data_vg
+#     size: "70g"
+#     path: /var/lib/logstash
+#     fstype: "ext4"
+#     opts: "ro,noauto"  # n'est pas implémenté
+#     resizefs: yes      # par défaut à yes si non spécifié
+#     force: no          # n'est pas implémenté
+#     shrink: no         # n'est pas implémenté
+#     owner: root        # utilisateur connectée par défaut si non spécifié
+#     group: root        # utilisateur connectée par défaut si non spécifié
+#     mode: "0755"       # umask par défaut si non spécifié
+#   - lv: ...
+#     ...
+
+
+# Liste des VG LVM à créer/étendre.
+# un VG sera étendu sur tous les pv indiqués.
+filesystem_lvm_vg_list: []
+
+# Exemple de VG LVM à créer ou étendre:
+#  filesystem_lvm_vg_list:
+#    - vg: data_vg
+#      pvs: /dev/sdb
+#    - vg: vg_combine_plusieurs_pvs
+#      pvs: "/dev/sda2,/dev/sdc"
+
+# Liste des VolumeGroup dont les PV sont à étendre. Tous les PV concernés
+# seront étendus si possible (récupération de la place disque disponible).
+# Utile si changement de taille des disques qui portent les pv.
+# Le changement ne concerne que les PV qui sont des partitions de disque: sans
+# effet pour un PV qui est porté par un disque complet.
+# N'est pas pris en compte si filesystem_lvm_vg_extend_pvs_all vaut True
+filesystem_lvm_vg_extend_pvs_list: []
+
+# Exemple de Liste de VG LVM dont les pvs doivent être étendus:
+#  filesystem_lvm_vg_extend_pvs_list:
+#      - root_vg     # etendra tous les pvs du VG 'root_vg' tels que /dev/sda2
+#      - data_vg     # etendra tous ses pvs du VG 'data_vg' tels que /dev/sdc3
+
+
+# Agrandissement de tous les pv des VG LVM listés dans la variable filesystem_list.
+# la variable filesystem_lvm_vg_extend_pvs_list n'est alors pas pris en compte.
+filesystem_lvm_vg_extend_pvs_all: False
+

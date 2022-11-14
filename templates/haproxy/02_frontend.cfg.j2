@@ -1,0 +1,151 @@
+{# ##################### #}
+{# # CONFIGURATION ZHB # #}
+{% if network_zone in ['zhb', 'gate'] %}
+#---------------------------------------------------
+# http:80 [http]
+#---------------------------------------------------
+frontend frontend_http
+    mode http
+    bind *:80
+    redirect scheme https code 301 if !{ ssl_fc }
+
+    default_backend backend_idatha-expert
+
+#---------------------------------------------------
+# https:443 [http]
+#---------------------------------------------------
+frontend frontend_https
+    mode http
+    log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tq/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %CC\ %CS\ %tsc\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %hr\ %hs\ %sslv\ %sslc\ %{+Q}r
+    bind *:443 ssl crt {{ ansible_host }}.pem {% if env == 'prod_zhb' %}crt haproxy_idatha-expert.enedis.fr.pem crt haproxy_idatha.enedis.fr.pem {% endif %}ca-file {{ idatha_autority_file }} crl-file crl-bundle.pem verify optional
+
+    acl method_valid method DELETE GET HEAD POST PUT
+    acl haproxy_stats_acl path_beg /haproxy_stats
+{% if idatha_url_domain is defined %}
+    acl idatha_acl hdr(host) -i {{ idatha_url_domain }}
+{% endif %}
+    acl idatha-expert_acl hdr(host) -i {{ idatha_expert_url_domain }}
+{% if env == 'prod_zhb' %}
+    acl push_acl hdr(host) -i push01.prod.{{ site }}.{{ network_zone }}.ida.enedis.fr
+    acl push_acl hdr(host) -i push01.prod.{{ site }}.{{ network_zone }}.ida.{{ dns_domain}}
+{% else %}
+    acl push_acl hdr(host) -i push01.{{ dns_suffix }}
+{% endif %}
+    acl kafka_rest_acl path_beg /kafka-rest
+    acl kafka_rest_static_acl path_beg /static
+    acl ida_alert_api_acl path_beg /alert-api
+    acl grafana_org_c3_acl path_beg /profile/switch-org/2
+    acl grafana5_org_c3_acl path_beg /api/user/using/2
+    acl grafana_org_c3_bis_acl urlp_val(orgId) 2
+
+{% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
+{% if haproxy_stack[stack_name].direct_kibana is defined %}
+    acl kibana-{{stack_name}}_acl hdr(host) -i {{ haproxy_stack[stack_name].direct_kibana }}
+{% endif %}
+{% endfor %}
+
+    acl cert_expired ssl_c_verify     10
+    acl cert_revoked ssl_c_verify     23
+    acl cert_valid   ssl_c_verify     0
+    acl cert_present ssl_c_used
+
+    http-request deny if ! method_valid
+    http-request set-header XX-SSL-Error nocert   if !cert_present
+    http-request set-header XX-SSL-Error %[ssl_c_verify] if cert_present !cert_valid
+    http-request set-header X-SSL-Client-DN       %{+Q}[ssl_c_s_dn] if cert_present
+    http-request set-header X-SSL-Client-UID      %{+Q}[ssl_c_s_dn(uid)] if cert_present
+    http-request deny if cert_expired or cert_revoked
+{% for grafana_acl in ['grafana_org_c3_acl', 'grafana5_org_c3_acl', 'grafana_org_c3_bis_acl'] %}
+    http-request deny if {{ grafana_acl }} !cert_present
+    http-request deny if {{ grafana_acl }} !cert_valid
+    http-request deny if {{ grafana_acl }} cert_expired
+    http-request deny if {{ grafana_acl }} cert_revoked
+{% endfor %}
+
+    use_backend backend_haproxy_stats if haproxy_stats_acl
+    use_backend backend_idatha-expert if idatha-expert_acl
+    use_backend backend_idatha if idatha_acl
+    use_backend backend_kafka_rest if push_acl kafka_rest_acl
+    use_backend backend_kafka_rest if push_acl kafka_rest_static_acl
+    use_backend backend_ida_alert_api if ida_alert_api_acl
+
+{% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
+{% if haproxy_stack[stack_name].direct_kibana is defined %}
+    use_backend backend_kibana-{{ stack_name }} if kibana-{{ stack_name }}_acl
+{% endif %}
+{% endfor %}
+
+{% if env == 'prod_zhb' %}
+    acl deploy_prod_noe_adaje_ido  src 10.117.3.6
+    acl deploy_prod_pacy_adaje_ido src 10.200.198.65
+    use_backend backend_ido if deploy_prod_noe_adaje_ido or deploy_prod_pacy_adaje_ido
+{% endif %}
+
+    default_backend backend_idatha-expert
+
+#---------------------------------------------------------------------
+# Backend settings
+#---------------------------------------------------------------------
+{% if idatha_url_domain is defined %}
+#---------------------------------------------------
+# idatha:443 [http]
+#---------------------------------------------------
+backend backend_idatha
+    mode http
+    acl cert_expired ssl_c_verify     10
+    acl cert_revoked ssl_c_verify     23
+    acl cert_valid   ssl_c_verify     0
+    acl cert_present ssl_c_used
+    http-request set-header XX-SSL-Error nocert   if !cert_present
+    http-request set-header XX-SSL-Error %[ssl_c_verify] if cert_present !cert_valid
+    http-request set-header X-SSL-Client-DN       %{+Q}[ssl_c_s_dn] if cert_present
+    http-request set-header X-SSL-Client-UID      %{+Q}[ssl_c_s_dn(uid)] if cert_present
+    http-response deny if cert_expired or cert_revoked
+    server srv_idatha {{ haproxy_idatha_front_server }} check fall 2 rise 2
+{% endif %}
+
+{% endif %}
+{# FIN CONFIGURATION ZHB #}
+{# ##################### #}
+{# # CONFIGURATION ZSE # #}
+{% if network_zone in ['za', 'hp_zs2', 'prod_zs2'] %}
+#---------------------------------------------------
+# https:443 [http]
+#---------------------------------------------------
+frontend frontend_https
+    mode http
+    log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tq/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %CC\ %CS\ %tsc\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %hr\ %hs\ %sslv\ %sslc\ %{+Q}r
+{% if network_zone == 'za' %}
+    bind *:443 ssl crt {{ ansible_host }}.pem ca-file {{ idatha_autority_file }} crl-file crl-bundle.pem verify optional
+{% else %}
+    bind *:443 ssl crt {{ ansible_host }}_chain.pem ca-file {{ idatha_autority_file }} verify optional
+{% endif %}
+
+    acl method_valid method DELETE GET HEAD POST PUT
+{% if network_zone in ['hp_zs2', 'prod_zs2'] %}
+    acl push_acl hdr(host) -i {{ dns_prefix }}push.{{ dns_suffix }}
+{% else %}
+    acl push_acl hdr(host) -i push01.{{ dns_suffix }}
+{% endif %}
+    acl kafka_rest_acl path_beg /kafka-rest
+    acl kafka_rest_static_acl path_beg /static
+    acl haproxy_stats_acl path_beg /haproxy_stats
+{% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
+{% if groups['kibana']|intersect(groups[stack_name])|length > 0 %}
+    acl has_kibana-{{ stack_name }}_uri path_beg /kibana_{{ stack_name }}/
+{% endif %}
+{% endfor %}
+
+    http-request deny if ! method_valid
+
+    use_backend backend_kafka_rest if push_acl kafka_rest_acl
+    use_backend backend_kafka_rest if push_acl kafka_rest_static_acl
+    use_backend backend_haproxy_stats if haproxy_stats_acl
+{% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
+{% if groups['kibana']|intersect(groups[stack_name])|length > 0 %}
+    use_backend backend_kibana-{{ stack_name }} if has_kibana-{{ stack_name }}_uri
+{% endif %}
+{% endfor %}
+
+{% endif %}
+{# FIN CONFIGURATION ZSE #}

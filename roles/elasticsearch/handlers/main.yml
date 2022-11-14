@@ -1,0 +1,13 @@
+- name: redémarre elasticsearch
+  become: true
+  systemd:
+    name: elasticsearch
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: elasticsearch_need_restart
+
+- name: attend le port d'elasticsearch
+  wait_for:
+    port: "{{ elasticsearch_port }}"
+  listen: elasticsearch_need_restart

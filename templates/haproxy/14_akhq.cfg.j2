@@ -1,0 +1,31 @@
+#---------------------------------------------------
+# akhq:{{ akhq_port }}
+#---------------------------------------------------
+frontend akhq
+  mode http
+  bind *:{{ akhq_port }} ssl crt {{ ansible_host }}.pem ca-file autorite_chain.pem crl-file crl-bundle.pem verify optional
+{% for cluster in akhq_kafka_clusters %}
+  acl {{ cluster }} path_beg /akhq_{{ cluster }}
+{% endfor %}
+
+{% for cluster in akhq_kafka_clusters %}
+  use_backend {{ cluster }}_backend if {{ cluster }}
+{% endfor %}
+
+{% for cluster in akhq_kafka_clusters %}
+#---------------------------------------------------
+# akhq:{{ akhq_port }} [http]
+#---------------------------------------------------
+backend {{ cluster }}_backend
+    mode http
+    option http-server-close
+    option httpchk GET /akhq/ui/login
+    http-check expect status 200
+    http-request set-path %[path,regsub(/akhq_{{ cluster }},/akhq/ui/login)]
+
+  default-server check ssl force-tlsv12 verify required ca-file autorite_chain.pem {% if haproxy_crl_enabled|default(true) %}crl-file crl-bundle.pem{% endif %}
+
+{% for item in groups['akhq_' ~ cluster] %}
+    server akhq{{ loop.index }} {{ hostvars[item]['ansible_host'] }}:{{ akhq_port }} verifyhost {{ hostvars[item]['ansible_host'] }}
+{% endfor %}
+{% endfor %}

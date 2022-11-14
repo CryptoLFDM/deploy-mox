@@ -1,0 +1,10 @@
+---
+- name: Reset user_changed if still True
+  set_fact:
+    user_changed: false
+  listen: "user_changed_need_reset"
+
+- name: Partage au playbook si on doit restart le service
+  set_fact:
+    user_changed: true
+  listen: "user_changed_on_system"

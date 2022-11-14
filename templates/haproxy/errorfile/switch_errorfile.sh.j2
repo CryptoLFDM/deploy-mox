@@ -1,0 +1,40 @@
+#!/bin/bash
+function show_usage() {
+  echo -e "\nBascule le haproxy en mode maintenance ou en mode error normale.\n\n Utilisation :"
+  echo -e "\t(sh) switch_errorfile maintenance|error -r (optionel)"
+  echo -e "\t -r --restart (optionnel : redémarre haproxy après la bascule)"
+  exit 1
+}
+
+function switch_error() {
+  echo -e "\nBascule le haproxy en mode error page.\n"
+  sed -i "s]{{ haproxy_config_folder }}/maintenance.html]{{ haproxy_config_folder }}/503.html]g" "{{ haproxy_config_folder }}/00_haproxy.cfg"
+}
+
+function switch_maintenance() {
+  echo -e "\nBascule le haproxy en mode maintenance page.\n"
+  sed -i "s]{{ haproxy_config_folder }}/503.html]{{ haproxy_config_folder }}/maintenance.html]g" "{{ haproxy_config_folder }}/00_haproxy.cfg"
+}
+
+if [[ "$#" -eq 0 ]]; then
+  show_usage
+elif [[ "$#" -ge 1 ]]; then
+  if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    show_usage
+  fi
+  case "$1" in
+
+      maintenance) switch_maintenance;;
+
+      error) switch_error;;
+
+      *) show_usage;;
+  esac
+  if [[ "$2" == "-r" ]] ; then
+    echo "Redémarrage de haproxy en cours..."
+    systemctl restart haproxy
+  fi
+fi
+
+
+

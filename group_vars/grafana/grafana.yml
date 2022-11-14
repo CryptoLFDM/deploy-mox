@@ -1,0 +1,86 @@
+---
+grafana_repo:
+  - name : grafana-enterprise
+    description: Miroir du repo officiel de Grafana
+    baseurl: https://rpm.grafana.com
+    file: grafana
+    gpgcheck: false
+    state: present
+    enabled: true
+
+grafana_custom_configs:
+  - src: grafana/grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  - src: grafana/datasources_technical.yaml.j2
+    dest: "{{ grafana_datasources_dir }}/datasources_technical.yaml"
+
+grafana_data_dir: /var/lib/grafana
+grafana_data_size: 1G
+grafana_log_dir: /var/log/grafana
+grafana_plugins_dir: "{{ grafana_data_dir }}/plugins"
+grafana_datasources_dir: "{{ grafana_data_dir }}/datasources"
+grafana_notification_images_dir: "{{ grafana_data_dir }}/png"
+grafana_notification_images_size: 1G
+
+grafana_http_port: 3000
+
+# Authentification basic "grafana_admin_password" doit être définie par le projet
+grafana_admin_user: admin
+
+
+grafana_filesystem_list:
+  - lv: lv_grafana_data
+    vg: data_vg
+    size: "{{ grafana_data_size }}"
+    path: "{{ grafana_data_dir }}"
+    owner: grafana
+    group: grafana
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+  - lv: lv_grafana_log
+    vg: data_vg
+    size: "{{ grafana_log_size }}"
+    path: "{{ grafana_log_dir }}"
+    owner: grafana
+    group: grafana
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+  - lv: lv_grafana_notifications
+    vg: data_vg
+    size: "{{ grafana_notification_images_size }}"
+    path: "{{ grafana_notification_images_dir }}"
+    owner: grafana
+    group: grafana
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+
+grafana_system_directories :
+  - path: /usr/share/grafana
+  - path: /etc/grafana
+  - path: /var/lib/grafana
+
+# Configuration des datasources
+grafana_tls_ca_location:
+grafana_tls_client_cert_location:
+grafana_tls_client_key_location:
+
+grafana_no_log_enabled: "{{ idatha_global_no_log_enabled }}"
+
+###  PRECEDENCE
+grafana_version: enterprise-8.5.9
+
+grafana_internal_metric_interval_seconds: 60
+
+grafana_instance_name: "{{ ansible_host }}"
+
+grafana_custom_packages:
+  - nss
+  - gtk3
+#  - libXScrnSaver TODO : pour fresh install, installer cette dep à la main (ou fix erreur ansible)
+

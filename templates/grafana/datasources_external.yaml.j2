@@ -1,0 +1,66 @@
+---
+# config file version
+apiVersion: {{ grafana_datasources_external_version }}
+
+datasources:
+{% if grafana_datasources_external %}
+{% for id,datasource_type in grafana_datasources_external.items() %}
+{% for datasource in datasource_type.datasources %}
+  - name: "{{ datasource.name }}"
+    type: "{{ id }}"
+    access: proxy
+    url: "{{ datasource.url }}"
+    basicAuth: {{ datasource.get('auth', false) }}
+{% if datasource.user is defined %}
+    user: "{{ datasource.user }}"
+{% endif %}
+    basicAuthUser: "{{ datasource.get('basicAuthUser', '') }}"
+    orgId: {% if datasource.get('c3') %}2{% else %}1{% endif +%}
+{% if datasource.database is defined %}
+    database: "{{ datasource.database }}"
+{% endif %}
+    jsonData:
+      tlsAuth: {{ datasource.get('tlsAuth', true) }}
+      tlsAuthWithCACert: {{ datasource.get('tlsAuth', true) }}
+{% if datasource.sslMode is defined %}
+      sslmode: "{{ datasource.sslMode }}"
+{% endif %}
+{% if datasource.postgresVersion is defined %}
+      postgresVersion: {{ datasource.postgresVersion }}
+{% endif %}
+{% if datasource.sslRootCertFile is defined %}
+      sslRootCertFile: "{{ datasource.sslRootCertFile }}"
+{% endif %}
+{% if datasource.sslCertFile is defined %}
+      sslCertFile: "{{ datasource.sslCertFile }}"
+{% endif %}
+{% if datasource.sslKeyFile is defined %}
+      sslKeyFile: "{{ datasource.sslKeyFile }}"
+{% endif %}
+{% if datasource.maxOpenConns is defined %}
+      maxOpenConns: {{ datasource.maxOpenConns }}
+{% endif %}
+{% if datasource.maxIdleConns is defined %}
+      maxIdleConns: {{ datasource.maxIdleConns }}
+{% endif %}
+{% if datasource.connMaxLifetime is defined %}
+      connMaxLifetime: {{ datasource.connMaxLifetime }}
+{% endif %}
+{% if datasource.tlsConfigurationMethod is defined %}
+      tlsConfigurationMethod: {{ datasource.tlsConfigurationMethod }}
+{% endif %}
+    secureJsonData:
+{% if datasource.get('tlsAuth', true) %}
+      tlsCACert: "{{ '$__file{' ~ grafana_tls_ca_location ~ '}' }}"
+      tlsClientCert: "{{ '$__file{' ~ grafana_tls_client_cert_location ~ '}' }}"
+      tlsClientKey: "{{ '$__file{' ~ grafana_tls_client_key_location ~ '}' }}"
+{% endif %}
+      basicAuthPassword: "{{ datasource.get('basicAuthPass', '') }}"
+{% if datasource.pass is defined %}
+      password: "{{ datasource.pass }}"
+{% endif %}
+    editable: true
+
+{% endfor %}
+{% endfor %}
+{% endif %}

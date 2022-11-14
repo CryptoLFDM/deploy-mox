@@ -1,0 +1,111 @@
+---
+- name: passe nonlocal_bind à 1 dans sysctl
+  become: true
+  sysctl:
+    name: net.ipv4.ip_nonlocal_bind
+    value: "1"
+    state: present
+    reload: yes
+
+- name: mise en place de la configuration logrotate / rsyslog
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  loop: "{{ haproxy_rsyslog_template|union(haproxy_logrotate_template) }}"
+  notify:
+    - haproxy restart rsyslog
+
+- name: création de répertoires additionnels de configuration
+  become: true
+  file:
+    state: directory
+    path: "{{ item.path }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  loop: "{{ haproxy_additional_config_dirs }}"
+  notify: haproxy service action
+
+- name: Gestion haproxy multifile
+  block:
+    - name: "liste les fichiers .cfg présents dans {{ haproxy_config_folder }}"
+      find:
+        paths: "{{ haproxy_config_folder }}/"
+        patterns: "*.cfg"
+      register: haproxy_existing_config_files
+
+    - name: "Supprime les fichiers .cfg non déclarés dans Ansible"
+      file:
+        state: absent
+        path: "{{ haproxy_config_folder }}/{{ item }}"
+      loop: "{{ haproxy_existing_config_files.files | map(attribute='path') | list | difference(haproxy_templates_filedest) }}"
+  become: true
+  when: haproxy_templates | length > 1
+
+- name: création des fichiers de configuration haproxy
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  loop: "{{ haproxy_templates }}"
+  notify: haproxy service action
+
+- name: configurations additionnelles nécessitant un redémarrage du service
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  loop: "{{ haproxy_config_files }}"
+  notify:
+    - haproxy fact restart
+    - haproxy service action
+
+- name: création du répertoire des errorfiles
+  become: true
+  file:
+    path: "{{ haproxy_error_files_dest }}"
+    group: "haproxy"
+    state: "directory"
+    mode: "0640"
+    owner: "haproxy"
+  when: haproxy_error_files | length > 0
+
+- name: dépose des errorfiles
+  become: true
+  copy:
+    dest: "{{ haproxy_error_files_dest }}/{{ item.file_name }}"
+    src: "{{ item.src }}"
+    group: "haproxy"
+    mode: "0640"
+    owner: "haproxy"
+  loop: "{{ haproxy_error_files }}"
+  notify: haproxy service action
+
+- name: ajoute des rêgles iptables
+  become: true
+  iptables:
+    action: insert
+    chain: INPUT
+    protocol: tcp
+    ctstate: NEW,ESTABLISHED
+    match: tcp
+    destination_port: "{{ item.port }}"
+    jump: ACCEPT
+    comment: "{{ item.comment|default(omit) }}"
+    state: present
+  loop: "{{ haproxy_iptables_ports }}"
+  notify: haproxy sauvegarde de la configuration iptables
+  when: haproxy_iptables_enabled|default(true)|bool 
+        and haproxy_iptables_ports is defined
+  tags:
+    - iptables

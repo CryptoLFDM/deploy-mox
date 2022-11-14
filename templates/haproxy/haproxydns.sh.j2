@@ -1,0 +1,35 @@
+#!/bin/bash
+function show_usage() {
+  echo -e "\nBascule en mode PRA.\n\nUtilisation :"
+  echo -e "\thaproxydns <ServerName> -r/--restart (Optionnel)"
+  echo -e "\tValeurs acceptées : front-pacy, front-noe"
+  echo -e "\t -r --restart (optionnel : redémarre Haproxy après la bascule)"
+}
+if [[ "$#" -eq 0 ]]; then
+  show_usage
+elif [[ "$#" -ge 1 ]]; then
+  if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    show_usage
+  fi
+  case "$1" in
+
+    front-pacy) echo "Bascule du front NOE vers PACY..."
+            sed -i s/{{ hostvars['front_ida_noe_01']['ansible_host'] }}:3010/{{ hostvars['front_ida_pacy_01']['ansible_host'] }}:3010/g {{ haproxy_config_folder }}/02_frontend.cfg;;
+
+    front-noe) echo "Bascule du front PACY vers NOE..."
+            sed -i s/{{ hostvars['front_ida_pacy_01']['ansible_host'] }}:3010/{{ hostvars['front_ida_noe_01']['ansible_host'] }}:3010/g {{ haproxy_config_folder }}/02_frontend.cfg;;
+
+    *) echo "Argument invalide."
+       echo "Valeurs acceptées : front-pacy, front-noe"
+       exit 1;;
+    esac
+  if [[ "$2" == "-r" ]] || [[ "$2" == "--restart" ]]; then
+    {% if env == 'prod_zhb' %}
+      echo "Reload haproxy en cours..."
+      systemctl reload haproxy
+    {% else %}
+      echo "Restart haproxy en cours..."
+      systemctl restart haproxy
+    {% endif %}
+  fi
+fi

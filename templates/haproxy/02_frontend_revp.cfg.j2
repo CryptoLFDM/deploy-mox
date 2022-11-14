@@ -1,0 +1,28 @@
+#---------------------------------------------------
+# https:443 [http]
+#---------------------------------------------------
+frontend frontend_https
+    mode http
+    log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tq/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %CC\ %CS\ %tsc\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %hr\ %hs\ %sslv\ %sslc\ %{+Q}r
+{% if network_zone == 'da' %}
+    bind *:443 ssl crt {{ ansible_host }}_chain.pem ca-file {{ idatha_autority_file }} verify optional
+{% else %}
+    bind *:443 ssl crt {{ ansible_host }}.pem ca-file {{ idatha_autority_file }} {% if not network_zone in ['hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} verify optional
+{% endif %}
+
+    acl method_valid method DELETE GET HEAD POST PUT
+    http-request deny if ! method_valid
+
+    default_backend backend_https
+
+#---------------------------------------------------------------------
+# Backend settings
+#---------------------------------------------------------------------
+
+#---------------------------------------------------
+# https:443 [http]
+#---------------------------------------------------
+backend backend_https
+    mode http
+    balance roundrobin
+    server srv_haproxy_stats 127.0.0.1:9090 check  fall 2 rise 2

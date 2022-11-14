@@ -1,0 +1,27 @@
+---
+- name: Importe la clef elastic
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: Templatise le fichier repo
+  become: true
+  template:
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
+    owner: root
+    group: root
+
+- name: Clean Yum
+  ansible.builtin.command: yum clean metadata
+  args:
+    warn: false
+
+- name: Installe les RPM
+  become: true
+  yum:
+    name: "{{ elasticsearch_rpms }}"
+    state: present
+    update_cache: true
+  register: elasticsearch_install_result
+

@@ -1,0 +1,72 @@
+---
+- name: trouve la liste des repertoires avec un ancien naming
+  become: true
+  find:
+    path: /var/lib/grafana/plugins/
+    file_type: directory
+    pattern: "^(?!plugin|core).*"
+    use_regex: true
+    depth: no
+  register: grafana_old_plugin_naming
+
+# Suppression des répertoires de plugins lorsqu'ils sont mis à jour
+# 1ère étape : trouver la liste des répertoires existants
+- name: trouve la liste des répertoires de plugins pré existants
+  become: true
+  find:
+    path: /var/lib/grafana/plugins/
+    file_type: directory
+    pattern: "plugin*"
+    depth: no
+  register: grafana_previous_plugin_folder_list
+
+- name: trouve la liste des répertoires de core-plugins pré existants
+  become: true
+  find:
+    path: /var/lib/grafana/plugins/
+    file_type: directory
+    pattern: "core*"
+    depth: no
+  register: grafana_previous_plugin_core_folder_list
+
+# 2ème étape : créer les variables avec les noms des répertoires
+- name: creation de la liste cible des répertoires des plugins
+  set_fact:
+    grafana_old_plugin_folders: "{{ grafana_previous_plugin_folder_list['files'] | map(attribute='path') | map('basename') | sort }}"
+    grafana_old_core_plugin_folders: "{{ grafana_previous_plugin_core_folder_list['files'] | map(attribute='path') | map('basename') | sort }}"
+    grafana_old_plugin_naming_folder: "{{ grafana_old_plugin_naming['files'] | map(attribute='path') | map('basename') | sort }}"
+
+- name: construit les listes pour la mise a jours des plugins
+  set_fact:
+    grafana_plugin_to_delete: "{{ grafana_old_plugin_folders | difference(grafana_plugins) }}"
+    grafana_plugin_to_install: "{{ grafana_plugins | difference(grafana_old_plugin_folders) }}"
+    grafana_core_plugin_to_delete: "{{ grafana_old_core_plugin_folders | difference(grafana_core_plugins) }}"
+    grafana_core_plugin_to_install: "{{ grafana_core_plugins | difference(grafana_old_core_plugin_folders) }}"
+
+- name: Arrete grafana
+  become: true
+  systemd:
+    name: "{{ grafana_service_name }}"
+    state: "stopped"
+    daemon_reload: true
+    enabled: true
+  when: grafana_core_plugin_to_install.0 is defined
+
+# 3ème étape : supprimer les anciennes versions de plugins qui vont être mis à jour
+- name: suppression des répertoires des anciennes versions
+  become: true
+  file:
+    state: absent
+    path: "/var/lib/grafana/plugins/{{ item }}"
+  loop: "{{ grafana_plugin_to_delete | union(grafana_core_plugin_to_delete) | union(grafana_old_plugin_naming_folder) }}"
+
+- name: installation des plugins
+  become: true
+  become_user: "{{ grafana_owner }}"
+  grafana_plugin:
+    name: "{{ item }}"
+    grafana_plugin_url: "{{ grafana_download_repo ~ item }}.zip"
+    version: "{{ item.split('-')[-1] }}"
+    state: present
+  loop: "{{ grafana_plugin_to_install | union(grafana_core_plugin_to_install) }}"
+  notify: grafana - redémarrage

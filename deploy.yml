@@ -1,0 +1,5 @@
+---
+- ansible.builtin.import_playbook: playbook_es.yml
+- ansible.builtin.import_playbook: playbook_kibana.yml
+- ansible.builtin.import_playbook: playbook_haproxy.yml
+- ansible.builtin.import_playbook: playbook_grafana.yml

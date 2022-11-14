@@ -1,0 +1,22 @@
+---
+grafana_version: enterprise-8.5.14
+
+# Test adresses PGaaS
+postgresql10_binode_database_name: sqlite
+
+# Adresse Mail pour la notification
+grafana_domain_name: idatha-expert.qual.idatha.gate-noe.enedis.fr
+grafana_instance_mail_name: "idatha-expert.qual.idatha.gate-noe.enedis.fr"
+
+# Whitelist des url des Proxy pour les datasources grafana (séparées par un espace)
+grafana_whitelist_datasources:
+
+grafana_annotation_cleanup_batch_size: 1000
+grafana_alerting_max_annotation_age: 3d
+grafana_alerting_error_or_timeout: keep_state
+grafana_alerting_nodata_or_nullvalues: keep_state
+grafana_alerting_min_interval_seconds: 300
+grafana_alerting_evaluation_timeout_seconds: 60
+grafana_alerting_notification_timeout_seconds: 60
+grafana_internal_monitoring_enabled: false
+grafana_dashboards_versions_to_keep: 5

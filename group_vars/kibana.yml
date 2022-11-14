@@ -1,0 +1,81 @@
+---
+# Kibana
+kibana_version: "{{ elasticsearch_version }}"
+
+kibana_certificates_path:
+kibana_certificate_path:
+kibana_private_key_path:
+kibana_ca_path:
+
+kibana_custom_templates:
+  - src: kibana/kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: kibana
+    group: kibana
+    mode: "0640"
+
+kibana_data_dir: /var/lib/kibana
+kibana_share_dir: /usr/share/kibana
+kibana_log_dir: /var/log/kibana
+kibana_pid_dir: /var/run/kibana
+
+kibana_custom_dirs:
+  - path: "{{ kibana_pid_dir }}"
+    state: directory
+    owner: kibana
+    group: kibana
+    mode: "0755"
+  - path: "{{ kibana_log_dir }}"
+    state: directory
+    owner: kibana
+    group: kibana
+    mode: "0750"
+
+# Filesystem
+kibana_data_size: 1G
+kibana_share_size: 1536M
+kibana_log_size: 1G
+
+kibana_filesystem_list:
+  - lv: lv_kibana_data
+    vg: data_vg
+    size: "{{ kibana_data_size }}"
+    path: "{{ kibana_data_dir }}"
+    owner: kibana
+    group: kibana
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+  - lv: lv_kibana_share
+    vg: data_vg
+    size: "{{ kibana_share_size }}"
+    path: "{{ kibana_share_dir }}"
+    owner: kibana
+    group: kibana
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+  - lv: lv_kibana_log
+    vg: data_vg
+    size: "{{ kibana_log_size }}"
+    path: "{{ kibana_log_dir }}"
+    owner: kibana
+    group: kibana
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+
+kibana_elasticsearch_username: kibana_system
+kibana_elasticsearch_password:
+
+## SSL
+kibana_certificate:
+kibana_private_key:
+
+kibana_ssl_protocols: "TLSv1.2"
+
+kibana_elasticsearch_url: >-
+  {% set comma = joiner(",") %}{% for host in groups['es'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:{{ elasticsearch_http_port }}"{% endfor %}

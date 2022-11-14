@@ -1,0 +1,21 @@
+- name: Récupération du certificat
+  become: true
+  slurp:
+    src: "{{ cert_conf.cert_file }}"
+  register: cert
+
+- name: Récupération de la clé
+  become: true
+  slurp:
+    src: "{{ cert_conf.key_file }}"
+  register: key
+
+- name: création du certificat haproxy
+  become: true
+  template:
+    src: certificate_from_file.pem.j2
+    dest: "{{ cert_conf.dest }}"
+    mode: "{{ cert_conf.mode | default(600) }}"
+    owner: "{{ cert_conf.owner | default('root') }}"
+    group: "{{ cert_conf.group | default('root') }}"
+  notify: haproxy service action

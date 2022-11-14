@@ -1,0 +1,45 @@
+---
+- name: installation
+  become: true
+  yum:
+    name: "{{ grafana_custom_packages | union(['grafana-' ~ grafana_version]) }}"
+    state: "present"
+
+- name: Restreint le umask du service à 0027
+  become: true
+  block:
+    - name: crée le dossier grafana.service.d
+      file:
+        path: "/etc/systemd/system/grafana-server.service.d"
+        state: directory
+    - name: copie les paramètres de umask
+      copy:
+        dest: "/etc/systemd/system/grafana-server.service.d/grafana-server.conf"
+        src: "grafana-server.conf"
+
+- name: configuration système
+  include: system.yml
+
+- include: plugins.yml
+  when: grafana_plugins is defined
+
+- name: configuration
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(grafana_owner) }}"
+    group: "{{ item.group | default(grafana_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  no_log: "{{ item.no_log | default(grafana_no_log_enabled) }}"
+  loop: "{{ grafana_custom_configs }}"
+  when: grafana_custom_configs is defined
+  notify: grafana - redémarrage
+
+- name: démarrage
+  become: true
+  systemd:
+    name: "{{ grafana_service_name }}"
+    state: "started"
+    daemon_reload: true
+    enabled: true

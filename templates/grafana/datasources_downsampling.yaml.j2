@@ -1,0 +1,6 @@
+---
+{% set grafana_datasources = grafana_datasources_downsampling %}
+# config file version
+apiVersion: {{ grafana_datasources_downsampling_version }}
+
+{% include "templates/grafana/datasources.j2" %}

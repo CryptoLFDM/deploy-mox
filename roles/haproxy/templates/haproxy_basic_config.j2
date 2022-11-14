@@ -1,0 +1,85 @@
+#jinja2: lstrip_blocks: "True"
+global
+    log 127.0.0.1 local3
+    chroot /var/lib/haproxy
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+    {% if haproxy_template_stat_socket_enabled %}
+    # turn on stats unix socket
+    stats socket /var/run/haproxy.sock level admin
+    {% endif %}
+
+    {% if haproxy_ssl_enabled %}
+    ssl-default-bind-ciphers {{ haproxy_template_ssl_bind_ciphers | join(':') }}
+    ssl-default-bind-options {{ haproxy_template_ssl_bind_options | join(' ') }}
+
+    tune.ssl.default-dh-param {{ haproxy_template_default_dh_param }}
+    {% endif %}
+
+defaults
+    mode                    http
+    log                     global
+    {% for option in haproxy_template_options %}
+    option                  {{ option }}
+    {% endfor %}
+    retries                 {{ haproxy_template_retries }}
+    {% for timeout in haproxy_template_timeouts %}
+    timeout {{ timeout }}
+    {% endfor %}
+    maxconn                 {{ haproxy_template_maxconn }}
+
+#---------------------------------------------------
+# http:80 [http]
+#---------------------------------------------------
+frontend http_frontend
+    bind {{ haproxy_template_bind_ip }}:80
+    option httplog
+    {% if haproxy_ssl_enabled %}
+    redirect scheme https code 301 if !{ ssl_fc }
+    {% else %}
+    use_backend app_backend
+    {% for file in haproxy_error_files %}
+    errorfile {{ file.code }} {{ haproxy_error_files_dest }}/{{ file.file_name }}
+    {% endfor %}
+    {% endif %}
+    monitor-uri /check
+
+{% if haproxy_ssl_enabled %}
+#---------------------------------------------------
+# https:443 [http]
+#---------------------------------------------------
+frontend https_frontend
+    bind {{ haproxy_template_bind_ip }}:443 ssl crt {{ haproxy_template_ssl_cert }}
+    log-format "{{ haproxy_template_log_format }}"
+
+    http-request set-header X-Forwarded-Proto https
+    http-request set-header Forwarded for=%[src];\ proto=https
+    http-response set-header Strict-Transport-Security max-age={{ haproxy_template_strict_transport_security_max_age }};\ includeSubDomains
+
+    {% if haproxy_template_csp|length > 0 %}
+    acl csp res.hdr(Content-Security-Policy),lower -m found
+    http-response set-header Content-Security-Policy "{{ haproxy_template_csp | join('; ') }}" if !csp
+
+    {% endif %}
+    acl frame_options res.hdr(X-Frame-Options),lower -m found
+    http-response set-header X-Frame-Options "{{ haproxy_template_frame_options }}" if !frame_options
+
+    acl secured_cookie res.hdr(Set-Cookie),lower -m sub secure
+    rspirep ^(set-cookie:.*) \1;\ Secure if !secured_cookie
+
+    acl valid_method method {{ haproxy_template_valid_methods | join(' ') }}
+    http-request deny if ! valid_method
+    use_backend app_backend
+
+    {% for file in haproxy_error_files %}
+    errorfile {{ file.code }} {{ haproxy_error_files_dest }}/{{ file.file_name }}
+    {% endfor %}
+
+{% endif %}
+
+backend app_backend
+    balance roundrobin
+    server {{ haproxy_template_backend_name }} {{ haproxy_template_backend_ip }}:{{ haproxy_template_backend_port }} check

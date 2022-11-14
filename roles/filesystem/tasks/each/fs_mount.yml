@@ -1,0 +1,34 @@
+---
+
+# Montage d'un FS et (re)montage global si isolation des namespace actif
+#
+# variables d'input:
+# - filesystem_item : item provenant de filesystem_list à opérer (meme structure)
+# - filesystem_ns_isolated : isolation NS actif si filesystem_ns_isolated.rc == 0
+#
+# "mount -o remount" pour eviter les erreurs sur les FS deja montés
+#
+# certains FS ne sont pas concernés, car isolation justement requises pour eux
+# cf /etc/security/namespace.d/namespace_CSS45.conf
+
+
+- name: "(loop) LVM lv fs | info"
+  debug:
+    msg: "travail sur le FS {{ filesystem_item.path }}"
+
+- name: "(loop) LVM lv fs | monte le fs"
+  become: true
+  mount:
+    name  : "{{ filesystem_item.path }}"
+    src   : "/dev/{{ filesystem_item.vg }}/{{ filesystem_item.lv }}"
+    fstype: "{{ filesystem_item.fstype }}"
+    opts  : "{{ filesystem_item.opts | default(omit) }}"
+    state : mounted
+
+- name: "(loop) LVM lv fs | (re)monte le FS dans le namespace global"
+  become: true
+  shell: "nsenter -t 1 -m mount {{ filesystem_item.path }} || nsenter -t 1 -m mount -o remount {{ filesystem_item.path }}"
+  when:
+    - filesystem_ns_isolated.rc == 0
+    - filesystem_item.path not in [ '/tmp', '/var/tmp' ]
+
