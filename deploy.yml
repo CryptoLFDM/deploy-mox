@@ -1,7 +1,7 @@
 ---
 - hosts: init
   tasks:
-    - name: Fix hosts files
+    - name: Fix hosts templates
       become: true
       template:
         src: misc/hosts.j2

@@ -57,12 +57,12 @@ ssl_minimal_file:
 
 elasticsearch_users_custom:
   - name: grafana
-    content: "{{ lookup('template', 'templates/elasticsearch/user/grafana.json.j2') }}"
+    content: "{{ lookup('template', 'user/grafana.json.j2') }}"
   - name: minotor
-    content: "{{ lookup('template', 'templates/elasticsearch/user/minotor.json.j2') }}"
+    content: "{{ lookup('template', 'user/minotor.json.j2') }}"
 
 elasticsearch_roles_custom:
   - name: grafana
-    content: "{{ lookup('template', 'templates/elasticsearch/role/grafana.json.j2') }}"
+    content: "{{ lookup('template', 'role/grafana.json.j2') }}"
   - name: minotor
-    content: "{{ lookup('template', 'templates/elasticsearch/role/minotor.json.j2') }}"
+    content: "{{ lookup('template', 'role/minotor.json.j2') }}"

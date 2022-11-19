@@ -7,7 +7,7 @@
     user: "{{ elasticsearch_elastic_user }}"
     password: "{{ elasticsearch_elastic_password }}"
     body: "{{ item.content }}"
-    force_basic_auth: yes
+    force_basic_auth: true
     status_code: 200
     body_format: json
   loop: "{{ elasticsearch_roles_custom }}"

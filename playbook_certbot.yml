@@ -20,6 +20,6 @@
 
 - hosts: infra
   tasks:
-    - name: Execute the command in remote shell; stdout goes to the specified files on the remote
+    - name: Execute the command in remote shell; stdout goes to the specified templates on the remote
       become: true
       ansible.builtin.shell: sh /opt/certbot.sh
