@@ -1,0 +1,1 @@
+ansible-playbook deploy.yml -i inventory/mox/hosts -k -K -u moz

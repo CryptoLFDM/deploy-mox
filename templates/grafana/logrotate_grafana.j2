@@ -1,9 +1,0 @@
-{{grafana_log_dir}}/grafana.log {
-  hourly
-  notifempty
-  size={{grafana_rotate_log_size}}
-  compress
-  missingok
-  rotate {{grafana_retention_log}}
-  copytruncate
-}

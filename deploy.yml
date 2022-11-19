@@ -1,4 +1,29 @@
 ---
+- hosts: init
+  tasks:
+    - name: Fix hosts files
+      become: true
+      template:
+        src: misc/hosts.j2
+        dest: /etc/hosts
+
+    - name: Install required rpm
+      become: true
+      yum:
+        name: certbot,emacs-nox,git,python3-certbot-nginx,certbot-nginx,python3-certbot-dns-ovh
+        state: present
+
+    - name: Remove useless / unwanted rpm
+      become: true
+      yum:
+        name: nftables,iptables
+        state: absent
+
+    - name: Set hostname
+      become: true
+      shell: "hostnamectl set-hostname {{ local_dns }}"
+
+- ansible.builtin.import_playbook: playbook_misc.yml
 - ansible.builtin.import_playbook: playbook_es.yml
 - ansible.builtin.import_playbook: playbook_kibana.yml
 - ansible.builtin.import_playbook: playbook_haproxy.yml

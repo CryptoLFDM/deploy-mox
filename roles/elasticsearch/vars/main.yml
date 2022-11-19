@@ -3,7 +3,6 @@ elasticsearch_owner: elasticsearch
 elasticsearch_group: elasticsearch
 elasticsearch_service_name: elasticsearch
 elasticsearch_path_logs: /var/log/elasticsearch
-elasticsearch_path_home: /usr/share/elasticsearch
 elasticsearch_http_base_url: "{{ elasticsearch_protocol }}://{{ elasticsearch_host }}:{{ elasticsearch_port }}"
 elasticsearch_elastic_user: elastic
 elasticsearch_kibana_user: kibana

@@ -6,22 +6,11 @@
   tags:
     - kibana
   roles:
+    - role: user
+      user_name: kibana
+      user_group: kibana
     - role: filesystem
       filesystem_list: "{{ kibana_filesystem_list }}"
-      tags:
-        - filesystem
-        - kibana_filesystem
     - role: kibana
-      tags:
-        - kibana_only
-  post_tasks:
-    - name: restart le kibana
-      become: true
-      ansible.builtin.systemd:
-        name: kibana
-        state: restarted
-      when: kibana_force_restart|default(false)|bool
-      tags:
-        - kibana_only
 
 

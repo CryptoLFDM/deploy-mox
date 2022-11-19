@@ -1,51 +1,13 @@
 ---
-# Version à installer
-grafana_version: 4.6.1
-
-# Port d'écoute HTTP
 grafana_http_port: 3000
 
-grafana_download_repo:
-
-# Liste des plugins à installer
-# format : plugin-nom_de_plugin-version
-grafana_plugins: []
-
-# Liste des plugins que grafana doit mettre a jour avec un arret
-# format : core-plugin-nom_de_plugin-version
-grafana_core_plugins: []
-
-# Liste des répertoires pour les plugins
-grafana_plugin_folders: []
-
-# Liste des packages à installer pour des plugins
-grafana_custom_packages: []
-
-# Liste des fichiers de configuration "projet"
-grafana_custom_configs: []
-#  - src: "grafana/grafana.ini.j2"
-#    dest: "/etc/grafana/grafana.ini"
-#  - src: "grafana/ldap.toml.j2"
-#    dest: "/etc/grafana/ldap.toml"
-#  - src: "grafana/logrotate_grafana.j2"
-#    dest: "/etc/logrotate.hourly/logrotate_grafana"
-#    owner: "root"
-#    group: "root"
-#    mode: "0640"
-#    no_log: false
-
-# Activation des iptables
-grafana_enable_iptables: false
-
-# Dossier utilisé pour le provisioning. Nécessite l'activation de l'option
-# "provisioning" dans la partie [paths] de grafana.ini
-grafana_datasources_dir:
-
-# Dossiers par défaut GRAFANA
 grafana_system_directories :
-  - path: "/etc/grafana"
-  - path: "/usr/share/grafana"
-  - path: "/var/lib/grafana"
-  - path: "/var/run/grafana"
+  - path: /etc/grafana
+  - path: /usr/share/grafana
+  - path: "{{ grafana_data_dir }}"
+  - path: /var/run/grafana
 
-grafana_no_log_enabled: true
+grafana_service_name: grafana-server
+
+grafana_owner: grafana
+grafana_group: grafana

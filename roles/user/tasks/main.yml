@@ -34,7 +34,7 @@
     chage -l {{ user_name | quote }} | grep "^Maximum number of days between password change" | sed 's/.*: //'
   when: user_name is not none
   register: user_current_max_pwd_age
-  changed_when: False
+  changed_when: false
 
 - name: définition du "max password age" de l'utilisateur
   become: true

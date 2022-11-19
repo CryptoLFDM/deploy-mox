@@ -1,12 +1,4 @@
 ---
-# Kibana
-kibana_version: "{{ elasticsearch_version }}"
-
-kibana_certificates_path:
-kibana_certificate_path:
-kibana_private_key_path:
-kibana_ca_path:
-
 kibana_custom_templates:
   - src: kibana/kibana.yml.j2
     dest: /etc/kibana/kibana.yml
@@ -38,7 +30,7 @@ kibana_log_size: 1G
 
 kibana_filesystem_list:
   - lv: lv_kibana_data
-    vg: data_vg
+    vg: fedora_fedora
     size: "{{ kibana_data_size }}"
     path: "{{ kibana_data_dir }}"
     owner: kibana
@@ -48,7 +40,7 @@ kibana_filesystem_list:
     force: false
     shrink: false
   - lv: lv_kibana_share
-    vg: data_vg
+    vg: fedora_fedora
     size: "{{ kibana_share_size }}"
     path: "{{ kibana_share_dir }}"
     owner: kibana
@@ -58,7 +50,7 @@ kibana_filesystem_list:
     force: false
     shrink: false
   - lv: lv_kibana_log
-    vg: data_vg
+    vg: fedora_fedora
     size: "{{ kibana_log_size }}"
     path: "{{ kibana_log_dir }}"
     owner: kibana
@@ -69,13 +61,24 @@ kibana_filesystem_list:
     shrink: false
 
 kibana_elasticsearch_username: kibana_system
-kibana_elasticsearch_password:
-
-## SSL
-kibana_certificate:
-kibana_private_key:
+kibana_elasticsearch_password: 7Qs0uWt0waUORUOk4CLZ
 
 kibana_ssl_protocols: "TLSv1.2"
 
 kibana_elasticsearch_url: >-
-  {% set comma = joiner(",") %}{% for host in groups['es'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:{{ elasticsearch_http_port }}"{% endfor %}
+  {% set comma = joiner(",") %}{% for host in groups['es'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}
+
+ssl_minimal_file:
+ - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
+   dest: /etc/kibana/cert.pem
+   user: kibana
+ - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
+   dest: /etc/kibana/chain.pem
+   user: kibana
+ - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
+   dest: /etc/kibana/fullchain.pem
+   user: kibana
+ - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
+   dest: /etc/kibana/privkey.pem
+   user: kibana
+

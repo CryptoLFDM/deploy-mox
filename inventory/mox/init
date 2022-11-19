@@ -1,0 +1,12 @@
+cerberus_alpha ansible_host="192.168.1.23" local_dns="cerberus-alpha.ether-source.fr"
+cerberus_beta ansible_host="192.168.1.189" local_dns="cerberus-beta.ether-source.fr"
+cerberus_gamma ansible_host="192.168.1.161" local_dns="cerberus-gamma.ether-source.fr"
+mermaid_alpha ansible_host="192.168.1.3" local_dns="mermaid-alpha.ether-source.fr"
+minotor_alpha ansible_host="192.168.1.106" local_dns="minotor-alpha.ether-source.fr"
+
+[init]
+cerberus_alpha
+cerberus_beta
+cerberus_gamma
+mermaid_alpha
+minotor_alpha

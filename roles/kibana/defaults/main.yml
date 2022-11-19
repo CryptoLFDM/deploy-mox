@@ -1,0 +1,11 @@
+---
+kibana_version: "{{ elk_version }}"
+kibana_certificates_path: /etc/ssl/certs
+kibana_certificate:
+kibana_certificate_path: "{{ kibana_certificates_path }}/kibana_{{ ansible_host }}.pem"
+kibana_private_key:
+kibana_private_key_path: "{{ kibana_certificates_path }}/kibana_{{ ansible_host }}.key"
+kibana_owner: kibana
+kibana_group: kibana
+kibana_app_dir: /usr/share/kibana
+kibana_conf_dir: /etc/kibana

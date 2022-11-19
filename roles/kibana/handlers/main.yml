@@ -1,0 +1,9 @@
+---
+- name: restart kibana
+  become: true
+  systemd:
+    name: kibana
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: kibana_need_restart

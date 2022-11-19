@@ -28,7 +28,7 @@
 # le module ansible 'parted' ne permet pas (encore) de demander l'agrandissement
 # d'une partition. cf https://github.com/ansible/ansible/issues/23914
 - name: (loop) agrandissement des PV qui sont des partitions (si possible)
-  become: True
+  become: true
   command: "parted {{ blockdev[:8] }} resizepart {{ blockdev[8] }} 100%"
   loop: "{{ filesystem_pvlist }}"
   loop_control:

@@ -26,7 +26,7 @@
     filesystem_pvlist: "{{ filesystem_pvs_raw.stdout | from_json | json_query(query_pv_list) }}"
 
 - name: (loop) création ou extension du VG
-  become: True
+  become: true
   lvg:
     vg:  "{{ lvm_vg_item.vg }}"
     pvs: "{{ lvm_vg_item.pvs }}"

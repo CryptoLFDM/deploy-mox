@@ -1,0 +1,6 @@
+---
+external_dns_domain: ether-source.fr
+ansible_python_interpreter: /usr/bin/python3
+ovh_cred_path: /etc/ovh.cred
+
+elk_version: 8.5.1

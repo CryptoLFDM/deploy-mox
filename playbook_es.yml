@@ -6,6 +6,9 @@
   tags:
     - elasticsearch
   roles:
+    - role: user
+      user_name: elasticsearch
+      user_group: elasticsearch
     - role: filesystem
       filesystem_list: "{{ elasticsearch_filesystem_list }}"
       tags:

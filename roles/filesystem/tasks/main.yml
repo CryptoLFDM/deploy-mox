@@ -50,7 +50,7 @@
   loop: "{{ filesystem_list }}"
 
 - name: Namespace mount | evaluation isolation active ou pas
-  become: True
+  become: true
   # renvoie 0 si ns isole, 1 sinon (error ou 1 seul namespace)
   shell: |
     set -e

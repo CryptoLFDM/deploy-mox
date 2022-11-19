@@ -1,5 +1,5 @@
 ---
-- name: Reset user_changed if still True
+- name: Reset user_changed if still true
   set_fact:
     user_changed: false
   listen: "user_changed_need_reset"

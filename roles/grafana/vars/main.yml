@@ -1,9 +1,0 @@
----
-grafana_service_name: "grafana-server"
-
-grafana_data_dir: "/var/lib/grafana"
-grafana_log_dir: "/var/log/grafana"
-grafana_plugins_dir: "{{ grafana_data_dir }}/plugins"
-
-grafana_owner: "grafana"
-grafana_group: "grafana"

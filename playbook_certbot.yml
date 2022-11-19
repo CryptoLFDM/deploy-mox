@@ -1,0 +1,25 @@
+---
+
+- hosts: infra
+  tasks:
+    - name: Create certbot shell
+      become: true
+      template:
+        src: misc/certbot.sh.j2
+        dest: /opt/certbot.sh
+
+- hosts: infra
+  tasks:
+    - name: Copy ovh cred
+      become: true
+      ansible.builtin.copy:
+       src: ovh.cred
+       dest: "{{ ovh_cred_path }}"
+       owner: root
+       group: root
+
+- hosts: infra
+  tasks:
+    - name: Execute the command in remote shell; stdout goes to the specified files on the remote
+      become: true
+      ansible.builtin.shell: sh /opt/certbot.sh

@@ -1,35 +1,17 @@
 ---
-# Installation d'Elasticsearch
 - import_tasks: install.yml
 
-# Configuration d'Elasticsearch
 - import_tasks: config.yml
 
-# Configuration du SSL
 - include_tasks: ssl.yml
-  when: elasticsearch_ssl_enabled
 
 - name: Force le restart si necessaire
   meta: flush_handlers
 
-# Paramètrage des mots de passe par défaut.
 - include_tasks: param-default-password.yml
-
-- name: Force le restart si necessaire
-  meta: flush_handlers
 
 - include_tasks: param-change-password.yml
 
-# Paramètrage de la licence
-- include_tasks: param-license.yml
-  when:
-    - elasticsearch_license_enabled
-    - elasticsearch_license_content is not none
+- name: Force le restart si necessaire
+  meta: flush_handlers
 
-# Paramétrage de X-Pack security
-- include_tasks: param-xpack-security.yml
-  when: (elasticsearch_plugin_xpack_roles_files is defined or
-    elasticsearch_plugin_xpack_users_files is defined)
-
-- include_tasks: param-template-config.yml
-  when: elasticsearch_index_templates | length > 0

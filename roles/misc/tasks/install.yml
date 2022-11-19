@@ -1,0 +1,14 @@
+---
+- name: import elastic gpg key
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: add yum repo for elk
+  become: true
+  template:
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
+    owner: root
+    group: root

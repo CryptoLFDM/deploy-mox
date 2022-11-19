@@ -1,18 +1,23 @@
-es_01 ansible_host="192.168.1.23"
-es_02 ansible_host="192.168.1.189"
-es_03 ansible_host="192.168.1.161"
-haproxy ansible_host="212.24.105.203"
-grafana ansible_host="192.168.1.3"
-minotaur ansible_host="192.168.1.106"
+[infra]
+cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr"
+cerberus_beta ansible_host="cerberus-beta.ether-source.fr"
+cerberus_gamma ansible_host="cerberus-gamma.ether-source.fr"
+mermaid_alpha ansible_host="mermaid-alpha.ether-source.fr"
+minotor_alpha ansible_host="minotor-alpha.ether-source.fr"
+
+[misc:children]
+infra
 
 [es]
-es_[01:03]
-
-[haproxy]
-haproxy
+cerberus_alpha
+cerberus_beta
+cerberus_gamma
 
 [grafana]
-grafana
+mermaid_alpha
 
-[minotaur]
-minotaur
+[minotor]
+minotor_alpha
+
+[kibana]
+mermaid_alpha

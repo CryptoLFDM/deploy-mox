@@ -4,26 +4,15 @@
 #==================================================================
 - hosts: grafana
   roles:
+    - role: user
+      user_name: grafana
+      user_group: grafana
     - role: filesystem
       filesystem_list: "{{ grafana_filesystem_list }}"
       tags:
         - filesystem
         - grafana
-    - role: tls_certificate
-      tls_certificate_name: "grafana_{{ ansible_host }}"
-      tls_certificate_owner: "grafana"
-      tls_certificate_group: "grafana"
-      tls_certificate_key_mode: "0600"
-      tags:
-        - tls_certificate
-        - grafana
     - role: grafana
       serial: 1
       tags:
         - grafana
-
-  post_tasks:
-    - name: vérification du démarrage de grafana-server
-      wait_for:
-        port: 3000
-        delay: 10

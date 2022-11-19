@@ -19,3 +19,5 @@ vault.key
 
 # launcher local
 /*_local.sh
+
+*.cred

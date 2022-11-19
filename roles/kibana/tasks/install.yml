@@ -1,0 +1,17 @@
+---
+- name: create directory
+  become: true
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(kibana_owner) }}"
+    group: "{{ item.group | default(kibana_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ kibana_custom_dirs }} "
+
+- name: install binaries
+  become: true
+  yum:
+    name: "kibana-{{ kibana_version }}"
+    state: present
+    update_cache: true

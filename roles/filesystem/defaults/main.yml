@@ -7,7 +7,7 @@ filesystem_list: []
 #
 # filesystem_list:
 #   - lv: lv_logstash_db
-#     vg: data_vg
+#     vg: fedora_fedora
 #     size: "70g"
 #     path: /var/lib/logstash
 #     fstype: "ext4"
@@ -28,7 +28,7 @@ filesystem_lvm_vg_list: []
 
 # Exemple de VG LVM à créer ou étendre:
 #  filesystem_lvm_vg_list:
-#    - vg: data_vg
+#    - vg: fedora_fedora
 #      pvs: /dev/sdb
 #    - vg: vg_combine_plusieurs_pvs
 #      pvs: "/dev/sda2,/dev/sdc"
@@ -38,7 +38,7 @@ filesystem_lvm_vg_list: []
 # Utile si changement de taille des disques qui portent les pv.
 # Le changement ne concerne que les PV qui sont des partitions de disque: sans
 # effet pour un PV qui est porté par un disque complet.
-# N'est pas pris en compte si filesystem_lvm_vg_extend_pvs_all vaut True
+# N'est pas pris en compte si filesystem_lvm_vg_extend_pvs_all vaut true
 filesystem_lvm_vg_extend_pvs_list: []
 
 # Exemple de Liste de VG LVM dont les pvs doivent être étendus:
@@ -49,5 +49,5 @@ filesystem_lvm_vg_extend_pvs_list: []
 
 # Agrandissement de tous les pv des VG LVM listés dans la variable filesystem_list.
 # la variable filesystem_lvm_vg_extend_pvs_list n'est alors pas pris en compte.
-filesystem_lvm_vg_extend_pvs_all: False
+filesystem_lvm_vg_extend_pvs_all: false
 
