@@ -1,5 +1,6 @@
 [grafana]
 name=grafana
 baseurl=https://rpm.grafana.com
-repo_gpgcheck=1
 enabled=1
+gpgcheck=1
+gpgkey=https://packages.grafana.com/gpg.key

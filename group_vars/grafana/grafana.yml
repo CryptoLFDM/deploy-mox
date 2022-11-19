@@ -1,13 +1,4 @@
 ---
-grafana_repo:
-  - name : grafana-enterprise
-    description: Miroir du repo officiel de Grafana
-    baseurl: https://rpm.grafana.com
-    file: grafana
-    gpgcheck: false
-    state: present
-    enabled: true
-
 grafana_custom_configs:
   - src: grafana/grafana.ini.j2
     dest: /etc/grafana/grafana.ini
