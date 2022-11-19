@@ -54,3 +54,15 @@ ssl_minimal_file:
  - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
    dest: /etc/elasticsearch/privkey.pem
    user: elasticsearch
+
+elasticsearch_users_custom:
+  - name: grafana
+    content: "{{ lookup('template', 'templates/elasticsearch/user/grafana.json.j2') }}"
+  - name: minotor
+    content: "{{ lookup('template', 'templates/elasticsearch/user/minotor.json.j2') }}"
+
+elasticsearch_roles_custom:
+  - name: grafana
+    content: "{{ lookup('template', 'templates/elasticsearch/role/grafana.json.j2') }}"
+  - name: minotor
+    content: "{{ lookup('template', 'templates/elasticsearch/role/minotor.json.j2') }}"

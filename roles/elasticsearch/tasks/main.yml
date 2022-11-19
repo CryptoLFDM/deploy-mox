@@ -8,9 +8,9 @@
 - name: Force le restart si necessaire
   meta: flush_handlers
 
-- include_tasks: param-default-password.yml
+- include_tasks: bootstrap.yml
 
-- include_tasks: param-change-password.yml
+- include_tasks: users.yml
 
 - name: Force le restart si necessaire
   meta: flush_handlers

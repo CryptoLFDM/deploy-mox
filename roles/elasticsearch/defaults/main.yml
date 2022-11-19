@@ -1,4 +1,13 @@
 ---
+elasticsearch_owner: elasticsearch
+elasticsearch_group: elasticsearch
+elasticsearch_service_name: elasticsearch
+elasticsearch_path_logs: /var/log/elasticsearch
+elasticsearch_http_base_url: "{{ elasticsearch_protocol }}://{{ elasticsearch_host }}:{{ elasticsearch_port }}"
+elasticsearch_elastic_user: elastic
+elasticsearch_kibana_user: kibana
+elasticsearch_url_license: "{{ elasticsearch_http_base_url }}/_license"
+elasticsearch_url_security: "{{ elasticsearch_http_base_url }}/_security"
 elasticsearch_path_data: /var/lib/elasticsearch
 elasticsearch_path_bin: /usr/share/elasticsearch
 
@@ -17,7 +26,12 @@ elasticsearch_cluster_users:
     password: "{{ elasticsearch_kibana_password }}"
   - name: elastic
     password: "{{ elasticsearch_elastic_password }}"
+
+
+elasticsearch_custom_users:
   - name: grafana
     password: "{{ elasticsearch_grafana_password }}"
+    role: [grafana_role]
   - name: minotor
     password: "{{ elasticsearch_minotor_password }}"
+    role: [minotor_writer]
