@@ -10,6 +10,8 @@
 
 - include_tasks: bootstrap.yml
 
+- include_tasks: roles.yml
+
 - include_tasks: users.yml
 
 - name: Force le restart si necessaire
