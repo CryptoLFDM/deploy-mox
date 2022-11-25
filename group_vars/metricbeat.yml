@@ -1,0 +1,41 @@
+---
+metricbeat_custom_templates:
+  - src: metricbeat.yml.j2
+    dest: /etc/metricbeat/metricbeat.yml
+    owner: metricbeat
+    group: metricbeat
+    mode: "0640"
+  - src: system.yml.j2
+    dest: /etc/metricbeat/modules.d/system.yml
+    owner: metricbeat
+    group: metricbeat
+    mode: "0640"
+
+metricbeat_log_dir: /var/log/metricbeat
+
+metricbeat_custom_dirs:
+  - path: "{{ metricbeat_log_dir }}"
+    state: directory
+    owner: metricbeat
+    group: metricbeat
+    mode: "0750"
+
+# Filesystem
+metricbeat_log_size: 1G
+
+metricbeat_filesystem_list:
+  - lv: lv_metricbeat_log
+    vg: fedora_fedora
+    size: "{{ metricbeat_log_size }}"
+    path: "{{ metricbeat_log_dir }}"
+    owner: metricbeat
+    group: metricbeat
+    mode: "0750"
+    fstype: "{{ filesystem_type | default('xfs') }}"
+    force: false
+    shrink: false
+
+metricbeat_ssl_protocols: "TLSv1.2"
+
+metricbeat_elasticsearch_url: >-
+  {% set comma = joiner(",") %}{% for host in groups['es'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}

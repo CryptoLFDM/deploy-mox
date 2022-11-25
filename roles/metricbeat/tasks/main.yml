@@ -1,0 +1,30 @@
+---
+- name: create directory
+  become: true
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(metricbeat_owner) }}"
+    group: "{{ item.group | default(metricbeat_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ metricbeat_custom_dirs }} "
+
+- name: install binaries
+  become: true
+  yum:
+    name: "metricbeat-{{ metricbeat_version }}"
+    state: present
+    update_cache: true
+
+- name: template config files
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(metricbeat_owner) }}"
+    group: "{{ item.group | default(metricbeat_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ metricbeat_custom_templates }}"
+  notify:
+    - metricbeat_need_restart
+

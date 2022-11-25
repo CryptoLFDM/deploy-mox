@@ -1,0 +1,13 @@
+---
+## --------------------------------------------------------------------
+## Kibana
+## --------------------------------------------------------------------
+- hosts: metricbeat
+  tags:
+    - metricbeat
+  roles:
+    - role: filesystem
+      filesystem_list: "{{ metricbeat_filesystem_list }}"
+    - role: metricbeat
+
+

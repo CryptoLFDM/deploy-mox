@@ -21,3 +21,6 @@ minotor_alpha
 
 [kibana]
 mermaid_alpha
+
+[metricbeat:children]
+infra
