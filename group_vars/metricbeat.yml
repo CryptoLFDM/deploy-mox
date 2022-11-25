@@ -1,6 +1,6 @@
 ---
-metricbeat_owner: "{{ metricbeat_owner }}"
-metricbeat_group: "{{ metricbeat_group }}"
+metricbeat_owner: root
+metricbeat_group: root
 
 metricbeat_custom_templates:
   - src: metricbeat.yml.j2
