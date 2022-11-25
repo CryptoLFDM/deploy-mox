@@ -60,9 +60,13 @@ elasticsearch_users_custom:
     content: "{{ lookup('template', 'user/grafana.json.j2') }}"
   - name: minotor
     content: "{{ lookup('template', 'user/minotor.json.j2') }}"
+  - name: metricbeat
+    content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
 
 elasticsearch_roles_custom:
   - name: grafana
     content: "{{ lookup('template', 'role/grafana.json.j2') }}"
   - name: minotor
     content: "{{ lookup('template', 'role/minotor.json.j2') }}"
+  - name: metricbeat
+    content: "{{ lookup('template', 'role/metricbeat.json.j2') }}"
