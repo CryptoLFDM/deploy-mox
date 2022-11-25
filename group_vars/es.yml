@@ -2,7 +2,7 @@
 elasticsearch_port: 9200
 
 elasticsearch_templates:
-  - src: elasticsearch/elasticsearch.yml.j2
+  - src: elasticsearch.yml.j2
     dest: /etc/elasticsearch/elasticsearch.yml
 
 
