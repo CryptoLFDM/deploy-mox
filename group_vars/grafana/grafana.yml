@@ -1,6 +1,6 @@
 ---
 grafana_custom_configs:
-  - src: grafana/grafana.ini.j2
+  - src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
 
 grafana_data_dir: /var/lib/grafana
