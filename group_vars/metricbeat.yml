@@ -1,14 +1,17 @@
 ---
+metricbeat_owner: "{{ metricbeat_owner }}"
+metricbeat_group: "{{ metricbeat_group }}"
+
 metricbeat_custom_templates:
   - src: metricbeat.yml.j2
     dest: /etc/metricbeat/metricbeat.yml
-    owner: metricbeat
-    group: metricbeat
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
     mode: "0640"
   - src: system.yml.j2
     dest: /etc/metricbeat/modules.d/system.yml
-    owner: metricbeat
-    group: metricbeat
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
     mode: "0640"
 
 metricbeat_log_dir: /var/log/metricbeat
@@ -16,8 +19,8 @@ metricbeat_log_dir: /var/log/metricbeat
 metricbeat_custom_dirs:
   - path: "{{ metricbeat_log_dir }}"
     state: directory
-    owner: metricbeat
-    group: metricbeat
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
     mode: "0750"
 
 # Filesystem
@@ -28,8 +31,8 @@ metricbeat_filesystem_list:
     vg: fedora_fedora
     size: "{{ metricbeat_log_size }}"
     path: "{{ metricbeat_log_dir }}"
-    owner: metricbeat
-    group: metricbeat
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
     mode: "0750"
     fstype: "{{ filesystem_type | default('xfs') }}"
     force: false
