@@ -1,8 +1,8 @@
 {
-  "cluster": [ "manage_index_templates"],
+  "cluster": [ "manage_index_templates", "monitor", "manage_ilm"],
   "indices": [
     {
-      "names": [ "flux-*", "cosmos-*"],
+      "names": ["metricbeat*"],
       "privileges": [ "write", "create_index", "manage", "view_index_metadata" ]
     }
   ]

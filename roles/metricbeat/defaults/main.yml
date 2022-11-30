@@ -1,0 +1,3 @@
+---
+metricbeat_version: "{{ elk_version }}"
+

@@ -61,7 +61,6 @@ kibana_filesystem_list:
     shrink: false
 
 kibana_elasticsearch_username: kibana_system
-kibana_elasticsearch_password: 7Qs0uWt0waUORUOk4CLZ
 
 kibana_ssl_protocols: "TLSv1.2"
 
