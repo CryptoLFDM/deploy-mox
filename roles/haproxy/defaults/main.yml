@@ -17,7 +17,7 @@ haproxy_log_dir: "/var/log/haproxy"
 haproxy_config_folder: "/etc/haproxy"
 # Fichier de configuration par défaut
 haproxy_config_file: "{{ haproxy_config_folder }}/haproxy.cfg"
-# Fichiers template de configuration haproxy à déployer
+# Fichiers templates de configuration haproxy à déployer
 haproxy_templates:
   - src: "haproxy_basic_config.j2"
     dest: "{{ haproxy_config_file }}"
@@ -26,7 +26,7 @@ haproxy_templates:
     group: "haproxy"
 
 haproxy_templates_filedest: "{{ haproxy_templates | map(attribute='dest') | list }}"
-# Fichiers template pour la configuration logrotate haproxy
+# Fichiers templates pour la configuration logrotate haproxy
 haproxy_logrotate_template:
   - src: "logrotate_haproxy.j2"
     dest: "/etc/logrotate.d/haproxy"
@@ -37,7 +37,7 @@ haproxy_logrotate_template:
 # configuration logrotate haproxy
 haproxy_logrotate_max_size: 1G
 
-# Fichiers template pour la configuration syslog haproxy
+# Fichiers templates pour la configuration syslog haproxy
 haproxy_rsyslog_template:
   - src: "rsyslog_haproxy.conf.j2"
     dest: "/etc/rsyslog.d/haproxy.conf"
@@ -95,7 +95,7 @@ haproxy_pid_file: "/var/run/haproxy.pid"
 haproxy_start_option: "-Ws"
 
 ##################################
-## Variables template par défaut##
+## Variables templates par défaut##
 ##################################
 haproxy_template_options:
     - "httplog"
