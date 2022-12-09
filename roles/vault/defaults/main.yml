@@ -1,5 +1,7 @@
 ---
-vault_package: vault-1.12.2
+vault_package:
+  - dnf-plugins-core
+  - vault-1.12.2
 
 vault_user: vault
 vault_group: vault

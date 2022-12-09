@@ -4,7 +4,7 @@
   ansible.builtin.yum_repository:
     name: vault
     description: vault
-    baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    baseurl: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 
 - name: install binaries
   become: true
