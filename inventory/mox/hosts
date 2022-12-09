@@ -4,6 +4,8 @@ cerberus_beta ansible_host="cerberus-beta.ether-source.fr"
 cerberus_gamma ansible_host="cerberus-gamma.ether-source.fr"
 mermaid_alpha ansible_host="mermaid-alpha.ether-source.fr"
 minotor_alpha ansible_host="minotor-alpha.ether-source.fr"
+basilisk ansible_host="basilisk.ether-source.fr"
+
 
 [misc:children]
 infra
@@ -24,3 +26,6 @@ mermaid_alpha
 
 [metricbeat:children]
 infra
+
+[vault]
+basilisk

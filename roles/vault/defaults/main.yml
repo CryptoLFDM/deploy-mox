@@ -1,0 +1,24 @@
+---
+vault_package: vault-1.12.2
+
+vault_user: vault
+vault_group: vault
+
+vault_custom_templates:
+  - src: vault.hcl.j2
+    dest: /etc/vault.d/vault.hcl
+    mode: "0640"
+
+ssl_minimal_file:
+  - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
+    dest: /etc/vault/cert.pem
+    user: vault
+  - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
+    dest: /etc/vault/chain.pem
+    user: vault
+  - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
+    dest: /etc/vault/fullchain.pem
+    user: vault
+  - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
+    dest: /etc/vault/privkey.pem
+    user: vault

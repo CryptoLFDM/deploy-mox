@@ -41,26 +41,14 @@ elasticsearch_protocol: https
 elasticsearch_host: "{{ ansible_host }}"
 elasticsearch_ssl_protocols: TLSv1.2
 
-ssl_minimal_file:
- - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
-   dest: /etc/elasticsearch/cert.pem
-   user: elasticsearch
- - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
-   dest: /etc/elasticsearch/chain.pem
-   user: elasticsearch
- - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
-   dest: /etc/elasticsearch/fullchain.pem
-   user: elasticsearch
- - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
-   dest: /etc/elasticsearch/privkey.pem
-   user: elasticsearch
-
 elasticsearch_users_custom:
   - name: grafana
     content: "{{ lookup('template', 'user/grafana.json.j2') }}"
   - name: minotor
     content: "{{ lookup('template', 'user/minotor.json.j2') }}"
   - name: metricbeat
+    content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
+  - name: mozquito
     content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
 
 elasticsearch_roles_custom:

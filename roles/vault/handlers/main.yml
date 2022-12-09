@@ -1,0 +1,9 @@
+---
+- name: restart vault
+  become: true
+  systemd:
+    name: vault  
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: vault_need_restart
