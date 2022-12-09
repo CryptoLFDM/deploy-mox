@@ -22,7 +22,7 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default(vault_owner) }}"
+    owner: "{{ item.owner | default(vault_user) }}"
     group: "{{ item.group | default(vault_group) }}"
     mode: "{{ item.mode | default('0640') }}"
   loop: "{{ vault_custom_templates }}"
