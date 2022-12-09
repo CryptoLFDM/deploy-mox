@@ -1,0 +1,19 @@
+---
+## --------------------------------------------------------------------
+## Elasticsearch
+## --------------------------------------------------------------------
+- hosts: elasticsearch
+  tags:
+    - elasticsearch
+  roles:
+    - role: user
+      user_name: "{{ elasticsearch_owner }}"
+      user_group: "{{ elasticsearch_group }}"
+    - role: filesystem
+      filesystem_list: "{{ elasticsearch_filesystem_list }}"
+      tags:
+        - elasticsearch
+    - role: elasticsearch
+      tags:
+        - elasticsearch
+

@@ -10,7 +10,7 @@ basilisk ansible_host="basilisk.ether-source.fr"
 [misc:children]
 infra
 
-[es]
+[elasticsearch]
 cerberus_alpha
 cerberus_beta
 cerberus_gamma

@@ -1,22 +1,62 @@
 ---
 elasticsearch_owner: elasticsearch
 elasticsearch_group: elasticsearch
-elasticsearch_service_name: elasticsearch
-elasticsearch_path_logs: /var/log/elasticsearch
-elasticsearch_http_base_url: "{{ elasticsearch_protocol }}://{{ elasticsearch_host }}:{{ elasticsearch_port }}"
+
+elasticsearch_port: 9200
+elasticsearch_host: "{{ ansible_host }}"
+
+elasticsearch_http_base_url: "https://{{ elasticsearch_host }}:{{ elasticsearch_port }}"
 elasticsearch_elastic_user: elastic
-elasticsearch_kibana_user: kibana
 elasticsearch_url_license: "{{ elasticsearch_http_base_url }}/_license"
 elasticsearch_url_security: "{{ elasticsearch_http_base_url }}/_security"
+
 elasticsearch_path_data: /var/lib/elasticsearch
 elasticsearch_path_bin: /usr/share/elasticsearch
+elasticsearch_path_logs: /var/log/elasticsearch
+elasticsearch_path_config: /etc/elasticsearch
+
+
+elasticsearch_templates:
+  - src: elasticsearch.yml.j2
+    dest: "{{ elasticsearch_path_config }}/elasticsearch.yml"
+
+elasticsearch_other_nodes: "{{ elasticsearch_unicast_hosts | difference(elasticsearch_exclude_node) }}"
+
+elasticsearch_exclude_node:
+  - "{{ ansible_host }}"
+
+elasticsearch_unicast_hosts: "{{ groups['es'] | map('extract', hostvars, ['ansible_host']) | list }}"
+
+elasticsearch_filesystem_list:
+  - lv: lv_es_data
+    vg: fedora_fedora
+    size: 50g
+    path: "{{ elasticsearch_path_data }}"
+    owner: "{{ elasticsearch_owner }}"
+    group: "{{ elasticsearch_owner }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
+  - lv: lv_es_log
+    vg: fedora_fedora
+    size: 500M
+    path: "{{ elasticsearch_path_logs }}"
+    owner: "{{ elasticsearch_owner }}"
+    group: "{{ elasticsearch_owner }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
+
+
 
 elasticsearch_version: "{{ elk_version }}"
 
 elasticsearch_rpms:
   - "elasticsearch-{{ elasticsearch_version }}"
-
-elasticsearch_path_config: /etc/elasticsearch
 
 elasticsearch_elastic_current_password:
 
@@ -36,14 +76,14 @@ elasticsearch_custom_users:
 
 ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
-    dest: /etc/elasticsearch/cert.pem
+    dest: "{{ elasticsearch_path_config }}/cert.pem"
     user: elasticsearch
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
-    dest: /etc/elasticsearch/chain.pem
+    dest: "{{ elasticsearch_path_config }}/chain.pem"
     user: elasticsearch
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
-    dest: /etc/elasticsearch/fullchain.pem
+    dest: "{{ elasticsearch_path_config }}/fullchain.pem"
     user: elasticsearch
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
-    dest: /etc/elasticsearch/privkey.pem
+    dest: "{{ elasticsearch_path_config }}/privkey.pem"
     user: elasticsearch
