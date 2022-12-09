@@ -65,7 +65,7 @@ kibana_elasticsearch_username: kibana_system
 kibana_ssl_protocols: "TLSv1.2"
 
 kibana_elasticsearch_url: >-
-  {% set comma = joiner(",") %}{% for host in groups['es'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}
+  {% set comma = joiner(",") %}{% for host in groups['elasticsearch'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}
 
 ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"

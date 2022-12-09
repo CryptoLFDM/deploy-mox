@@ -25,7 +25,7 @@ elasticsearch_other_nodes: "{{ elasticsearch_unicast_hosts | difference(elastics
 elasticsearch_exclude_node:
   - "{{ ansible_host }}"
 
-elasticsearch_unicast_hosts: "{{ groups['es'] | map('extract', hostvars, ['ansible_host']) | list }}"
+elasticsearch_unicast_hosts: "{{ groups['elasticsearch'] | map('extract', hostvars, ['ansible_host']) | list }}"
 
 elasticsearch_filesystem_list:
   - lv: lv_es_data
