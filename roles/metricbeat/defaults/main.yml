@@ -1,3 +1,39 @@
 ---
 metricbeat_version: "{{ elk_version }}"
 
+metricbeat_owner: root
+metricbeat_group: root
+
+metricbeat_custom_templates:
+  - src: metricbeat.yml.j2
+    dest: /etc/metricbeat/metricbeat.yml
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0640"
+  - src: system.yml.j2
+    dest: /etc/metricbeat/modules.d/system.yml
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0640"
+
+metricbeat_log_dir: /var/log/metricbeat
+
+metricbeat_custom_dirs:
+  - path: "{{ metricbeat_log_dir }}"
+    state: directory
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0750"
+
+metricbeat_filesystem_list:
+  - lv: lv_metricbeat_log
+    vg: fedora_fedora
+    size: 1g
+    path: "{{ metricbeat_log_dir }}"
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
