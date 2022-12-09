@@ -1,4 +1,10 @@
 ---
+- name: Add repository
+  ansible.builtin.yum_repository:
+    name: vault
+    description: vault
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+
 - name: install binaries
   become: true
   yum:
