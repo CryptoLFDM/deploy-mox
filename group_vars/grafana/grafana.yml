@@ -16,7 +16,7 @@ grafana_filesystem_list:
     owner: grafana
     group: grafana
     mode: "0750"
-    fstype: "{{ filesystem_type | default('xfs') }}"
+    fstype: xfs
     force: false
     shrink: false
   - lv: lv_grafana_log
@@ -26,7 +26,7 @@ grafana_filesystem_list:
     owner: grafana
     group: grafana
     mode: "0750"
-    fstype: "{{ filesystem_type | default('xfs') }}"
+    fstype: xfs
     force: false
     shrink: false
 

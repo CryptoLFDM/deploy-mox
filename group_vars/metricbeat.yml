@@ -34,7 +34,7 @@ metricbeat_filesystem_list:
     owner: "{{ metricbeat_owner }}"
     group: "{{ metricbeat_group }}"
     mode: "0750"
-    fstype: "{{ filesystem_type | default('xfs') }}"
+    fstype: xfs
     force: false
     shrink: false
 

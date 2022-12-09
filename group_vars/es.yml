@@ -22,7 +22,7 @@ elasticsearch_filesystem_list:
     owner: elasticsearch
     group: elasticsearch
     mode: "0750"
-    fstype: "{{ filesystem_type | default('xfs') }}"
+    fstype: xfs
     force: false
     shrink: false
 
@@ -33,7 +33,7 @@ elasticsearch_filesystem_list:
     owner: elasticsearch
     group: elasticsearch
     mode: "0750"
-    fstype: "{{ filesystem_type | default('xfs') }}"
+    fstype: xfs
     force: false
     shrink: false
 
