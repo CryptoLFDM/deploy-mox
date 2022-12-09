@@ -1,5 +1,6 @@
 ---
 - name: Add repository
+  become: true
   ansible.builtin.yum_repository:
     name: vault
     description: vault
