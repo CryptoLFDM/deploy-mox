@@ -43,8 +43,6 @@ grafana_system_directories:
   - path: "{{ grafana_data_dir }}"
   - path: /var/run/grafana
 
-grafana_service_name: grafana-server
-
 grafana_owner: grafana
 grafana_group: grafana
 
