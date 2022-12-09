@@ -13,7 +13,7 @@ vault_path_data: /opt/vault/data
 
 vault_filesystem_list:
   - lv: lv_vault_data
-    vg: fedora
+    vg: fedora_fedora
     size: 5g
     path: "{{ vault_path_data }}"
     owner: "{{ vault_user }}"
