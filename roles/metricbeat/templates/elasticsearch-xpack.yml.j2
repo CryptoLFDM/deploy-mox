@@ -2,7 +2,7 @@
   xpack.enabled: true
   period: 60s
   hosts: ["https://{{ ansible_host }}:9200"]
-  username: metricbeat
+  username: "{{ metricbeat_user }}"
   password: "{{ elasticsearch_metricbeat_password }}"
 
   ssl.certificate_authorities: [ "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem" ]

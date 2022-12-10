@@ -1,0 +1,9 @@
+{
+  "cluster": [ "manage_index_templates", "monitor", "manage_ilm"],
+  "indices": [
+    {
+      "names": ["metricbeat*", ".monitoring*"],
+      "privileges": [ "write", "create_index", "manage", "view_index_metadata" ]
+    }
+  ]
+}

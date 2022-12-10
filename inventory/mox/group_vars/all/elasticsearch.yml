@@ -6,5 +6,6 @@ elasticsearch_minotor_password: "{{ lookup('hashi_vault', hashi_elasticsearch_pa
 elasticsearch_metricbeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
 elasticsearch_mozquito_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/mozquito:moz ' ~ hashi_connect) }}"
+elasticsearch_metricbeat_advanced_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat-advance:moz ' ~ hashi_connect) }}"
 
 
