@@ -2,6 +2,15 @@
 
 # =========================== Modules configuration ============================
 
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/metricbeat
+  name: metricbeat
+  keepfiles: 3
+  permissions: 0640
+  rotateeverybytes: 5242880000
+
 metricbeat.config.modules:
   # Glob pattern for configuration loading
   path: ${path.config}/modules.d/*.yml
