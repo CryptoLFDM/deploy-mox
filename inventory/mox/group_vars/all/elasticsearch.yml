@@ -1,10 +1,10 @@
 ---
 
-elasticsearch_elastic_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/elastic:moz ' ~ hashi_connect )}}"
-elasticsearch_kibana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/kibana:moz ' ~ hashi_connect )}}"
-elasticsearch_minotor_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/minotor:moz ' ~ hashi_connect )}}"
-elasticsearch_metricbeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect )}}"
-elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect )}}"
-elasticsearch_mozquito_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/mozquito:moz ' ~ hashi_connect )}}"
+elasticsearch_elastic_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/elastic:moz ' ~ hashi_connect) }}"
+elasticsearch_kibana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/kibana:moz ' ~ hashi_connect) }}"
+elasticsearch_minotor_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/minotor:moz ' ~ hashi_connect) }}"
+elasticsearch_metricbeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
+elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
+elasticsearch_mozquito_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/mozquito:moz ' ~ hashi_connect) }}"
 
 
