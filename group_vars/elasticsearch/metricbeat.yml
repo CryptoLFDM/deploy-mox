@@ -1,7 +1,7 @@
 ---
 metricbeat_custom_templates:
   - src: elasticsearch-xpack.yml.j2
-    dest: /etc/metricbeat.d/elasticsearch-xpack.yml
+    dest: /etc/metricbeat/modules.d/elasticsearch-xpack.yml
     owner: "{{ metricbeat_owner }}"
     group: "{{ metricbeat_group }}"
     mode: "0640"
