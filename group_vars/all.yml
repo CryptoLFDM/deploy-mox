@@ -8,5 +8,8 @@ elk_version: 8.5.1
 hashi_connect: "{{ hashi_auth_method }} {{hashi_vault_url }}"
 hashi_vault_url: url=https://basilisk.ether-source.fr:8200
 hashi_mount_point: secret/moz
+hashi_user: "{{ lookup('ansible.builtin.env', 'VAULT_USER') }}"
+hashi_password: "{{ lookup('ansible.builtin.env', 'VAULT_PASSWORD') }}"
+
 hashi_auth_method: "auth_method=userpass username={{ hashi_user }} password={{ hashi_password }}"
 hashi_elasticsearch_path: "{{ hashi_mount_point }}/elasticsearch"
