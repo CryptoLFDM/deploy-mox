@@ -25,7 +25,10 @@ minotor_alpha
 mermaid_alpha
 
 [metricbeat:children]
-infra
+elasticsearch
+grafana
+minotor
+vault
 
 [vault]
 basilisk

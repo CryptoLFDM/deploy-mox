@@ -16,6 +16,13 @@ metricbeat_custom_templates:
     group: "{{ metricbeat_group }}"
     mode: "0640"
 
+metricbeat_xpack_templates:
+  - src: elasticsearch-xpack.yml.j2
+    dest: /etc/metricbeat.d/elasticsearch-xpack.yml
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0640"
+
 metricbeat_log_dir: /var/log/metricbeat
 
 metricbeat_custom_dirs:
