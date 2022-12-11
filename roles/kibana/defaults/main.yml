@@ -10,7 +10,7 @@ kibana_log_dir: /var/log/kibana
 kibana_pid_dir: /var/run/kibana
 
 kibana_custom_templates:
-  - src: kibana/kibana.yml.j2
+  - src: kibana.yml.j2
     dest: /etc/kibana/kibana.yml
     owner: "{{ kibana_owner }}"
     group: "{{ kibana_group }}"
