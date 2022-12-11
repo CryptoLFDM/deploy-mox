@@ -1,0 +1,38 @@
+---
+- name: Add repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: vault
+    description: vault
+    baseurl: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+
+- name: install binaries
+  become: true
+  yum:
+    name: "{{ vault_package }}"
+    state: present
+    update_cache: true
+
+- name: Copy ssl files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: "{{ item.mode | default('0640') }}"
+    remote_src: true
+  loop: "{{ ssl_minimal_file }}"
+
+- name: template config files
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(vault_user) }}"
+    group: "{{ item.group | default(vault_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ vault_custom_templates }}"
+  notify:
+    - vault_need_restart
+

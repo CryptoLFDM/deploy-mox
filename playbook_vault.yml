@@ -1,0 +1,19 @@
+---
+## --------------------------------------------------------------------
+## vault
+## --------------------------------------------------------------------
+- hosts: vault
+  tags:
+    - vault
+  roles:
+    - role: user
+      user_name: "{{ vault_user }}"
+      user_group: "{{ vault_group }}"
+    - role: filesystem
+      filesystem_list: "{{ vault_filesystem_list }}"
+      tags:
+        - vault
+    - role: vault
+      tags:
+        - vault
+

@@ -1,32 +1,42 @@
 ---
 
-# Utilisation du rpm provenant de digit
-haproxy_service_overwrite: false
+haproxy_packages:
+  - haproxy-2.4.7
+  - socat-1.7.2.2
 
-# Version de haproxy à installer
-# A surcharger si utilisation de haproxy-2.4.4
-haproxy_package: haproxy-2.0.7
-
-# Version de socat à installer
-haproxy_socat_package: socat-1.7.2.2
-
-# Le répertoire de log de HAproxy
-haproxy_log_dir: "/var/log/haproxy"
-
-#Le répertoire des fichiers de configuration haproxy
-haproxy_config_folder: "/etc/haproxy"
-# Fichier de configuration par défaut
-haproxy_config_file: "{{ haproxy_config_folder }}/haproxy.cfg"
-# Fichiers templates de configuration haproxy à déployer
 haproxy_templates:
-  - src: "haproxy_basic_config.j2"
-    dest: "{{ haproxy_config_file }}"
-    mode: "640"
-    owner: "haproxy"
-    group: "haproxy"
+  - src: haproxy/haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    mode: "0640"
+    owner: haproxy
+    group: haproxy
+  - src: haproxy/00_haproxy.cfg.j2
+    dest: "{{ haproxy_config_folder }}/00_haproxy.cfg"
+    mode: "0640"
+    owner: haproxy
+    group: haproxy
+  - src: haproxy/01_stats.cfg.j2
+    dest: "{{ haproxy_config_folder }}/01_stats.cfg"
+    mode: "0640"
+    owner: haproxy
+    group: haproxy
+
+haproxy_maxconn: "{{ ansible_processor_vcpus * 2000 }}"
+
+haproxy_socket: /var/run/haproxy.sock level admin
+
+haproxy_mng_ip: 0.0.0.0
+haproxy_mng_port: 9090
+haproxy_mng_user: admin
+haproxy_mng_psw: changeme
+
+haproxy_certs_path: /etc/haproxy
+haproxy_log_dir: /var/log/haproxy
+haproxy_config_folder: /etc/haproxy
+haproxy_config_file: "{{ haproxy_config_folder }}/haproxy.cfg"
 
 haproxy_templates_filedest: "{{ haproxy_templates | map(attribute='dest') | list }}"
-# Fichiers templates pour la configuration logrotate haproxy
+
 haproxy_logrotate_template:
   - src: "logrotate_haproxy.j2"
     dest: "/etc/logrotate.d/haproxy"
@@ -34,10 +44,10 @@ haproxy_logrotate_template:
     owner: "root"
     group: "root"
 
-# configuration logrotate haproxy
+
 haproxy_logrotate_max_size: 1G
 
-# Fichiers templates pour la configuration syslog haproxy
+
 haproxy_rsyslog_template:
   - src: "rsyslog_haproxy.conf.j2"
     dest: "/etc/rsyslog.d/haproxy.conf"
@@ -45,58 +55,58 @@ haproxy_rsyslog_template:
     owner: "root"
     group: "root"
 
-# Liste des ports à débloquer dans iptables
+
 haproxy_iptables_ports:
   - port: 80
 
-# Configuration des error files
+
 haproxy_error_files_dest: "{{ haproxy_config_folder}}/errorfiles"
 haproxy_error_files: []
-#   - file_name: "503.html"
-#     src: "haproxy/504.html"
-#     code: "503"
-#     dest: "{{ haproxy_config_folder}}/errorfiles"
 
-# Configurations additionnelles pour haproxy
+
+
+
+
+
 haproxy_config_files: []
-#  - src: ""
-#    dest: ""
-#    owner: "" # default: root
-#    group: "" # default: root
-#    mode: ""  # default: 600
+
+
+
+
+
 
 haproxy_additional_config_dirs: []
-#  - path: ""
-#    owner: "" # default: root
-#    group: "" # default: root
-#    mode: ""  # default: 600
 
-# Configurer le ssl
+
+
+
+
+
 haproxy_ssl_enabled: false
 
-# Les sources SSL
-haproxy_ssl_certificates: []
-#  - dest: "/etc/ssl/certs/haproxy_{{ ansible_host }}.pem"
-#    cert: "{{ lookup('files', 'inventory/'~ env ~ '/files/' ~ item.name ~ '.pem') }}"
-#    key: "{{ ssl_private_keys[ansible_host] }}"
-#    owner: "" # default: root
-#    group: "" # default: root
-#    mode: ""  # default: 600
-#    cert_file: "" # Fichier du certificat (si définit à la place de cert, le certificat sera récupéré depuis le fichier distant)
-#    key_file: "" # Fichier du la clé (si définit à la place de key, le certificat sera récupéré depuis le fichier distant)
 
-# Haproxy binary
+haproxy_ssl_certificates: []
+
+
+
+
+
+
+
+
+
+
 haproxy_bin: "/opt/haproxy/sbin/haproxy"
 
-# PID files
+
 haproxy_pid_file: "/var/run/haproxy.pid"
 
-# Start options
+
 haproxy_start_option: "-Ws"
 
-##################################
-## Variables templates par défaut##
-##################################
+
+
+
 haproxy_template_options:
     - "httplog"
     - "dontlognull"
@@ -167,11 +177,11 @@ haproxy_template_ssl_bind_options:
     - "no-tlsv10"
     - "no-tlsv11"
     - "no-tls-tickets"
-## https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy
-# haproxy_template_csp: [] pour désactiver les csp
+
+
 haproxy_template_csp:
     - "default-src 'self'"
-#   - "script-src 'self'"
+
 haproxy_template_frame_options: "sameorigin"
 haproxy_template_strict_transport_security_max_age: "15552000"
 haproxy_template_ssl_cert: "{% if haproxy_ssl_certificates %}{{ haproxy_ssl_certificates[0].dest }}{% endif %}"

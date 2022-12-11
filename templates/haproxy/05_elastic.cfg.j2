@@ -1,5 +1,5 @@
 {% for stack_name in groups|flatten|select('match', '^id.?$')|list|unique %}
-{% if groups['es']|intersect(groups[stack_name])|length > 0 %}
+{% if groups['elasticsearch']|intersect(groups[stack_name])|length > 0 %}
 #---------------------------------------------------
 # {{ stack_name }}:{{ haproxy_frontend_es_ports[stack_name] }}
 #---------------------------------------------------
@@ -25,11 +25,11 @@ backend backend_{{ stack_name }}
 {% endif %}
     option httpchk
     default-server check ssl force-tlsv12 verify required ca-file {{ idatha_autority_file }} {% if not network_zone in ['da', 'hp_zs2', 'prod_zs2'] %}crl-file crl-bundle.pem{% endif %} fall 2 rise 2
-{% for item in groups['es']|intersect(groups[stack_name])|intersect(groups[site]) %}
+{% for item in groups['elasticsearch']|intersect(groups[stack_name])|intersect(groups[site]) %}
     server {{ item }} {{ hostvars[item]['ansible_host'] }}:9200 verifyhost {{ hostvars[item]['ansible_host'] }}
 {% endfor %}
 {% if stack_name != 'ido' and env == 'qual' and site == 'noe' %}
-{% for item in groups['es']|intersect(groups[stack_name])|intersect(groups['pacy']) %}
+{% for item in groups['elasticsearch']|intersect(groups[stack_name])|intersect(groups['pacy']) %}
     server {{ item }} {{ hostvars[item]['ansible_host'] }}:9200 verifyhost {{ hostvars[item]['ansible_host'] }}
 {% endfor %}
 {% endif %}

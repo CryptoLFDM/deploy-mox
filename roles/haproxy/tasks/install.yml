@@ -1,40 +1,11 @@
 ---
-- name: installation de socat
+- name: install haproxy packges
   become: true
   yum:
-    name: "{{ haproxy_socat_package }}"
+    name: "{{ item }}"
     state: present
-
-- name: installation de haproxy
-  become: true
-  yum:
-    name: "{{ haproxy_package }}"
-    state: present
+  loop: "{{ haproxy_packages }}"
   notify:
-    - haproxy fact restart
+    - haproxy_need_restart
 
-- name: "création du répertoire haproxy.service.d"
-  become: true
-  file:
-    state: directory
-    path: "/etc/systemd/system/haproxy.service.d"
-  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version|int >= 7
 
-- name: mise en place du service haproxy
-  become: true
-  template:
-    src: haproxy.service.j2
-    dest: /usr/lib/systemd/system/haproxy.service
-    mode: '0644'
-    owner: root
-    group: root
-  notify:
-    - haproxy service action
-  when: haproxy_service_overwrite | bool
-
-- name: "changement du umask pour systemd"
-  become: true
-  copy:
-    src: "haproxy.conf"
-    dest: "/etc/systemd/system/haproxy.service.d/haproxy.conf"
-  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version|int >= 7
