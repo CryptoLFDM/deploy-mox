@@ -7,7 +7,7 @@ elasticsearch_users_custom:
   - name: metricbeat
     content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
   - name: mozquito
-    content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
+    content: "{{ lookup('template', 'user/mozquito.json.j2') }}"
   - name: metricbeat-advanced
     content: "{{ lookup('template', 'user/metricbeat-advanced.json.j2') }}"
 
