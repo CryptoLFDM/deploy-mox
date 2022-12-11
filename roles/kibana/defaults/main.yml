@@ -1,11 +1,65 @@
 ---
 kibana_version: "{{ elk_version }}"
-kibana_certificates_path: /etc/ssl/certs
-kibana_certificate:
-kibana_certificate_path: "{{ kibana_certificates_path }}/kibana_{{ ansible_host }}.pem"
-kibana_private_key:
-kibana_private_key_path: "{{ kibana_certificates_path }}/kibana_{{ ansible_host }}.key"
+
 kibana_owner: kibana
 kibana_group: kibana
-kibana_app_dir: /usr/share/kibana
-kibana_conf_dir: /etc/kibana
+
+kibana_data_dir: /var/lib/kibana
+kibana_share_dir: /usr/share/kibana
+kibana_log_dir: /var/log/kibana
+kibana_pid_dir: /var/run/kibana
+
+kibana_custom_templates:
+  - src: kibana/kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: "{{ kibana_owner }}"
+    group: "{{ kibana_group }}"
+    mode: "0640"
+
+kibana_custom_dirs:
+  - path: "{{ kibana_pid_dir }}"
+    state: directory
+    owner: "{{ kibana_owner}}"
+    group: "{{ kibana_group}}"
+    mode: "0755"
+  - path: "{{ kibana_log_dir }}"
+    state: directory
+    owner: "{{ kibana_owner}}"
+    group: "{{ kibana_group}}"
+    mode: "0750"
+
+kibana_filesystem_list:
+  - lv: lv_kibana_data
+    vg: fedora_fedora
+    size: 1G
+    path: "{{ kibana_data_dir }}"
+    owner: "{{ kibana_owner}}"
+    group: "{{ kibana_group}}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+  - lv: lv_kibana_share
+    vg: fedora_fedora
+    size: 1536M
+    path: "{{ kibana_share_dir }}"
+    owner: "{{ kibana_owner}}"
+    group: "{{ kibana_group}}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+  - lv: lv_kibana_log
+    vg: fedora_fedora
+    size: 1G
+    path: "{{ kibana_log_dir }}"
+    owner: "{{ kibana_owner}}"
+    group: "{{ kibana_group}}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
+kibana_elasticsearch_username: kibana_system
+
+kibana_elasticsearch_url:
