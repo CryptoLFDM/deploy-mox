@@ -1,5 +1,6 @@
 ---
 metricbeat_user: metricbeat-advanced
+metricbeat_password: "{{ elasticsearch_metricbeat_advanced_password }}"
 metricbeat_custom_templates:
   - src: elasticsearch-xpack.yml.j2
     dest: /etc/metricbeat/modules.d/elasticsearch-xpack.yml

@@ -4,6 +4,9 @@ metricbeat_version: "{{ elk_version }}"
 metricbeat_owner: root
 metricbeat_group: root
 
+metricbeat_user: metricbeat
+metricbeat_password: changeme
+
 metricbeat_custom_templates:
   - src: metricbeat.yml.j2
     dest: /etc/metricbeat/metricbeat.yml

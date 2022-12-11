@@ -32,8 +32,8 @@ output.elasticsearch:
 
   protocol: "https"
 
-  username: metricbeat
-  password: {{ elasticsearch_metricbeat_password }}
+  username: "{{ metricbeat_user }}"
+  password: "{{ metricbeat_password }}"
 
   ssl.certificate_authorities: [ "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem" ]
 

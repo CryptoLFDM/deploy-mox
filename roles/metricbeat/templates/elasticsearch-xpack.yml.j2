@@ -3,7 +3,7 @@
   period: 60s
   hosts: ["https://{{ ansible_host }}:9200"]
   username: "{{ metricbeat_user }}"
-  password: "{{ elasticsearch_metricbeat_password }}"
+  password: "{{ metricbeat_password }}"
 
   ssl.certificate_authorities: [ "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem" ]
 
