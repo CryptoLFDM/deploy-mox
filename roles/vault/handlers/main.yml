@@ -1,9 +1,9 @@
 ---
-- name: restart haproxy
+- name: restart vault
   become: true
   systemd:
-    name: haproxy_service_name
+    name: vault  
     state: restarted
     enabled: true
     daemon_reload: true
-  listen: haproxy_need_restart
+  listen: vault_need_restart
