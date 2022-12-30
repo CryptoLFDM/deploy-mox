@@ -1,6 +1,7 @@
 ---
 - name: restart haproxy
   become: true
+  become_method: "{{ custom_become_method }}"
   systemd:
     name: haproxy_service_name
     state: restarted

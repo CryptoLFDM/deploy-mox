@@ -1,19 +1,25 @@
 ---
+- name: Valide les inputs du role user
+  import_tasks: validation_input.yml
 
-- name: Create Group
+- name: création du groupe
   become: true
+  become_method: "{{ custom_become_method }}"
   group:
     name: "{{ user_group }}"
+    gid: "{{ user_gid }}"
     state: present
   when: user_group is not none
   notify: user_changed_on_system
 
-- name: Create User
+- name: création de l'utilisateur
   become: true
+  become_method: "{{ custom_become_method }}"
   user:
     name: "{{ user_name }}"
     group: "{{ user_group }}"
     home: "{{ user_home | default(omit) }}"
+    uid: "{{ user_uid }}"
     shell: "{{ user_shell }}"
     comment: "{{ user_comment }}"
     append: true
@@ -22,8 +28,9 @@
   when: user_name is not none
   notify: user_changed_on_system
 
-- name: Harvest maximum number of day between restart
+- name: lecture du "max password age" de l'utilisateur
   become: true
+  become_method: "{{ custom_become_method }}"
   shell: |
     set -o pipefail
     export LANG=en_US.UTF-8
@@ -32,10 +39,17 @@
   register: user_current_max_pwd_age
   changed_when: false
 
-- name: Set to unlimited if not the case
+- name: définition du "max password age" de l'utilisateur
   become: true
+  become_method: "{{ custom_become_method }}"
   command: chage -M {{ user_password_expires | default(-1) }} {{ user_name }}
   when:
     - user_name is not none
     - user_current_max_pwd_age.stdout|string != user_password_expires|default(-1)|string
     - not user_current_max_pwd_age.skipped|default('false')|bool
+
+- name: unlock caccia user
+  become: true
+  become_method: "{{ custom_become_method }}"
+  command: "{{ user_caccia_bin_path }} -u {{ user_name }}"
+  when: user_name is not none and user_unlock_caccia

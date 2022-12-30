@@ -10,7 +10,7 @@ grafana_admin_user: admin
 
 grafana_filesystem_list:
   - lv: lv_grafana_data
-    vg: fedora_fedora
+    vg: "{{ custom_vg_name }}"
     size: 1G
     path: "{{ grafana_data_dir }}"
     owner: "{{ grafana_owner }}"
@@ -20,7 +20,7 @@ grafana_filesystem_list:
     force: false
     shrink: false
   - lv: lv_grafana_log
-    vg: fedora_fedora
+    vg: "{{ custom_vg_name }}"
     size: 500M
     path: "{{ grafana_log_dir }}"
     owner: "{{ grafana_owner }}"

@@ -1,0 +1,16 @@
+---
+- name: import elastic gpg key
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: add repo for elk
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
+    owner: root
+    group: root

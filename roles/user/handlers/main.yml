@@ -2,9 +2,9 @@
 - name: Reset user_changed if still true
   set_fact:
     user_changed: false
-  listen: user_changed_need_reset
+  listen: "user_changed_need_reset"
 
-- name: Share if system change need restart
+- name: Partage au playbook si on doit restart le service
   set_fact:
     user_changed: true
-  listen: user_changed_on_system
+  listen: "user_changed_on_system"

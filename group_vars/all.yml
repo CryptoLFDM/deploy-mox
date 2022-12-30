@@ -3,10 +3,10 @@ external_dns_domain: ether-source.fr
 ansible_python_interpreter: /usr/bin/python3
 ovh_cred_path: /etc/ovh.cred
 
-elk_version: 8.5.1
+elk_version: "{{ package_delimiter }}8.5.3"
 
 hashi_connect: "{{ hashi_auth_method }} {{hashi_vault_url }}"
-hashi_vault_url: url=https://basilisk.ether-source.fr:8200
+hashi_vault_url: url=https://basilisk-alpha.ether-source.fr:8200
 hashi_mount_point: secret/moz/data
 hashi_user: "{{ lookup('ansible.builtin.env', 'VAULT_USER') }}"
 hashi_password: "{{ lookup('ansible.builtin.env', 'VAULT_PASSWORD') }}"
