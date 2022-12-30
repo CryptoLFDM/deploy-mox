@@ -1,6 +1,7 @@
 ---
 - name: create directory
   become: true
+  become_method: "{{ custom_become_method }}"
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner | default(metricbeat_owner) }}"
@@ -11,13 +12,14 @@
 
 - name: install binaries
   become: true
-  yum:
-    name: "metricbeat-{{ metricbeat_version }}"
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "metricbeat{{ metricbeat_version }}"
     state: present
-    update_cache: true
 
 - name: template config files
   become: true
+  become_method: "{{ custom_become_method }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

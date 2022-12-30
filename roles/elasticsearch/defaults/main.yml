@@ -29,7 +29,7 @@ elasticsearch_unicast_hosts: "{{ groups['elasticsearch'] | map('extract', hostva
 
 elasticsearch_filesystem_list:
   - lv: lv_es_data
-    vg: fedora_fedora
+    vg: "{{ custom_vg_name }}"
     size: 50g
     path: "{{ elasticsearch_path_data }}"
     owner: "{{ elasticsearch_owner }}"
@@ -40,7 +40,7 @@ elasticsearch_filesystem_list:
     shrink: false
 
   - lv: lv_es_log
-    vg: fedora_fedora
+    vg: "{{ custom_vg_name }}"
     size: 500M
     path: "{{ elasticsearch_path_logs }}"
     owner: "{{ elasticsearch_owner }}"
@@ -56,7 +56,7 @@ elasticsearch_filesystem_list:
 elasticsearch_version: "{{ elk_version }}"
 
 elasticsearch_rpms:
-  - "elasticsearch-{{ elasticsearch_version }}"
+  - "elasticsearch{{ elasticsearch_version }}"
 
 elasticsearch_elastic_current_password:
 

@@ -1,6 +1,7 @@
 ---
 - name: Installe les RPM
   become: true
+  become_method: "{{ custom_become_method }}"
   yum:
     name: "{{ elasticsearch_rpms }}"
     state: present
