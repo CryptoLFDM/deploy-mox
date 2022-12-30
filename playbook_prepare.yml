@@ -1,0 +1,8 @@
+---
+
+- hosts: init
+  roles:
+    - role: prepare
+  tags:
+    - prepare
+

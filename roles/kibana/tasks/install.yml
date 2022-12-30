@@ -1,6 +1,7 @@
 ---
 - name: create directory
   become: true
+  become_method: "{{ custom_become_method }}"
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner | default(kibana_owner) }}"
@@ -11,7 +12,8 @@
 
 - name: install binaries
   become: true
+  become_method: "{{ custom_become_method }}"
   yum:
-    name: "kibana-{{ kibana_version }}"
+    name: "kibana{{ kibana_version }}"
     state: present
     update_cache: true

@@ -37,7 +37,7 @@ metricbeat_custom_dirs:
 
 metricbeat_filesystem_list:
   - lv: lv_metricbeat_log
-    vg: fedora_fedora
+    vg: "{{ custom_vg_name }}"
     size: 1g
     path: "{{ metricbeat_log_dir }}"
     owner: "{{ metricbeat_owner }}"

@@ -1,6 +1,7 @@
 ---
 - name: install haproxy packges
   become: true
+  become_method: "{{ custom_become_method }}"
   yum:
     name: "{{ item }}"
     state: present
