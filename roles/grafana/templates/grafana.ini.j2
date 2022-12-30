@@ -38,7 +38,7 @@ protocol = http
 http_port = {{ grafana_http_port }}
 
 # The public facing domain name used to access grafana from a browser
-domain = grafana.ether-source.fr
+domain = {{ ansible_host }}
 
 # Redirect to correct domain if host header does not match domain
 # Prevents DNS rebinding attacks
