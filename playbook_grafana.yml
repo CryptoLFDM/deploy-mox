@@ -13,6 +13,5 @@
         - filesystem
         - grafana
     - role: grafana
-      serial: 1
       tags:
         - grafana

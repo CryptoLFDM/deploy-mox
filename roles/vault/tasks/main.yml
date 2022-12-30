@@ -1,6 +1,7 @@
 ---
 - name: Add repository
   become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.yum_repository:
     name: vault
     description: vault
@@ -8,6 +9,7 @@
 
 - name: install binaries
   become: true
+  become_method: "{{ custom_become_method }}"
   yum:
     name: "{{ vault_package }}"
     state: present
@@ -15,6 +17,7 @@
 
 - name: Copy ssl files
   become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -26,6 +29,7 @@
 
 - name: template config files
   become: true
+  become_method: "{{ custom_become_method }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

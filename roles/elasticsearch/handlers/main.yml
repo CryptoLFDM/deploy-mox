@@ -2,6 +2,7 @@
 - name: restart elasticsearch
   throttle: 1
   become: true
+  become_method: "{{ custom_become_method }}"
   systemd:
     name: elasticsearch
     state: restarted

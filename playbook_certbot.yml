@@ -1,25 +1,22 @@
 ---
 
-- hosts: infra
+- hosts: olympus
   tasks:
     - name: Create certbot shell
       become: true
+      become_method: "{{ custom_become_method }}"
       template:
-        src: misc/certbot.sh.j2
+        src: certbot/certbot.sh.j2
         dest: /opt/certbot.sh
 
-- hosts: infra
+- hosts: olympus
   tasks:
     - name: Copy ovh cred
       become: true
+      become_method: "{{ custom_become_method }}"
       ansible.builtin.copy:
        src: ovh.cred
        dest: "{{ ovh_cred_path }}"
        owner: root
        group: root
 
-- hosts: infra
-  tasks:
-    - name: Execute the command in remote shell
-      become: true
-      ansible.builtin.shell: sh /opt/certbot.sh

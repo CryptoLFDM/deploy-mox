@@ -1,36 +1,36 @@
 ---
 
-- name: LVM lv | check if lv already exist
-  stat:
-    path: "/dev/{{ item.vg }}/{{ item.lv }}"
-    follow: yes
-  loop: "{{ filesystem_list }}"
-
-- name: LVM lv | Create / Resize Filesystem
+- name: LVM lv | crée/redimensionne le lv
   become: true
+  become_method: "{{ custom_become_method }}"
   lvol:
     vg: "{{ item.vg }}"
     lv: "{{ item.lv }}"
     size: "{{ item.size }}"
-    shrink: "{{ item.shrink|default('no') }}"
-    force: "{{ item.force|default('no') }}"
+    shrink: "{{ item.shrink | default('false') }}"
+    force: "{{ item.force | default('false') }}"
   loop: "{{ filesystem_list }}"
+  when: inventory_hostname not in groups["cyclops"]
 
-- name: LVM lv | format or extend fs
+- name: LVM lv | formate (creation) ou agrandit le fs
   become: true
+  become_method: "{{ custom_become_method }}"
   filesystem:
     fstype: "{{ item.fstype }}"
     dev: "/dev/{{ item.vg }}/{{ item.lv }}"
-    resizefs: "{{ item.resizefs | default('yes') }}"
-    force: no
+    resizefs: "{{ item.resizefs | default('true') }}"
+    force: false
   loop: "{{ filesystem_list }}"
+  when: inventory_hostname not in groups["cyclops"]
 
-- name: LVM lv fs | change MetaData
+- name: "(loop) LVM lv fs | monte le fs"
   become: true
-  file:
-    path: "{{ item.path }}"
-    owner: "{{ item.owner | default(omit) }}"
-    group: "{{ item.group | default(omit) }}"
-    mode: "{{ item.mode | default(omit) }}"
-  when: item.owner is defined
+  become_method: "{{ custom_become_method }}"
+  mount:
+    name: "{{ item.path }}"
+    src: "/dev/{{ item.vg }}/{{ item.lv }}"
+    fstype: "{{ item.fstype }}"
+    opts: "{{ item.opts | default(omit) }}"
+    state: mounted
   loop: "{{ filesystem_list }}"
+  when: inventory_hostname not in groups["cyclops"]

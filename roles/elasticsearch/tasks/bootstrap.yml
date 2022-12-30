@@ -1,12 +1,14 @@
 ---
 - name: check if keystore exist
   become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.stat:
     path: "{{ elasticsearch_path_config }}/elasticsearch.keystore"
   register: elasticsearch_keystore_check
 
 - name: Create elasticsearch keystore
   become: true
+  become_method: "{{ custom_become_method }}"
   block:
   - name: create the keystore if it doesn't exist yet
     command: >

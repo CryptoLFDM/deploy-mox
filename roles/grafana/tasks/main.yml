@@ -1,6 +1,7 @@
 ---
 - name: Templatise le fichier repo
   become: true
+  become_method: "{{ custom_become_method }}"
   template:
     src: grafana.repo
     dest: /etc/yum.repos.d/grafana.repo
@@ -9,12 +10,14 @@
 
 - name: installation
   become: true
+  become_method: "{{ custom_become_method }}"
   yum:
     name: grafana
     state: present
 
 - name: Restreint le umask du service à 0027
   become: true
+  become_method: "{{ custom_become_method }}"
   block:
     - name: crée le dossier grafana.service.d
       file:
@@ -27,6 +30,7 @@
 
 - name: Copy ssl files
   become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -38,6 +42,7 @@
 
 - name: configuration
   become: true
+  become_method: "{{ custom_become_method }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

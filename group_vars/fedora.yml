@@ -1,0 +1,6 @@
+---
+custom_become_method: sudo
+package_to_remove: nftables,iptables
+package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh,certbot-nginx
+custom_vg_name: fedora_fedora
+package_delimiter: "-"
