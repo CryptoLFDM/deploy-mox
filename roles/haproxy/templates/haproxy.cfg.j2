@@ -50,16 +50,6 @@ listen stats
     #This allows you to take down and bring up back end servers.
     #This will produce an error on older versions of HAProxy.
     stats admin if true
-
-#---------------------------------------------------------------------
-# Backend settings
-#---------------------------------------------------------------------
-
-#---------------------------------------------------
-# haproxy_stats:443 [http]
-#---------------------------------------------------
-backend backend_haproxy_stats
-    mode http
     server srv_haproxy_stats 127.0.0.1:9090 check  fall 2 rise 2
 
 
