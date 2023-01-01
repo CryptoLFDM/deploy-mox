@@ -47,9 +47,6 @@ listen stats
     #The user/pass you want to use. Change this password!
     stats auth {{ haproxy_stats_user }}:{{ haproxy_stats_password }}
 
-    #This allows you to take down and bring up back end servers.
-    #This will produce an error on older versions of HAProxy.
-    stats admin if true
     server srv_haproxy_stats 127.0.0.1:9090 check  fall 2 rise 2
 
 
