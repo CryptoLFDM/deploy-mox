@@ -2,10 +2,13 @@
 #==================================================================
 # HAPROXY
 #==================================================================
-- hosts: haproxy
+- hosts: pegasus
   roles:
+    - role: user
+      user_name: "{{ haproxy_owner }}"
+      user_group: "{{ haproxy_group }}"
     - role: filesystem
-      filesystem_list: "{{ haproxy_offset_filesystem_list }}"
+      filesystem_list: "{{ haproxy_filesystem_list }}"
       tags:
         - filesystem
         - haproxy
