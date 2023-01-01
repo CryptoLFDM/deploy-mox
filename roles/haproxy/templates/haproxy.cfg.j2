@@ -7,7 +7,7 @@ global
     group haproxy
     daemon
     # turn on stats unix socket
-    stats socket /var/run/haproxy.sock level admin
+    stats socket /var/run/haproxy/haproxy.sock level admin
     ca-base     {{ haproxy_certs_path }}
     crt-base    {{ haproxy_certs_path }}
 
