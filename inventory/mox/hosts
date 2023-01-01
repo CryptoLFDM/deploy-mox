@@ -101,7 +101,7 @@ minotor
 cerberus
 basilisk
 centaur
-pegagus
+pegasus
 init_fedora
 
 [debian:children]
