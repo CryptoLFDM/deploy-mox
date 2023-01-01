@@ -9,6 +9,17 @@
   notify:
     - haproxy_need_restart
 
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(haproxy_owner) }}"
+    group: "{{ item.group | default(haproxy_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ haproxy_custom_dirs }} "
+
 - name: Set nonlocal_bind to 1
   become: true
   become_method: "{{ custom_become_method }}"

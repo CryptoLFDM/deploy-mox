@@ -1,4 +1,13 @@
 ---
+haproxy_owner: haproxy
+haproxy_group: haproxy
+
+haproxy_custom_dirs:
+  - path: /run/haproxy
+    state: directory
+    owner: "{{ haproxy_owner}}"
+    group: "{{ haproxy_group}}"
+    mode: "0755"
 
 haproxy_packages:
   - haproxy
@@ -7,8 +16,8 @@ haproxy_templates:
   - src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
     mode: "0640"
-    owner: haproxy
-    group: haproxy
+    owner: "{{ haproxy_owner }}"
+    group: "{{ haproxy_group }}"
 
 haproxy_stats_user: admin
 haproxy_stats_password: "{{ lookup('hashi_vault', hashi_haproxy_path ~ '/stats_user:moz ' ~ hashi_connect) }}"
@@ -18,8 +27,8 @@ haproxy_filesystem_list:
     vg: "{{ custom_vg_name }}"
     size: 1g
     path: /var/log/haproxy
-    owner: haproxy
-    group: haproxy
+    owner: "{{ haproxy_owner }}"
+    group: "{{ haproxy_group }}"
     mode: "0750"
     fstype: xfs
     force: false
@@ -46,16 +55,16 @@ haproxy_certs_path: /etc/haproxy
 ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
     dest: "{{ haproxy_certs_path }}/cert.pem"
-    user: haproxy
+    user: "{{ haproxy_owner }}"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
     dest: "{{ haproxy_certs_path }}/chain.pem"
-    user: haproxy
+    user: "{{ haproxy_owner }}"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
     dest: "{{ haproxy_certs_path }}/fullchain.pem"
-    user: haproxy
+    user: "{{ haproxy_owner }}"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
     dest: "{{ haproxy_certs_path }}/privkey.pem"
-    user: haproxy
+    user: "{{ haproxy_owner }}"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
     dest: "{{ haproxy_certs_path }}/fullchain.pem.key"
-    user: haproxy
+    user: "{{ haproxy_owner }}"
