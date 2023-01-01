@@ -1,6 +1,6 @@
 ---
 
-- hosts: init
+- hosts: olympus
   roles:
     - role: prepare
   tags:

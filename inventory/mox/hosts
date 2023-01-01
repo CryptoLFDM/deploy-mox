@@ -1,20 +1,3 @@
-[init]
-init_cerberus_alpha ansible_host="192.168.1.23" local_dns="cerberus-alpha.ether-source.fr"
-init_cerberus_beta ansible_host="192.168.1.189" local_dns="cerberus-beta.ether-source.fr"
-init_cerberus_gamma ansible_host="192.168.1.161" local_dns="cerberus-gamma.ether-source.fr"
-init_mermaid_alpha ansible_host="192.168.1.3" local_dns="mermaid-alpha.ether-source.fr"
-init_minotor_alpha ansible_host="192.168.1.106" local_dns="minotor-alpha.ether-source.fr"
-init_basilisk_alpha ansible_host="192.168.1.43" local_dns="basilisk-alpha.ether-source.fr"
-init_centaur_alpha ansible_host="192.168.1.41" local_dns="centaur-alpha.ether-source.fr"
-init_cyclops_alpha ansible_host="192.168.1.15" local_dns="mox01.ether-source.fr"
-init_cyclops_beta ansible_host="192.168.1.144" local_dns="mox02.ether-source.fr"
-init_cyclops_gamma ansible_host="192.168.1.42" local_dns="mox03.ether-source.fr"
-init_cyclops_epsilon ansible_host="192.168.1.138" local_dns="mox04.ether-source.fr"
-init_cyclops_zeta ansible_host="192.168.1.172" local_dns="mox05.ether-source.fr"
-init_cyclops_eta ansible_host="192.168.1.198" local_dns="mox06.ether-source.fr"
-init_cyclops_theta ansible_host="192.168.1.113" local_dns="mox08.ether-source.fr"
-init_pegasus_alpha ansible_host="192.168.1.83" local_dns="pegasus-alpha.ether-source.fr"
-
 [olympus]
 cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr"
 cerberus_beta ansible_host="cerberus-beta.ether-source.fr"
@@ -31,25 +14,6 @@ cyclops_zeta ansible_host="mox05.ether-source.fr"
 cyclops_eta ansible_host="mox06.ether-source.fr"
 cyclops_theta ansible_host="mox08.ether-source.fr"
 pegasus_alpha ansible_host="pegasus-alpha.ether-source.fr"
-
-[init_debian]
-init_cyclops_alpha
-init_cyclops_beta
-init_cyclops_gamma
-init_cyclops_epsilon
-init_cyclops_zeta
-init_cyclops_eta
-init_cyclops_theta
-
-[init_fedora]
-init_cerberus_alpha
-init_cerberus_beta
-init_cerberus_gamma
-init_mermaid_alpha
-init_minotor_alpha
-init_basilisk_alpha
-init_centaur_alpha
-init_pegasus_alpha
 
 [cerberus]
 cerberus_alpha
@@ -102,9 +66,7 @@ cerberus
 basilisk
 centaur
 pegasus
-init_fedora
 
 [debian:children]
 cyclops
-init_debian
 
