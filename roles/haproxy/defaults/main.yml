@@ -1,7 +1,7 @@
 ---
 
 haproxy_packages:
-  - haproxy-2.4.7
+  - haproxy
 
 haproxy_templates:
   - src: haproxy/haproxy.cfg.j2
