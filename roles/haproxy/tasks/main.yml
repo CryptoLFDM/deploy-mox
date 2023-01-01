@@ -1,6 +1,36 @@
 ---
-- name: installation des packages
-  include: install.yml
+- name: Install haproxy packages
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ haproxy_packages }}"
+  notify:
+    - haproxy_need_restart
 
-- name: configuration de haproxy
-  include: config.yml
+- name: Template haproxy config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  loop: "{{ haproxy_templates }}"
+  notify: haproxy_need_restart
+
+- name: Copy ssl files
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: "{{ item.mode | default('0640') }}"
+    remote_src: "{{ item.remote | default(true) }}"
+  loop: "{{ ssl_minimal_file }}"
+  notify:
+    - haproxy_need_restart
