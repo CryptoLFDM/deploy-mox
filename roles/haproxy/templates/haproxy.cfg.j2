@@ -1,0 +1,64 @@
+#jinja2: lstrip_blocks: "true"
+global
+    log 127.0.0.1 local3
+    chroot /var/lib/haproxy
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+    # turn on stats unix socket
+    stats socket /var/run/haproxy/haproxy.sock level admin
+    ca-base     {{ haproxy_certs_path }}
+    crt-base    {{ haproxy_certs_path }}
+
+defaults
+    mode                    http
+    log                     global
+    {% for option in haproxy_template_options %}
+    option                  {{ option }}
+    {% endfor %}
+    retries                 3
+    {% for timeout in haproxy_template_timeouts %}
+    timeout {{ timeout }}
+    {% endfor %}
+    maxconn                 {{ ansible_processor_vcpus * 2000 }}
+
+
+#---------------------------------------------------------------------
+# Stats settings
+#---------------------------------------------------------------------
+listen stats
+    bind 0.0.0.0:9091
+    mode http
+    balance
+    timeout client 5000
+    timeout connect 4000
+    timeout server 30000
+
+    #This is the virtual URL to access the stats page
+    stats uri /haproxy_stats
+
+    #autorefresh value
+    stats refresh 5s
+
+    #Authentication realm. This can be set to anything. Escape space characters with a backslash.
+    stats realm HAProxy\ Statistics
+
+    #The user/pass you want to use. Change this password!
+    stats auth {{ haproxy_stats_user }}:{{ haproxy_stats_password }}
+
+    server srv_haproxy_stats 127.0.0.1:9090 check fall 2 rise 2
+
+
+listen cerberus
+    mode http
+    option httpchk
+
+    default-server check ssl force-tlsv12 verify required ca-file chain.pem fall 2 rise 2
+
+    bind *:9200 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+{% for item in groups['cerberus'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:9200 verifyhost {{ hostvars[item]['ansible_host'] }}
+{% endfor %}
+

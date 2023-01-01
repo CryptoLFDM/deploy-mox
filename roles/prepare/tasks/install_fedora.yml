@@ -14,3 +14,9 @@
     dest: /etc/yum.repos.d/elastic.repo
     owner: root
     group: root
+
+- name: Disable SELinux
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.posix.selinux:
+    state: disabled

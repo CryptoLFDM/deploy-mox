@@ -1,7 +1,7 @@
 - module: elasticsearch
   xpack.enabled: true
   period: 60s
-  hosts: ["https://{{ ansible_host }}:9200"]
+  hosts: [ {{ metricbeat_elasticsearch_url }} ]
   username: "{{ metricbeat_user }}"
   password: "{{ metricbeat_password }}"
 
