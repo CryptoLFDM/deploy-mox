@@ -56,3 +56,6 @@ ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
     dest: "{{ haproxy_certs_path }}/privkey.pem"
     user: haproxy
+  - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
+    dest: "{{ haproxy_certs_path }}/cert.pem.key"
+    user: haproxy
