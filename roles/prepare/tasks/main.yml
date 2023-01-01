@@ -39,4 +39,4 @@
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.hostname:
-    name: "{{ ansible_hostname }}"
+    name: "{{ ansible_host }}"
