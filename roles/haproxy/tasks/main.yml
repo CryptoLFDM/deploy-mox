@@ -9,6 +9,15 @@
   notify:
     - haproxy_need_restart
 
+- name: Set nonlocal_bind to 1
+  become: true
+  become_method: "{{ custom_become_method }}"
+  sysctl:
+    name: net.ipv4.ip_nonlocal_bind
+    value: "1"
+    state: present
+    reload: True
+
 - name: Template haproxy config
   become: true
   become_method: "{{ custom_become_method }}"
