@@ -5,8 +5,8 @@
 - hosts: pegasus
   roles:
     - role: user
-      user_name: haproxy
-      user_group: haproxy
+      user_name: "{{ haproxy_owner }}"
+      user_group: "{{ haproxy_group }}"
     - role: filesystem
       filesystem_list: "{{ haproxy_filesystem_list }}"
       tags:
