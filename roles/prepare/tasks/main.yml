@@ -32,9 +32,3 @@
   become_method: "{{ custom_become_method }}"
   ansible.builtin.hostname:
     name: "{{ local_dns }}"
-
-- name: Disable SELinux
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.posix.selinux:
-    state: disabled
