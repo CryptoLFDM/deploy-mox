@@ -1,1 +1,0 @@
-ansible-playbook deploy.yml -i inventory/mox/init -k -K -u moz
