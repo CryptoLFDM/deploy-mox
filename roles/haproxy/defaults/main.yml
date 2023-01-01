@@ -2,7 +2,6 @@
 
 haproxy_packages:
   - haproxy-2.4.7
-  - socat-1.7.2.2
 
 haproxy_templates:
   - src: haproxy/haproxy.cfg.j2
