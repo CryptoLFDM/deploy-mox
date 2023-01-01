@@ -13,7 +13,7 @@ init_cyclops_epsilon ansible_host="192.168.1.138" local_dns="mox04.ether-source.
 init_cyclops_zeta ansible_host="192.168.1.172" local_dns="mox05.ether-source.fr"
 init_cyclops_eta ansible_host="192.168.1.198" local_dns="mox06.ether-source.fr"
 init_cyclops_theta ansible_host="192.168.1.113" local_dns="mox08.ether-source.fr"
-init_pegasus_alpha ansible_host="192.168.1.77" local_dns="pegasus-alpha.ether-source.fr"
+init_pegasus_alpha ansible_host="192.168.1.83" local_dns="pegasus-alpha.ether-source.fr"
 
 [olympus]
 cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr"
