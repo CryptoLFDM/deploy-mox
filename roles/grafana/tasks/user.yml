@@ -1,14 +1,12 @@
 ---
 
 - name: Create or update a Grafana user
-  community.grafana.grafana_user:
+  ansible.builtin.uri:
     url: https://mermaid-alpha.ether-source.fr
-    url_username: admin
-    url_password: "{{ lookup('hashi_vault', hashi_grafana_path ~ '/admin:moz ' ~ hashi_connect) }}"
-    name: "{{ item.name }}"
-    email: moz@lfdm.moon
-    login: "{{ item.login }}"
-    password: "{{ item.password }}"
-    is_admin: false
-    state: present
+    user: admin
+    password: "{{ lookup('hashi_vault', hashi_grafana_path ~ '/admin:moz ' ~ hashi_connect) }}"
+    method: POST
+    body: "{{ lookup('ansible.builtin.file','user.json.j2') }}"
+    force_basic_auth: true
+    body_format: json
   loop: "{{ grafana_user }}"
