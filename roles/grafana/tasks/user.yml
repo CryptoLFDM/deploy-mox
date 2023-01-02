@@ -2,7 +2,7 @@
 
 - name: Create or update a Grafana user
   ansible.builtin.uri:
-    url: https://mermaid-alpha.ether-source.fr
+    url: https://mermaid-alpha.ether-source.fr:3000
     user: admin
     password: "{{ lookup('hashi_vault', hashi_grafana_path ~ '/admin:moz ' ~ hashi_connect) }}"
     method: POST
