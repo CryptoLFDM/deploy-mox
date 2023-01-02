@@ -61,6 +61,6 @@ ssl_minimal_file:
     user: "{{ grafana_owner }}"
 
 grafana_user:
-  - user: redboard
+  - name: redboard
     login: redboard
     password: "{{ lookup('hashi_vault', hashi_grafana_path ~ '/redboard:moz ' ~ hashi_connect) }}"
