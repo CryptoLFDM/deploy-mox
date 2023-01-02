@@ -11,4 +11,5 @@
     force_basic_auth: true
     body_format: json
     ca_path: /etc/grafana/chain.pem
+    ciphers: '@SECLEVEL=2:ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES:DHE+AES:!aNULL:!eNULL:!aDSS:!SHA1:!AESCCM'
   loop: "{{ grafana_user }}"
