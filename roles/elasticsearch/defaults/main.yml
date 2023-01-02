@@ -41,7 +41,7 @@ elasticsearch_filesystem_list:
 
   - lv: lv_es_log
     vg: "{{ custom_vg_name }}"
-    size: 500M
+    size: 1g
     path: "{{ elasticsearch_path_logs }}"
     owner: "{{ elasticsearch_owner }}"
     group: "{{ elasticsearch_owner }}"
