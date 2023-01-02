@@ -1,0 +1,14 @@
+---
+
+- name: Create or update a Grafana user
+  community.grafana.grafana_user:
+    url: https://mermaid-alpha.ether-source.fr
+    url_username: admin
+    url_password: "{{ lookup('hashi_vault', hashi_grafana_path ~ '/admin:moz ' ~ hashi_connect) }}"
+    name: "{{ item.name }}"
+    email: moz@lfdm.moon
+    login: "{{ item.login }}"
+    password: "{{ item.password }}"
+    is_admin: false
+    state: present
+  loop: "{{ grafana_user }}"

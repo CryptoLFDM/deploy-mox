@@ -59,3 +59,8 @@ ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
     dest: /etc/grafana/privkey.pem
     user: "{{ grafana_owner }}"
+
+grafana_user:
+  - user: redboard
+    login: redboard
+    password: "{{ lookup('hashi_vault', hashi_grafana_path ~ '/redboard:moz ' ~ hashi_connect) }}"
