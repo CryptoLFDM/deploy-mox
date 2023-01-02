@@ -9,4 +9,5 @@
     body: "{{ lookup('ansible.builtin.file','user.json.j2') }}"
     force_basic_auth: true
     body_format: json
+    ca_path: /etc/ssl/chain.pem
   loop: "{{ grafana_user }}"
