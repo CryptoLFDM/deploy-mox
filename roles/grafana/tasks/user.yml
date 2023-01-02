@@ -1,6 +1,7 @@
 ---
 
 - name: Create or update a Grafana user
+  become: true
   ansible.builtin.uri:
     url: https://mermaid-alpha.ether-source.fr:3000
     user: admin
@@ -9,5 +10,5 @@
     body: "{{ lookup('ansible.builtin.file','user.json.j2') }}"
     force_basic_auth: true
     body_format: json
-    ca_path: /etc/ssl/chain.pem
+    ca_path: /etc/grafana/chain.pem
   loop: "{{ grafana_user }}"
