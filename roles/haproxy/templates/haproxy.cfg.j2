@@ -91,6 +91,16 @@ backend backend_haproxy_stats
         mode http
         server srv_haproxy_stats 127.0.0.1:9091 check  fall 2 rise 2
 
+listen https
+    mode http
+    bind *:443 ssl crt fullchain.pem  ca-file chain.pem verify optional
+    acl haproxy_stats_acl path_beg /haproxy_stats
+    use_backend backend_haproxy_stats if haproxy_stats_acl
+
+    redirect scheme https if !{ ssl_fc }
+
+    server  mermaid-alpha  mermaid-alpha.ether-source.fr:3000 check fall 2 rise 2 ssl verify none
+
 listen cerberus
     mode http
     option httpchk
