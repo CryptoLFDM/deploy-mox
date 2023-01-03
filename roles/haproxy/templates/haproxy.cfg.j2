@@ -68,7 +68,7 @@ defaults
 # Stats settings
 #---------------------------------------------------------------------
 listen stats
-       bind 0.0.0.0:9090
+       bind 0.0.0.0:9091
        mode http
        balance
        timeout client 5000
@@ -89,7 +89,7 @@ listen stats
 
 backend backend_haproxy_stats
         mode http
-        server srv_haproxy_stats 127.0.0.1:9090 check  fall 2 rise 2
+        server srv_haproxy_stats 127.0.0.1:9091 check  fall 2 rise 2
 
 listen cerberus
     mode http
