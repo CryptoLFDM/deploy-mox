@@ -1,11 +1,11 @@
 ---
-- name: Force le reset de user_changed
+- name: Force reset user_changed
   ansible.builtin.debug:
     msg: fact user_changed has been reseted
   when: user_changed
   notify: user_changed_need_reset
 
-- name: Verifie le Gid
+- name: Check GID
   assert:
     that:
       - user_gid | type_debug == "int"
@@ -14,14 +14,14 @@
     success_msg: "User GID is Ok"
   when: user_gid is not none
 
-- name: Recolte la bdd group
+- name: Harvest bdd group
   become: true
   become_method: "{{ custom_become_method }}"
   getent:
     database: group
   when: user_gid is not none
 
-- name: Verifie si le gid existe deja
+- name: Check if gid present in group bdd
   assert:
     that:
       - "{{ getent_group[item].1 }} >= 0"
@@ -32,7 +32,7 @@
   when:
     - user_gid is not none
 
-- name: Verifie le Uid
+- name: Check UID
   assert:
     that:
       - user_uid | type_debug == "int"
@@ -42,14 +42,14 @@
     quiet: true
   when: user_uid is not none
 
-- name: Recolte la bdd user
+- name: Harvest bdd user
   become: true
   become_method: "{{ custom_become_method }}"
   getent:
     database: passwd
   when: user_uid is not none
 
-- name: Verifie si le uid existe déja
+- name: Check if UID present in user bdd
   assert:
     that:
       - "{{ getent_passwd[item].1 }} >= 0"

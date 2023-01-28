@@ -1,5 +1,5 @@
 ---
-- name: restart kibana
+- name: Restart kibana
   become: true
   become_method: "{{ custom_become_method }}"
   systemd:
