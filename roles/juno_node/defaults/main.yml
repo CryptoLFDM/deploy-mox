@@ -1,0 +1,15 @@
+---
+juno_node_owner: juno
+juno_node_group: juno
+
+juno_node_filesystem_list:
+  - lv: lv_juno_node_log
+    vg: "{{ custom_vg_name }}"
+    size: 100g
+    path: /home/juno_node
+    owner: "{{ juno_node_owner }}"
+    group: "{{ juno_node_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
