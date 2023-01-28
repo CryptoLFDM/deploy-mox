@@ -1,5 +1,5 @@
 ---
-- name: Templatise le fichier repo
+- name: Templatise rpm repo
   become: true
   become_method: "{{ custom_become_method }}"
   template:
@@ -8,25 +8,12 @@
     owner: root
     group: root
 
-- name: installation
+- name: Install rpm
   become: true
   become_method: "{{ custom_become_method }}"
   yum:
     name: grafana
     state: present
-
-- name: Restreint le umask du service à 0027
-  become: true
-  become_method: "{{ custom_become_method }}"
-  block:
-    - name: crée le dossier grafana.service.d
-      file:
-        path: /etc/systemd/system/grafana-server.service.d
-        state: directory
-    - name: copie les paramètres de umask
-      copy:
-        dest: /etc/systemd/system/grafana-server.service.d/grafana-server.conf
-        src: grafana-server.conf
 
 - name: Copy ssl files
   become: true
@@ -40,7 +27,7 @@
     remote_src: true
   loop: "{{ ssl_minimal_file }}"
 
-- name: configuration
+- name: Template config files
   become: true
   become_method: "{{ custom_become_method }}"
   template:

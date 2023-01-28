@@ -34,22 +34,6 @@ haproxy_filesystem_list:
     force: false
     shrink: false
 
-haproxy_template_options:
-  - httplog
-  - dontlognull
-  - redispatch
-  - forwardfor
-  - log-separate-errors
-
-haproxy_template_timeouts:
-  - http-request    10s
-  - queue           1m
-  - connect         5s
-  - client          50s
-  - server          50s
-  - http-keep-alive 10s
-  - check           10s
-
 haproxy_certs_path: /etc/haproxy
 
 ssl_minimal_file:

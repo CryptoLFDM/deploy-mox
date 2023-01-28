@@ -1,5 +1,5 @@
 ---
-- name: restart vault
+- name: Restart vault
   become: true
   become_method: "{{ custom_become_method }}"
   systemd:

@@ -7,7 +7,7 @@
     description: vault
     baseurl: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 
-- name: install binaries
+- name: Install binaries
   become: true
   become_method: "{{ custom_become_method }}"
   yum:
@@ -27,7 +27,7 @@
     remote_src: true
   loop: "{{ ssl_minimal_file }}"
 
-- name: template config files
+- name: Template config files
   become: true
   become_method: "{{ custom_become_method }}"
   template:

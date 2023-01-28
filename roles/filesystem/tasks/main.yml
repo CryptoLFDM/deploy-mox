@@ -1,6 +1,6 @@
 ---
 
-- name: LVM lv | crée/redimensionne le lv
+- name: Create the logical volume
   become: true
   become_method: "{{ custom_become_method }}"
   lvol:
@@ -12,7 +12,7 @@
   loop: "{{ filesystem_list }}"
   when: inventory_hostname not in groups["cyclops"]
 
-- name: LVM lv | formate (creation) ou agrandit le fs
+- name: Extend or format the fs
   become: true
   become_method: "{{ custom_become_method }}"
   filesystem:
@@ -23,7 +23,7 @@
   loop: "{{ filesystem_list }}"
   when: inventory_hostname not in groups["cyclops"]
 
-- name: "(loop) LVM lv fs | monte le fs"
+- name: Mount the fs
   become: true
   become_method: "{{ custom_become_method }}"
   mount:
