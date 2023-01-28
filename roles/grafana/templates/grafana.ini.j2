@@ -29,7 +29,7 @@ logs = {{ grafana_log_dir }}
 #################################### Server ####################################
 [server]
 # Protocol (http, https, h2, socket)
-protocol = http
+protocol = https
 
 # The ip address to bind to, empty will bind to all interfaces
 ;http_addr =
@@ -42,7 +42,7 @@ domain = {{ ansible_host }}
 
 # Redirect to correct domain if host header does not match domain
 # Prevents DNS rebinding attacks
-;enforce_domain = false
+;enforce_domain = true
 
 # The full public facing url you use in browser, used for redirects and emails
 # If you use reverse proxy and sub path specify full url (with sub path)
@@ -330,13 +330,13 @@ allow_org_create = false
 auto_assign_org = true
 
 # Set this value to automatically add new users to the provided organization (if auto_assign_org above is set to true)
-auto_assign_org_id = 1
+auto_assign_org_id = 7
 
 # Default role new users will be automatically assigned (if disabled above is set to true)
 auto_assign_org_role = Viewer
 
 # Require email validation before sign up completes
-verify_email_enabled = true
+verify_email_enabled = false
 
 # Background text for the user field on the login page
 login_hint = email or username
