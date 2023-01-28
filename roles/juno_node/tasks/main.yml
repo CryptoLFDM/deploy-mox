@@ -1,1 +1,24 @@
 ---
+- name: Donwload & extract Go
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: https://golang.org/dl/go1.19.3.linux-amd64.tar.gz
+    dest: /home/juno/go
+    remote_src: true
+    owner: "{{ item.owner | default(juno_node_owner) }}"
+    group: "{{ item.group | default(juno_node_group) }}"
+
+
+- name: Template juno_node config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default(juno_node_owner) }}"
+    group: "{{ item.group | default(juno_node_group) }}"
+  loop: "{{ juno_node_templates }}"
+  notify: juno_node_need_restart
+

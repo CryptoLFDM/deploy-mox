@@ -1,13 +1,3 @@
-wget https://golang.org/dl/go1.19.3.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
-
-
-echo """
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-""" > .profile
 
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
@@ -23,39 +13,6 @@ make install
 
 junod init "chimera-juno" --chain-id juno-1
 junod config chain-id juno-1
-
-
-echo """
-
-[Unit]
-Description=\"juno node\"
-After=network-online.target
-
-[Service]
-User=moz
-Group=moz
-WorkingDirectory=/home/moz/
-ExecStart=/home/moz/go/bin/junod start
-
-Environment=\"DAEMON_NAME=junod\"
-Environment=\"DAEMON_HOME=/home/moz/.juno\"
-Environment=\"DAEMON_ALLOW_DOWNLOAD_BINARIES=false\"
-Environment=\"DAEMON_RESTART_AFTER_UPGRADE=true\"
-Environment=\"UNSAFE_SKIP_BACKUP=true\"
-Environment=\"GOPATH=$HOME/go\"
-Environment=\"GOROOT=/usr/local/go\"
-Environment=\"GO111MODULE=on\"
-Environment=\"PATH=$PATH:/usr/local/go/bin:$HOME/go/bin\"
-
-Restart=on-failure
-RestartSec=5s
-
-[Install]
-WantedBy=multi-user.target
-""" > juno.service
-
-sudo cp juno.service /etc/systemd/system/juno.service
-
 
 sudo systemctl daemon-reload
 sudo systemctl restart juno
