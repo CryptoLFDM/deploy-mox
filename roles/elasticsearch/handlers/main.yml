@@ -1,5 +1,5 @@
 ---
-- name: restart elasticsearch
+- name: Restart elasticsearch
   throttle: 1
   become: true
   become_method: "{{ custom_become_method }}"
@@ -10,7 +10,7 @@
     daemon_reload: true
   listen: elasticsearch_need_restart
 
-- name: wait elasticsearch port
+- name: Wait elasticsearch port
   wait_for:
     port: "{{ elasticsearch_port }}"
   listen: elasticsearch_need_restart

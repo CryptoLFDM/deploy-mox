@@ -1,5 +1,5 @@
 ---
-- name: Installe les RPM
+- name: Install elasticsearch rpm
   become: true
   become_method: "{{ custom_become_method }}"
   yum:

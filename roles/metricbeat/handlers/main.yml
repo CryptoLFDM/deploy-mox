@@ -1,5 +1,5 @@
 ---
-- name: restart metricbeat
+- name: Restart metricbeat
   become: true
   become_method: "{{ custom_become_method }}"
   systemd:

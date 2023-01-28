@@ -1,5 +1,5 @@
 ---
-- name: create directory
+- name: Create directory
   become: true
   become_method: "{{ custom_become_method }}"
   file:
@@ -10,7 +10,7 @@
     state: "{{ item.state | default('directory') }}"
   loop: "{{ kibana_custom_dirs }}"
 
-- name: install binaries
+- name: Install binaries
   become: true
   become_method: "{{ custom_become_method }}"
   yum:

@@ -1,5 +1,5 @@
 ---
-- name: create directory
+- name: Create directory
   become: true
   become_method: "{{ custom_become_method }}"
   file:
@@ -10,14 +10,14 @@
     state: "{{ item.state | default('directory') }}"
   loop: "{{ metricbeat_custom_dirs }} "
 
-- name: install binaries
+- name: Install binaries
   become: true
   become_method: "{{ custom_become_method }}"
   package:
     name: "metricbeat{{ metricbeat_version }}"
     state: present
 
-- name: template config files
+- name: Template config files
   become: true
   become_method: "{{ custom_become_method }}"
   template:

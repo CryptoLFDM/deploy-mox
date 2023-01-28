@@ -1,5 +1,5 @@
 ---
-- name: add elasticsearch rôles
+- name: Add elasticsearch roles
   run_once: true
   uri:
     url: "{{ elasticsearch_url_security }}/role/{{ item.name }}"
