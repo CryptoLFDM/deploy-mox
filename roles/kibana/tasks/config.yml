@@ -1,5 +1,5 @@
 ---
-- name: template config files
+- name: Template config files
   become: true
   become_method: "{{ custom_become_method }}"
   template:

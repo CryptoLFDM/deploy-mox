@@ -1,5 +1,5 @@
 ---
-- name: change user password
+- name: Change user password
   run_once: true
   uri:
     url: "{{ elasticsearch_url_security }}/user/{{ item.name }}/_password"
@@ -15,7 +15,7 @@
   loop: "{{ elasticsearch_cluster_users }}"
   when: elasticsearch_cluster_users | length > 0
 
-- name: add elasticsearch custom users
+- name: Add elasticsearch custom users
   run_once: true
   uri:
     url: "{{ elasticsearch_url_security }}/user/{{ item.name }}"

@@ -33,7 +33,6 @@ grafana_filesystem_list:
 grafana_custom_packages:
   - nss
   - gtk3
-#  - libXScrnSaver TODO : pour fresh install, installer cette dep à la main (ou fix erreur ansible)
 
 grafana_http_port: 3000
 
