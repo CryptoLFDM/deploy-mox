@@ -9,7 +9,6 @@
     owner: "{{ item.owner | default(juno_node_owner) }}"
     group: "{{ item.group | default(juno_node_group) }}"
 
-
 - name: Template juno_node config
   become: true
   become_method: "{{ custom_become_method }}"
@@ -22,3 +21,24 @@
   loop: "{{ juno_node_templates }}"
   notify: juno_node_need_restart
 
+- name: Checkout Juno Node
+  ansible.builtin.git:
+    repo: https://github.com/CosmosContracts/juno
+    dest: /home/juno/juno
+    version: v11.0.3
+
+- name: Install juno node
+  make:
+    chdir: /home/juno/juno
+    target: install
+
+- name: Init the node
+  ansible.builtin.shell: junod init "chimera-juno" --chain-id juno-1
+  notify: juno_node_need_restart
+
+- name: Config the node
+  ansible.builtin.shell: junod config chain-id juno-1
+  notify: juno_node_need_restart
+
+- name: Force restart if needed
+  meta: flush_handlers

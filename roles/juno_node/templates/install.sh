@@ -1,23 +1,4 @@
 
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-
-git clone https://github.com/CosmosContracts/juno
-cd juno
-git fetch
-git clone v11.0.3
-
-make install
-
-junod init "chimera-juno" --chain-id juno-1
-junod config chain-id juno-1
-
-sudo systemctl daemon-reload
-sudo systemctl restart juno
-
-
 wget -O juno_6689277.tar.lz4 https://api-minio-sud.imperator.co/snapshots/juno/juno_6689277.tar.lz4 --inet4-only
 
 sudo systemctl stop juno
