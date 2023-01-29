@@ -36,6 +36,8 @@ output.elasticsearch:
   password: "{{ metricbeat_password }}"
 
   ssl.certificate_authorities: [ "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem" ]
+  allow_older_versions: true
+
 
 processors:
   - add_host_metadata: ~
