@@ -1,0 +1,37 @@
+---
+celestia_node_package:
+  - curl
+  - tar
+  - wget
+  - clang
+  - pkg-config
+  - libssl-dev
+  - jq
+  - build-essential
+  - git
+  - make
+  - ncdu
+ 
+celestia_node_user: celestia
+
+celestia_node_custom_templates:
+  - src: bashrc.j2
+    dest: "{{ celestia_node_path }}//.bashrc"
+    mode: "0640"
+
+celestia_node_path: /home/celestia
+
+celestia_node_filesystem_list:
+  - lv: lv_celestia_node_data
+    vg: "{{ custom_vg_name }}"
+    size: 5g
+    path: "{{ celestia_node_path }}"
+    owner: "{{ celestia_node_user }}"
+    group: "{{ celestia_node_user }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
+celestia_node_go_root: "{{ celestia_node_path }}//go"
+celestia_node_version: v0.6.2
