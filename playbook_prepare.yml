@@ -1,4 +1,15 @@
 ---
+- hosts: olympus
+  pre_task:
+    - name: Generate local hosts templates
+      gather_facts: no
+      become: true
+      delegate_to: 127.0.0.1
+      run_once: true
+      become_method: "{{ custom_become_method }}"
+      template:
+        src: hosts.j2
+        dest: /etc/hosts
 
 - hosts: olympus
   roles:

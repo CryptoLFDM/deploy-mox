@@ -1,13 +1,4 @@
 ---
-- name: Generate local hosts templates
-  become: true
-  delegate_to: 127.0.0.1
-  run_once: true
-  become_method: "{{ custom_become_method }}"
-  template:
-    src: hosts.j2
-    dest: /etc/hosts
-
 - name: Fix hosts templates
   become: true
   become_method: "{{ custom_become_method }}"

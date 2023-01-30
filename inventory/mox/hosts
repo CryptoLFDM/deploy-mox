@@ -1,19 +1,26 @@
 [olympus]
-cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr"
-cerberus_beta ansible_host="cerberus-beta.ether-source.fr"
-cerberus_gamma ansible_host="cerberus-gamma.ether-source.fr"
-mermaid_alpha ansible_host="mermaid-alpha.ether-source.fr"
-minotor_alpha ansible_host="minotor-alpha.ether-source.fr"
-basilisk_alpha ansible_host="basilisk-alpha.ether-source.fr"
-centaur_alpha ansible_host="centaur-alpha.ether-source.fr"
-cyclops_alpha ansible_host="mox01.ether-source.fr"
-cyclops_beta ansible_host="mox02.ether-source.fr"
-cyclops_gamma ansible_host="mox03.ether-source.fr"
-cyclops_epsilon ansible_host="mox04.ether-source.fr"
-cyclops_zeta ansible_host="mox05.ether-source.fr"
-cyclops_eta ansible_host="mox06.ether-source.fr"
-cyclops_theta ansible_host="mox08.ether-source.fr"
-pegasus_alpha ansible_host="pegasus-alpha.ether-source.fr"
+cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.23"
+cerberus_beta ansible_host="cerberus-beta.ether-source.fr" ansible_default_ipv4="192.168.1.189"
+cerberus_gamma ansible_host="cerberus-gamma.ether-source.fr" ansible_default_ipv4="192.168.1.161"
+mermaid_alpha ansible_host="mermaid-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.3"
+minotor_alpha ansible_host="minotor-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.106"
+basilisk_alpha ansible_host="basilisk-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.43"
+centaur_alpha ansible_host="centaur-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.41"
+cyclops_alpha ansible_host="mox01.ether-source.fr" ansible_default_ipv4="192.168.1.15"
+cyclops_beta ansible_host="mox02.ether-source.fr" ansible_default_ipv4="192.168.1.144"
+cyclops_gamma ansible_host="mox03.ether-source.fr" ansible_default_ipv4="192.168.1.42"
+cyclops_epsilon ansible_host="mox04.ether-source.fr" ansible_default_ipv4="192.168.1.138"
+cyclops_zeta ansible_host="mox05.ether-source.fr" ansible_default_ipv4="192.168.1.172"
+cyclops_eta ansible_host="mox06.ether-source.fr" ansible_default_ipv4="192.168.1.198"
+cyclops_theta ansible_host="mox08.ether-source.fr" ansible_default_ipv4="192.168.1.113"
+pegasus_alpha ansible_host="pegasus-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.83"
+chimera-alpha ansible_host="chimera-alpha.ether-source.fr" ansible_default_ipv4="192.168.1.37"
+
+[chimera]
+chimera-alpha
+
+[celestia_node]
+chimera-alpha
 
 [cerberus]
 cerberus_alpha
@@ -66,6 +73,7 @@ cerberus
 basilisk
 centaur
 pegasus
+celestia_node
 
 [debian:children]
 cyclops
