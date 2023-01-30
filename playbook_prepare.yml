@@ -1,8 +1,16 @@
 ---
+- name: Prepare ansible-tower
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Generate local hosts templates
+    become: true
+    template:
+      src: hosts.j2
+      dest: /etc/hosts
 
 - hosts: olympus
   roles:
     - role: prepare
   tags:
     - prepare
-

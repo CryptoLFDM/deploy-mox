@@ -1,5 +1,4 @@
 ---
-
 - ansible.builtin.import_playbook: playbook_prepare.yml
 - ansible.builtin.import_playbook: playbook_certbot.yml
 
@@ -9,4 +8,8 @@
 - ansible.builtin.import_playbook: playbook_kibana.yml
 - ansible.builtin.import_playbook: playbook_haproxy.yml
 - ansible.builtin.import_playbook: playbook_grafana.yml
+
+- ansible.builtin.import_playbook: playbook_celestia.yml
+
+
 - ansible.builtin.import_playbook: playbook_metricbeat.yml

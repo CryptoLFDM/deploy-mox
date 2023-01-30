@@ -1,0 +1,13 @@
+---
+- hosts: celestia
+  tags:
+    - celestia
+  roles:
+    - role: user
+      user_name: celestia
+      user_group: celestia
+    - role: filesystem
+      filesystem_list: "{{ celestia_node_filesystem_list }}"
+    - role: celestia_node
+
+
