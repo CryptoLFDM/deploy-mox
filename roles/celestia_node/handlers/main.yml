@@ -1,0 +1,10 @@
+---
+- name: Restart celestia node
+  become: true
+  become_method: "{{ custom_become_method }}"
+  systemd:
+    name: celestia_node
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: celestia_node_need_restart
