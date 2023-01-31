@@ -1,0 +1,67 @@
+---
+- name: Install binaries
+  become: true
+  become_method: "{{ custom_become_method }}"
+  yum:
+    name: "{{ celestia_node_package }}"
+    state: present
+    update_cache: true
+
+- name: Donwload & extract Go
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: https://golang.org/dl/go1.19.3.linux-amd64.tar.gz
+    dest: "{{ celestia_node_go_root }}"
+    remote_src: true
+    owner: "{{ celestia_node_user }}"
+    group: "{{ celestia_node_user }}"
+
+- name: Template config files
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(celestia_node_user) }}"
+    group: "{{ item.group | default(celestia_node_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ celestia_node_custom_templates }}"
+  notify:
+    - celestia_node_need_restart
+
+- name: Checkout Celestia Node
+  ansible.builtin.git:
+    repo: https://github.com/celestiaorg/celestia-node.git
+    dest: "{{ celestia_node_path }}"
+    version: "{{ celestia_node_version }}"
+
+- name: Install Celestia node
+  make:
+    chdir: "{{ celestia_node_path }}/celestia-node"
+    target: install
+  environment:
+    PATH: '{{ celestia_node_go_root }}/bin:{{ ansible_env.PATH }}'
+
+- name: Run Cel key
+  make:
+    chdir: "{{ celestia_node_path }}/celestia-node"
+    target: cel-key
+  environment:
+    PATH: '{{ celestia_node_go_root }}/bin:{{ ansible_env.PATH }}'
+
+- name: Init the node
+  ansible.builtin.shell: celestia light init --p2p.network mocha
+  environment:
+    PATH: '{{ celestia_node_go_root }}/bin:{{ ansible_env.PATH }}'
+  notify: celestia_node_need_restart
+
+- name: Config the node
+  ansible.builtin.shell: celestia light start --p2p.network mocha
+  environment:
+    PATH: '{{ celestia_node_go_root }}/bin:{{ ansible_env.PATH }}'
+  notify: celestia_node_need_restart
+
+- name: Force restart if needed
+  meta: flush_handlers
+
