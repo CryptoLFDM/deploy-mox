@@ -14,6 +14,13 @@ cyclops_zeta ansible_host="mox05.ether-source.fr"
 cyclops_eta ansible_host="mox06.ether-source.fr"
 cyclops_theta ansible_host="mox08.ether-source.fr"
 pegasus_alpha ansible_host="pegasus-alpha.ether-source.fr"
+chimera-beta ansible_host="chimera-beta.ether-source.fr" ansible_fqdn="chimera-beta" ansible_default_ipv4="192.168.1.117"
+
+[chimera]
+chimera-beta
+
+[punumbra_node]
+chimera-beta
 
 [cerberus]
 cerberus_alpha
@@ -66,6 +73,7 @@ cerberus
 basilisk
 centaur
 pegasus
+chimera
 
 [debian:children]
 cyclops
