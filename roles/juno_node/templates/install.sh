@@ -1,6 +1,4 @@
 
-wget -O juno_6689277.tar.lz4 https://api-minio-sud.imperator.co/snapshots/juno/juno_6689277.tar.lz4 --inet4-only
-
 sudo systemctl stop juno
 
 junod tendermint unsafe-reset-all --home $HOME/.juno --keep-addr-book

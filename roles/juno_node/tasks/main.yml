@@ -42,3 +42,22 @@
 
 - name: Force restart if needed
   meta: flush_handlers
+
+- name: Get Last Snapshot
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: https://api-minio-sud.imperator.co/snapshots/juno/juno_6689277.tar.lz4
+    dest: /home/juno/juno_snapshot.tar.lz4
+    remote_src: true
+    owner: "{{ item.owner | default(juno_node_owner) }}"
+    group: "{{ item.group | default(juno_node_group) }}"
+
+- name: Stop Juno Node
+  become: true
+  become_method: "{{ custom_become_method }}"
+  systemd:
+    name: juno_node
+    state: stopped
+    enabled: true
+    daemon_reload: true
