@@ -19,9 +19,6 @@ chimera-alpha ansible_host="chimera-alpha.ether-source.fr"
 [chimera]
 chimera-alpha
 
-[celestia_node]
-chimera-alpha
-
 [cerberus]
 cerberus_alpha
 cerberus_beta
