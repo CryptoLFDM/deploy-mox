@@ -7,6 +7,8 @@ metricbeat_group: root
 metricbeat_user: metricbeat
 metricbeat_password: changeme
 
+metricbeat_module_path: /etc/metricbeat/modules.d
+
 metricbeat_custom_templates:
   - src: metricbeat.yml.j2
     dest: /etc/metricbeat/metricbeat.yml
@@ -14,14 +16,21 @@ metricbeat_custom_templates:
     group: "{{ metricbeat_group }}"
     mode: "0640"
   - src: system.yml.j2
-    dest: /etc/metricbeat/modules.d/system.yml
+    dest: "{{ metricbeat_module_path }}/system.yml"
     owner: "{{ metricbeat_owner }}"
     group: "{{ metricbeat_group }}"
     mode: "0640"
 
 metricbeat_xpack_templates:
   - src: elasticsearch-xpack.yml.j2
-    dest: /etc/metricbeat.d/elasticsearch-xpack.yml
+    dest: "{{ metricbeat_module_path }}/elasticsearch-xpack.yml"
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0640"
+
+metricbeat_chimera_templates:
+  - src: juno.yml.j2
+    dest: "{{ metricbeat_module_path }}/juno.yml"
     owner: "{{ metricbeat_owner }}"
     group: "{{ metricbeat_group }}"
     mode: "0640"

@@ -1,0 +1,15 @@
+- module: http
+  metricsets:
+    - json
+  period: 10s
+  hosts: ["localhost:26657"]
+  namespace: "status"
+  path: "/status"
+
+- module: http
+  metricsets:
+    - json
+  period: 10s
+  hosts: ["localhost:26657"]
+  namespace: "net_info"
+  path: "/net_info"r
