@@ -17,7 +17,7 @@
     name: "metricbeat{{ metricbeat_version }}"
     state: present
 
-- name: Template config files
+- name: Template config file
   become: true
   become_method: "{{ custom_become_method }}"
   template:
@@ -30,3 +30,30 @@
   notify:
     - metricbeat_need_restart
 
+- name: Template elasticsearch xpack
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(metricbeat_owner) }}"
+    group: "{{ item.group | default(metricbeat_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ metricbeat_xpack_templates }}"
+  when: inventory_hostname in groups["cerberus"]
+  notify:
+    - metricbeat_need_restart
+
+- name: Template chimera xpack
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(metricbeat_owner) }}"
+    group: "{{ item.group | default(metricbeat_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ metricbeat_chimera_templates }}"
+  when: inventory_hostname in groups["chimera"]
+  notify:
+    - metricbeat_need_restart
