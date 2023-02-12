@@ -105,11 +105,70 @@ listen cerberus
     mode http
     option httpchk
 
-
     bind *:9200 ssl crt fullchain.pem  ca-file chain.pem verify optional
 
     default-server check fall 2 rise 2 ssl verify none
 
 {% for item in groups['cerberus'] %}
     server {{ item }} {{ hostvars[item]['ansible_host'] }}:9200
+{% endfor %}
+
+listen mermaid-kibana
+    mode http
+    option httpchk
+
+    bind *:5601 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+    default-server check fall 2 rise 2 ssl verify none
+
+{% for item in groups['mermaid'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:5601
+{% endfor %}
+
+listen chimera-juno
+    mode http
+    option httpchk
+
+    bind *:26657 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+    default-server check fall 2 rise 2 ssl verify none
+
+{% for item in groups['chimera'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:26657
+{% endfor %}
+
+listen chimera-juno-rest
+    mode http
+    option httpchk
+
+    bind *:1317 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+    default-server check fall 2 rise 2 ssl verify none
+
+{% for item in groups['chimera'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:1317
+{% endfor %}
+
+listen mermaid-grafana
+    mode http
+    option httpchk
+
+    bind *:3000 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+    default-server check fall 2 rise 2 ssl verify none
+
+{% for item in groups['mermaid'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:3000
+{% endfor %}
+
+listen minotor
+    mode http
+    option httpchk
+
+    bind *:8080 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+    default-server check fall 2 rise 2 ssl verify none
+
+{% for item in groups['minotor'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:8080
 {% endfor %}
