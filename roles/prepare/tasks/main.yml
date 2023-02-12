@@ -26,6 +26,9 @@
 - import_tasks: install_debian.yml
   when: ansible_distribution == 'Debian'
 
+- import_tasks: install_ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
 - name: Set a hostname
   become: true
   become_method: "{{ custom_become_method }}"

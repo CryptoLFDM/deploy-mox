@@ -34,8 +34,8 @@ mermaid_alpha
 [minotor]
 minotor_alpha
 
-[kibana]
-mermaid_alpha
+[kibana:children]
+mermaid
 
 [basilisk]
 basilisk_alpha
@@ -77,5 +77,7 @@ pegasus
 
 [debian:children]
 cyclops
+
+[ubuntu:children]
 chimera
 
