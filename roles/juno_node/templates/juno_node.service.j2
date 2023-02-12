@@ -6,18 +6,18 @@ After=network-online.target
 [Service]
 User=moz
 Group=moz
-WorkingDirectory=/home/moz/
-ExecStart=/home/moz/go/bin/junod start
+WorkingDirectory="{{ juno_node_path }}"
+ExecStart="{{ juno_node_path }}/go/bin/junod start"
 
 Environment="DAEMON_NAME=junod"
-Environment="DAEMON_HOME=/home/moz/.juno"
+Environment="DAEMON_HOME="{{ juno_node_path}}/.juno"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 Environment="UNSAFE_SKIP_BACKUP=true"
 Environment="GOPATH=$HOME/go"
 Environment="GOROOT=/usr/local/go"
 Environment="GO111MODULE=on"
-Environment="PATH=$PATH:/usr/local/go/bin:$HOME/go/bin"
+Environment="PATH=$PATH:/usr/local/go/bin:{{ juno_node_path }}/go/bin"
 
 Restart=on-failure
 RestartSec=5s

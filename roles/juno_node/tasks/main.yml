@@ -4,7 +4,7 @@
   become_method: "{{ custom_become_method }}"
   ansible.builtin.unarchive:
     src: https://golang.org/dl/go1.19.3.linux-amd64.tar.gz
-    dest: /home/juno/go
+    dest: "{{ juno_node_path}}/go"
     remote_src: true
     owner: "{{ item.owner | default(juno_node_owner) }}"
     group: "{{ item.group | default(juno_node_group) }}"
@@ -24,12 +24,12 @@
 - name: Checkout Juno Node
   ansible.builtin.git:
     repo: https://github.com/CosmosContracts/juno
-    dest: /home/juno/juno
+    dest: "{{ juno_node_path }}/juno"
     version: v11.0.3
 
 - name: Install juno node
   make:
-    chdir: /home/juno/juno
+    chdir: "{{ juno_node_path}}/juno"
     target: install
 
 - name: Init the node
@@ -48,7 +48,7 @@
   become_method: "{{ custom_become_method }}"
   ansible.builtin.unarchive:
     src: https://api-minio-sud.imperator.co/snapshots/juno/juno_6689277.tar.lz4
-    dest: /home/juno/juno_snapshot.tar.lz4
+    dest: "{{ juno_node_path}}/juno_snapshot.tar.lz4"
     remote_src: true
     owner: "{{ item.owner | default(juno_node_owner) }}"
     group: "{{ item.group | default(juno_node_group) }}"
