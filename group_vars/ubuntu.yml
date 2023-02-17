@@ -1,6 +1,0 @@
----
-custom_become_method: sudo
-package_to_remove:
-package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh
-custom_vg_name: ubuntu-vg
-package_delimiter: "="
