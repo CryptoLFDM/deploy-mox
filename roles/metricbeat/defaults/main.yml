@@ -35,6 +35,13 @@ metricbeat_chimera_templates:
     group: "{{ metricbeat_group }}"
     mode: "0640"
 
+metricbeat_hddtemp_templates:
+  - src: hddtemp.yml.j2
+    dest: "{{ metricbeat_module_path }}/hddtemp.yml"
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0640"
+
 metricbeat_log_dir: /var/log/metricbeat
 
 metricbeat_custom_dirs:
