@@ -74,10 +74,8 @@ cerberus
 basilisk
 centaur
 pegasus
+chimera
 
 [debian:children]
 cyclops
-
-[ubuntu:children]
-chimera
 
