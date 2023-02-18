@@ -30,7 +30,7 @@ elasticsearch_unicast_hosts: "{{ groups['elasticsearch'] | map('extract', hostva
 elasticsearch_filesystem_list:
   - lv: lv_es_data
     vg: "{{ custom_vg_name }}"
-    size: 50g
+    size: 70g
     path: "{{ elasticsearch_path_data }}"
     owner: "{{ elasticsearch_owner }}"
     group: "{{ elasticsearch_owner }}"
