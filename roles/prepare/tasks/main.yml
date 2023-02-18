@@ -1,13 +1,4 @@
 ---
-- name: Generate local hosts templates
-  become: true
-  delegate_to: 127.0.0.1
-  run_once: true
-  become_method: "{{ custom_become_method }}"
-  template:
-    src: hosts.j2
-    dest: /etc/hosts
-
 - name: Fix hosts templates
   become: true
   become_method: "{{ custom_become_method }}"
@@ -35,8 +26,17 @@
 - import_tasks: install_debian.yml
   when: ansible_distribution == 'Debian'
 
+- import_tasks: install_ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
 - name: Set a hostname
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.hostname:
     name: "{{ ansible_host }}"
+
+- name: set swapiness
+  ansible.posix.sysctl:
+    name: vm.swappiness
+    value: '10'
+    state: present
