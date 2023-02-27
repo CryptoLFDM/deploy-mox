@@ -36,6 +36,7 @@
     name: "{{ ansible_host }}"
 
 - name: set swapiness
+  become: true
   ansible.posix.sysctl:
     name: vm.swappiness
     value: '10'
