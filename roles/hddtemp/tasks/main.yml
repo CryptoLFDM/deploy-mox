@@ -2,10 +2,9 @@
 - name: Install binaries
   become: true
   become_method: "{{ custom_become_method }}"
-  yum:
+  package:
     name: "{{ hddtemp_package }}"
     state: present
-    update_cache: true
 
 - name: Install flask python package
   ansible.builtin.pip:
