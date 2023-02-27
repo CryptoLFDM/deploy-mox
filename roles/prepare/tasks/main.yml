@@ -37,6 +37,7 @@
 
 - name: set swapiness
   become: true
+  become_method: "{{ custom_become_method }}"
   ansible.posix.sysctl:
     name: vm.swappiness
     value: '10'
