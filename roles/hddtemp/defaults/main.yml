@@ -1,7 +1,7 @@
 ---
 hddtemp_package:
   - hddtemp
-  - pip3
+  - pip
 
 hddtemp_custom_templates:
   - src: hddtemp.service.j2
