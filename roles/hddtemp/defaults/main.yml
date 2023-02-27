@@ -1,4 +1,7 @@
 ---
+hddtemp_user: root
+hddtemp_group: root
+
 hddtemp_package:
   - hddtemp
   - pip
