@@ -2,6 +2,8 @@
 babylon_node_owner: babylon
 babylon_node_group: babylon
 
+babylon_git_version: v0.5.0
+
 babylon_node_path: /opt/babylon_node
 babylon_go_path: "{{ babylon_node_path }}/go"
 babylon_home: /home/babylon

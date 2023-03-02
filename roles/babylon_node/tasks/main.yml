@@ -46,7 +46,7 @@
   ansible.builtin.git:
     repo: https://github.com/babylonchain/babylon
     dest: "{{ babylon_node_path }}/babylon"
-    version: v0.0.5
+    version: "{{ babylon_git_version }}"
 
 - name: Install babylon node
   become: true
