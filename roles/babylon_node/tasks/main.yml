@@ -60,12 +60,14 @@
   become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond init "{{ babylon_node_name }}" --chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
+  environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
 - name: Config the node
   become: true
   become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond config chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
+  environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
 - name: Force restart if needed
   meta: flush_handlers
