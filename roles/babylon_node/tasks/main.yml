@@ -6,6 +6,18 @@
     name: "{{ babylon_packages }}"
     state: present
 
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(babylon_node_owner) }}"
+    group: "{{ item.group | default(babylon_node_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ babylon_directories }}"
+
+
 - name: Donwload & extract Go
   become: true
   become_method: "{{ custom_become_method }}"
@@ -87,17 +99,6 @@
 - name: Install Cosmovisor
   ansible.builtin.shell: go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
   environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-
-- name: Create directory
-  become: true
-  become_method: "{{ custom_become_method }}"
-  file:
-    path: "{{ item.path }}"
-    owner: "{{ item.owner | default(babylon_node_owner) }}"
-    group: "{{ item.group | default(babylon_node_group) }}"
-    mode: "{{ item.mode | default('0750') }}"
-    state: "{{ item.state | default('directory') }}"
-  loop: "{{ babylon_directories }}"
 
 - name: babylon binaries
   become: true
