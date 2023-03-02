@@ -1,0 +1,120 @@
+---
+- name: Install binaries for Babylon
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ babylon_packages }}"
+    state: present
+
+- name: Donwload & extract Go
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: https://golang.org/dl/go1.19.linux-amd64.tar.gz
+    dest: "{{ babylon_node_path}}/go"
+    remote_src: true
+    owner: "{{ item.owner | default(babylon_node_owner) }}"
+    group: "{{ item.group | default(babylon_node_group) }}"
+
+- name: Template babylon_node config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(600) }}"
+    owner: "{{ item.owner | default(babylon_node_owner) }}"
+    group: "{{ item.group | default(babylon_node_group) }}"
+  loop: "{{ babylon_node_templates }}"
+  notify: babylon_node_need_restart
+
+- name: Checkout babylon Node
+  ansible.builtin.git:
+    repo: https://github.com/babylonchain/babylon
+    dest: "{{ babylon_node_path }}/babylon"
+    version: v0.0.5
+
+- name: Install babylon node
+  make:
+    chdir: "{{ babylon_node_path}}/babylon"
+    target: install
+
+- name: Init the node
+  ansible.builtin.shell: babylond init "{{ babylon_node_name }}" --chain-id "{{ babylon_chain_id }}"
+  notify: babylon_node_need_restart
+
+- name: Config the node
+  ansible.builtin.shell: babylond config chain-id "{{ babylon_chain_id }}"
+  notify: babylon_node_need_restart
+
+- name: Force restart if needed
+  meta: flush_handlers
+
+- name: Get Genesis
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: "{{ babylon_genesis_source}}"
+    dest: "{{ babylon_genesis_location}}"
+    remote_src: true
+    owner: "{{ item.owner | default(babylon_node_owner) }}"
+    group: "{{ item.group | default(babylon_node_group) }}"
+
+- name: Change seeds
+  ansible.builtin.lineinfile:
+    path: "{{ babylon_config_toml_path }}"
+    regexp: '^seeds ='
+    line: "seeds = {{ babylon_seeds }}"
+
+- name: Change persistent_peers
+  ansible.builtin.lineinfile:
+    path: "{{ babylon_config_toml_path }}"
+    regexp: '^persistent_peers ='
+    line: "persistent_peers = {{ babylon_persistent_peers }}"
+
+- name: Change checkpoint-tag
+  ansible.builtin.lineinfile:
+    path: "{{ babylon_app_toml_path }}"
+    regexp: '^checkpoint-tag = "bbtm"'
+    line: 'checkpoint-tag = "{{ babylon_tag }}"'
+
+- name: Change network
+  ansible.builtin.lineinfile:
+    path: "{{ babylon_app_toml_path }}"
+    regexp: '^network = "mainnet"'
+    line: 'network = "{{ babylon_network }}"'
+
+- name: Install Cosmovisor
+  ansible.builtin.shell: go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+  environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(babylon_node_owner) }}"
+    group: "{{ item.group | default(babylon_node_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ babylon_directories }}"
+
+- name: babylon binaries
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.copy:
+    src: "$GOPATH/bin/babylond"
+    dest: "{{babylon_home }}/.babylond/cosmovisor/genesis/bin/babylond"
+    owner: "{{ item.owner | default(babylon_node_owner) }}"
+    group: "{{ item.group | default(babylon_node_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+    remote_src: true
+
+- name: Stop babylon Node
+  become: true
+  become_method: "{{ custom_become_method }}"
+  systemd:
+    name: babylon_node
+    state: stopped
+    enabled: true
+    daemon_reload: true
