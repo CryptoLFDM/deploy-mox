@@ -3,6 +3,7 @@ babylon_node_owner: babylon
 babylon_node_group: babylon
 
 babylon_node_path: /opt/babylon_node
+babylon_go_path: "{{ babylon_node_path }}/go"
 babylon_home: /home/babylon
 babylon_chain_id: bbn-test1
 babylon_node_name: "{{ ansible_host }}-babylon"
@@ -61,3 +62,5 @@ babylon_directories:
   - path: "{{ babylon_home }}/.babylond/cosmovisor/genesis"
   - path: "{{ babylon_home }}/.babylond/cosmovisor/genesis/bin"
   - path: "{{ babylon_home }}/.babylond/cosmovisor/upgrades"
+  - path: "{{ babylon_node_path }}"
+  - path: "{{ babylon_go_path }}"
