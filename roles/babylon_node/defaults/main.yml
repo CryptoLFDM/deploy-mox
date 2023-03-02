@@ -50,7 +50,7 @@ babylon_node_templates:
     mode: "0640"
     owner: "{{ babylon_node_owner }}"
     group: "{{ babylon_node_group }}"
-  - src: profile.j2
+  - src: profiles.j2
     dest: /home/babylon/.profiles
     mode: "0640"
     owner: "{{ babylon_node_owner }}"
