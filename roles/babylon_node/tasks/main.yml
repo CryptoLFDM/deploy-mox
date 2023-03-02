@@ -41,21 +41,29 @@
   notify: babylon_node_need_restart
 
 - name: Checkout babylon Node
+  become: true
+  become_user: "{{ babylon_node_owner }}"
   ansible.builtin.git:
     repo: https://github.com/babylonchain/babylon
     dest: "{{ babylon_node_path }}/babylon"
     version: v0.0.5
 
 - name: Install babylon node
+  become: true
+  become_user: "{{ babylon_node_owner }}"
   make:
     chdir: "{{ babylon_node_path}}/babylon"
     target: install
 
 - name: Init the node
+  become: true
+  become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond init "{{ babylon_node_name }}" --chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
 
 - name: Config the node
+  become: true
+  become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond config chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
 
@@ -73,24 +81,32 @@
     group: "{{ item.group | default(babylon_node_group) }}"
 
 - name: Change seeds
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.lineinfile:
     path: "{{ babylon_config_toml_path }}"
     regexp: '^seeds ='
     line: "seeds = {{ babylon_seeds }}"
 
 - name: Change persistent_peers
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.lineinfile:
     path: "{{ babylon_config_toml_path }}"
     regexp: '^persistent_peers ='
     line: "persistent_peers = {{ babylon_persistent_peers }}"
 
 - name: Change checkpoint-tag
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.lineinfile:
     path: "{{ babylon_app_toml_path }}"
     regexp: '^checkpoint-tag = "bbtm"'
     line: 'checkpoint-tag = "{{ babylon_tag }}"'
 
 - name: Change network
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.lineinfile:
     path: "{{ babylon_app_toml_path }}"
     regexp: '^network = "mainnet"'
