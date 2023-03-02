@@ -1,0 +1,21 @@
+---
+#==================================================================
+# Chimera-Juno
+#==================================================================
+- hosts: chimera
+  roles:
+    - role: user
+      user_name: "{{ babylon_node_owner }}"
+      user_group: "{{ babylon_node_group }}"
+      tags:
+        - user
+        - filesystem
+        - babylon
+    - role: filesystem
+      filesystem_list: "{{ babylon_node_filesystem_list }}"
+      tags:
+        - filesystem
+        - babylon
+    - role: babylon
+      tags:
+        - babylon
