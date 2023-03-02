@@ -16,6 +16,9 @@
       tags:
         - filesystem
         - babylon
+    - role: install_go
+      golang_version: '1.19.0'
+      golang_install_dir: '/opt/go/babylon'
     - role: babylon_node
       tags:
         - babylon
