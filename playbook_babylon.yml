@@ -16,6 +16,6 @@
       tags:
         - filesystem
         - babylon
-    - role: babylon
+    - role: babylon_node
       tags:
         - babylon
