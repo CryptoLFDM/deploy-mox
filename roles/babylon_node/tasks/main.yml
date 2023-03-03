@@ -1,7 +1,4 @@
 ---
-- name: re-read facts
-  setup:
-    filter: ansible_local
 
 - name: Install binaries for Babylon
   become: true
@@ -47,18 +44,24 @@
   make:
     chdir: "{{ babylon_node_path}}/babylon"
     target: install
+  environment:
+    PATH: "/opt/go/babylon/bin:{{ ansible_env.PATH }}"
 
 - name: Init the node
   become: true
   become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond init "{{ babylon_node_name }}" --chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
+  environment:
+    PATH: "/opt/go/babylon/bin:{{ ansible_env.PATH }}"
 
 - name: Config the node
   become: true
   become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond config chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
+  environment:
+    PATH: "/opt/go/babylon/bin:{{ ansible_env.PATH }}"
 
 - name: Force restart if needed
   meta: flush_handlers
@@ -107,6 +110,8 @@
 
 - name: Install Cosmovisor
   ansible.builtin.shell: go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+  environment:
+    PATH: "/opt/go/babylon/bin:{{ ansible_env.PATH }}"
 
 - name: babylon binaries
   become: true
