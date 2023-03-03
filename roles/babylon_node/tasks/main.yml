@@ -1,4 +1,8 @@
 ---
+- name: re-read facts
+  setup:
+    filter: ansible_local
+
 - name: Install binaries for Babylon
   become: true
   become_method: "{{ custom_become_method }}"
@@ -49,14 +53,12 @@
   become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond init "{{ babylon_node_name }}" --chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
-  environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
 - name: Config the node
   become: true
   become_user: "{{ babylon_node_owner }}"
   ansible.builtin.shell: babylond config chain-id "{{ babylon_chain_id }}"
   notify: babylon_node_need_restart
-  environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
 - name: Force restart if needed
   meta: flush_handlers
@@ -105,7 +107,6 @@
 
 - name: Install Cosmovisor
   ansible.builtin.shell: go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
-  environment: PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
 - name: babylon binaries
   become: true
