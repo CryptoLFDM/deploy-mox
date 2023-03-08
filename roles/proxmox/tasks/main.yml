@@ -1,0 +1,37 @@
+---
+
+- name: Rename interface
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.lineinfile:
+    path: "{{ proxmox_network_interface_path }}"
+    regexp: '^iface .* inet manual'
+    line: "face {{ proxmox_interface_custom_name}} inet manual"
+  notify: proxmox_need_reboot
+
+- name: Get interface mac adress
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.shell: "ifconfig vmbr0 | grep -o -E ..:..:..:..:..:.."
+  register: proxmox_mac_address
+
+- name: Fix interface bridge name
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.lineinfile:
+    path: "{{ proxmox_network_interface_path }}"
+    regexp: 'bridge-ports .*'
+    line: "bridge-ports {{ proxmox_interface_custom_name}}"
+  notify: proxmox_need_reboot
+
+- name: Template config file
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ proxmox_templates }}"
+  notify: proxmox_need_reboot
