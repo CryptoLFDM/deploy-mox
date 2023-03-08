@@ -18,8 +18,7 @@
 - name: Get interface mac adress
   become: true
   become_method: "{{ custom_become_method }}"
-  become_flags: "-l"
-  ansible.builtin.shell: "ifconfig vmbr0 | grep -o -E ..:..:..:..:..:.."
+  ansible.builtin.shell: "/usr/sbin/ifconfig vmbr0 | grep -o -E ..:..:..:..:..:.."
   register: proxmox_mac_address
 
 - name: Fix interface bridge name
