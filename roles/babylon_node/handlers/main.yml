@@ -1,0 +1,10 @@
+---
+- name: Restart babylon Node
+  become: true
+  become_method: "{{ custom_become_method }}"
+  systemd:
+    name: babylon_node
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: babylon_node_need_restart
