@@ -1,4 +1,10 @@
 ---
+- name: Add ifcofig package
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.package:
+    state: present
+    name: net-tools
 
 - name: Rename interface
   become: true
