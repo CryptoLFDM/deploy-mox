@@ -2,3 +2,4 @@
 - name: Reboot proxmox host
   ansible.builtin.reboot:
     reboot_timeout: 3600
+  listen: proxmox_need_reboot
