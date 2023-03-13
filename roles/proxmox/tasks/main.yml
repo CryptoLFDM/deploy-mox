@@ -13,7 +13,6 @@
     path: "{{ proxmox_network_interface_path }}"
     regexp: '^iface .* inet manual'
     line: "face {{ proxmox_interface_custom_name}} inet manual"
-  notify: proxmox_need_reboot
 
 - name: Get interface mac adress
   become: true
@@ -28,7 +27,6 @@
     path: "{{ proxmox_network_interface_path }}"
     regexp: 'bridge-ports .*'
     line: "bridge-ports {{ proxmox_interface_custom_name}}"
-  notify: proxmox_need_reboot
 
 - name: Template config file
   become: true
@@ -40,4 +38,3 @@
     group: root
     mode: "{{ item.mode | default('0640') }}"
   loop: "{{ proxmox_templates }}"
-  notify: proxmox_need_reboot
