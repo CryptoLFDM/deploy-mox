@@ -11,5 +11,4 @@
 - ansible.builtin.import_playbook: playbook_proxmox.yml
 
 - ansible.builtin.import_playbook: playbook_hddtemp.yml
-- ansible.builtin.import_playbook: playbook_babylon.yml
 - ansible.builtin.import_playbook: playbook_metricbeat.yml
