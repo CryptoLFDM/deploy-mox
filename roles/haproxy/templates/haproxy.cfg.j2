@@ -125,30 +125,6 @@ listen mermaid-kibana
     server {{ item }} {{ hostvars[item]['ansible_host'] }}:5601
 {% endfor %}
 
-listen chimera-juno
-    mode http
-    option httpchk
-
-    bind *:26657 ssl crt fullchain.pem  ca-file chain.pem verify optional
-
-    default-server check fall 2 rise 2 ssl verify none
-
-{% for item in groups['chimera'] %}
-    server {{ item }} {{ hostvars[item]['ansible_host'] }}:26657
-{% endfor %}
-
-listen chimera-juno-rest
-    mode http
-    option httpchk
-
-    bind *:1317 ssl crt fullchain.pem  ca-file chain.pem verify optional
-
-    default-server check fall 2 rise 2 ssl verify none
-
-{% for item in groups['chimera'] %}
-    server {{ item }} {{ hostvars[item]['ansible_host'] }}:1317
-{% endfor %}
-
 listen mermaid-grafana
     mode http
     option httpchk
