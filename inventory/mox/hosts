@@ -22,7 +22,7 @@ chimera_delta ansible_host="chimera-delta.ether-source.fr" olympus_fqdn="chimera
 [chimera]
 chimera_alpha
 chimera_beta
-chimera_gamma
+chimera_delta
 
 [cerberus]
 cerberus_alpha
