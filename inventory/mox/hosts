@@ -17,7 +17,7 @@ cyclops_theta ansible_host="mox08.ether-source.fr" olympus_fqdn="mox08" olympus_
 cyclops_iota ansible_host="mox09.ether-source.fr" olympus_fqdn="mox09" olympus_ip="192.168.1.41"
 pegasus_alpha ansible_host="pegasus-alpha.ether-source.fr" olympus_fqdn="pegasus-alpha" olympus_ip="192.168.1.133"
 chimera_alpha ansible_host="chimera-alpha.ether-source.fr" olympus_fqdn="chimera-alpha" olympus_ip="192.168.1.177"
-chimera_gamma ansible_host="chimera-delta.ether-source.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.69"
+chimera_delta ansible_host="chimera-delta.ether-source.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.69"
 
 [chimera]
 chimera_alpha
