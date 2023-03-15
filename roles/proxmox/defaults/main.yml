@@ -1,0 +1,9 @@
+---
+proxmox_network_link_path: /etc/systemd/network/10-fixed.link
+proxmox_network_interface_path:  /etc/network/interfaces
+
+proxmox_interface_custom_name: cyclops
+
+proxmox_templates:
+  - src: 10-fixed.link.j2
+    dest: "{{ proxmox_network_link_path }}"
