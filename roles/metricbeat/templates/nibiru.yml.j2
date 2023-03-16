@@ -3,7 +3,7 @@
     - json
   period: 10s
   hosts: ["localhost:26657"]
-  namespace: "status"
+  namespace: "nibiru_status"
   path: "/status"
 
 - module: http
@@ -11,5 +11,5 @@
     - json
   period: 10s
   hosts: ["localhost:26657"]
-  namespace: "net_info"
+  namespace: "nibiru_net_info"
   path: "/net_info"
