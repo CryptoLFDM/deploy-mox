@@ -1,0 +1,21 @@
+---
+#==================================================================
+# Chimera-Juno
+#==================================================================
+- hosts: centaur
+  roles:
+    - role: user
+      user_name: "{{ chia_farmer_node_owner }}"
+      user_group: "{{ chia_farmer_node_group }}"
+      tags:
+        - user
+        - filesystem
+        - chia
+    - role: filesystem
+      filesystem_list: "{{ chia_farmer_node_filesystem_list }}"
+      tags:
+        - filesystem
+        - chia
+    - role: chia_farmer
+      tags:
+        - chia
