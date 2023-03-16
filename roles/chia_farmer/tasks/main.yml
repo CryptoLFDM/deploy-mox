@@ -12,8 +12,8 @@
   become_method: "{{ custom_become_method }}"
   file:
     path: "{{ item.path }}"
-    owner: "{{ item.owner | default(chia_farm_owner) }}"
-    group: "{{ item.group | default(chia_farm_group) }}"
+    owner: "{{ item.owner | default(chia_farmer_owner) }}"
+    group: "{{ item.group | default(chia_farmer_group) }}"
     mode: "{{ item.mode | default('0750') }}"
     state: "{{ item.state | default('directory') }}"
   loop: "{{ chia_farmer_directory }} "
