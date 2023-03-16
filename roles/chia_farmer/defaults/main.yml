@@ -18,7 +18,7 @@ chia_farmer_db_remote_source: https://s3.lafermedumineur.fr/blockchain_v2_mainne
 chia_farmer_filesystem_list:
   - lv: lv_chia_chain
     vg: "{{ custom_vg_name }}"
-    size: 120g
+    size: 180g
     path: "{{ chia_farmer_root }}"
     owner: "{{ chia_farmer_owner }}"
     group: "{{ chia_farmer_group }}"
@@ -29,7 +29,7 @@ chia_farmer_filesystem_list:
 
 
 chia_farmer_keys:
-  - "{{ lookup('hashi_vault', hashi_chia_path ~ '/chia_legacy_key:moz ' ~ hashi_connect) }}"
+  - "{{ lookup('hashi_vault', hashi_chia_path ~ '/chia:key ' ~ hashi_connect) }}"
 
 chia_farmer_bashrc_editable:
   - /root

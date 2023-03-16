@@ -39,24 +39,4 @@
     state: present
   loop: "{{ chia_farmer_packages }}"
 
-- name: Fetch remote bdd
-  become: true
-  become_method: "{{ custom_become_method }}"
-  uri:
-    url: "{{ chia_farmer_db_remote_source }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  when: "{{ chia_farmer_db_remote_fetch_enabled }}"
-
-- name: Add Keys
-  become: true
-  become_method: "{{ custom_become_method }}"
-  no_log: true
-  ansible.builtin.shell: |
-    echo "{{ item }}" | chia keys add -l ""
-  environment:
-    CHIA_ROOT: "{{ chia_farmer_root }}"
-  when:
-    - keys | length
-  with_items: "{{ chia_farmer_keys }}"
+- import_tasks: chia_cli.yml
