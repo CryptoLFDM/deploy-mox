@@ -5,6 +5,7 @@ chia_farmer_group: chia
 chia_farmer_packages:
   - yum-utils
   - chia-blockchain-cli
+  - libxcrypt-compat
 
 chia_farmer_directory:
   - path: "{{ chia_farmer_root }}"

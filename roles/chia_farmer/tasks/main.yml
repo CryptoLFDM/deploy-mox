@@ -18,6 +18,15 @@
     state: "{{ item.state | default('directory') }}"
   loop: "{{ chia_farmer_directory }} "
 
+- name: Download chia-blockchain.repo
+  ansible.builtin.get_url:
+    url: https://repo.chia.net/rhel/chia-blockchain.repo
+    dest: /etc/yum.repos.d/chia-blockchain.repo
+    mode: '0640'
+
+- name: yum clean
+  ansible.builtin.command: yum clean  all
+
 - name: Install binaries
   become: true
   become_method: "{{ custom_become_method }}"
