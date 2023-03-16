@@ -32,5 +32,5 @@ chia_farmer_keys:
   - "{{ lookup('hashi_vault', hashi_chia_path ~ '/chia_legacy_key:moz ' ~ hashi_connect) }}"
 
 chia_farmer_bashrc_editable:
-  - root
-  - "{{ chia_farmer_owner }}"
+  - /root
+  - "/home/{{ chia_farmer_owner }}"

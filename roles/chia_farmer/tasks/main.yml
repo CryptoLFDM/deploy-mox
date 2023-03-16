@@ -2,7 +2,7 @@
 - name: Ensure CHIA_ROOT is set in .bashrc
   become: true
   ansible.builtin.lineinfile:
-    path: "/home/{{ item }}/.bashrc"
+    path: "{{ item }}/.bashrc"
     regexp: '^export CHIA_ROOT='
     line: "export CHIA_ROOT={{ chia_farmer_root }}"
   loop: "{{ chia_farmer_bashrc_editable }}"
