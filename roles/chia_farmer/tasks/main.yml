@@ -19,12 +19,16 @@
   loop: "{{ chia_farmer_directory }} "
 
 - name: Download chia-blockchain.repo
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.get_url:
     url: https://repo.chia.net/rhel/chia-blockchain.repo
     dest: /etc/yum.repos.d/chia-blockchain.repo
     mode: '0640'
 
 - name: yum clean
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.command: yum clean  all
 
 - name: Install binaries
@@ -36,6 +40,8 @@
   loop: "{{ chia_farmer_packages }}"
 
 - name: Fetch remote bdd
+  become: true
+  become_method: "{{ custom_become_method }}"
   uri:
     url: "{{ chia_farmer_db_remote_source }}"
     method: GET
@@ -45,7 +51,7 @@
 
 - name: Add Keys
   become: true
-  become_user: "{{ chia_farmer_owner }}"
+  become_method: "{{ custom_become_method }}"
   no_log: true
   ansible.builtin.shell: |
     echo "{{ item }}" | chia keys add -l ""

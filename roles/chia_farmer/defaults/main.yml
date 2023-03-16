@@ -15,6 +15,18 @@ chia_farmer_root: /chia
 chia_farmer_db_remote_fetch_enabled: true
 chia_farmer_db_remote_source: https://s3.lafermedumineur.fr/blockchain_v2_mainnet/latest.zip
 
+chia_farmer_filesystem_list:
+  - lv: lv_chia_chain
+    vg: "{{ custom_vg_name }}"
+    size: 1g
+    path: "{{ chia_farmer_root }}"
+    owner: "{{ chia_farmer_owner }}"
+    group: "{{ chia_farmer_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
 
 chia_farmer_keys:
   - "{{ lookup('hashi_vault', hashi_chia_path ~ '/chia_legacy_key:moz ' ~ hashi_connect) }}"
