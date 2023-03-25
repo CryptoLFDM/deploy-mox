@@ -44,7 +44,7 @@
   notify:
     - metricbeat_need_restart
 
-- name: Template chimera xpack
+- name: Template chimera
   become: true
   become_method: "{{ custom_become_method }}"
   template:
@@ -55,6 +55,20 @@
     mode: "{{ item.mode | default('0640') }}"
   loop: "{{ metricbeat_chimera_templates }}"
   when: inventory_hostname in groups["chimera"]
+  notify:
+    - metricbeat_need_restart
+
+- name: Template centaur
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(metricbeat_owner) }}"
+    group: "{{ item.group | default(metricbeat_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ metricbeat_centaur_templates }}"
+  when: inventory_hostname in groups["centaur"]
   notify:
     - metricbeat_need_restart
 
