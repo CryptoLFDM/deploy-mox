@@ -1,3 +1,4 @@
+---
 - module: http
   metricsets:
     - json
@@ -7,21 +8,150 @@
   path: "/get_blockchain_state"
   ssl.certificate: "/chia/config/ssl/full_node/private_full_node.crt"
   ssl.key: "/chia/config/ssl/full_node/private_full_node.key"
+  body: ""
+  method: "POST"
 
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8555"]
+  namespace: "get_network_space"
+  path: "/get_network_space"
+  ssl.certificate: "/chia/config/ssl/full_node/private_full_node.crt"
+  ssl.key: "/chia/config/ssl/full_node/private_full_node.key"
+  body: ""
+  method: "POST"
 
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8555"]
+  namespace: "healthz"
+  path: "/healthz"
+  ssl.certificate: "/chia/config/ssl/full_node/private_full_node.crt"
+  ssl.key: "/chia/config/ssl/full_node/private_full_node.key"
+  body: ""
+  method: "POST"
 
-#  --key  -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8555/get_blockchain_state
-#get_network_space
-#healthz
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:$2"]
+  namespace: "$3"
+  path: "/$3"
+  ssl.certificate: "/chia/config/ssl/$4/private_$4.crt"
+  ssl.key: "/chia/config/ssl/$4/private_$4.key"
+  body: ""
+  method: "POST"
 
-# /chia/config/ssl/farmer/private_farmer.crt --key /chia/config/ssl/farmer/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8559/get_pool_state
-# /chia/config/ssl/farmer/private_farmer.crt --key /chia/config/ssl/farmer/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8559/get_harvesters
-#  /chia/config/ssl/farmer/private_farmer.crt --key /chia/config/ssl/farmer/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8559/get_harvesters_summary
-#  /chia/config/ssl/farmer/private_farmer.crt --key /chia/config/ssl/farmer/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8559/get_harvester_plots_valid
-#  /chia/config/ssl/farmer/private_farmer.crt --key /chia/config/ssl/farmer/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8559/get_harvester_plots_invalid
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_pool_state"
+  path: "/get_pool_state"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
 
-#get_harvester_plots_keys_missing
-#get_harvester_plots_duplicates
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_harvesters"
+  path: "/get_harvesters"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
 
-#  /chia/config/ssl/harvester/private_harvester.crt --key /chia/config/ssl/harvester/private_harvester.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8560/get_plots
-#get_plot_directories
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_harvesters_summary"
+  path: "/get_harvesters_summary"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
+
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_harvester_plots_valid"
+  path: "/get_harvester_plots_valid"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
+
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_harvester_plots_invalid"
+  path: "/get_harvester_plots_invalid"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
+
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_harvester_plots_keys_missing"
+  path: "/get_harvester_plots_keys_missing"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
+
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8559"]
+  namespace: "get_harvester_plots_duplicates"
+  path: "/get_harvester_plots_duplicates"
+  ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
+  ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
+  body: ""
+  method: "POST"
+
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8560"]
+  namespace: "get_plots"
+  path: "/get_plots"
+  ssl.certificate: "/chia/config/ssl/harvester/private_harvester.crt"
+  ssl.key: "/chia/config/ssl/harvester/private_harvester.key"
+  body: ""
+  method: "POST"
+
+- module: http
+  metricsets:
+    - json
+  period: 60s
+  hosts: [" https://localhost:8560"]
+  namespace: "get_plots"
+  path: "/get_plots"
+  ssl.certificate: "/chia/config/ssl/harvester/private_harvester.crt"
+  ssl.key: "/chia/config/ssl/harvester/private_harvester.key"
+  body: ""
+  method: "POST"
+

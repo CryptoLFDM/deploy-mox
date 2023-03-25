@@ -30,7 +30,14 @@ metricbeat_xpack_templates:
 
 metricbeat_chimera_templates:
   - src: nibiru.yml.j2
-    dest: "{{ metricbeat_module_path }}/juno.yml"
+    dest: "{{ metricbeat_module_path }}/nibiru.yml"
+    owner: "{{ metricbeat_owner }}"
+    group: "{{ metricbeat_group }}"
+    mode: "0640"
+
+metricbeat_centaur_templates:
+  - src: centaur.yml.j2
+    dest: "{{ metricbeat_module_path }}/chia.yml"
     owner: "{{ metricbeat_owner }}"
     group: "{{ metricbeat_group }}"
     mode: "0640"
