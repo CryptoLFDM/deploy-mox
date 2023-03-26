@@ -2,8 +2,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8555"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8555"]
   namespace: "get_blockchain_state"
   path: "/get_blockchain_state"
   ssl.certificate: "/chia/config/ssl/full_node/private_full_node.crt"
@@ -14,8 +16,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8555"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8555"]
   namespace: "get_network_space"
   path: "/get_network_space"
   ssl.certificate: "/chia/config/ssl/full_node/private_full_node.crt"
@@ -26,8 +30,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8555"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8555"]
   namespace: "healthz"
   path: "/healthz"
   ssl.certificate: "/chia/config/ssl/full_node/private_full_node.crt"
@@ -38,8 +44,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_pool_state"
   path: "/get_pool_state"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -50,8 +58,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_harvesters"
   path: "/get_harvesters"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -62,8 +72,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_harvesters_summary"
   path: "/get_harvesters_summary"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -74,8 +86,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_harvester_plots_valid"
   path: "/get_harvester_plots_valid"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -86,8 +100,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_harvester_plots_invalid"
   path: "/get_harvester_plots_invalid"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -98,8 +114,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_harvester_plots_keys_missing"
   path: "/get_harvester_plots_keys_missing"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -110,8 +128,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8559"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8559"]
   namespace: "get_harvester_plots_duplicates"
   path: "/get_harvester_plots_duplicates"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
@@ -122,8 +142,10 @@
 - module: http
   metricsets:
     - json
-  period: 60s
-  hosts: ["localhost:8560"]
+  period: 60s  
+  ssl.enabled: true
+  ssl.verification_mode: "none"
+  hosts: ["https://localhost:8560"]
   namespace: "get_plots"
   path: "/get_plots"
   ssl.certificate: "/chia/config/ssl/harvester/private_harvester.crt"
