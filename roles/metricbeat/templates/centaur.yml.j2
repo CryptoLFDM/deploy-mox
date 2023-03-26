@@ -39,18 +39,6 @@
   metricsets:
     - json
   period: 60s
-  hosts: ["localhost:$2"]
-  namespace: "$3"
-  path: "/$3"
-  ssl.certificate: "/chia/config/ssl/$4/private_$4.crt"
-  ssl.key: "/chia/config/ssl/$4/private_$4.key"
-  body: ""
-  method: "POST"
-
-- module: http
-  metricsets:
-    - json
-  period: 60s
   hosts: ["localhost:8559"]
   namespace: "get_pool_state"
   path: "/get_pool_state"
@@ -128,18 +116,6 @@
   path: "/get_harvester_plots_duplicates"
   ssl.certificate: "/chia/config/ssl/farmer/private_farmer.crt"
   ssl.key: "/chia/config/ssl/farmer/private_farmer.key"
-  body: ""
-  method: "POST"
-
-- module: http
-  metricsets:
-    - json
-  period: 60s
-  hosts: ["localhost:8560"]
-  namespace: "get_plots"
-  path: "/get_plots"
-  ssl.certificate: "/chia/config/ssl/harvester/private_harvester.crt"
-  ssl.key: "/chia/config/ssl/harvester/private_harvester.key"
   body: ""
   method: "POST"
 
