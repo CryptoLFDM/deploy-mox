@@ -11,12 +11,25 @@
   become_method: "{{ custom_become_method }}"
   become_user: "{{ chia_rpc_user }}"
   ansible.builtin.git:
-    repo: chia_rpc_repo
+    repo: "{{ chia_rpc_repo }}"
     dest: "{{ chia_rpc_clone_path }}"
+    force: true
 
 - name: Install specified python requirements
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.pip:
     requirements: "{{ chia_rpc_clone_path}}/req.txt"
+
+- name: Change permission on main.py
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ chia_rpc_clone_path}}/main.py"
+    state: file
+    owner: "{{ chia_rpc_user }}"
+    group: "{{ chia_rpc_user }}"
+    mode: 0755
 
 - name: Template config files
   become: true
