@@ -13,6 +13,7 @@
   ansible.builtin.git:
     repo: "{{ chia_rpc_repo }}"
     dest: "{{ chia_rpc_clone_path }}"
+    force: true
 
 - name: Install specified python requirements
   become: true
