@@ -15,4 +15,4 @@ chia_rpc_repo: https://github.com/CryptoLFDM/ChiaRPCWrapper.git
 chia_rpc_clone_path: /home/chia/ChiaRPCWrapper
 
 chia_rpc_config_path: /chia
-chia_rpc_node_id: 0x02f04ecc1d1e88904dd2a520b46318fee634b76b8f359722d16485a335037fc1
+chia_rpc_node_id: "0x02f04ecc1d1e88904dd2a520b46318fee634b76b8f359722d16485a335037fc1"
