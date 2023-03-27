@@ -3,7 +3,7 @@ Description=chia_rpc unit service
 
 [Service]
 User=root
-ExecStart="{{ chia_rpc_clone_path}}/main.py"
+ExecStart="{{ chia_rpc_clone_path}}/main.py --chia-root {{ chia_rpc_config_path }}"
 Restart=always
 
 [Install]
