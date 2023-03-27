@@ -13,3 +13,5 @@ chia_rpc_custom_templates:
 
 chia_rpc_repo: https://github.com/CryptoLFDM/ChiaRPCWrapper.git
 chia_rpc_clone_path: /home/chia/ChiaRPCWrapper
+
+chia_rpc_config_path: /chia
