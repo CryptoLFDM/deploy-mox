@@ -1,0 +1,35 @@
+---
+- name: Init chia
+  become: true
+  become_method: "{{ custom_become_method }}"
+  no_log: true
+  ansible.builtin.shell: |
+    echo "{{ item }}" | chia keys add -l ""
+  environment:
+    CHIA_ROOT: "{{ chia_farmer_root }}"
+  when:
+    - keys | length
+  with_items: "{{ chia_farmer_keys }}"
+
+
+- name: Fetch LFDM chia blockchain
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: "{{ chia_farmer_db_remote_source }}"
+    dest: /chia
+    remote_src: true
+  when: "{{ chia_farmer_db_remote_fetch_enabled }}"
+
+
+- name: Add Keys
+  become: true
+  become_method: "{{ custom_become_method }}"
+  no_log: true
+  ansible.builtin.shell: |
+    echo "{{ item }}" | chia keys add -l ""
+  environment:
+    CHIA_ROOT: "{{ chia_farmer_root }}"
+  when:
+    - keys | length
+  with_items: "{{ chia_farmer_keys }}"

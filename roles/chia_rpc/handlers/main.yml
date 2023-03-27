@@ -1,0 +1,10 @@
+---
+- name: Restart chia_rpc
+  become: true
+  become_method: "{{ custom_become_method }}"
+  systemd:
+    name: chia_rpc
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: chia_rpc_need_restart
