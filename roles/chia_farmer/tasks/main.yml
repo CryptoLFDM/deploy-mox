@@ -1,0 +1,42 @@
+---
+- name: Ensure CHIA_ROOT is set in .bashrc
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ item }}/.bashrc"
+    regexp: '^export CHIA_ROOT='
+    line: "export CHIA_ROOT={{ chia_farmer_root }}"
+  loop: "{{ chia_farmer_bashrc_editable }}"
+
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(chia_farmer_owner) }}"
+    group: "{{ item.group | default(chia_farmer_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ chia_farmer_directory }} "
+
+- name: Download chia-blockchain.repo
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.get_url:
+    url: https://repo.chia.net/rhel/chia-blockchain.repo
+    dest: /etc/yum.repos.d/chia-blockchain.repo
+    mode: '0640'
+
+- name: yum clean
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.command: yum clean  all
+
+- name: Install binaries
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ chia_farmer_packages }}"
+
+- import_tasks: chia_cli.yml

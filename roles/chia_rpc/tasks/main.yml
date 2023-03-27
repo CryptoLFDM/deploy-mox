@@ -1,0 +1,33 @@
+---
+- name: Install binaries
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ chia_rpc_package }}"
+    state: present
+
+- name: Checkout chia rpc
+  become: true
+  become_method: "{{ custom_become_method }}"
+  become_user: "{{ chia_rpc_user }}"
+  ansible.builtin.git:
+    repo: chia_rpc_repo
+    dest: "{{ chia_rpc_clone_path }}"
+
+- name: Install specified python requirements
+  ansible.builtin.pip:
+    requirements: "{{ chia_rpc_clone_path}}/req.txt"
+
+- name: Template config files
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(chia_rpc_user) }}"
+    group: "{{ item.group | default(chia_rpc_group) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ chia_rpc_custom_templates }}"
+  notify:
+    - chia_rpc_need_restart
+

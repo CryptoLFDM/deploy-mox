@@ -1,0 +1,15 @@
+---
+chia_rpc_user: chia
+chia_rpc_group: chia
+
+chia_rpc_package:
+  - git
+  - pip
+
+chia_rpc_custom_templates:
+  - src: chia_rpc.service.j2
+    dest: /etc/systemd/system/chia_rpc.service
+    mode: "0640"
+
+chia_rpc_repo: https://github.com/CryptoLFDM/ChiaRPCWrapper.git
+chia_rpc_clone_path: /home/chia/ChiaRPCWrapper
