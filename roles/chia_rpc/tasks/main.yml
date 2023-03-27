@@ -20,6 +20,16 @@
   ansible.builtin.pip:
     requirements: "{{ chia_rpc_clone_path}}/req.txt"
 
+- name: Change permission on main.py
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ chia_rpc_clone_path}}/main.py"
+    state: file
+    owner: "{{ chia_rpc_user }}"
+    group: "{{ chia_rpc_user }}"
+    mode: 0755
+
 - name: Template config files
   become: true
   become_method: "{{ custom_become_method }}"
