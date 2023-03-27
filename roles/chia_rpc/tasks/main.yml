@@ -11,7 +11,7 @@
   become_method: "{{ custom_become_method }}"
   become_user: "{{ chia_rpc_user }}"
   ansible.builtin.git:
-    repo: chia_rpc_repo
+    repo: "{{ chia_rpc_repo }}"
     dest: "{{ chia_rpc_clone_path }}"
 
 - name: Install specified python requirements
