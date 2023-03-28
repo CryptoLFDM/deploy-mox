@@ -14,6 +14,8 @@
     repo: "{{ chia_rpc_repo }}"
     dest: "{{ chia_rpc_clone_path }}"
     force: true
+  notify:
+    - chia_rpc_need_restart
 
 - name: Install specified python requirements
   become: true
