@@ -1,5 +1,5 @@
 [olympus]
-cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr" olympus_fqdn="cerberus-alpha" olympus_ip="192.168.1.23"
+cerberus_alpha ansible_host="cerberus-alpha.ether-source.fr" olympus_fqdn="cerberus-alpha" olympus_ip="192.168.1.176"
 cerberus_beta ansible_host="cerberus-beta.ether-source.fr" olympus_fqdn="cerberus-beta" olympus_ip="192.168.1.189"
 cerberus_gamma ansible_host="cerberus-gamma.ether-source.fr" olympus_fqdn="cerberus-gamma" olympus_ip="192.168.1.161"
 mermaid_alpha ansible_host="mermaid-alpha.ether-source.fr" olympus_fqdn="mermaid-alpha" olympus_ip="192.168.1.3"
