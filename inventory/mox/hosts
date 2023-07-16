@@ -75,10 +75,10 @@ cerberus
 basilisk
 centaur
 pegasus
-chimera
 
 [debian:children]
 cyclops
+chimera
 
 [hddtemp:children]
 cyclops
