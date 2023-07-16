@@ -3,7 +3,7 @@ external_dns_domain: ether-source.fr
 ansible_python_interpreter: /usr/bin/python3
 ovh_cred_path: /etc/ovh.cred
 
-elk_version: "{{ package_delimiter }}8.6.1"
+elk_version: "{{ package_delimiter }}8.8.2"
 
 hashi_connect: "{{ hashi_auth_method }} {{hashi_vault_url }}"
 hashi_vault_url: url=https://basilisk-alpha.ether-source.fr:8200
