@@ -4,6 +4,10 @@
   period: 10s
   hosts: ["localhost:26657"]
   namespace: "nibiru_status"
+  setup:
+    template.name: "status"
+    template.pattern: "status-*"
+    data_stream.enabled: true
   path: "/status"
 
 - module: http
@@ -12,4 +16,32 @@
   period: 10s
   hosts: ["localhost:26657"]
   namespace: "nibiru_net_info"
+  setup:
+    template.name: "net_info"
+    template.pattern: "net_info-*"
+    data_stream.enabled: true
   path: "/net_info"
+
+- module: http
+  metricsets:
+    - json
+  period: 2s
+  hosts: ["localhost:26657"]
+  namespace: "nibiru_validators"
+  setup:
+    template.name: "validators"
+    template.pattern: "validators-*"
+    data_stream.enabled: true
+  path: "/validators"
+
+- module: http
+  metricsets:
+    - json
+  period: 2s
+  hosts: ["localhost:26657"]
+  namespace: "nibiru_block"
+  setup:
+    template.name: "block"
+    template.pattern: "block-*"
+    data_stream.enabled: true
+  path: "/block"
