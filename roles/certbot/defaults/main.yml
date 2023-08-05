@@ -5,7 +5,12 @@ certbot_group: certbot
 certbot_root_dir: /opt/certbot
 certbot_cred_path: "{{ certbot_root_dir }}/certbot.cred"
 
-certbot_final_name_pattern: "{{ ansible_fqdn }}"
+certbot_final_name_pattern: "{{ ansible_hostname }}"
+certbot_email_contact: contact@ether-source.fr
+certbot_domain_to_claim:
+  - "{{ certbot_final_name_pattern }}.ether-source.fr"
+  - "{{ certbot_final_name_pattern }}.mythological.fr"
+
 
 certbot_directories:
   - path: /opt/certbot
