@@ -24,11 +24,11 @@ certbot_templates:
 certbot_credential: "{{ lookup('hashi_vault', hashi_certbot_path ~ '/ovh ' ~ hashi_connect) }}"
 
 certbot_link_to_create:
-  - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
+  - src: "/etc/letsencrypt/live/{{ ansible_hostname }}/cert.pem"
     dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.cert.pem"
-  - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
+  - src: "/etc/letsencrypt/live/{{ ansible_hostname }}/chain.pem"
     dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.chain.pem"
-  - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
+  - src: "/etc/letsencrypt/live/{{ ansible_hostname }}/fullchain.pem"
     dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.fullchain.pem"
-  - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
+  - src: "/etc/letsencrypt/live/{{ ansible_hostname }}/privkey.pem"
     dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.privkey.pem"
