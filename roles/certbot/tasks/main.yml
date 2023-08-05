@@ -41,6 +41,12 @@
     job: "sh {{ certbot_root_dir }}/certbot.sh"
     cron_file: certbot_auto_renew
 
+- name: Clean live cert
+  ansible.builtin.file:
+    path: /etc/letsencrypt/live/
+    state: absent
+  when: certbot_clean_previous_install
+
 - name: Check if certbot has already been run at least once
   become: true
   become_method: "{{ custom_become_method }}"
