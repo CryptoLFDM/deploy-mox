@@ -38,7 +38,7 @@
     minute: "0"
     hour: "12"
     user: root
-    job: "{{ certbot_root_dir }}/certbot.sh"
+    job: "sh {{ certbot_root_dir }}/certbot.sh"
     cron_file: certbot_auto_renew
 
 - name: Check if certbot has already been run at least once
@@ -51,7 +51,7 @@
 - name: Run at least once the shell script
   become: true
   become_method: "{{ custom_become_method }}"
-  ansible.builtin.shell: "{{ certbot_root_dir }}/certbot.sh"
+  ansible.builtin.shell: "sh {{ certbot_root_dir }}/certbot.sh"
   when: not certbot_already_executed.stat.exists
 
 - name: Create ssl symbolic link
