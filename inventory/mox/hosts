@@ -116,3 +116,27 @@ cyclops
 
 [kibana:children]
 mermaid
+
+[celestia]
+chimera-alpha
+
+[starknet]
+chimera_beta
+
+[shardeum]
+chimera_gamma
+
+[nibiru]
+chimera_delta
+
+[nolus]
+chimera_epsilon
+
+[subspace]
+chimera_zeta
+
+[gear]
+chimera_eta
+
+[massa]
+chimera_theta

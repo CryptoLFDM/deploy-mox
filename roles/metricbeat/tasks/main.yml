@@ -44,7 +44,7 @@
   notify:
     - metricbeat_need_restart
 
-- name: Template chimera
+- name: Template nibiru
   become: true
   become_method: "{{ custom_become_method }}"
   template:
@@ -54,7 +54,7 @@
     group: "{{ item.group | default(metricbeat_group) }}"
     mode: "{{ item.mode | default('0640') }}"
   loop: "{{ metricbeat_chimera_templates }}"
-  when: inventory_hostname in groups["chimera"]
+  when: inventory_hostname in groups["nibiru"]
   notify:
     - metricbeat_need_restart
 
