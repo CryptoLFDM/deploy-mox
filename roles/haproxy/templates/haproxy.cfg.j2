@@ -148,3 +148,15 @@ listen minotor
 {% for item in groups['minotor'] %}
     server {{ item }} {{ hostvars[item]['ansible_host'] }}:8080
 {% endfor %}
+
+listen cyclops
+    mode http
+    option httpchk
+
+    bind *:8006 ssl crt fullchain.pem  ca-file chain.pem verify optional
+
+    default-server check fall 2 rise 2 ssl verify none
+
+{% for item in groups['cyclops'] %}
+    server {{ item }} {{ hostvars[item]['ansible_host'] }}:8006
+{% endfor %}
