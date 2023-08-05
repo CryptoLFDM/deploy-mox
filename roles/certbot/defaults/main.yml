@@ -5,6 +5,8 @@ certbot_group: certbot
 certbot_root_dir: /opt/certbot
 certbot_cred_path: "{{ certbot_root_dir }}/certbot.cred"
 
+certbot_final_name_pattern: "{{ ansible_fqdn }}"
+
 certbot_directories:
   - path: /opt/certbot
 
@@ -18,10 +20,10 @@ certbot_credential: "{{ lookup('hashi_vault', hashi_certbot_path ~ '/ovh ' ~ has
 
 certbot_link_to_create:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
-    dest: /etc/ssl/certs/cert.pem
+    dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.cert.pem"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/chain.pem"
-    dest: /etc/ssl/certs/chain.pem
+    dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.chain.pem"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/fullchain.pem"
-    dest: /etc/ssl/certs/fullchain.pem
+    dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.fullchain.pem"
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
-    dest: /etc/ssl/certs/privkey.pem
+    dest: "/etc/ssl/certs/{{ certbot_final_name_pattern }}.privkey.pem"
