@@ -1,5 +1,5 @@
 ---
 package_to_remove:
-package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh
+package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh,python3-pip
 custom_vg_name: pve
 package_delimiter: "="
