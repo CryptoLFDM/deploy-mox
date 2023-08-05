@@ -42,6 +42,8 @@
     cron_file: certbot_auto_renew
 
 - name: Clean live cert
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.file:
     path: /etc/letsencrypt/live/
     state: absent
