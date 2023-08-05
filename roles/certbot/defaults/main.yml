@@ -5,6 +5,8 @@ certbot_group: certbot
 certbot_root_dir: /opt/certbot
 certbot_cred_path: "{{ certbot_root_dir }}/certbot.cred"
 
+certbot_force_renew: false
+
 certbot_final_name_pattern: "{{ ansible_hostname }}"
 certbot_email_contact: contact@ether-source.fr
 certbot_domain_to_claim:

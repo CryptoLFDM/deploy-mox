@@ -52,7 +52,7 @@
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.shell: "sh {{ certbot_root_dir }}/certbot.sh"
-  when: not certbot_already_executed.stat.exists
+  when: not certbot_already_executed.stat.exists or certbot_force_renew
 
 - name: Create ssl symbolic link
   become: true
