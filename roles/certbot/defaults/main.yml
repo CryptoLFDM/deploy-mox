@@ -9,7 +9,7 @@ certbot_final_name_pattern: "{{ ansible_hostname }}"
 certbot_email_contact: contact@ether-source.fr
 certbot_domain_to_claim:
   - "{{ certbot_final_name_pattern }}.ether-source.fr"
-  - "{{ certbot_final_name_pattern }}.mythological.fr"
+  - "{{ certbot_final_name_pattern }}.mythologic.fr"
 
 
 certbot_directories:
