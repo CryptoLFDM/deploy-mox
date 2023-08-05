@@ -1,6 +1,8 @@
 ---
 
 - name: Create group certbot
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.group:
     name: "{{ certbot_group }}"
     state: present
@@ -28,6 +30,8 @@
   loop: "{{ certbot_templates }}"
 
 - name: Creates a cron file under /etc/cron.d to auto renew certificat
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.cron:
     name: certbot auto renew
     weekday: "*"
@@ -45,10 +49,14 @@
   register: certbot_already_executed
 
 - name: Run at least once the shell script
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.shell: "{{ certbot_root_dir }}/certbot.sh"
   when: not certbot_already_executed.stat.exists
 
 - name: Create ssl symbolic link
+  become: true
+  become_method: "{{ custom_become_method }}"
   ansible.builtin.file:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
