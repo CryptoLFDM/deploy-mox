@@ -41,7 +41,16 @@ chimera_mu ansible_host="chimera-mu.ether-source.fr" olympus_fqdn="chimera-mu" o
 [chimera]
 chimera_alpha
 chimera_beta
+chimera_gamma
 chimera_delta
+chimera_epsilon
+chimera_zeta
+chimera_eta
+chimera_theta
+chimera_iota
+chimera_kappa
+chimera_lambda
+chimera_mu
 
 [cerberus]
 cerberus_alpha
