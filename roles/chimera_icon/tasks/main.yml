@@ -35,7 +35,6 @@
 - name: Pull an image
   become: true
   become_method: "{{ custom_become_method }}"
-  become_user: "{{ chimera_icon_owner }}"
   community.docker.docker_image:
     name: iconloop/icon2-node
     source: pull
