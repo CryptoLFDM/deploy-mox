@@ -38,3 +38,14 @@
   community.docker.docker_image:
     name: iconloop/icon2-node
     source: pull
+
+- name: Template config file
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(chimera_icon_owner) }}"
+    group: "{{ item.group | default(chimera_icon_owner) }}"
+    mode: "{{ item.mode | default('0640') }}"
+  loop: "{{ chimera_icon_templates }}"

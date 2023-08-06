@@ -26,3 +26,7 @@ chimera_icon_filesystem_list:
     fstype: xfs
     force: false
     shrink: false
+
+chimera_icon_templates:
+  - src: docker-compose.yml.j2
+    dest: "{{ chimera_icon_install_path }}/dokcer-compose.yml"
