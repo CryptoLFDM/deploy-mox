@@ -8,6 +8,7 @@ chimera_icon_packages:
   - docker-ce-cli
   - containerd.io
   - docker-buildx-plugin
+  - docker-compose
   - docker-compose-plugin
 
 chimera_icon_install_path: "/opt/chimera_{{ chimera_icon_owner }}"
@@ -29,4 +30,4 @@ chimera_icon_filesystem_list:
 
 chimera_icon_templates:
   - src: docker-compose.yml.j2
-    dest: "{{ chimera_icon_install_path }}/dokcer-compose.yml"
+    dest: "{{ chimera_icon_install_path }}/docker-compose.yml"
