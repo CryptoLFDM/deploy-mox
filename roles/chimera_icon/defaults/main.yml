@@ -4,12 +4,16 @@ chimera_icon_group: icon
 
 chimera_icon_packages:
   - docker
-  - docker-engine
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
 
 chimera_icon_install_path: "/opt/chimera_{{ chimera_icon_owner }}"
 
 chimera_icon_directories:
-  - "{{ chimera_icon_install_path }}"
+  - path: "{{ chimera_icon_install_path }}"
 
 chimera_icon_filesystem_list:
   - lv: lv_chimera_icon
