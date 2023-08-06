@@ -1,7 +1,4 @@
 ---
-- name: Check input
-  import_tasks: validation_input.yml
-
 - name: Group creation
   become: true
   become_method: "{{ custom_become_method }}"
@@ -10,7 +7,6 @@
     gid: "{{ user_gid }}"
     state: present
   when: user_group is not none
-  notify: user_changed_on_system
 
 - name: User creation
   become: true
@@ -25,8 +21,8 @@
     append: true
     groups: "{{ user_groups }}"
     expires: "{{ user_expires }}"
+    password: "{{ user_password | default(omit) }}"
   when: user_name is not none
-  notify: user_changed_on_system
 
 - name: Set max password age
   become: true

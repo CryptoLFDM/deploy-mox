@@ -7,6 +7,7 @@
     - role: user
       user_name: "{{ chimera_icon_owner }}"
       user_group: "{{ chimera_icon_group }}"
+      user_password: "{{ lookup('hashi_vault', hashi_icon_path ~ '/icon_user:moz ' ~ hashi_connect) }}"
       tags:
         - chimera_icon
     - role: filesystem
