@@ -28,22 +28,9 @@
   when: user_name is not none
   notify: user_changed_on_system
 
-- name: Read max password age
-  become: true
-  become_method: "{{ custom_become_method }}"
-  shell: |
-    set -o pipefail
-    export LANG=en_US.UTF-8
-    chage -l {{ user_name | quote }} | grep "^Maximum number of days between password change" | sed 's/.*: //'
-  when: user_name is not none
-  register: user_current_max_pwd_age
-  changed_when: false
-
 - name: Set max password age
   become: true
   become_method: "{{ custom_become_method }}"
   command: chage -M {{ user_password_expires | default(-1) }} {{ user_name }}
   when:
     - user_name is not none
-    - user_current_max_pwd_age.stdout | string != user_password_expires | default(-1) | string
-    - not user_current_max_pwd_age.skipped|default('false') | bool
