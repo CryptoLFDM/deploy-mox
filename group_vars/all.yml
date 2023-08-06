@@ -1,7 +1,6 @@
 ---
 external_dns_domain: ether-source.fr
 ansible_python_interpreter: /usr/bin/python3
-ovh_cred_path: /etc/ovh.cred
 
 elk_version: "{{ package_delimiter }}8.9.0"
 
@@ -15,6 +14,6 @@ hashi_auth_method: "auth_method=userpass username={{ hashi_user }} password={{ h
 hashi_elasticsearch_path: "{{ hashi_mount_point }}/elasticsearch"
 hashi_haproxy_path: "{{ hashi_mount_point }}/haproxy"
 hashi_chia_path: "{{ hashi_mount_point }}/chia"
-
+hashi_certbot_path: "{{ hashi_mount_point }}/certbot"
 
 metricbeat_password: "{{ elasticsearch_metricbeat_password }}"
