@@ -1,5 +1,12 @@
 ---
 
+- name: Add Docker GPG apt Key
+  become: true
+  become_method: "{{ custom_become_method }}"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
 - name: Add Docker Repository
   become: true
   become_method: "{{ custom_become_method }}"
