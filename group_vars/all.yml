@@ -18,4 +18,4 @@ hashi_certbot_path: "{{ hashi_mount_point }}/certbot"
 
 metricbeat_password: "{{ elasticsearch_metricbeat_password }}"
 
-hashi_icon_path: "{{ hashi_mount_point }}/icon"
+hashi_chimera_path: "{{ hashi_mount_point }}/chimera"

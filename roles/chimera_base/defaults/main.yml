@@ -1,0 +1,21 @@
+---
+chimera_base_owner: 
+chimera_base_group: 
+
+
+chimera_base_install_path: "/opt/chimera_{{ chimera_base_owner }}"
+
+chimera_base_directories:
+  - path: "{{ chimera_base_install_path }}"
+
+chimera_base_filesystem_list:
+  - lv: lv_chimera_base
+    vg: "{{ custom_vg_name }}"
+    size: 10g
+    path: "{{ chimera_base_install_path }}"
+    owner: "{{ chimera_base_owner }}"
+    group: "{{ chimera_base_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false

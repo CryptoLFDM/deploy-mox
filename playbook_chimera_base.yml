@@ -1,0 +1,19 @@
+---
+#==================================================================
+# Chimera-base
+#==================================================================
+- hosts: chimera
+  roles:
+    - role: user
+      user_name: chimera
+      user_group: chimera
+      user_password: "{{ lookup('hashi_vault', hashi_chimera_path ~ '/user:moz ' ~ hashi_connect) }}"
+      tags:
+        - chimera_base
+    - role: filesystem
+      filesystem_list: "{{ chimera_base_filesystem_list }}"
+      tags:
+        - chimera_base
+    - role: chimera_base
+      tags:
+        - chimera_base
