@@ -1,0 +1,18 @@
+---
+#==================================================================
+# Chimera-icon
+#==================================================================
+- hosts: chimera_icon
+  roles:
+    - role: user
+      user_name: "{{ chimera_icon_owner }}"
+      user_group: "{{ chimera_icon_group }}"
+      tags:
+        - chimera_icon
+    - role: filesystem
+      filesystem_list: "{{ chimera_icon_filesystem_list }}"
+      tags:
+        - chimera_icon
+    - role: chimera_icon
+      tags:
+        - chimera_icon

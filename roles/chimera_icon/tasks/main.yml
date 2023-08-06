@@ -1,0 +1,34 @@
+---
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install binaries for chimera_icon
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ chimera_icon_packages }}"
+    state: present
+
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(chimera_icon_owner) }}"
+    group: "{{ item.group | default(chimera_icon_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ chimera_icon_directories }}"
+
+- name: Pull an image
+  community.docker.docker_image:
+    name: iconloop/icon2-node
+    source: pull

@@ -1,0 +1,24 @@
+---
+chimera_icon_owner: icon
+chimera_icon_group: icon
+
+chimera_icon_packages:
+  - docker
+  - docker-engine
+
+chimera_icon_install_path: "/opt/chimera_{{ chimera_icon_owner }}"
+
+chimera_icon_directories:
+  - "{{ chimera_icon_install_path }}"
+
+chimera_icon_filesystem_list:
+  - lv: lv_chimera_icon
+    vg: "{{ custom_vg_name }}"
+    size: 10g
+    path: "{{ chimera_icon_install_path }}"
+    owner: "{{ chimera_icon_owner }}"
+    group: "{{ chimera_icon_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
