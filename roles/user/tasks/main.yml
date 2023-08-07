@@ -21,6 +21,6 @@
     append: true
     groups: "{{ user_groups }}"
     expires: "{{ user_expires }}"
-    password: "{{ user_password | default(omit) }}"
+    password: "{{ user_password | default(omit) | password_hash('sha512') }}"
     password_expire_max: -1
   when: user_name is not none
