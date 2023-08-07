@@ -1,12 +1,15 @@
 ---
 subspace_owner: chimera
 subspace_group: chimera
+
+subspace_donwload_binary: true
+
 subspace_install_path: "/opt/chimera_{{ subspace_owner }}"
 subspace_github_url: https://github.com/subspace/subspace/releases/download
 subpsace_snapshot: gemini-3e-2023-jul-03
 
 subspace_node_install_path: "{{ subspace_install_path }}/node"
-subspace_node_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-node-ubuntu-x86_64-skylake-{{ subpsace_snapshot}}"
+subspace_node_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-node-ubuntu-x86_64-v2-{{ subpsace_snapshot}}"
 subspace_node_binary_path: "/usr/bin/{{ subspace_node_binary_name}}"
 subspace_node_binary_name: subspace_node
 subspace_node_templates:
@@ -24,6 +27,8 @@ subspace_farmer_templates:
     dest: /etc/systemd/system/subspace_farmer.service
     mode: "0640"
 
+subspace_wallet_adress: "{{ lookup('hashi_vault', hashi_subspace_path ~ '/wallet:moz ' ~ hashi_connect) }}"
+
 
 subspace_filesystem_list:
   - lv: lv_chimera_base
@@ -40,6 +45,7 @@ subspace_filesystem_list:
 
 subspace_extra_package:
   - libgomp1
+  - nginx
 
 subspace_directories:
   - path: "{{ subspace_node_install_path }}"

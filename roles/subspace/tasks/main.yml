@@ -19,6 +19,7 @@
     force: true
   notify:
     - subspace_node_need_restart
+  when: subspace_donwload_binary
 
 - name: Download Farmer binary
   become: true
@@ -32,6 +33,8 @@
     mode: '0750'
   notify:
     - subspace_farmer_need_restart
+  when: subspace_donwload_binary
+
 
 - name: Create directory
   become: true
