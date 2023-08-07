@@ -22,11 +22,5 @@
     groups: "{{ user_groups }}"
     expires: "{{ user_expires }}"
     password: "{{ user_password | default(omit) }}"
+    password_expire_max: -1
   when: user_name is not none
-
-- name: Set max password age
-  become: true
-  become_method: "{{ custom_become_method }}"
-  command: chage -M {{ user_password_expires | default(-1) }} {{ user_name }}
-  when:
-    - user_name is not none

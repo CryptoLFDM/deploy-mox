@@ -1,6 +1,6 @@
 ---
-chimera_base_owner: 
-chimera_base_group: 
+chimera_base_owner: chimera
+chimera_base_group: chimera
 
 
 chimera_base_install_path: "/opt/chimera_{{ chimera_base_owner }}"
