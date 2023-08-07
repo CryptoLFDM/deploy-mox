@@ -1,0 +1,25 @@
+
+[Unit]
+Description="subspace node"
+After=network-online.target
+
+[Service]
+User={{ subspace_owner}}
+Group={{ subspace_group }}
+WorkingDirectory={{ subspace_node_install_path }}/
+ExecStart={{ subspace_node_binary_name }} \
+  --chain gemini-3e \
+  --execution wasm \
+  --blocks-pruning archive \
+  --state-pruning archive \
+  --dsn-disable-private-ips \
+  --no-private-ipv4 \
+  --validator \
+  --name {{ ansible_hostname }} \
+  --base-path {{ subspace_node_install_path }}/
+
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
