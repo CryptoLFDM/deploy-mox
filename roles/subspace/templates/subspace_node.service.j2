@@ -7,9 +7,9 @@ After=network-online.target
 User={{ subspace_owner}}
 Group={{ subspace_group }}
 WorkingDirectory={{ subspace_node_install_path }}/
-ExecStart={{ subspace_node_binary_name }} --chain gemini-3e --execution wasm --dsn-disable-private-ips --no-private-ipv4 --validator --name {{ ansible_hostname }} --base-path {{ subspace_node_install_path }}/
-StandardOutput=append:{{subspace_farmer_log_folder}}/{{ subspace_farmer_log_file }}
-StandardError=append:{{subspace_farmer_log_folder}}/{{ subspace_farmer_log_file }}
+ExecStart={{ subspace_node_binary_name }} --chain gemini-3e --execution wasm --dsn-disable-private-ips --no-private-ipv4 --validator --name {{ ansible_hostname }} --base-path {{ subspace_node_install_path }}/ --blocks-pruning archive --state-pruning archive
+StandardOutput=append:{{subspace_node_log_folder}}/{{ subspace_node_log_file }}
+StandardError=append:{{subspace_node_log_folder}}/{{ subspace_node_log_file }}
 
 
 Restart=on-failure
