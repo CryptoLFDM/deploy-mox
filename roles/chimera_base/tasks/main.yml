@@ -1,0 +1,12 @@
+---
+
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(chimera_base_owner) }}"
+    group: "{{ item.group | default(chimera_base_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ chimera_base_directories }}"

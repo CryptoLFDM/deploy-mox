@@ -1,0 +1,14 @@
+---
+#==================================================================
+# Chimera-Zeta-Subspace
+#==================================================================
+- hosts: subspace
+  roles:
+    - role: filesystem
+      filesystem_list: "{{ subspace_node_filesystem_list | union(subspace_farmer_filesystem_list) }}"
+      tags:
+        - subspace
+    - role: subspace
+      tags:
+        - subspace
+
