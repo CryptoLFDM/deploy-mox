@@ -9,3 +9,4 @@ user_groups:
 user_expires: -1
 user_password_expires: -1
 user_changed: false
+user_password:

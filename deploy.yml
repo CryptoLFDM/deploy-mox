@@ -10,6 +10,9 @@
 - ansible.builtin.import_playbook: playbook_grafana.yml
 - ansible.builtin.import_playbook: playbook_proxmox.yml
 - ansible.builtin.import_playbook: playbook_chia_farmer.yml
+- ansible.builtin.import_playbook: playbook_chimera_base.yml
+
+- ansible.builtin.import_playbook: playbook_subspace.yml
 
 - ansible.builtin.import_playbook: playbook_hddtemp.yml
 - ansible.builtin.import_playbook: playbook_metricbeat.yml
