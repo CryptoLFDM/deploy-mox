@@ -1,0 +1,14 @@
+---
+#==================================================================
+# Promtail
+#==================================================================
+- hosts: promtail
+  roles:
+    - role: user
+      user_name: "{{ promtail_owner }}"
+      user_group: "{{ promtail_group }}"
+      tags:
+        - promtail
+    - role: promtail
+      tags:
+        - promtail

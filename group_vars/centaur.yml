@@ -1,0 +1,4 @@
+---
+
+chia_log_path: /chia/log/debug.log
+promtail_chia_enabled: true

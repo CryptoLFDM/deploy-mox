@@ -1,0 +1,7 @@
+- job_name: subspace farmer
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: {{ ansible_hostname }}-farmer
+      __path__: {{ subspace_farmer_log_folder }}/{{ subspace_farmer_log_file }}

@@ -1,0 +1,27 @@
+---
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://192.168.1.4:3100/loki/api/v1/push
+
+scrape_configs:
+{% if promtail_chia_enabled | default(false) %}
+{% include './subconfig/chia.j2' %}
+{% endif %}
+{% if promtail_streamr_enabled | default(false) %}
+{% include './subconfig/streamr.j2' %}
+{% endif %}
+{% if promtail_subspace_farmer_enabled | default(false) %}
+{% include './subconfig/subspace_farmer.j2' %}
+{% endif %}
+{% if promtail_subspace_node_enabled | default(false) %}
+{% include './subconfig/subspace_node.j2' %}
+{% endif %}
+{% if promtail_nibiru_enabled | default(false) %}
+{% include './subconfig/nibiru.j2' %}
+{% endif %}
