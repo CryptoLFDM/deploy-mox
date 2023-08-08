@@ -7,7 +7,10 @@ After=network-online.target
 User={{ subspace_owner}}
 Group={{ subspace_group }}
 WorkingDirectory={{ subspace_farmer_install_path }}/
-ExecStart={{ subspace_farmer_binary_name }} --base-path {{ subspace_node_install_path }}/ farm --disable-private-ips --reward-address {{ subspace_wallet_adress }} --plot-size 10G
+ExecStart={{ subspace_farmer_binary_name }} --base-path {{ subspace_farmer_install_path }}/ farm --disable-private-ips --reward-address {{ subspace_farmer_wallet_adress }} --plot-size 10G
+StandardOutput=append:{{subspace_farmer_log_folder}}/{{ subspace_farmer_log_file }}
+StandardError=append:{{subspace_farmer_log_folder}}/{{ subspace_farmer_log_file }}
+
 
 Restart=on-failure
 RestartSec=5s
