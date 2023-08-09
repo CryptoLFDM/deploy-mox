@@ -4,7 +4,6 @@
   become_method: "{{ custom_become_method }}"
   group:
     name: "{{ user_group }}"
-    gid: "{{ user_gid }}"
     state: present
   when: user_group is not none
 
@@ -14,13 +13,10 @@
   user:
     name: "{{ user_name }}"
     group: "{{ user_group }}"
-    home: "{{ user_home | default(omit) }}"
-    uid: "{{ user_uid }}"
     shell: "{{ user_shell }}"
-    comment: "{{ user_comment }}"
     append: true
     groups: "{{ user_groups }}"
     expires: "{{ user_expires }}"
-    password: "{{ user_password | default(omit) | password_hash('sha512') }}"
+    password: "{{ user_password | password_hash('sha512') | default(omit) }}"
     password_expire_max: -1
   when: user_name is not none

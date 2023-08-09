@@ -4,3 +4,8 @@ package_to_remove: nftables,iptables
 package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh,certbot-nginx
 custom_vg_name: fedora_fedora
 package_delimiter: "-"
+package_suffix: .rpm
+
+sudo_group: wheel
+
+promtail_package_identifier: "{{ promtail_download_version }}/promtail-{{ promtail_download_version }}.x86_64.rpm"

@@ -1,0 +1,7 @@
+- job_name: subspace node
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: {{ ansible_hostname }}-node
+      __path__: {{ subspace_node_log_folder }}/{{ subspace_node_log_file }}

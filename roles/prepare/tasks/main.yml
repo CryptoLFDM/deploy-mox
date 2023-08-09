@@ -42,3 +42,11 @@
     name: vm.swappiness
     value: '10'
     state: present
+
+- name: set max file
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.posix.sysctl:
+    name: fs.file-max
+    value: '9223372036854775807'
+    state: present
