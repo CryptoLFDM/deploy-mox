@@ -1,0 +1,19 @@
+---
+promtail_owner: promtail
+promtail_group: promtail
+
+promtail_root_path: /opt/promtail
+promtail_log_path: /var/log/promtail
+promtail_directories:
+  - path: "{{ promtail_root_path }}"
+  - path: "{{ promtail_log_path }}"
+
+# remember that promtail & loki version are linked
+promtail_download_version: 2.7.4
+promtail_download_url: "https://github.com/grafana/loki/releases/download/v{{ promtail_package_identifier }}"
+promtail_download_desination: "{{ promtail_root_path }}/promtail_{{promtail_download_version}}{{ package_suffix }}"
+
+
+promtail_templates:
+  - src: config.yml.j2
+    dest: /etc/promtail/config.yml

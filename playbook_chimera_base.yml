@@ -8,7 +8,7 @@
       user_name: chimera
       user_group: chimera
       user_password: "{{ lookup('hashi_vault', hashi_chimera_path ~ '/user:moz ' ~ hashi_connect) }}"
-      user_groups: [sudo, certbot]
+      user_groups: [ "{{ sudo_group }}", certbot]
       tags:
         - chimera_base
     - role: filesystem

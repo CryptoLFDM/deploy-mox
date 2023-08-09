@@ -4,6 +4,8 @@ package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-
 package_delimiter: "="
 
 package_suffix: .deb
+sudo_group: sudo
 
 promtail_package_identifier: "{{ promtail_download_version }}/promtail_{{ promtail_download_version }}_amd64.deb"
-
+custom_become_method: sudo
+custom_vg_name: ubuntu-vg

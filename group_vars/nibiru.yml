@@ -1,0 +1,4 @@
+---
+
+nibiru_log_path: /var/log/chimera/nibiru.log
+promtail_nibiru_enabled: true

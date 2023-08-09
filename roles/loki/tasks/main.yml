@@ -1,0 +1,16 @@
+---
+- name: Templatise rpm repo
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: grafana.repo
+    dest: /etc/yum.repos.d/grafana.repo
+    owner: root
+    group: root
+
+- name: Install binaries for Loki
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ loki_extra_package }}"
+    state: present
