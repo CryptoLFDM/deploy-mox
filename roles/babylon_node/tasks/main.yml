@@ -1,0 +1,102 @@
+---
+
+- name: DEBUG
+  ansible.builtin.debug:
+    msg:{{ babylon_privkey_validator }}
+
+- name: Run Prepare task
+  import_tasks: node_prepare.yml
+
+- name: Donwload & extract Babylon Binary
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.get_url:
+    url: "{{ babylon_binaries_download_url}}"
+    dest: "{{ babylon_binaries_path }}/babylon"
+    owner: "{{ item.owner | default(babylon_owner) }}"
+    group: "{{ item.group | default(babylon_group) }}"
+    mode: "0777"
+    force: true
+
+- name: Donwload & extract libwasmvm
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.get_url:
+    url: "{{ babylon_libwasmvm_download_url}}"
+    dest: /lib
+    owner: "{{ item.owner | default(babylon_owner) }}"
+    group: "{{ item.group | default(babylon_group) }}"
+    force: true
+  register: libwasmvm
+
+- name: Reload shared library
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.shell: ldconfig
+  when: libwasmvm.changed
+
+- name: Check if node_marker is present
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.stat:
+    path: "{{ babylon_home }}/node_marker"
+  register: node_marker
+
+- name: Run take node config
+  become: true
+  become_user: "{{ babylon_owner }}"
+  import_tasks: node_init.yml
+  when: not node_marker.stat.exists
+
+- name: Create Marker file to avoid double init & config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.file:
+    path: "{{ babylon_home }}/node_marker"
+    state: touch
+    owner: "{{ babylon_owner }}"
+    group: "{{ babylon_group }}"
+  when: not node_marker.stat.exists
+
+- name: Template babylon config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0640') }}"
+    owner: "{{ item.owner | default(babylon_owner) }}"
+    group: "{{ item.group | default(babylon_group) }}"
+  loop: "{{ babylon_templates }}"
+  notify: babylon_need_restart
+
+- name: Template babylon validator config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0640') }}"
+    owner: "{{ item.owner | default(babylon_owner) }}"
+    group: "{{ item.group | default(babylon_group) }}"
+  loop: "{{ babylon_validator_templates }}"
+  notify: babylon_need_restart
+  when: babylon_validator_templates_enabled
+
+- name: Get Genesis
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: "{{ babylon_genesis_donwload_url }}"
+    dest: "{{ babylon_config_path }}"
+    remote_src: true
+    owner: "{{ item.owner | default(babylon_owner) }}"
+    group: "{{ item.group | default(babylon_group) }}"
+
+
+- name: Run th keys management
+  become: true
+  become_user: "{{ babylon_owner }}"
+  import_tasks: keys_management.yml
+  when: babylon_keys_management_enabled
+

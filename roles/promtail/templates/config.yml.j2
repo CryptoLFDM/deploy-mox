@@ -22,3 +22,6 @@ scrape_configs:
 {% if promtail_nibiru_enabled | default(false) %}
 {% include './subconfig/nibiru.j2' %}
 {% endif %}
+{% if promtail_babylon_enabled | default(false) %}
+{% include './subconfig/babylon.j2' %}
+{% endif %}
