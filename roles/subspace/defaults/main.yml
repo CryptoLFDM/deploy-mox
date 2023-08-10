@@ -31,7 +31,7 @@ subspace_node_directories:
   - path: "{{ subspace_node_install_path }}"
   - path: "{{ subspace_node_log_folder }}"
 subspace_node_filesystem_list:
-  - lv: lv_chimera_base
+  - lv: lv_chimera
     vg: "{{ custom_vg_name }}"
     size: 10g
     path: "{{ subspace_install_path }}"
@@ -51,6 +51,8 @@ subspace_node_filesystem_list:
     fstype: xfs
     force: false
     shrink: false
+subspace_node_prometheus_port: 9615
+
 
 subspace_farmer_install_enabled: true
 subspace_farmer_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-farmer-{{ subspace_binary }}-{{ subpsace_snapshot}}"

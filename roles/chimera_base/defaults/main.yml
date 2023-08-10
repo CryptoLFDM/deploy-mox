@@ -3,13 +3,13 @@ chimera_base_owner: chimera
 chimera_base_group: chimera
 
 
-chimera_base_install_path: "/opt/chimera_{{ chimera_base_owner }}"
+chimera_base_install_path: /opt/chimera
 
 chimera_base_directories:
   - path: "{{ chimera_base_install_path }}"
 
 chimera_base_filesystem_list:
-  - lv: "{{ chimera_root_path | default('lv_chimera_base') }}"
+  - lv: lv_chimera
     vg: "{{ custom_vg_name }}"
     size: 10g
     path: "{{ chimera_base_install_path }}"

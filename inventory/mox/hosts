@@ -158,7 +158,7 @@ chimera_eta
 [massa]
 chimera_theta
 
-[chimera_icon]
+[babylon]
 chimera_iota
 
 [loki:children]
@@ -172,3 +172,4 @@ centaur
 streamr
 subspace
 nibiru
+babylon
