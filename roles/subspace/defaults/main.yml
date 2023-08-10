@@ -52,6 +52,8 @@ subspace_node_filesystem_list:
     fstype: xfs
     force: false
     shrink: false
+subspace_node_prometheus_port: 9615
+
 
 subspace_farmer_install_enabled: true
 subspace_farmer_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-farmer-{{ subspace_binary }}-{{ subpsace_snapshot}}"

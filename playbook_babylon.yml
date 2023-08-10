@@ -1,0 +1,13 @@
+---
+#==================================================================
+# Chimera-iota-Babylon
+#==================================================================
+- hosts: babylon
+  roles:
+    - role: filesystem
+      filesystem_list: "{{ babylon_filesystem_list }}"
+      tags:
+        - babylon
+    - role: babylon_node
+      tags:
+        - babylon

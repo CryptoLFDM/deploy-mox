@@ -7,3 +7,4 @@ netaddr
 paramiko
 passlib
 requests[security]
+pexpect
