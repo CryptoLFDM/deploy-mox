@@ -9,7 +9,7 @@ chimera_base_directories:
   - path: "{{ chimera_base_install_path }}"
 
 chimera_base_filesystem_list:
-  - lv: lv_chimera_base
+  - lv: "{{ chimera_root_path | default('lv_chimera_base') }}"
     vg: "{{ custom_vg_name }}"
     size: 10g
     path: "{{ chimera_base_install_path }}"
