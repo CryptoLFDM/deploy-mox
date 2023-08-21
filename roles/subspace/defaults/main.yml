@@ -1,6 +1,17 @@
 ---
 
 chimera_root_path: lv_chimera
+chimera_base_filesystem_list:
+  - lv: "{{ chimera_root_path | default('lv_chimera_base') }}"
+    vg: "{{ custom_vg_name }}"
+    size: 10g
+    path: "{{ chimera_base_install_path }}"
+    owner: "{{ chimera_base_owner }}"
+    group: "{{ chimera_base_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
 subspace_owner: chimera
 subspace_group: chimera
 
