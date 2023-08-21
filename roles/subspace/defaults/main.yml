@@ -80,6 +80,7 @@ subspace_farmer_wallet_adress: "{{ lookup('hashi_vault', hashi_subspace_path ~ '
 subspace_farmer_directories:
   - path: "{{ subspace_farmer_install_path }}"
   - path: "{{ subspace_farmer_log_folder }}"
+subpace_farmer_plot_size: 10g
 
 subspace_farmer_filesystem_list:
   - lv: lv_subspace_farmer_log
