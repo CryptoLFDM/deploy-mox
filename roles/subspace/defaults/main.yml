@@ -1,17 +1,5 @@
 ---
 
-chimera_root_path: lv_chimera
-chimera_base_filesystem_list:
-  - lv: "{{ chimera_root_path | default('lv_chimera_base') }}"
-    vg: "{{ custom_vg_name }}"
-    size: 10g
-    path: "{{ chimera_base_install_path }}"
-    owner: "{{ chimera_base_owner }}"
-    group: "{{ chimera_base_group }}"
-    mode: "0750"
-    fstype: xfs
-    force: false
-    shrink: false
 subspace_owner: chimera
 subspace_group: chimera
 
@@ -80,7 +68,7 @@ subspace_farmer_wallet_adress: "{{ lookup('hashi_vault', hashi_subspace_path ~ '
 subspace_farmer_directories:
   - path: "{{ subspace_farmer_install_path }}"
   - path: "{{ subspace_farmer_log_folder }}"
-subpace_farmer_plot_size: 10g
+subpace_farmer_plot_size: 60g
 
 subspace_farmer_filesystem_list:
   - lv: lv_subspace_farmer_log
