@@ -34,7 +34,7 @@ haproxy_filesystem_list:
     force: false
     shrink: false
 
-haproxy_certs_path: /etc/haproxy
+haproxy_certs_path: /etc/ssl/certs
 
 ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/cert.pem"
