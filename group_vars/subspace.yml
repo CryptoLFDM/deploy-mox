@@ -1,9 +1,4 @@
 ---
 
-subspace_farmer_log_file: farmer.log
-subspace_farmer_log_folder: /var/log/chimera/subspace_farmer
-promtail_subspace_farmer_enabled: true
-
-subspace_node_log_file: node.log
-subspace_node_log_folder: /var/log/chimera/subspace_node
-promtail_subspace_node_enabled: true
+promtail_subspace_enabled: true
+subspace_log_folder: /var/log/chimera/subspace_*/*.log
