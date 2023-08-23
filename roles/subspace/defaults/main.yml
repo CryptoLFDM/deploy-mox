@@ -7,7 +7,7 @@ subspace_donwload_binary: true
 
 subspace_install_path: /opt/chimera
 subspace_github_url: https://github.com/subspace/subspace/releases/download
-subpsace_snapshot: gemini-3f-2023-aug-22
+subpsace_snapshot: gemini-3f-2023-aug-21
 subspace_logrotate_folder: /etc/logrotate.d
 
 
