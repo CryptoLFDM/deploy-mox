@@ -7,13 +7,15 @@ subspace_donwload_binary: true
 
 subspace_install_path: /opt/chimera
 subspace_github_url: https://github.com/subspace/subspace/releases/download
-subpsace_snapshot: gemini-3f-2023-aug-21
-subspace_logrotate_folder: /etc/logrotate.d
+subpsace_snapshot: gemini-3f-2023-aug-25-2
+subspace_binary: ubuntu-x86_64-skylake
+# subspace_binary: subspace-farmer-ubuntu-x86_64-v2
 
+subspace_logrotate_folder: /etc/logrotate.d
 
 subspace_node_install_enabled: true
 subspace_node_install_path: "{{ subspace_install_path }}/node"
-subspace_node_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-node-ubuntu-x86_64-v2-{{ subpsace_snapshot}}"
+subspace_node_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-node-{{ subspace_binary }}-{{ subpsace_snapshot}}"
 subspace_node_binary_path: "/usr/bin/{{ subspace_node_binary_name}}"
 subspace_node_binary_name: subspace_node
 subspace_node_logrotate_file: subspace_node
@@ -51,7 +53,7 @@ subspace_node_filesystem_list:
     shrink: false
 
 subspace_farmer_install_enabled: true
-subspace_farmer_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-farmer-ubuntu-x86_64-skylake-{{ subpsace_snapshot}}"
+subspace_farmer_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-farmer-{{ subspace_binary }}-{{ subpsace_snapshot}}"
 subspace_farmer_install_path: "{{ subspace_install_path }}/farmer"
 subspace_farmer_binary_path: "/usr/bin/{{ subspace_farmer_binary_name}}"
 subspace_farmer_binary_name: subspace_farmer
