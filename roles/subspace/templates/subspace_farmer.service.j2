@@ -7,7 +7,7 @@ After=network-online.target
 User={{ subspace_owner}}
 Group={{ subspace_group }}
 WorkingDirectory={{ subspace_farmer_install_path }}/
-ExecStart={{ subspace_farmer_binary_name }} --base-path {{ subspace_farmer_install_path }}/ farm --disable-private-ips --reward-address {{ subspace_farmer_wallet_adress }} --plot-size 10G
+ExecStart={{ subspace_farmer_binary_name }} farm --reward-address {{ subspace_farmer_wallet_adress }} path={{ subspace_farmer_install_path }}/big/,size=300g path={{ subspace_farmer_install_path }}/true_plot/,size=150g path={{ subspace_farmer_install_path }}/nvme/,size=894g path={{ subspace_farmer_install_path }}/ssd/,size=795g
 StandardOutput=append:{{ subspace_farmer_log_folder }}/{{ subspace_farmer_log_file }}
 StandardError=append:{{ subspace_farmer_log_folder }}/{{ subspace_farmer_log_file }}
 LimitNOFILE=infinity

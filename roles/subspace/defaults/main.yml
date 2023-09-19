@@ -7,10 +7,7 @@ subspace_donwload_binary: true
 
 subspace_install_path: /opt/chimera
 subspace_github_url: https://github.com/subspace/subspace/releases/download
-subpsace_snapshot: gemini-3f-2023-aug-25-2
-subspace_binary: ubuntu-x86_64-skylake
-# subspace_binary: subspace-farmer-ubuntu-x86_64-v2
-
+subpsace_snapshot: gemini-3f-2023-sep-13-2
 subspace_logrotate_folder: /etc/logrotate.d
 
 subspace_node_install_enabled: true
