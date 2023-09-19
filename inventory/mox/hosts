@@ -11,7 +11,7 @@ minotor_alpha ansible_host="minotor-alpha.mythologic.fr" olympus_fqdn="minotor-a
 basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr" olympus_fqdn="basilisk-alpha" olympus_ip="192.168.1.43"
 
 centaur_alpha ansible_host="centaur-alpha.mythologic.fr" olympus_fqdn="centaur-alpha" olympus_ip="192.168.1.139"
-centaur_beta ansible_host="centaur-beta.mythologic.fr" olympus_fqdn="centaur-beta" olympus_ip="192.168.1.88"
+centaur_beta ansible_host="centaur-beta.mythologic.fr" olympus_fqdn="centaur-beta" olympus_ip="192.168.1.200"
 
 
 cyclops_alpha ansible_host="mox01.mythologic.fr" olympus_fqdn="mox01" olympus_ip="192.168.1.15"
@@ -63,6 +63,7 @@ basilisk_alpha
 
 [centaur]
 centaur_alpha
+centaur_beta
 
 [cyclops]
 cyclops_alpha
