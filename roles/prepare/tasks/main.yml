@@ -23,11 +23,8 @@
 - import_tasks: install_fedora.yml
   when: ansible_distribution == 'Fedora'
 
-- import_tasks: install_debian.yml
-  when: ansible_distribution == 'Debian'
-
 - import_tasks: install_ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - name: Set a hostname
   become: true

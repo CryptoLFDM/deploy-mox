@@ -3,15 +3,17 @@
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    url: "{{ item }}"
     state: present
+  loop: "{{ prepare_gpg_key }}"
 
 - name: Add repo for elk
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/8.x/apt stable main
+    repo: "deb {{ item }}"
     state: present
+  loop: "{{ prepare_deb}}"
 
 - name: Add debian package
   become: true
