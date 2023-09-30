@@ -129,9 +129,8 @@ gorgons
 [streamr]
 chimera_xi
 
-[chia]
-centaur-alpha
-centaur-beta
+[chia:children]
+centaur
 
 [promtail:children]
 chia

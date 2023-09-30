@@ -10,32 +10,12 @@
     state: "{{ item.state | default('directory') }}"
   loop: "{{ promtail_directories }}"
 
-- name: Download promtail binary
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.get_url:
-    url: "{{ promtail_download_url }}"
-    dest: "{{ promtail_download_desination }}"
-    owner: "{{ promtail_owner }}"
-    group: "{{ promtail_group }}"
-    mode: '0640'
-    force: true
-
-- name: Install promtail package (ferdora)
+- name: Install promtail package
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.package:
-    name: "{{ promtail_download_desination }}"
+    name: promtail
     state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: Install promtail package (debian)
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.apt:
-    deb: "{{ promtail_download_desination }}"
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
-
 
 - name: Template promtail file
   become: true
