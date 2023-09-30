@@ -48,7 +48,6 @@ chimera_beta
 chimera_gamma
 chimera_epsilon
 chimera_zeta
-chimera_eta
 chimera_theta
 chimera_iota
 chimera_lambda
@@ -143,9 +142,6 @@ chimera_epsilon
 
 [subspace]
 chimera_zeta
-
-[gear]
-chimera_eta
 
 [massa]
 chimera_theta
