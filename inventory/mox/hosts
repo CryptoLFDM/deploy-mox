@@ -30,7 +30,6 @@ chimera_beta ansible_host="chimera-beta.mythologic.fr" olympus_fqdn="chimera-bet
 chimera_gamma ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.105"
 chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr" olympus_fqdn="chimera-epsilon" olympus_ip="192.168.1.151"
 chimera_zeta ansible_host="chimera-zeta.mythologic.fr" olympus_fqdn="chimera-zeta" olympus_ip="192.168.1.111"
-chimera_eta ansible_host="chimera-eta.mythologic.fr" olympus_fqdn="chimera-eta" olympus_ip="192.168.1.166"
 chimera_theta ansible_host="chimera-theta.mythologic.fr" olympus_fqdn="chimera-theta" olympus_ip="192.168.1.85"
 chimera_iota ansible_host="chimera-iota.mythologic.fr" olympus_fqdn="chimera-iota" olympus_ip="192.168.1.50"
 chimera_lambda ansible_host="chimera-lambda.mythologic.fr" olympus_fqdn="chimera-lambda" olympus_ip="192.168.1.47"
@@ -160,9 +159,8 @@ gorgons
 [streamr]
 chimera_xi
 
-[chia]
-centaur-alpha
-centaur-beta
+[chia:children]
+centaur
 
 [promtail:children]
 chia
