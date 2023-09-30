@@ -1,5 +1,5 @@
 ---
-metricbeat_version: "{{ elk_version }}"
+metricbeat_version: ""
 
 metricbeat_owner: root
 metricbeat_group: root
