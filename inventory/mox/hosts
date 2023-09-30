@@ -129,8 +129,12 @@ gorgons
 [streamr]
 chimera_xi
 
+[chia]
+centaur-alpha
+centaur-beta
+
 [promtail:children]
-centaur
+chia
 streamr
 subspace
 babylon
