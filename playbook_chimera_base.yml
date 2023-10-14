@@ -11,10 +11,6 @@
       user_groups: [ "{{ sudo_group }}", certbot]
       tags:
         - chimera_base
-    - role: filesystem
-      filesystem_list: "{{ chimera_base_filesystem_list }}"
-      tags:
-        - chimera_base
     - role: chimera_base
       tags:
         - chimera_base

@@ -4,7 +4,7 @@ cerberus_beta ansible_host="cerberus-beta.mythologic.fr" olympus_fqdn="cerberus-
 cerberus_gamma ansible_host="cerberus-gamma.mythologic.fr" olympus_fqdn="cerberus-gamma" olympus_ip="192.168.1.129"
 cerberus_delta ansible_host="cerberus-delta.mythologic.fr" olympus_fqdn="cerberus-delta" olympus_ip="192.168.1.8"
 
-mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr" olympus_fqdn="mermaid-alpha" olympus_ip="192.168.1.3"
+mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr" olympus_fqdn="mermaid-alpha" olympus_ip="192.168.1.86"
 
 minotor_alpha ansible_host="minotor-alpha.mythologic.fr" olympus_fqdn="minotor-alpha" olympus_ip="192.168.1.190"
 
@@ -13,24 +13,17 @@ basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr" olympus_fqdn="basilis
 centaur_alpha ansible_host="centaur-alpha.mythologic.fr" olympus_fqdn="centaur-alpha" olympus_ip="192.168.1.139"
 
 cyclops_alpha ansible_host="mox01.mythologic.fr" olympus_fqdn="mox01" olympus_ip="192.168.1.15"
-cyclops_gamma ansible_host="mox03.mythologic.fr" olympus_fqdn="mox03" olympus_ip="192.168.1.42"
 cyclops_zeta ansible_host="mox06.mythologic.fr" olympus_fqdn="mox06" olympus_ip="192.168.1.198"
 cyclops_theta ansible_host="mox08.mythologic.fr" olympus_fqdn="mox08" olympus_ip="192.168.1.113"
 cyclops_iota ansible_host="mox09.mythologic.fr" olympus_fqdn="mox09" olympus_ip="192.168.1.41"
 
 pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr" olympus_fqdn="pegasus-alpha" olympus_ip="192.168.1.133"
 
-chimera_alpha ansible_host="chimera-alpha.mythologic.fr" olympus_fqdn="chimera-alpha" olympus_ip="192.168.1.103"
 chimera_beta ansible_host="chimera-beta.mythologic.fr" olympus_fqdn="chimera-beta" olympus_ip="192.168.1.179"
-chimera_gamma ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.105"
-chimera_delta ansible_host="chimera-delta.mythologic.fr" olympus_fqdn="chimera-delta" olympus_ip="192.168.1.9"
 chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr" olympus_fqdn="chimera-epsilon" olympus_ip="192.168.1.151"
 chimera_zeta ansible_host="chimera-zeta.mythologic.fr" olympus_fqdn="chimera-zeta" olympus_ip="192.168.1.111"
-chimera_eta ansible_host="chimera-eta.mythologic.fr" olympus_fqdn="chimera-eta" olympus_ip="192.168.1.166"
-chimera_theta ansible_host="chimera-theta.mythologic.fr" olympus_fqdn="chimera-theta" olympus_ip="192.168.1.85"
 chimera_zeta ansible_host="chimera-zeta.mythologic.fr" olympus_fqdn="chimera-zeta" olympus_ip="192.168.1.40"
 chimera_iota ansible_host="chimera-iota.mythologic.fr" olympus_fqdn="chimera-iota" olympus_ip="192.168.1.50"
-chimera_kappa ansible_host="chimera-kappa.mythologic.fr" olympus_fqdn="chimera-kappa" olympus_ip="192.168.1.79"
 chimera_lambda ansible_host="chimera-lambda.mythologic.fr" olympus_fqdn="chimera-lambda" olympus_ip="192.168.1.47"
 chimera_xi ansible_host="chimera-xi.mythologic.fr" olympus_fqdn="chimera-xi" olympus_ip="192.168.1.39"
 
@@ -42,18 +35,11 @@ chimera_ubuntu
 chimera_fedora
 
 [chimera_ubuntu]
-chimera_alpha
 chimera_beta
-chimera_gamma
-chimera_delta
 chimera_epsilon
 chimera_zeta
-chimera_eta
-chimera_theta
 chimera_iota
-chimera_kappa
 chimera_lambda
-chimera_mu
 
 [chimera_fedora]
 chimera_xi
@@ -78,7 +64,6 @@ centaur_alpha
 
 [cyclops]
 cyclops_alpha
-cyclops_gamma
 cyclops_zeta
 cyclops_theta
 cyclops_iota
@@ -127,9 +112,6 @@ cyclops
 [kibana:children]
 mermaid
 
-[celestia]
-chimera-alpha
-
 [starknet]
 chimera_beta
 
@@ -152,4 +134,3 @@ chimera_xi
 centaur
 streamr
 subspace
-nibiru

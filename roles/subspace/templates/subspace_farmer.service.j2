@@ -7,7 +7,7 @@ After=network-online.target
 User={{ subspace_owner}}
 Group={{ subspace_group }}
 WorkingDirectory={{ subspace_farmer_install_path }}/
-ExecStart={{ subspace_farmer_binary_name }} farm  --reward-address {{ subspace_farmer_wallet_adress }} path={{ subspace_farmer_install_path }}/,size={{ subpace_farmer_plot_size }} path=/opt/chimera/farm01/,size=200g
+ExecStart={{ subspace_farmer_binary_name }} farm  --reward-address {{ subspace_farmer_wallet_adress }} path={{ subspace_farmer_install_path }}/ssd,size={{ subpace_farmer_plot_size }} path={{ subspace_farmer_install_path }}/ssd,size={{ subpace_farmer_plot_size }}
 StandardOutput=append:{{subspace_farmer_log_folder}}/{{ subspace_farmer_log_file }}
 StandardError=append:{{subspace_farmer_log_folder}}/{{ subspace_farmer_log_file }}
 
