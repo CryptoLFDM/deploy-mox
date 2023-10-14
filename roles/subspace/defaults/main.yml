@@ -7,7 +7,8 @@ subspace_donwload_binary: true
 
 subspace_install_path: /opt/chimera
 subspace_github_url: https://github.com/subspace/subspace/releases/download
-subpsace_snapshot: gemini-3f-2023-aug-25-2
+subspace_chain_id: gemini-3g
+subpsace_snapshot: "{{ subspace_chain_id }}-2023-oct-31"
 subspace_binary: ubuntu-x86_64-skylake
 # subspace_binary: subspace-farmer-ubuntu-x86_64-v2
 
@@ -31,7 +32,7 @@ subspace_node_directories:
   - path: "{{ subspace_node_install_path }}"
   - path: "{{ subspace_node_log_folder }}"
 subspace_node_filesystem_list:
-  - lv: lv_chimera_base
+  - lv: lv_chimera
     vg: "{{ custom_vg_name }}"
     size: 10g
     path: "{{ subspace_install_path }}"
@@ -56,6 +57,8 @@ subspace_farmer_install_enabled: true
 subspace_farmer_binary_url: "{{ subspace_github_url }}/{{ subpsace_snapshot }}/subspace-farmer-{{ subspace_binary }}-{{ subpsace_snapshot}}"
 subspace_farmer_install_path: "{{ subspace_install_path }}/farmer"
 subspace_farmer_binary_path: "/usr/bin/{{ subspace_farmer_binary_name}}"
+
+
 subspace_farmer_binary_name: subspace_farmer
 subspace_farmer_logrotate_file: subspace_farmer
 subspace_farmer_templates:
@@ -70,7 +73,9 @@ subspace_farmer_wallet_adress: "{{ lookup('hashi_vault', hashi_subspace_path ~ '
 subspace_farmer_directories:
   - path: "{{ subspace_farmer_install_path }}"
   - path: "{{ subspace_farmer_log_folder }}"
-subpace_farmer_plot_size: 60g
+  - path: "{{ subspace_farmer_install_path }}/ssd"
+  - path: "{{ subspace_farmer_install_path }}/nvme"
+subpace_farmer_plot_size: 10g
 
 subspace_farmer_filesystem_list:
   - lv: lv_subspace_farmer_log
