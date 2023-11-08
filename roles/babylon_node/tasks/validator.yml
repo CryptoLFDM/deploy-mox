@@ -1,0 +1,14 @@
+---
+
+- name: Template babylon validator config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0640') }}"
+    owner: "{{ item.owner | default(babylon_owner) }}"
+    group: "{{ item.group | default(babylon_group) }}"
+  loop: "{{ babylon_validator_templates }}"
+  notify: babylon_need_restart
+  when: babylon_validator_templates_enabled

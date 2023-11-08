@@ -74,7 +74,7 @@ babylon_templates:
     dest: "{{ babylon_config_toml_path}}"
 
 
-babylon_privkey_validator: "{{ lookup('hashi_vault', hashi_babylon_path ~ '/' ~ ansible_hostname ~ hashi_connect) }}"
+babylon_privkey_validator: "{{ lookup('hashi_vault', hashi_babylon_path ~ '/privkey' ~ hashi_connect) }}"
 babylon_validator_templates_enabled: true
 babylon_validator_templates:
   - src: priv_validator_key.json.j2
