@@ -1,0 +1,20 @@
+---
+
+- name: Install binaries for cosmos_node_factory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ cosmos_node_factory_packages }}"
+
+- name: Create directory
+  become: true
+  become_method: "{{ custom_become_method }}"
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
+    group: "{{ item.group | default(cosmos_node_factory_group) }}"
+    mode: "{{ item.mode | default('0750') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop: "{{ cosmos_node_factory_directories }}"

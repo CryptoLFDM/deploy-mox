@@ -87,6 +87,6 @@ babylon_directories:
   - path: "{{ babylon_config_path }}"
   - path: "{{ babylon_log_path }}"
 
-babylon_keys_management_enabled: true
+babylon_keys_management_enabled: false
 babylon_key_name: "{{ ansible_hostname }}"
 babylon_key_password: "{{ lookup('hashi_vault', hashi_babylon_path ~ '/' ~ ansible_hostname  ~ hashi_connect) }}"
