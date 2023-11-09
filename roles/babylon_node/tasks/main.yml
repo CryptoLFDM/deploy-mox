@@ -1,9 +1,5 @@
 ---
 
-- name: DEBUG
-  ansible.builtin.debug:
-    msg:{{ babylon_privkey_validator }}
-
 - name: Run Prepare task
   import_tasks: node_prepare.yml
 

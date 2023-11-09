@@ -1,0 +1,90 @@
+---
+cosmos_node_factory_owner: chimera
+cosmos_node_factory_group: chimera
+
+cosmos_node_factory_log_path: /var/log/chimera/
+cosmos_node_factory_log_file: cosmos_node_factory.log
+cosmos_node_factory_binaries_path: /usr/bin/
+cosmos_node_factory_path: "{{ chimera_base_install_path}}"
+cosmos_node_factory_home: "{{ cosmos_node_factory_path }}/cosmos_node_factory"
+cosmos_node_factory_name: "{{ ansible_hostname }}"
+cosmos_node_factory_config_path: "{{ cosmos_node_factory_home }}/config"
+
+
+cosmos_node_factory_genesis_location: "{{ cosmos_node_factory_config_path }}/genesis.json"
+cosmos_node_factory_config_toml_path: "{{ cosmos_node_factory_config_path }}/config.toml"
+cosmos_node_factory_app_toml_path: "{{cosmos_node_factory_config_path }}/app.toml"
+
+cosmos_node_factory_packages:
+  - jq
+  - curl
+  - snapd
+  - git
+  - ufw
+  - gcc
+  - g++
+  - make
+  - docker
+  - build-essential
+  - acl
+
+
+cosmos_node_factory_filesystem_list:
+  - lv: lv_chimera
+    vg: "{{ custom_vg_name }}"
+    size: 200g
+    path: "{{ cosmos_node_factory_path}}"
+    owner: "{{ cosmos_node_factory_owner }}"
+    group: "{{ cosmos_node_factory_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+  - lv: lv_log_cosmos_node_factory
+    vg: "{{ custom_vg_name }}"
+    size: 2g
+    path: "{{ cosmos_node_factory_log_path }}"
+    owner: "{{ cosmos_node_factory_owner }}"
+    group: "{{ cosmos_node_factory_group }}"
+    mode: "0750"
+    fstype: xfs
+    force: false
+    shrink: false
+
+cosmos_node_factory_templates:
+  - src: cosmos_node_factory.service.j2
+    dest: /etc/systemd/system/cosmos_node_factory.service
+  - src: app.toml.j2
+    dest: "{{ cosmos_node_factory_app_toml_path}}"
+  - src: config.toml.j2
+    dest: "{{ cosmos_node_factory_config_toml_path}}"
+
+
+
+cosmos_node_factory_directories:
+  - path: "{{ chimera_base_install_path }}"
+  - path: "{{ cosmos_node_factory_home }}"
+  - path: "{{ cosmos_node_factory_config_path }}"
+  - path: "{{ cosmos_node_factory_log_path }}"
+
+cosmos_node_factory_keys_management_enabled: true
+cosmos_node_factory_key_name: "{{ ansible_hostname }}"
+cosmos_node_factory_key_password: "{{ lookup('hashi_vault', hashi_cosmos_node_factory_path ~ '/' ~ ansible_hostname  ~ hashi_connect) }}"
+
+
+#CONVERT TO PARAM
+
+cosmos_node_factory_git_version: v0.7.2
+
+cosmos_node_factory_binaries_download_url: "https://github.com/Tocard/cosmos_node_factory/releases/download/build-{{ cosmos_node_factory_git_version }}/cosmos_node_factoryd"
+cosmos_node_factory_libwasmvm_download_url: "https://github.com/Tocard/cosmos_node_factory/releases/download/build-{{ cosmos_node_factory_git_version }}/libwasmvm.x86_64.so"
+cosmos_node_factory_genesis_donwload_url: https://github.com/cosmos_node_factorychain/networks/raw/main/bbn-test-2/genesis.tar.bz2
+
+cosmos_node_factory_seeds: "8da45f9ff83b4f8dd45bbcb4f850999637fbfe3b@seed0.testnet.cosmos_node_factorychain.io:26656,4b1f8a774220ba1073a4e9f4881de218b8a49c99@seed1.testnet.cosmos_node_factorychain.io:26656"
+cosmos_node_factory_persistent_peers: "8da45f9ff83b4f8dd45bbcb4f850999637fbfe3b@seed0.testnet.cosmos_node_factorychain.io:26656,4b1f8a774220ba1073a4e9f4881de218b8a49c99@seed1.testnet.cosmos_node_factorychain.io:26656"
+
+
+cosmos_node_factory_tag: bbn2
+cosmos_node_factory_network: mainnet
+cosmos_node_factory_chain_id: bbn-test2
+cosmos_node_factory_binaries: babylon

@@ -1,0 +1,102 @@
+---
+
+- name: DEBUG
+  ansible.builtin.debug:
+    msg:{{ cosmos_node_factory_privkey_validator }}
+
+- name: Run Prepare task
+  import_tasks: node_prepare.yml
+
+- name: Donwload & extract cosmos_node_factory Binary
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.get_url:
+    url: "{{ cosmos_node_factory_binaries_download_url}}"
+    dest: "{{ cosmos_node_factory_binaries_path }}/cosmos_node_factory"
+    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
+    group: "{{ item.group | default(cosmos_node_factory_group) }}"
+    mode: "0777"
+    force: true
+
+- name: Donwload & extract libwasmvm
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.get_url:
+    url: "{{ cosmos_node_factory_libwasmvm_download_url}}"
+    dest: /lib
+    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
+    group: "{{ item.group | default(cosmos_node_factory_group) }}"
+    force: true
+  register: libwasmvm
+
+- name: Reload shared library
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.shell: ldconfig
+  when: libwasmvm.changed
+
+- name: Check if node_marker is present
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.stat:
+    path: "{{ cosmos_node_factory_home }}/node_marker"
+  register: node_marker
+
+- name: Run take node config
+  become: true
+  become_user: "{{ cosmos_node_factory_owner }}"
+  import_tasks: node_init.yml
+  when: not node_marker.stat.exists
+
+- name: Create Marker file to avoid double init & config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.file:
+    path: "{{ cosmos_node_factory_home }}/node_marker"
+    state: touch
+    owner: "{{ cosmos_node_factory_owner }}"
+    group: "{{ cosmos_node_factory_group }}"
+  when: not node_marker.stat.exists
+
+- name: Template cosmos_node_factory config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0640') }}"
+    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
+    group: "{{ item.group | default(cosmos_node_factory_group) }}"
+  loop: "{{ cosmos_node_factory_templates }}"
+  notify: cosmos_node_factory_need_restart
+
+- name: Template cosmos_node_factory validator config
+  become: true
+  become_method: "{{ custom_become_method }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0640') }}"
+    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
+    group: "{{ item.group | default(cosmos_node_factory_group) }}"
+  loop: "{{ cosmos_node_factory_validator_templates }}"
+  notify: cosmos_node_factory_need_restart
+  when: cosmos_node_factory_validator_templates_enabled
+
+- name: Get Genesis
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.unarchive:
+    src: "{{ cosmos_node_factory_genesis_donwload_url }}"
+    dest: "{{ cosmos_node_factory_config_path }}"
+    remote_src: true
+    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
+    group: "{{ item.group | default(cosmos_node_factory_group) }}"
+
+
+- name: Run th keys management
+  become: true
+  become_user: "{{ cosmos_node_factory_owner }}"
+  import_tasks: keys_management.yml
+  when: cosmos_node_factory_keys_management_enabled
+
