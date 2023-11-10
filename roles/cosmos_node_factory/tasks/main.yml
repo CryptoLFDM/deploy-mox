@@ -1,9 +1,5 @@
 ---
 
-- name: DEBUG
-  ansible.builtin.debug:
-    msg:{{ cosmos_node_factory_privkey_validator }}
-
 - name: Run Prepare task
   import_tasks: node_prepare.yml
 
@@ -17,23 +13,6 @@
     group: "{{ item.group | default(cosmos_node_factory_group) }}"
     mode: "0777"
     force: true
-
-- name: Donwload & extract libwasmvm
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.get_url:
-    url: "{{ cosmos_node_factory_libwasmvm_download_url}}"
-    dest: /lib
-    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
-    group: "{{ item.group | default(cosmos_node_factory_group) }}"
-    force: true
-  register: libwasmvm
-
-- name: Reload shared library
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.shell: ldconfig
-  when: libwasmvm.changed
 
 - name: Check if node_marker is present
   become: true
@@ -69,19 +48,6 @@
     group: "{{ item.group | default(cosmos_node_factory_group) }}"
   loop: "{{ cosmos_node_factory_templates }}"
   notify: cosmos_node_factory_need_restart
-
-- name: Template cosmos_node_factory validator config
-  become: true
-  become_method: "{{ custom_become_method }}"
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    mode: "{{ item.mode | default('0640') }}"
-    owner: "{{ item.owner | default(cosmos_node_factory_owner) }}"
-    group: "{{ item.group | default(cosmos_node_factory_group) }}"
-  loop: "{{ cosmos_node_factory_validator_templates }}"
-  notify: cosmos_node_factory_need_restart
-  when: cosmos_node_factory_validator_templates_enabled
 
 - name: Get Genesis
   become: true
