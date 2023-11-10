@@ -1,20 +1,13 @@
 ---
+#% USER
 cosmos_node_factory_owner: chimera
 cosmos_node_factory_group: chimera
 
-cosmos_node_factory_log_path: /var/log/chimera/
-cosmos_node_factory_log_file: cosmos_node_factory.log
-cosmos_node_factory_binaries_path: /usr/bin/
-cosmos_node_factory_path: "{{ chimera_base_install_path}}"
-cosmos_node_factory_home: "{{ cosmos_node_factory_path }}/cosmos_node_factory"
-cosmos_node_factory_name: "{{ ansible_hostname }}"
-cosmos_node_factory_config_path: "{{ cosmos_node_factory_home }}/config"
 
 
-cosmos_node_factory_genesis_location: "{{ cosmos_node_factory_config_path }}/genesis.json"
-cosmos_node_factory_config_toml_path: "{{ cosmos_node_factory_config_path }}/config.toml"
-cosmos_node_factory_app_toml_path: "{{cosmos_node_factory_config_path }}/app.toml"
 
+# SYSTEM
+## OS
 cosmos_node_factory_packages:
   - jq
   - curl
@@ -28,7 +21,19 @@ cosmos_node_factory_packages:
   - build-essential
   - acl
 
+## FOLDER
+cosmos_node_factory_log_path: /var/log/chimera/
+cosmos_node_factory_binaries_path: /usr/bin/
+cosmos_node_factory_path: "{{ chimera_base_install_path}}"
+cosmos_node_factory_home: "{{ cosmos_node_factory_path }}/{{ cosmos_node_factory_chain_name }}"
+cosmos_node_factory_config_path: "{{ cosmos_node_factory_home }}/config"
+cosmos_node_factory_directories:
+  - path: "{{ chimera_base_install_path }}"
+  - path: "{{ cosmos_node_factory_home }}"
+  - path: "{{ cosmos_node_factory_config_path }}"
+  - path: "{{ cosmos_node_factory_log_path }}"
 
+##% FILESYSTEM
 cosmos_node_factory_filesystem_list:
   - lv: lv_chimera
     vg: "{{ custom_vg_name }}"
@@ -51,6 +56,18 @@ cosmos_node_factory_filesystem_list:
     force: false
     shrink: false
 
+## FILE
+cosmos_node_factory_log_file: cosmos_node_factory.log
+
+
+# NODE
+cosmos_node_factory_name: "{{ ansible_hostname }}"
+
+cosmos_node_factory_genesis_location: "{{ cosmos_node_factory_config_path }}/genesis.json"
+cosmos_node_factory_config_toml_path: "{{ cosmos_node_factory_config_path }}/config.toml"
+cosmos_node_factory_app_toml_path: "{{cosmos_node_factory_config_path }}/app.toml"
+
+
 cosmos_node_factory_templates:
   - src: cosmos_node_factory.service.j2
     dest: /etc/systemd/system/cosmos_node_factory.service
@@ -61,15 +78,6 @@ cosmos_node_factory_templates:
 
 
 
-cosmos_node_factory_directories:
-  - path: "{{ chimera_base_install_path }}"
-  - path: "{{ cosmos_node_factory_home }}"
-  - path: "{{ cosmos_node_factory_config_path }}"
-  - path: "{{ cosmos_node_factory_log_path }}"
-
-cosmos_node_factory_keys_management_enabled: true
-cosmos_node_factory_key_name: "{{ ansible_hostname }}"
-cosmos_node_factory_key_password: "{{ lookup('hashi_vault', hashi_cosmos_node_factory_path ~ '/' ~ ansible_hostname  ~ hashi_connect) }}"
 
 
 #CONVERT TO PARAM
@@ -88,3 +96,4 @@ cosmos_node_factory_tag: bbn2
 cosmos_node_factory_network: mainnet
 cosmos_node_factory_chain_id: bbn-test2
 cosmos_node_factory_binaries: babylon
+cosmos_node_factory_chain_name: replace_me
