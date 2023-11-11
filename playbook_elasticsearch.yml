@@ -6,10 +6,10 @@
   tags:
     - elasticsearch
   roles:
-    - role: user
+    - role: tocard.utils.user
       user_name: "{{ elasticsearch_owner }}"
       user_group: "{{ elasticsearch_group }}"
-    - role: filesystem
+    - role: tocard.utils.filesystem
       filesystem_list: "{{ elasticsearch_filesystem_list }}"
       tags:
         - elasticsearch

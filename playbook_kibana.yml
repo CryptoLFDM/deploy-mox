@@ -6,10 +6,10 @@
   tags:
     - kibana
   roles:
-    - role: user
+    - role: tocard.utils.user
       user_name: kibana
       user_group: kibana
-    - role: filesystem
+    - role: tocard.utils.filesystem
       filesystem_list: "{{ kibana_filesystem_list }}"
     - role: kibana
 
