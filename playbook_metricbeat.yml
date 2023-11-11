@@ -8,6 +8,6 @@
   roles:
     - role: tocard.utils.filesystem
       filesystem_list: "{{ metricbeat_filesystem_list }}"
-    - role: metricbeat
+    - role: tocard.utils.metricbeat
 
 
