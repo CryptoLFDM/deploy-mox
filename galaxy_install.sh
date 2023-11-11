@@ -1,3 +1,3 @@
-ansible-galaxy collection install community.docker
-ansible-galaxy collection install community.general
-ansible-galaxy collection install tocard.utils
+ansible-galaxy collection install community.docker -p collection/
+ansible-galaxy collection install community.general -p collection/
+ansible-galaxy collection install tocard.utils -p collection/

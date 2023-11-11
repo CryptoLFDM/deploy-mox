@@ -9,6 +9,7 @@ atlassian-ide-plugin.xml
 *~
 .#*
 tmp/
+collection/*
 
 # virtualenv #
 virtualenv_ansible_*
