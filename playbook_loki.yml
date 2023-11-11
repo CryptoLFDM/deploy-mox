@@ -7,6 +7,6 @@
     - role: tocard.utils.user
       user_name: "{{ loki_owner }}"
       user_group: "{{ loki_group }}"
-    - role: loki
+    - role: tocard.utils.loki
       tags:
         - loki

@@ -9,6 +9,6 @@
       user_group: "{{ promtail_group }}"
       tags:
         - promtail
-    - role: promtail
+    - role: tocard.utils.promtail
       tags:
         - promtail

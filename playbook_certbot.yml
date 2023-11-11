@@ -5,7 +5,7 @@
 #==================================================================
 - hosts: olympus
   roles:
-    - role: certbot
+    - role: tocard.utils.certbot
       tags:
         - certbot
 

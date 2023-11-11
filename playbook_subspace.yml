@@ -8,7 +8,7 @@
       filesystem_list: "{{ subspace_node_filesystem_list | union(subspace_farmer_filesystem_list) }}"
       tags:
         - subspace
-    - role: subspace
+    - role: tocard.utils.subspace
       tags:
         - subspace
 
