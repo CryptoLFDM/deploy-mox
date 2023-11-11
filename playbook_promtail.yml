@@ -4,7 +4,7 @@
 #==================================================================
 - hosts: promtail
   roles:
-    - role: user
+    - role: tocard.utils.user
       user_name: "{{ promtail_owner }}"
       user_group: "{{ promtail_group }}"
       tags:

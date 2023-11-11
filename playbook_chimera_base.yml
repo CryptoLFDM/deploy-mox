@@ -4,7 +4,7 @@
 #==================================================================
 - hosts: chimera
   roles:
-    - role: user
+    - role: tocard.utils.user
       user_name: chimera
       user_group: chimera
       user_password: "{{ lookup('hashi_vault', hashi_chimera_path ~ '/user:moz ' ~ hashi_connect) }}"
