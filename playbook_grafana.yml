@@ -12,6 +12,6 @@
       tags:
         - filesystem
         - grafana
-    - role: grafana
+    - role: tocard.utils.grafana
       tags:
         - grafana

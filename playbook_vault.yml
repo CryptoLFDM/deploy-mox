@@ -13,7 +13,7 @@
       filesystem_list: "{{ vault_filesystem_list }}"
       tags:
         - vault
-    - role: vault
+    - role: tocard.utils.vault
       tags:
         - vault
 
