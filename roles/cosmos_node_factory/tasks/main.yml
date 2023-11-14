@@ -18,24 +18,14 @@
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.stat:
-    path: "{{ cosmos_node_factory_home }}/node_marker"
-  register: node_marker
+    path: "{{ cosmos_node_factory_home }}/privkey_validator.json"
+  register: cosmos_node_factory_already_init
 
 - name: Run take node config
   become: true
   become_user: "{{ cosmos_node_factory_owner }}"
   import_tasks: node_init.yml
-  when: not node_marker.stat.exists
-
-- name: Create Marker file to avoid double init & config
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.file:
-    path: "{{ cosmos_node_factory_home }}/node_marker"
-    state: touch
-    owner: "{{ cosmos_node_factory_owner }}"
-    group: "{{ cosmos_node_factory_group }}"
-  when: not node_marker.stat.exists
+  when: not cosmos_node_factory_already_init.stat.exists
 
 - name: Template cosmos_node_factory config
   become: true
@@ -48,6 +38,14 @@
     group: "{{ item.group | default(cosmos_node_factory_group) }}"
   loop: "{{ cosmos_node_factory_templates }}"
   notify: cosmos_node_factory_need_restart
+
+- name: Setup config file
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop: "{{ cosmos_node_factory_config_replacement }}"
 
 - name: Get Genesis
   become: true
