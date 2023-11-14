@@ -8,7 +8,7 @@
 # The minimum gas prices a validator is willing to accept for processing a
 # transaction. A transaction's fees must meet the minimum of any denomination
 # specified in this config (e.g. 0.25token1;0.0001token2).
-minimum-gas-prices = "0bbn"
+minimum-gas-prices = "{{ cosmos_node_factory_linimum_gas_price }}"
 
 # default: the last 362880 states are kept, pruning at 10 block intervals
 # nothing: all historic states will be saved, nothing will be deleted (i.e. archiving node)
@@ -72,8 +72,7 @@ iavl-lazy-loading = false
 
 # AppDBBackend defines the database backend type to use for the application and snapshots DBs.
 # An empty string indicates that a fallback will be used.
-# First fallback is the deprecated compile-time types.DBBackend value.
-# Second fallback (if the types.DBBackend also isn't set), is the db-backend value set in Tendermint's config.toml.
+# The fallback is the db_backend value set in Tendermint's config.toml.
 app-db-backend = ""
 
 ###############################################################################
@@ -262,34 +261,3 @@ fsync = "false"
 # Note, this configuration only applies to SDK built-in app-side mempool
 # implementations.
 max-txs = "5000"
-
-[wasm]
-# Smart query gas limit is the max gas to be used in a smart query contract call
-query_gas_limit = 3000000
-
-# in-memory cache for Wasm contracts. Set to 0 to disable.
-# The value is in MiB not bytes
-memory_cache_size = 100
-
-# Simulation gas limit is the max gas to be used in a tx simulation call.
-# When not set the consensus max block gas is used instead
-# simulation_gas_limit =
-
-###############################################################################
-###                      cosmos_node_factory Bitcoin configuration                      ###
-###############################################################################
-
-[btc-config]
-
-# Configures which bitcoin network should be used for checkpointing
-# valid values are: [mainnet, testnet, simnet, regtest]
-network = "mainnet"
-
-[signer-config]
-
-# Configures which key that the BLS signer uses to sign BLS-sig transactions
-key-name = ""
-# Configures the gas-price that the signer would like to pay
-gas-price = "0.01ubbn"
-# Configures the adjustment of the gas cost of estimation
-gas-adjustment = "1.5"
