@@ -25,7 +25,7 @@ cosmos_node_factory_packages:
 cosmos_node_factory_log_path: /var/log/chimera/
 cosmos_node_factory_binaries_path: /usr/bin/
 cosmos_node_factory_path: "{{ chimera_base_install_path}}"
-cosmos_node_factory_home: "{{ cosmos_node_factory_path }}/{{ cosmos_node_factory_chain_name }}"
+cosmos_node_factory_home: "{{ cosmos_node_factory_path }}/{{ cosmos_node_factory_chain_id }}"
 cosmos_node_factory_config_path: "{{ cosmos_node_factory_home }}/config"
 cosmos_node_factory_directories:
   - path: "{{ chimera_base_install_path }}"
@@ -98,18 +98,13 @@ cosmos_node_factory_templates:
 cosmos_node_factory_git_version: v0.7.2
 
 cosmos_node_factory_binaries_download_url: "https://github.com/Tocard/cosmos_node_factory/releases/download/build-{{ cosmos_node_factory_git_version }}/cosmos_node_factoryd"
-cosmos_node_factory_libwasmvm_download_url: "https://github.com/Tocard/cosmos_node_factory/releases/download/build-{{ cosmos_node_factory_git_version }}/libwasmvm.x86_64.so"
 cosmos_node_factory_genesis_donwload_url: https://github.com/cosmos_node_factorychain/networks/raw/main/bbn-test-2/genesis.tar.bz2
 
 cosmos_node_factory_seeds: "8da45f9ff83b4f8dd45bbcb4f850999637fbfe3b@seed0.testnet.cosmos_node_factorychain.io:26656,4b1f8a774220ba1073a4e9f4881de218b8a49c99@seed1.testnet.cosmos_node_factorychain.io:26656"
-cosmos_node_factory_persistent_peers: "8da45f9ff83b4f8dd45bbcb4f850999637fbfe3b@seed0.testnet.cosmos_node_factorychain.io:26656,4b1f8a774220ba1073a4e9f4881de218b8a49c99@seed1.testnet.cosmos_node_factorychain.io:26656"
+cosmos_node_factory_persistent_peers: ""
 
-
-cosmos_node_factory_tag: bbn2
-cosmos_node_factory_network: mainnet
 cosmos_node_factory_chain_id: bbn-test2
 cosmos_node_factory_binaries: babylon
-cosmos_node_factory_chain_name: replace_me
 cosmos_node_factory_denom: bbn
 
 # Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb
