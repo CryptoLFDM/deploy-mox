@@ -209,7 +209,7 @@ laddr = "tcp://0.0.0.0:{{ cosmos_node_factory_p2p_port }}"
 # and will introspect on the listener or use UPnP
 # to figure out the address. ip and port are required
 # example: 159.89.10.97:26656
-{% if cosmos_node_factory_p2p_external_address is not "" %}
+{% if cosmos_node_factory_p2p_external_address_enabled %}
 external_address = "{{ cosmos_node_factory_p2p_external_address }}:{{ cosmos_node_factory_p2p_external_port }}"
 {% else %}
 external_address = ""

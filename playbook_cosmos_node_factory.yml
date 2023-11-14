@@ -1,0 +1,14 @@
+---
+#==================================================================
+# Generic cosmos node factory
+#==================================================================
+- hosts: nibiru-testnet
+  roles:
+    - role: tocard.utils.filesystem
+      filesystem_list: "{{ babylon_filesystem_list }}"
+      tags:
+        - nibiru-testnet
+    - role: cosmos_node_factory
+
+      tags:
+        - nibiru-testnet
