@@ -4,6 +4,11 @@
 #==================================================================
 - hosts: subspace
   roles:
+    - role: tocard.utils.user
+      user_name: subspace
+      user_group: subspace
+      tags:
+        - subspace
     - role: tocard.utils.filesystem
       filesystem_list: "{{ subspace_node_filesystem_list | union(subspace_farmer_filesystem_list) }}"
       tags:

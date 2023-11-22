@@ -21,6 +21,7 @@
 
     pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr" olympus_fqdn="pegasus-alpha" olympus_ip="192.168.1.133"
 
+    chimera_delta ansible_host="chimera-delta.mythologic.fr" olympus_fqdn="chimera-delta" olympus_ip="192.168.1.150"
     chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr" olympus_fqdn="chimera-epsilon" olympus_ip="192.168.1.151"
     chimera_zeta ansible_host="chimera-zeta.mythologic.fr" olympus_fqdn="chimera-zeta" olympus_ip="192.168.1.40"
     chimera_iota ansible_host="chimera-iota.mythologic.fr" olympus_fqdn="chimera-iota" olympus_ip="192.168.1.165"
@@ -36,6 +37,7 @@
     chimera_fedora
 
     [chimera_ubuntu]
+    chimera_delta
     chimera_epsilon
     chimera_zeta
     chimera_iota
@@ -114,6 +116,7 @@
     chimera_epsilon
 
     [subspace]
+    chimera_delta
     chimera_zeta
 
     [babylon]
