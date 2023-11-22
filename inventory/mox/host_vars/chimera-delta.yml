@@ -3,3 +3,7 @@
 subspace_node_install_enabled: false
 subspace_operator_install_enabled: true
 subspace_farmer_install_enabled: false
+
+subspace_operator_p2p_port: 40333
+subspace_operator_dsn_port: 40433
+subspace_operator_farmer_port: 40533
