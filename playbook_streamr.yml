@@ -1,0 +1,11 @@
+
+---
+#==================================================================
+# Streamr
+#==================================================================
+- hosts: streamr
+  roles:
+    - role: tocard.utils.streamr
+      streamr_virtual_group_name: "{{ custom_vg_name }}"
+      tags:
+        - streamr

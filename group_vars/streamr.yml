@@ -1,4 +1,4 @@
 ---
 
-streamr_log_path: /home/streamr/streamr.log
+streamr_log_path: /var/log/chimera/streamr.log
 promtail_streamr_enabled: true
