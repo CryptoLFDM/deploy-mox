@@ -2,3 +2,5 @@
 
 streamr_log_path: /var/log/chimera/streamr.log
 promtail_streamr_enabled: true
+
+streamr_node_priv_key: "{{ lookup('hashi_vault', hashi_streamr_path ~ '/streamr_node_privkey:moz ' ~ hashi_connect) }}"
