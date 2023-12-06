@@ -13,6 +13,7 @@
 - ansible.builtin.import_playbook: playbook_chimera_base.yml
 
 - ansible.builtin.import_playbook: playbook_subspace.yml
+- ansible.builtin.import_playbook: playbook_streamr.yml
 - ansible.builtin.import_playbook: playbook_babylon.yml
 
 

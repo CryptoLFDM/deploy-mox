@@ -15,7 +15,7 @@ hashi_haproxy_path: "{{ hashi_mount_point }}/haproxy"
 hashi_chia_path: "{{ hashi_mount_point }}/chia"
 hashi_certbot_path: "{{ hashi_mount_point }}/certbot"
 hashi_babylon_path: "{{ hashi_mount_point }}/babylon"
-
+hashi_streamr_path: "{{ hashi_mount_point }}/chimera/streamr"
 
 metricbeat_password: "{{ elasticsearch_metricbeat_password }}"
 
