@@ -120,6 +120,8 @@ gorgons
 [streamr]
 chimera_xi
 chimera_beta
+chimera_alpha
+chimera_gamma
 
 [chia:children]
 centaur
