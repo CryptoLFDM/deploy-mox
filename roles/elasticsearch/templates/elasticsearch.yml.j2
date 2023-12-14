@@ -13,7 +13,7 @@ cluster.initial_master_nodes:
 - {{ host }}
 {% endfor %}
 
-node.roles: [ data, master ]
+node.roles: [ data, master , ingest, transform ]
 
 
 xpack.security.enabled: true
