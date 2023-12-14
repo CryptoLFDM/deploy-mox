@@ -13,10 +13,13 @@ basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr" olympus_fqdn="basilis
 centaur_alpha ansible_host="centaur-alpha.mythologic.fr" olympus_fqdn="centaur-alpha" olympus_ip="192.168.1.46"
 centaur_beta ansible_host="centaur-beta.mythologic.fr" olympus_fqdn="centaur-beta" olympus_ip="192.168.1.200"
 
-cyclops_alpha ansible_host="mox01.mythologic.fr" olympus_fqdn="mox01" olympus_ip="192.168.1.15"
+cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr" olympus_fqdn="cyclops-alpha" olympus_ip="192.168.1.15"
+cyclops_beta ansible_host="cyclops-beta.mythologic.fr" olympus_fqdn="cyclops-beta" olympus_ip="192.168.1.118"
+cyclops_gamma ansible_host="cyclops-gamma.mythologic.fr" olympus_fqdn="cyclops-gamma" olympus_ip="192.168.1.41"
+
+cyclops_delta ansible_host="mox01.mythologic.fr" olympus_fqdn="mox01" olympus_ip="192.168.1.15"
 cyclops_zeta ansible_host="mox06.mythologic.fr" olympus_fqdn="mox06" olympus_ip="192.168.1.198"
 cyclops_theta ansible_host="mox08.mythologic.fr" olympus_fqdn="mox08" olympus_ip="192.168.1.113"
-cyclops_iota ansible_host="mox09.mythologic.fr" olympus_fqdn="mox09" olympus_ip="192.168.1.41"
 
 pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr" olympus_fqdn="pegasus-alpha" olympus_ip="192.168.1.133"
 
