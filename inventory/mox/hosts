@@ -66,10 +66,12 @@ centaur_alpha
 centaur_beta
 
 [cyclops]
-cyclops_alpha
 cyclops_zeta
 cyclops_theta
-cyclops_iota
+cyclops_alpha
+cyclops_beta
+cyclops_gamma
+cyclops_delta
 
 [pegasus]
 pegasus_alpha
