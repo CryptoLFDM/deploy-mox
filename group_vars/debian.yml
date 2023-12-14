@@ -1,6 +1,6 @@
 ---
 package_to_remove: ''
-package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh,python3-pip,avahi-daemon,libnss-mdns
+package_to_install: certbot,emacs-nox,git,python3-certbot-nginx,python3-certbot-dns-ovh,python3-pip,avahi-daemon,libnss-mdns,sudo
 package_delimiter: "="
 
 package_suffix: .deb
