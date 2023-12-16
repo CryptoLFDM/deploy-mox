@@ -46,6 +46,7 @@ chimera_xi
 chimera_gamma
 chimera_beta
 chimera_alpha
+chimera_eta
 
 [cerberus]
 cerberus_alpha
@@ -119,6 +120,7 @@ chimera_epsilon
 [subspace]
 chimera_delta
 chimera_zeta
+chimera_eta
 
 [loki:children]
 gorgons

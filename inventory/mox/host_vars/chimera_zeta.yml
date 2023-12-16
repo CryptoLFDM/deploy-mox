@@ -3,3 +3,7 @@
 subspace_node_install_enabled: true
 subspace_operator_install_enabled: false
 subspace_farmer_install_enabled: true
+
+subspace_farmer_disks:
+  - path={{ subspace_farmer_install_path }}/ssd,size=800G
+  - path={{ subspace_farmer_install_path }}/nvme,size=900G

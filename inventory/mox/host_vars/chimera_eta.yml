@@ -3,3 +3,6 @@
 subspace_node_install_enabled: false
 subspace_operator_install_enabled: false
 subspace_farmer_install_enabled: true
+
+subspace_farmer_disks: []
+subspace_farmer_node_rpc_url: ws://chimera-zeta.mythologic.fr:9944
