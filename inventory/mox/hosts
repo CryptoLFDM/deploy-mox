@@ -32,6 +32,7 @@ chimera_alpha  ansible_host="chimera-alpha.mythologic.fr" olympus_fqdn="chimera-
 chimera_beta  ansible_host="chimera-beta.mythologic.fr" olympus_fqdn="chimera-beta" olympus_ip="192.168.1.33"
 chimera_gamma  ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.149"
 chimera_xi  ansible_host="chimera-xi.mythologic.fr" olympus_fqdn="chimera-xi" olympus_ip="192.168.1.175"
+chimera_eta ansible_host="chimera-eta.mythologic.fr" olympus_fqdn="chimera-ata" olympus_ip="192.168.1.162"
 
 gorgons_alpha ansible_host="gorgons-alpha.mythologic.fr" olympus_fqdn="gorgons-alpha" olympus_ip="192.168.1.4"
 
