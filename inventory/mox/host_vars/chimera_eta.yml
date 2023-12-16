@@ -20,3 +20,4 @@ subspace_farmer_filesystem_list:
     path: "{{ subspace_farmer_install_path }}/alpha"
     owner: "{{ subspace_owner }}"
     group: "{{ subspace_group }}"
+    direct_mount: true
