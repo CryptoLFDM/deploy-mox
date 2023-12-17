@@ -4,5 +4,20 @@ subspace_node_install_enabled: false
 subspace_operator_install_enabled: false
 subspace_farmer_install_enabled: true
 
-subspace_farmer_disks: []
 subspace_farmer_node_rpc_url: ws://chimera-zeta.mythologic.fr:9944
+
+subspace_farmer_disks:
+  - path={{ subspace_farmer_install_path }}/alpha,size=800G
+
+subspace_farmer_filesystem_list:
+  - lv: lv_subspace_farmer_log
+    vg: "{{ custom_vg_name }}"
+    size: 2g
+    path: "{{ subspace_farmer_log_folder }}"
+    owner: "{{ subspace_owner }}"
+    group: "{{ subspace_group }}"
+  - disk: /dev/sdb
+    path: "{{ subspace_farmer_install_path }}/alpha"
+    owner: "{{ subspace_owner }}"
+    group: "{{ subspace_group }}"
+    direct_mount: true
