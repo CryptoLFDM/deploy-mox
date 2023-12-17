@@ -1,6 +1,6 @@
 ---
 #==================================================================
-# Subspace AutomaTic Deployment
+# Subspace Automatic Deployment
 #==================================================================
 - hosts: subspace
   roles:
