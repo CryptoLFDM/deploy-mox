@@ -10,6 +10,10 @@ elasticsearch_users_custom:
     content: "{{ lookup('template', 'user/mozquito.json.j2') }}"
   - name: metricbeat-advanced
     content: "{{ lookup('template', 'user/metricbeat-advanced.json.j2') }}"
+  - name: filebeat
+    content: "{{ lookup('template', 'user/filebeat.json.j2') }}"
+  - name: packetbeat
+    content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
 
 elasticsearch_roles_custom:
   - name: grafana
@@ -20,3 +24,7 @@ elasticsearch_roles_custom:
     content: "{{ lookup('template', 'role/metricbeat.json.j2') }}"
   - name: metricbeat-advanced
     content: "{{ lookup('template', 'role/metricbeat-advanced.json.j2') }}"
+  - name: filebeat
+    content: "{{ lookup('template', 'role/filebeat.json.j2') }}"
+  - name: packetbeat
+    content: "{{ lookup('template', 'role/metricbeat.json.j2') }}"
