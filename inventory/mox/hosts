@@ -84,6 +84,9 @@ basilisk
 [metricbeat:children]
 olympus
 
+[filebeat:children]
+olympus
+
 [elasticsearch:children]
 cerberus
 
