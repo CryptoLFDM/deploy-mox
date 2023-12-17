@@ -20,7 +20,7 @@ subspace_farmer_filesystem_list:
     path: "{{ subspace_farmer_log_folder }}"
     owner: "{{ subspace_owner }}"
     group: "{{ subspace_group }}"
-  - disk: /dev/sdb
+  - disk: sdb
     path: "{{ subspace_farmer_install_path }}/alpha"
     owner: "{{ subspace_owner }}"
     group: "{{ subspace_group }}"
