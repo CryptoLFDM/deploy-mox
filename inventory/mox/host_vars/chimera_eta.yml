@@ -35,7 +35,7 @@ subspace_operator_install_enabled: false
 
 subspace_farmer_install_enabled: true
 subspace_farmer_disks:
-  - path={{ subspace_farmer_install_path }}/alpha,size=800G
+  - path={{ subspace_farmer_install_path }}/alpha,size=3.5T
 subspace_farmer_filesystem_enable: true
 subspace_farmer_filesystem_list:
   - lv: lv_subspace_farmer_log
