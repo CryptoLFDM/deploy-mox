@@ -18,6 +18,8 @@ hashi_babylon_path: "{{ hashi_mount_point }}/babylon"
 hashi_streamr_path: "{{ hashi_mount_point }}/chimera/streamr"
 
 metricbeat_password: "{{ elasticsearch_metricbeat_password }}"
+filebeat_password: "{{ elasticsearch_filebeat_password }}"
+packetbeat_password: "{{ elasticsearch_packetbeat_password }}"
 
 hashi_chimera_path: "{{ hashi_mount_point }}/chimera"
 hashi_subspace_path: "{{ hashi_mount_point }}/chimera/subspace"
