@@ -11,7 +11,6 @@ subspace_farmer_filesystem_enable: false
 
 subspace_operator_p2p_port: 40333
 subspace_operator_dsn_port: 40433
-subspace_operator_farmer_port: 40533
 
 subspace_filebeat_enabled: true
 subspace_log_path_to_watch:
