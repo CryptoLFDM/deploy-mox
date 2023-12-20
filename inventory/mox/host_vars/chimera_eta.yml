@@ -51,3 +51,6 @@ subspace_farmer_filesystem_list:
     direct_mount: true
 
 
+subspace_farmer_custom_port: 50533
+subspace_node_p2p_custom_port: 50333
+subspace_node_dsn_custom_port: 50433
