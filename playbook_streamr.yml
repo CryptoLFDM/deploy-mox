@@ -4,15 +4,10 @@
 # Streamr
 #==================================================================
 - hosts: streamr
-  serial: 1  # Set serial to 1 for sequential execution
+  serial: 1
   roles:
     - role: tocard.utils.streamr
       streamr_virtual_group_name: "{{ custom_vg_name }}"
+      streamr_serial_mode_enabled: true
       tags:
         - streamr
-  vars:
-    streamr_delay_minutes: 3
-  tasks:
-    - name: Pause for 3 minutes
-      pause:
-        minutes: "{{ streamr_delay_minutes }}"
