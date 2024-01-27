@@ -34,6 +34,9 @@ chimera_gamma  ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-
 chimera_xi  ansible_host="chimera-xi.mythologic.fr" olympus_fqdn="chimera-xi" olympus_ip="192.168.1.175"
 chimera_eta ansible_host="chimera-eta.mythologic.fr" olympus_fqdn="chimera-ata" olympus_ip="192.168.1.162"
 
+xav_streamr_node ansible_host="xav.streamr.mythologic.fr" olympus_fqdn="xav-streamr-node" olympus_ip="192.168.1.85"
+
+
 gorgons_alpha ansible_host="gorgons-alpha.mythologic.fr" olympus_fqdn="gorgons-alpha" olympus_ip="192.168.1.4"
 
 [chimera]
@@ -47,6 +50,7 @@ chimera_gamma
 chimera_beta
 chimera_alpha
 chimera_eta
+xav_streamr_node
 
 [cerberus]
 cerberus_alpha
@@ -133,6 +137,7 @@ chimera_xi
 chimera_beta
 chimera_alpha
 chimera_gamma
+xav_streamr_node
 
 [chia:children]
 centaur
