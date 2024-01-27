@@ -2,6 +2,7 @@
 
 streamr_node_priv_key: "{{ lookup('hashi_vault', hashi_streamr_path ~ '/streamr_node_privkey:xav ' ~ hashi_connect) }}"
 
+streamr_operator_contract_adress: "0x1c1812e5fc6a0d01a571bae30c82128b4302fbc4"
 
 streamr_node_port_min: 32204
 streamr_node_port_max: 32204
