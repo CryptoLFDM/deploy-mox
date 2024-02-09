@@ -1,5 +1,8 @@
 ---
 
+subspace_chain_id: gemini-3g
+subpsace_snapshot: "{{ subspace_chain_id }}-2024-jan-03"
+
 subspace_node_install_enabled: false
 subspace_node_filesystem_enabled: false
 
