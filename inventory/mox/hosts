@@ -109,9 +109,6 @@ cyclops
 [kibana:children]
 mermaid
 
-[nolus]
-chimera_epsilon
-
 [subspace]
 chimera_zeta
 
@@ -125,5 +122,16 @@ xav_streamr_node
 [chia:children]
 centaur
 
+[cosmos_node:children]
+chimera_nu
+chimera_epsilon
+chimera_delta
+
+[nolus]
+chimera_epsilon
+
 [nibiru]
 chimera_nu
+
+[blockx]
+chimera_delta
