@@ -17,7 +17,6 @@ cerberus: elasticsearch
 pegasus: haproxy
 hydras: truenas
 mermaid: grafana,kibana
-gorgons: loki
 minotor: custom go api
 cyclops: proxmox host
 chimera: node machine
