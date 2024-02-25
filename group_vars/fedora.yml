@@ -8,4 +8,3 @@ package_suffix: .rpm
 
 sudo_group: wheel
 
-promtail_package_identifier: "{{ promtail_download_version }}/promtail-{{ promtail_download_version }}.x86_64.rpm"
