@@ -124,9 +124,9 @@ xav_streamr_node
 centaur
 
 [cosmos_node:children]
-chimera_nu
-chimera_epsilon
-chimera_delta
+nolus
+nibiru
+blockx
 
 [nolus]
 chimera_epsilon
