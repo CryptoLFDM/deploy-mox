@@ -4,13 +4,14 @@
   become_method: "{{ custom_become_method }}"
   ansible.builtin.rpm_key:
     state: present
-    key: "{{ item  }}"
+    key: "{{ item }}"
+    validate_certs: false
   loop: "{{ prepare_gpg_key }}"
 
 - name: Add custom yum repo
   become: true
   become_method: "{{ custom_become_method }}"
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
