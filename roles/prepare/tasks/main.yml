@@ -2,28 +2,28 @@
 - name: Fix hosts templates
   become: true
   become_method: "{{ custom_become_method }}"
-  template:
+  ansible.builtin.template:
     src: hosts.j2
     dest: /etc/hosts
 
 - name: Install required package
   become: true
   become_method: "{{ custom_become_method }}"
-  package:
+  ansible.builtin.package:
     name: "{{ package_to_install}}"
     state: present
 
 - name: Remove useless / unwanted package
   become: true
   become_method: "{{ custom_become_method }}"
-  package:
+  ansible.builtin.package:
     name: "{{ package_to_remove }}"
     state: absent
 
-- import_tasks: install_fedora.yml
+- ansible.builtin.import_tasks: install_fedora.yml
   when: ansible_distribution == 'Fedora'
 
-- import_tasks: install_ubuntu.yml
+- ansible.builtin.import_tasks: install_ubuntu.yml
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - name: Set a hostname
