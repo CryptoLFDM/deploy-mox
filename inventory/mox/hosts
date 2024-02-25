@@ -115,9 +115,6 @@ chimera_epsilon
 [subspace]
 chimera_zeta
 
-[loki:children]
-gorgons
-
 [streamr]
 chimera_xi
 chimera_beta
