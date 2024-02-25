@@ -16,8 +16,6 @@ centaur_beta ansible_host="centaur-beta.mythologic.fr" olympus_fqdn="centaur-bet
 cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr" olympus_fqdn="cyclops-alpha" olympus_ip="192.168.1.15"
 cyclops_beta ansible_host="cyclops-beta.mythologic.fr" olympus_fqdn="cyclops-beta" olympus_ip="192.168.1.118"
 cyclops_gamma ansible_host="cyclops-gamma.mythologic.fr" olympus_fqdn="cyclops-gamma" olympus_ip="192.168.1.41"
-
-cyclops_delta ansible_host="mox01.mythologic.fr" olympus_fqdn="mox01" olympus_ip="192.168.1.15"
 cyclops_zeta ansible_host="mox06.mythologic.fr" olympus_fqdn="mox06" olympus_ip="192.168.1.198"
 cyclops_theta ansible_host="mox08.mythologic.fr" olympus_fqdn="mox08" olympus_ip="192.168.1.113"
 
@@ -31,12 +29,9 @@ chimera_alpha  ansible_host="chimera-alpha.mythologic.fr" olympus_fqdn="chimera-
 chimera_beta  ansible_host="chimera-beta.mythologic.fr" olympus_fqdn="chimera-beta" olympus_ip="192.168.1.33"
 chimera_gamma  ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.149"
 chimera_xi  ansible_host="chimera-xi.mythologic.fr" olympus_fqdn="chimera-xi" olympus_ip="192.168.1.175"
-chimera_eta ansible_host="chimera-eta.mythologic.fr" olympus_fqdn="chimera-ata" olympus_ip="192.168.1.162"
 
 xav_streamr_node ansible_host="xav.streamr.mythologic.fr" olympus_fqdn="xav-streamr-node" olympus_ip="192.168.1.85"
 
-
-gorgons_alpha ansible_host="gorgons-alpha.mythologic.fr" olympus_fqdn="gorgons-alpha" olympus_ip="192.168.1.4"
 
 [chimera]
 chimera_epsilon
@@ -47,7 +42,6 @@ chimera_xi
 chimera_gamma
 chimera_beta
 chimera_alpha
-chimera_eta
 xav_streamr_node
 
 [cerberus]
@@ -75,7 +69,6 @@ cyclops_theta
 cyclops_alpha
 cyclops_beta
 cyclops_gamma
-cyclops_delta
 
 [pegasus]
 pegasus_alpha
@@ -95,9 +88,6 @@ cerberus
 [grafana:children]
 mermaid
 
-[gorgons]
-gorgons_alpha
-
 [fedora:children]
 mermaid
 minotor
@@ -105,7 +95,6 @@ cerberus
 basilisk
 centaur
 pegasus
-gorgons
 
 [debian:children]
 cyclops
@@ -124,7 +113,6 @@ chimera_epsilon
 
 [subspace]
 chimera_zeta
-chimera_eta
 
 [loki:children]
 gorgons
@@ -138,12 +126,6 @@ xav_streamr_node
 
 [chia:children]
 centaur
-
-[promtail:children]
-chia
-streamr
-subspace
-nibiru
 
 [nibiru]
 chimera_nu
