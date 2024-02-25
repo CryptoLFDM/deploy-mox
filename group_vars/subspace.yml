@@ -1,5 +1,4 @@
 ---
 
-promtail_subspace_enabled: true
 subspace_log_folder: /var/log/chimera/subspace_*/*.log
 
