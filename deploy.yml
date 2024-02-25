@@ -20,4 +20,3 @@
 - ansible.builtin.import_playbook: playbook_hddtemp.yml
 - ansible.builtin.import_playbook: playbook_metricbeat.yml
 
-- ansible.builtin.import_playbook: playbook_promtail.yml
