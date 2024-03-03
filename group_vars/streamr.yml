@@ -6,4 +6,4 @@ streamr_node_priv_key: "{{ lookup('hashi_vault', hashi_streamr_path ~ '/streamr_
 streamr_supervision_metric_enabled: true
 streamr_supervision_log_enabled: true
 
-streamr_operator_contract_adress: 0xcbb74c57c2f41bedfd1fc31a8b8b9c16844f2895
+streamr_operator_contract_adress: "0xcbb74c57c2f41bedfd1fc31a8b8b9c16844f2895"
