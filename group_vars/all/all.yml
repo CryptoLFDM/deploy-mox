@@ -1,5 +1,6 @@
 ---
 ansible_python_interpreter: /usr/bin/python3
+custom_become_method: sudo
 
 elk_version: "{{ package_delimiter }}8.9.0"
 
