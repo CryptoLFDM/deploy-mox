@@ -30,6 +30,8 @@ chimera_beta  ansible_host="chimera-beta.mythologic.fr" olympus_fqdn="chimera-be
 chimera_gamma  ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.149"
 chimera_xi  ansible_host="chimera-xi.mythologic.fr" olympus_fqdn="chimera-xi" olympus_ip="192.168.1.175"
 chimera_delta ansible_host="chimera-delta.mythologic.fr" olympus_fqdn="chimera-delta" olympus_ip="192.168.1.124"
+chimera_iota ansible_host="chimera-iota.mythologic.fr" olympus_fqdn="chimera-iota" olympus_ip="192.168.1.114"
+
 
 xav_streamr_node ansible_host="xav.streamr.mythologic.fr" olympus_fqdn="xav-streamr-node" olympus_ip="192.168.1.85"
 
@@ -112,6 +114,7 @@ mermaid
 
 [subspace]
 chimera_zeta
+chimera_iota
 
 [streamr]
 chimera_xi
