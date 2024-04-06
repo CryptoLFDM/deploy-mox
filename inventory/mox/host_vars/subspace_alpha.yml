@@ -11,7 +11,3 @@ subspace_farmer_install_enabled: true
 subspace_farmer_filesystem_enable: true
 
 subspace_farmer_disks: []
-
-
-
-
