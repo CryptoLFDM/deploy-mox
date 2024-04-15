@@ -1,13 +1,13 @@
 ---
 ternoa_node_filesystem_list:
-  - lv: "{{ ternoa_lv_node_name }}"
-    vg: "{{ ternoa_vg_name }}"
-    size: "{{ ternoa_lv_node_size }}"
+  - disk: sdb
     path: "{{ ternoa_node_install_path }}"
     owner: "{{ ternoa_owner }}"
     group: "{{ ternoa_group }}"
-  - disk: sdb
+    direct_mount: true
+  - lv: "{{ ternoa_lv_log_name }}"
+    vg: "{{ ternoa_vg_name }}"
+    size: "{{ ternoa_lv_log_size }}"
     path: "{{ ternoa_node_log_folder }}"
     owner: "{{ ternoa_owner }}"
     group: "{{ ternoa_group }}"
-    direct_mount: true
