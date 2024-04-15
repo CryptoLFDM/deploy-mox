@@ -1,0 +1,14 @@
+[olympus:children]
+ternoa
+
+[metricbeat:children]
+olympus
+
+[filebeat:children]
+olympus
+
+[ubuntu:children]
+ternoa
+
+[ternoa]
+ternoa_alpha ansible_host="ternoa-alpha.mythologic.fr" olympus_fqdn="ternoa-alpha" olympus_ip="192.168.1.61"
