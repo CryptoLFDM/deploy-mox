@@ -15,6 +15,7 @@
 - ansible.builtin.import_playbook: playbook_subspace.yml
 - ansible.builtin.import_playbook: playbook_streamr.yml
 - ansible.builtin.import_playbook: playbook_babylon.yml
+- ansible.builtin.import_playbook: playbook_ternoa.yml
 
 
 - ansible.builtin.import_playbook: playbook_hddtemp.yml
