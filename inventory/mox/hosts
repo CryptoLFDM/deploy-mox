@@ -15,7 +15,7 @@ centaur_beta ansible_ssh_host="centaur-beta.local" ansible_host="centaur-beta.my
 
 cyclops_alpha ansible_ssh_host="cyclops-alpha.local" ansible_host="cyclops-alpha.mythologic.fr"
 cyclops_beta ansible_ssh_host="cyclops-beta.local" ansible_host="cyclops-beta.mythologic.fr"
-cyclops_gamma ansible_ssh_host="cyclops-gamma.local" ansible_host="cyclops-gamma.mythologic.fr"
+cyclops_gamma ansible_ssh_host="mox09.local" ansible_host="mox09.mythologic.fr
 cyclops_theta ansible_ssh_host="mox08.local" ansible_host="mox08.mythologic.fr"
 
 pegasus_alpha ansible_ssh_host="pegasus-alpha.local" ansible_host="pegasus-alpha.mythologic.fr"
