@@ -11,4 +11,4 @@ olympus
 ternoa
 
 [ternoa]
-ternoa_alpha ansible_host="ternoa-alpha.mythologic.fr" olympus_fqdn="ternoa-alpha" olympus_ip="192.168.1.61"
+ternoa_alpha ansible_ssh_host="ternoa-alpha.local" ansible_host="ternoa-alpha.mythologic.fr"
