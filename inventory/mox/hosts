@@ -38,7 +38,6 @@ chimera_zeta
 chimera_lambda
 chimera_nu
 xav_streamr_node
-chimera_delta
 chimera_iota
 
 [cerberus]
@@ -124,6 +123,3 @@ chimera_epsilon
 
 [nibiru]
 chimera_nu
-
-[blockx]
-chimera_delta
