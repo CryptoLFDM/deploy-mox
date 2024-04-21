@@ -1,34 +1,34 @@
 [olympus]
-cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr" olympus_fqdn="cerberus-alpha" olympus_ip="192.168.1.176"
-cerberus_beta ansible_host="cerberus-beta.mythologic.fr" olympus_fqdn="cerberus-beta" olympus_ip="192.168.1.45"
-cerberus_gamma ansible_host="cerberus-gamma.mythologic.fr" olympus_fqdn="cerberus-gamma" olympus_ip="192.168.1.129"
-cerberus_delta ansible_host="cerberus-delta.mythologic.fr" olympus_fqdn="cerberus-delta" olympus_ip="192.168.1.8"
+#cerberus_alpha ansible_ssh_host="cerberus-alpha.local" ansible_host="cerberus-alpha.mythologic.fr"
+cerberus_beta ansible_ssh_host="cerberus-beta.local" ansible_host="cerberus-beta.mythologic.fr"
+cerberus_gamma ansible_ssh_host="cerberus-gamma.local" ansible_host="cerberus-gamma.mythologic.fr"
+cerberus_delta ansible_ssh_host="cerberus-delta.local" ansible_host="cerberus-delta.mythologic.fr"
 
-mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr" olympus_fqdn="mermaid-alpha" olympus_ip="192.168.1.86"
+mermaid_alpha ansible_ssh_host="mermaid-alpha.local" ansible_host="mermaid-alpha.mythologic.fr"
 
-minotor_alpha ansible_host="minotor-alpha.mythologic.fr" olympus_fqdn="minotor-alpha" olympus_ip="192.168.1.190"
+minotor_alpha ansible_ssh_host="minotor-alpha.local" ansible_host="minotor-alpha.mythologic.fr"
 
-basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr" olympus_fqdn="basilisk-alpha" olympus_ip="192.168.1.43"
+basilisk_alpha ansible_ssh_host="basilisk-alpha.local" ansible_host="basilisk-alpha.mythologic.fr"
 
-centaur_alpha ansible_host="centaur-alpha.mythologic.fr" olympus_fqdn="centaur-alpha" olympus_ip="192.168.1.46"
-centaur_beta ansible_host="centaur-beta.mythologic.fr" olympus_fqdn="centaur-beta" olympus_ip="192.168.1.9"
+centaur_alpha ansible_ssh_host="centaur-alpha.local" ansible_host="centaur-alpha.mythologic.fr"
+centaur_beta ansible_ssh_host="centaur-beta.local" ansible_host="centaur-beta.mythologic.fr"
 
-cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr" olympus_fqdn="cyclops-alpha" olympus_ip="192.168.1.15"
-cyclops_beta ansible_host="cyclops-beta.mythologic.fr" olympus_fqdn="cyclops-beta" olympus_ip="192.168.1.118"
-cyclops_gamma ansible_host="cyclops-gamma.mythologic.fr" olympus_fqdn="cyclops-gamma" olympus_ip="192.168.1.41"
-cyclops_theta ansible_host="mox08.mythologic.fr" olympus_fqdn="mox08" olympus_ip="192.168.1.113"
+cyclops_alpha ansible_ssh_host="cyclops-alpha.local" ansible_host="cyclops-alpha.mythologic.fr"
+cyclops_beta ansible_ssh_host="cyclops-beta.local" ansible_host="cyclops-beta.mythologic.fr"
+cyclops_gamma ansible_ssh_host="cyclops-gamma.local" ansible_host="cyclops-gamma.mythologic.fr"
+cyclops_theta ansible_ssh_host="mox08.local" ansible_host="mox08.mythologic.fr"
 
-pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr" olympus_fqdn="pegasus-alpha" olympus_ip="192.168.1.133"
+pegasus_alpha ansible_ssh_host="pegasus-alpha.local" ansible_host="pegasus-alpha.mythologic.fr"
 
-chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr" olympus_fqdn="chimera-epsilon" olympus_ip="192.168.1.151"
-chimera_zeta ansible_host="chimera-zeta.mythologic.fr" olympus_fqdn="chimera-zeta" olympus_ip="192.168.1.40"
-chimera_lambda ansible_host="chimera-lambda.mythologic.fr" olympus_fqdn="chimera-lambda" olympus_ip="192.168.1.47"
-chimera_nu ansible_host="chimera-nu.mythologic.fr" olympus_fqdn="chimera-nu" olympus_ip="192.168.1.156"
-chimera_delta ansible_host="chimera-delta.mythologic.fr" olympus_fqdn="chimera-delta" olympus_ip="192.168.1.124"
-chimera_iota ansible_host="chimera-iota.mythologic.fr" olympus_fqdn="chimera-iota" olympus_ip="192.168.1.114"
+chimera_epsilon ansible_ssh_host="chimera-epsilon.local" ansible_host="chimera-epsilon.mythologic.fr"
+chimera_zeta ansible_ssh_host="chimera-zeta.local" ansible_host="chimera-zeta.mythologic.fr"
+chimera_lambda ansible_ssh_host="chimera-lambda.local" ansible_host="chimera-lambda.mythologic.fr"
+chimera_nu ansible_ssh_host="chimera-nu.local" ansible_host="chimera-nu.mythologic.fr"
+chimera_delta ansible_ssh_host="chimera-delta.local" ansible_host="chimera-delta.mythologic.fr"
+chimera_iota ansible_ssh_host="chimera-iota.local" ansible_host="chimera-iota.mythologic.fr"
 
 
-xav_streamr_node ansible_host="xav.streamr.mythologic.fr" olympus_fqdn="xav-streamr-node" olympus_ip="192.168.1.85"
+xav_streamr_node ansible_ssh_host="streamr-xav.local" ansible_host="streamr-xav.mythologic.fr"
 
 
 [chimera]
