@@ -24,7 +24,8 @@ chimera_epsilon ansible_ssh_host="chimera-epsilon.local" ansible_host="chimera-e
 chimera_zeta ansible_ssh_host="chimera-zeta.local" ansible_host="chimera-zeta.mythologic.fr"
 chimera_lambda ansible_ssh_host="chimera-lambda.local" ansible_host="chimera-lambda.mythologic.fr"
 chimera_nu ansible_ssh_host="chimera-nu.local" ansible_host="chimera-nu.mythologic.fr"
-chimera_delta ansible_ssh_host="chimera-delta.local" ansible_host="chimera-delta.mythologic.fr"
+chimera_eta ansible_ssh_host="chimera-eta.local" ansible_host="chimera-eta.mythologic.fr"
+chimera_mu ansible_ssh_host="chimera-mu.local" ansible_host="chimera-mu.mythologic.fr"
 chimera_iota ansible_ssh_host="chimera-iota.local" ansible_host="chimera-iota.mythologic.fr"
 
 
