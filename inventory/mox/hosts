@@ -116,7 +116,6 @@ centaur
 [cosmos_node:children]
 nolus
 nibiru
-blockx
 
 [nolus]
 chimera_epsilon
