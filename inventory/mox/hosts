@@ -24,10 +24,6 @@ chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr" olympus_fqdn="chime
 chimera_zeta ansible_host="chimera-zeta.mythologic.fr" olympus_fqdn="chimera-zeta" olympus_ip="192.168.1.40"
 chimera_lambda ansible_host="chimera-lambda.mythologic.fr" olympus_fqdn="chimera-lambda" olympus_ip="192.168.1.47"
 chimera_nu ansible_host="chimera-nu.mythologic.fr" olympus_fqdn="chimera-nu" olympus_ip="192.168.1.156"
-chimera_alpha  ansible_host="chimera-alpha.mythologic.fr" olympus_fqdn="chimera-alpha"  olympus_ip="192.168.1.124"
-chimera_beta  ansible_host="chimera-beta.mythologic.fr" olympus_fqdn="chimera-beta" olympus_ip="192.168.1.33"
-chimera_gamma  ansible_host="chimera-gamma.mythologic.fr" olympus_fqdn="chimera-gamma" olympus_ip="192.168.1.149"
-chimera_xi  ansible_host="chimera-xi.mythologic.fr" olympus_fqdn="chimera-xi" olympus_ip="192.168.1.175"
 chimera_delta ansible_host="chimera-delta.mythologic.fr" olympus_fqdn="chimera-delta" olympus_ip="192.168.1.124"
 chimera_iota ansible_host="chimera-iota.mythologic.fr" olympus_fqdn="chimera-iota" olympus_ip="192.168.1.114"
 
@@ -40,10 +36,6 @@ chimera_epsilon
 chimera_zeta
 chimera_lambda
 chimera_nu
-chimera_xi
-chimera_gamma
-chimera_beta
-chimera_alpha
 xav_streamr_node
 chimera_delta
 chimera_iota
@@ -116,10 +108,6 @@ chimera_zeta
 chimera_iota
 
 [streamr]
-chimera_xi
-chimera_beta
-chimera_alpha
-chimera_gamma
 xav_streamr_node
 
 [chia:children]
