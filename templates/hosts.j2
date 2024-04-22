@@ -1,6 +1,6 @@
 127.0.0.1 localhost.localdomain localhost
 {% for host in groups['olympus'] %}
-{{ hostvars[host]['ansible_ssh_host'] }} {{ hostvars[host]['ansible_host'] }} {{ hostvars[host]['ansible_ssh_host'] | split('.') | first }}
+{{ lookup('community.general.dig', {{ hostvars[host]['ansible_ssh_host'] }} )}} {{ hostvars[host]['ansible_host'] }} {{ hostvars[host]['ansible_ssh_host'] | split('.') | first }}
 {% endfor %}
 
 # The following lines are desirable for IPv6 capable hosts
