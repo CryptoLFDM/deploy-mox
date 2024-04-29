@@ -7,7 +7,7 @@
     become: true
     template:
       src: hosts.j2
-      dest: /etc/hosts
+      dest: /etc/pihole/custom.list
 
 - hosts: olympus
   roles:
