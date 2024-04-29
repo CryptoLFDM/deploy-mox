@@ -1,13 +1,4 @@
-127.0.0.1 localhost.localdomain localhost
 {% for host in groups['olympus'] %}
-{{ lookup('community.general.dig', {{ hostvars[host]['ansible_ssh_host'] }} )}} {{ hostvars[host]['ansible_host'] }} {{ hostvars[host]['ansible_ssh_host'] | split('.') | first }}
+{{ lookup('community.general.dig',  {{ hostvars[host]['ansible_host'] | split('.') | first }}.local )}} {{ hostvars[host]['ansible_host'] }} }}
 {% endfor %}
 
-# The following lines are desirable for IPv6 capable hosts
-
-::1     ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-ff02::3 ip6-allhosts
