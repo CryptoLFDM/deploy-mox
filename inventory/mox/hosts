@@ -17,7 +17,7 @@ centaur_beta ansible_host="centaur-beta.mythologic.bibou"
 
 cyclops_alpha ansible_host="cyclops-alpha.mythologic.bibou"
 cyclops_beta ansible_host="cyclops-beta.mythologic.bibou"
-cyclops_iota ansible_host="cyclops-iota.mythologic.bibou"
+cyclops_gamma ansible_host="mox09.mythologic.bibou"
 cyclops_theta ansible_host="mox08.mythologic.bibou"
 
 pegasus_alpha ansible_host="pegasus-alpha.mythologic.bibou"
