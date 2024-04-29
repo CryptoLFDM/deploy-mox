@@ -1,35 +1,37 @@
 [olympus]
-#cerberus_alpha ansible_ssh_host="cerberus-alpha.local" ansible_host="cerberus-alpha.mythologic.fr"
-cerberus_beta ansible_ssh_host="cerberus-beta.local" ansible_host="cerberus-beta.mythologic.fr"
-cerberus_gamma ansible_ssh_host="cerberus-gamma.local" ansible_host="cerberus-gamma.mythologic.fr"
-cerberus_delta ansible_ssh_host="cerberus-delta.local" ansible_host="cerberus-delta.mythologic.fr"
+#cerberus_alpha ansible_host="cerberus-alpha.mythologic.bibou"
+cerberus_beta ansible_host="cerberus-beta.mythologic.bibou"
+cerberus_gamma ansible_host="cerberus-gamma.mythologic.bibou"
+cerberus_delta ansible_host="cerberus-delta.mythologic.bibou"
 
-mermaid_alpha ansible_ssh_host="mermaid-alpha.local" ansible_host="mermaid-alpha.mythologic.fr"
+hades_alpha ansible_host="hades-alpha.mythologic.bibou"
 
-minotor_alpha ansible_ssh_host="minotor-alpha.local" ansible_host="minotor-alpha.mythologic.fr"
+mermaid_alpha ansible_host="mermaid-alpha.mythologic.bibou"
 
-basilisk_alpha ansible_ssh_host="basilisk-alpha.local" ansible_host="basilisk-alpha.mythologic.fr"
+minotor_alpha ansible_host="minotor-alpha.mythologic.bibou"
 
-centaur_alpha ansible_ssh_host="centaur-alpha.local" ansible_host="centaur-alpha.mythologic.fr"
-centaur_beta ansible_ssh_host="centaur-beta.local" ansible_host="centaur-beta.mythologic.fr"
+basilisk_alpha ansible_host="basilisk-alpha.mythologic.bibou"
 
-cyclops_alpha ansible_ssh_host="cyclops-alpha.local" ansible_host="cyclops-alpha.mythologic.fr"
-cyclops_beta ansible_ssh_host="cyclops-beta.local" ansible_host="cyclops-beta.mythologic.fr"
-cyclops_gamma ansible_ssh_host="mox09.local" ansible_host="mox09.mythologic.fr"
-cyclops_theta ansible_ssh_host="mox08.local" ansible_host="mox08.mythologic.fr"
+centaur_alpha ansible_host="centaur-alpha.mythologic.bibou"
+centaur_beta ansible_host="centaur-beta.mythologic.bibou"
 
-pegasus_alpha ansible_ssh_host="pegasus-alpha.local" ansible_host="pegasus-alpha.mythologic.fr"
+cyclops_alpha ansible_host="cyclops-alpha.mythologic.bibou"
+cyclops_beta ansible_host="cyclops-beta.mythologic.bibou"
+cyclops_iota ansible_host="cyclops-iota.mythologic.bibou"
+cyclops_theta ansible_host="mox08.mythologic.bibou"
 
-chimera_epsilon ansible_ssh_host="chimera-epsilon.local" ansible_host="chimera-epsilon.mythologic.fr"
-chimera_zeta ansible_ssh_host="chimera-zeta.local" ansible_host="chimera-zeta.mythologic.fr"
-chimera_lambda ansible_ssh_host="chimera-lambda.local" ansible_host="chimera-lambda.mythologic.fr"
-chimera_nu ansible_ssh_host="chimera-nu.local" ansible_host="chimera-nu.mythologic.fr"
-chimera_eta ansible_ssh_host="chimera-eta.local" ansible_host="chimera-eta.mythologic.fr"
-chimera_mu ansible_ssh_host="chimera-mu.local" ansible_host="chimera-mu.mythologic.fr"
-chimera_iota ansible_ssh_host="chimera-iota.local" ansible_host="chimera-iota.mythologic.fr"
+pegasus_alpha ansible_host="pegasus-alpha.mythologic.bibou"
+
+chimera_epsilon ansible_host="chimera-epsilon.mythologic.bibou"
+chimera_zeta ansible_host="chimera-zeta.mythologic.bibou"
+chimera_lambda ansible_host="chimera-lambda.mythologic.bibou"
+chimera_nu ansible_host="chimera-nu.mythologic.bibou"
+chimera_eta ansible_host="chimera-eta.mythologic.bibou"
+chimera_mu ansible_host="chimera-mu.mythologic.bibou"
+chimera_iota ansible_host="chimera-iota.mythologic.bibou"
 
 
-xav_streamr_node ansible_ssh_host="streamr-xav.local" ansible_host="streamr-xav.mythologic.fr"
+xav_streamr_node ansible_host="streamr-xav.mythologic.bibou"
 
 
 [chimera]
@@ -108,8 +110,6 @@ mermaid
 [subspace]
 chimera_zeta
 chimera_iota
-chimera_mu
-chimera_eta
 
 [streamr]
 xav_streamr_node
@@ -126,3 +126,6 @@ chimera_epsilon
 
 [nibiru]
 chimera_nu
+
+[hades]
+hades_alpha

@@ -1,10 +1,4 @@
 ---
-- name: Fix hosts templates
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.template:
-    src: hosts.j2
-    dest: /etc/hosts
 
 - name: Install required package
   become: true

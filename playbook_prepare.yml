@@ -1,6 +1,6 @@
 ---
-- name: Prepare ansible-tower
-  hosts: localhost
+- name: Prepare pi-hole
+  hosts: hades
   gather_facts: false
   tasks:
   - name: Generate local hosts templates
