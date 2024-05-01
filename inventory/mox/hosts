@@ -4,8 +4,6 @@ cerberus_beta ansible_host="cerberus-beta.mythologic.bibou"
 cerberus_gamma ansible_host="cerberus-gamma.mythologic.bibou"
 cerberus_delta ansible_host="cerberus-delta.mythologic.bibou"
 
-hades_alpha ansible_host="hades-alpha.mythologic.bibou"
-
 mermaid_alpha ansible_host="mermaid-alpha.mythologic.bibou"
 
 minotor_alpha ansible_host="minotor-alpha.mythologic.bibou"
@@ -128,4 +126,4 @@ chimera_epsilon
 chimera_nu
 
 [hades]
-hades_alpha
+hades_alpha ansible_host="hades.mythologic.fr"
