@@ -17,10 +17,6 @@
         vault_mount_point: "{{ hashi_short_mount_point }}"
       register: prepare_static_lease
 
-    - name: Print vars
-      ansible.builtin.debug:
-        msg: "{{ prepare_static_lease.message }}"
-
     - name: Extract static lease
       ansible.builtin.set_fact:
         prepare_static_hosts: "{{ prepare_static_lease.message }}"
@@ -30,9 +26,7 @@
 
 - hosts: hades
   tasks:
-    - name: Print vars
-      ansible.builtin.debug:
-        msg: "{{ hostvars['localhost']['prepare_static_hosts'] }}"
+
     - name: Generate local hosts templates
       become: true
       ansible.builtin.template:

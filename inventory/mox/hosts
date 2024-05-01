@@ -1,35 +1,35 @@
 [olympus]
-#cerberus_alpha ansible_host="cerberus-alpha.mythologic.bibou"
-cerberus_beta ansible_host="cerberus-beta.mythologic.bibou"
-cerberus_gamma ansible_host="cerberus-gamma.mythologic.bibou"
-cerberus_delta ansible_host="cerberus-delta.mythologic.bibou"
+#cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr"
+cerberus_beta ansible_host="cerberus-beta.mythologic.fr"
+cerberus_gamma ansible_host="cerberus-gamma.mythologic.fr"
+cerberus_delta ansible_host="cerberus-delta.mythologic.fr"
 
-mermaid_alpha ansible_host="mermaid-alpha.mythologic.bibou"
+mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr"
 
-minotor_alpha ansible_host="minotor-alpha.mythologic.bibou"
+minotor_alpha ansible_host="minotor-alpha.mythologic.fr"
 
-basilisk_alpha ansible_host="basilisk-alpha.mythologic.bibou"
+basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr"
 
-centaur_alpha ansible_host="centaur-alpha.mythologic.bibou"
-centaur_beta ansible_host="centaur-beta.mythologic.bibou"
+centaur_alpha ansible_host="centaur-alpha.mythologic.fr"
+centaur_beta ansible_host="centaur-beta.mythologic.fr"
 
-cyclops_alpha ansible_host="cyclops-alpha.mythologic.bibou"
-cyclops_beta ansible_host="cyclops-beta.mythologic.bibou"
-cyclops_gamma ansible_host="mox09.mythologic.bibou"
-cyclops_theta ansible_host="mox08.mythologic.bibou"
+cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr"
+cyclops_beta ansible_host="cyclops-beta.mythologic.fr"
+cyclops_gamma ansible_host="mox09.mythologic.fr"
+cyclops_theta ansible_host="mox08.mythologic.fr"
 
-pegasus_alpha ansible_host="pegasus-alpha.mythologic.bibou"
+pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr"
 
-chimera_epsilon ansible_host="chimera-epsilon.mythologic.bibou"
-chimera_zeta ansible_host="chimera-zeta.mythologic.bibou"
-chimera_lambda ansible_host="chimera-lambda.mythologic.bibou"
-chimera_nu ansible_host="chimera-nu.mythologic.bibou"
-chimera_eta ansible_host="chimera-eta.mythologic.bibou"
-chimera_mu ansible_host="chimera-mu.mythologic.bibou"
-chimera_iota ansible_host="chimera-iota.mythologic.bibou"
+chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr"
+chimera_zeta ansible_host="chimera-zeta.mythologic.fr"
+chimera_lambda ansible_host="chimera-lambda.mythologic.fr"
+chimera_nu ansible_host="chimera-nu.mythologic.fr"
+chimera_eta ansible_host="chimera-eta.mythologic.fr"
+chimera_mu ansible_host="chimera-mu.mythologic.fr"
+chimera_iota ansible_host="chimera-iota.mythologic.fr"
 
 
-xav_streamr_node ansible_host="streamr-xav.mythologic.bibou"
+xav_streamr_node ansible_host="streamr-xav.mythologic.fr"
 
 
 [chimera]
