@@ -1,31 +1,43 @@
 ---
 
-- hosts: hades
+- hosts: localhost
   gather_facts: false
   tasks:
-   - name: Harvest static lease
-     freebox_dhcp:
-       app_id: fr.freebox.integration
-       app_name: freebox_ansible
-       app_version: 0.1
-       device_name: ansible_integration
-       freebox_url: http://mafreebox.freebox.fr/api/v8
-       vault_username: "{{ hashi_user }}"
-       vault_password: "{{ hashi_password }}"
-       vault_url: https://basilisk-alpha.mythologic.fr:8200
-       vault_path: freebox/app_token
-       vault_mount_point: "{{ hashi_short_mount_point }}"
-     register: prepare_static_lease.message
+    - name: Harvest static lease
+      freebox_dhcp:
+        app_id: fr.freebox.integration
+        app_name: freebox_ansible
+        app_version: 0.1
+        device_name: ansible_integration
+        freebox_url: http://mafreebox.freebox.fr/api/v8
+        vault_username: "{{ hashi_user }}"
+        vault_password: "{{ hashi_password }}"
+        vault_url: https://basilisk-alpha.mythologic.fr:8200
+        vault_path: freebox/app_token
+        vault_mount_point: "{{ hashi_short_mount_point }}"
+      register: prepare_static_lease
 
-   - name: Print vars
-     ansible.builtin.debug:
-       msg: "{{ prepare_static_lease }}"
+    - name: Print vars
+      ansible.builtin.debug:
+        msg: "{{ prepare_static_lease.message }}"
 
-  - name: Generate local hosts templates
-    become: true
-    template:
-      src: hosts.j2
-      dest: /etc/pihole/custom.list
+    - name: Extract static lease
+      ansible.builtin.set_fact:
+        prepare_static_hosts: "{{ prepare_static_lease.message }}"
+        cacheable: true
+      delegate_to: localhost
+
+
+- hosts: hades
+  tasks:
+    - name: Print vars
+      ansible.builtin.debug:
+        msg: "{{ hostvars['localhost']['prepare_static_hosts'] }}"
+    - name: Generate local hosts templates
+      become: true
+      ansible.builtin.template:
+        src: hosts.j2
+        dest: /etc/pihole/custom.list
 
 - hosts: olympus
   roles:

@@ -1,4 +1,4 @@
-{% for host in prepare_static_lease %}
+{% for host in hostvars['localhost']['prepare_static_hosts'] %}
 {{ host.ip }} {{ host.hostname }}.mythologic.fr
 {% endfor %}
 
