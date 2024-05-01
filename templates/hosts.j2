@@ -1,4 +1,4 @@
-{% for host in groups['olympus'] %}
-{{ lookup('community.general.dig',  {{ hostvars[host]['ansible_host'] | split('.') | first }}.local )}} {{ hostvars[host]['ansible_host'] }} }}
+{% for host in prepare_static_lease %}
+{{ host.ip }} {{ host.hostname }}.mythologic.fr
 {% endfor %}
 
