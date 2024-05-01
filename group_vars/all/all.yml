@@ -9,6 +9,8 @@ hashi_vault_url: url=https://basilisk-alpha.mythologic.fr:8200
 hashi_mount_point: secret/moz/data
 hashi_user: "{{ lookup('ansible.builtin.env', 'VAULT_USER') }}"
 hashi_password: "{{ lookup('ansible.builtin.env', 'VAULT_PASSWORD') }}"
+hashi_short_mount_point: secret/moz
+
 
 hashi_auth_method: "auth_method=userpass username={{ hashi_user }} password={{ hashi_password }}"
 hashi_elasticsearch_path: "{{ hashi_mount_point }}/elasticsearch"
@@ -24,3 +26,4 @@ packetbeat_password: "{{ elasticsearch_packetbeat_password }}"
 
 hashi_chimera_path: "{{ hashi_mount_point }}/chimera"
 hashi_subspace_path: "{{ hashi_mount_point }}/chimera/subspace"
+

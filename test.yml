@@ -13,5 +13,5 @@
        vault_username: "{{ hashi_user }}"
        vault_password: "{{ hashi_password }}"
        vault_url: https://basilisk-alpha.mythologic.fr:8200
-       vault_path: test/app_token
-       vault_mount_point: "{{ hashi_mount_point }}"
+       vault_path: freebox/app_token
+       vault_mount_point: "{{ hashi_short_mount_point }}"
