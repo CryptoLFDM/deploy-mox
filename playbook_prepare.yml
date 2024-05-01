@@ -1,9 +1,9 @@
 ---
 
-- hosts: localhost
+- hosts: hades
+  gather_facts: false
   tasks:
    - name: Harvest static lease
-     become: true
      freebox_dhcp:
        app_id: fr.freebox.integration
        app_name: freebox_ansible
@@ -15,11 +15,12 @@
        vault_url: https://basilisk-alpha.mythologic.fr:8200
        vault_path: freebox/app_token
        vault_mount_point: "{{ hashi_short_mount_point }}"
-     register: prepare_static_lease
+     register: prepare_static_lease.message
 
-- hosts: hades
-  gather_facts: false
-  tasks:
+   - name: Print vars
+     ansible.builtin.debug:
+       msg: "{{ prepare_static_lease }}"
+
   - name: Generate local hosts templates
     become: true
     template:
