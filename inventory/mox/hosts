@@ -34,11 +34,17 @@ chimera_iota
 chimera_mu
 chimera_eta
 
-[cerberus]
-cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr"
+[cerberus_fedora]
 cerberus_beta ansible_host="cerberus-beta.mythologic.fr"
 cerberus_gamma ansible_host="cerberus-gamma.mythologic.fr"
 cerberus_delta ansible_host="cerberus-delta.mythologic.fr"
+
+[cerberus_ubuntu]
+cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr"
+
+[cerberus:children]
+cerberus_fedora
+cerberus_ubuntu
 
 [mermaid]
 mermaid_alpha
@@ -80,7 +86,7 @@ mermaid
 [fedora:children]
 mermaid
 minotor
-cerberus
+cerberus_fedora
 basilisk
 centaur
 pegasus
@@ -90,6 +96,7 @@ cyclops
 
 [ubuntu:children]
 chimera
+cerberus_ubuntu
 
 [proxmox:children]
 cyclops
