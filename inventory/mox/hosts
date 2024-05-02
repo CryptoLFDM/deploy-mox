@@ -21,7 +21,7 @@ chimera_lambda ansible_host="chimera-lambda.mythologic.fr"
 chimera_nu ansible_host="chimera-nu.mythologic.fr"
 
 
-xav_streamr_node ansible_host="streamr-xav.mythologic.fr"
+xav_streamr_node ansible_host="xav.streamr.mythologic.fr"
 
 
 [chimera]
@@ -127,4 +127,4 @@ chimera_epsilon
 chimera_nu
 
 [hades]
-hades_alpha ansible_host="hades.mythologic.fr"
+hades_alpha ansible_host="hades-alpha.mythologic.fr"
