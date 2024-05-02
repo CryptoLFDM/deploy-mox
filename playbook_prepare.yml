@@ -33,6 +33,13 @@
         src: hosts.j2
         dest: /etc/pihole/custom.list
 
+    - name: Restart Pihole
+      become: true
+      ansible.builtin.systemd:
+        state: restarted
+        name: pihole-FTL
+
+
 - hosts: olympus
   roles:
     - role: prepare
