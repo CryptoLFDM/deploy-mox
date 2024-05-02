@@ -40,8 +40,7 @@ subspace_farmer_filesystem_enable: true
 subspace_farmer_disks: []
 subspace_farmer_port: 60533
 
-subspace_farmer_disks:
-  - path=/mnt/subspace_001/hydras_alpha_fikwot4T_baie_top_left/alpha,size=3.7T
+subspace_farmer_disks: []
 
 
 
