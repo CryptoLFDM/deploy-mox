@@ -21,12 +21,8 @@ cyclops_theta ansible_host="mox08.mythologic.fr"
 pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr"
 
 chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr"
-chimera_zeta ansible_host="chimera-zeta.mythologic.fr"
 chimera_lambda ansible_host="chimera-lambda.mythologic.fr"
 chimera_nu ansible_host="chimera-nu.mythologic.fr"
-chimera_eta ansible_host="chimera-eta.mythologic.fr"
-chimera_mu ansible_host="chimera-mu.mythologic.fr"
-chimera_iota ansible_host="chimera-iota.mythologic.fr"
 
 
 xav_streamr_node ansible_host="streamr-xav.mythologic.fr"
@@ -106,8 +102,10 @@ cyclops
 mermaid
 
 [subspace]
-chimera_zeta
-chimera_iota
+chimera_zeta ansible_host="chimera-zeta.mythologic.fr"
+chimera_eta ansible_host="chimera-eta.mythologic.fr"
+chimera_mu ansible_host="chimera-mu.mythologic.fr"
+chimera_iota ansible_host="chimera-iota.mythologic.fr"
 
 [streamr]
 xav_streamr_node
