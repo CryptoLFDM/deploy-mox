@@ -55,7 +55,7 @@ elasticsearch_filesystem_list:
 
 elasticsearch_version: "{{ elk_version }}"
 
-elasticsearch_rpms:
+elasticsearch_packages:
   - "elasticsearch{{ elasticsearch_version }}"
 
 elasticsearch_elastic_current_password:
