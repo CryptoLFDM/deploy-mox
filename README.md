@@ -48,4 +48,4 @@ for exemple
 
 `ansible-playbook deploy.yml -i inventory/mox/hosts -k -K -u ${ANSIBLE_USER} -v -c paramiko -D`
 
-will run all play from `deply.yml` with inventory `inventory/mox/hosts` and the remote user `${ANSIBLE_USER`. `-k` and `-K` will prompt for ssh password and sudo password.
+will run all play from `deploy.yml` with inventory `inventory/mox/hosts` and the remote user `${ANSIBLE_USER`. `-k` and `-K` will prompt for ssh password and sudo password.
