@@ -13,7 +13,7 @@ subspace_farmer_disks:
   - path=/mnt/subspace_001,size=1.8T
   - path=/mnt/subspace_002,size=1.8T
   - path=/mnt/subspace_003,size=900G
-  - path=/mnt/hydras_top_mid_bay,size=3.7T \
+  - path=/mnt/hydras_top_mid_bay,size=3.7T
   - path={{ subspace_farmer_install_path }}/ssd,size=800G
   - path={{ subspace_farmer_install_path }}/nvme,size=900G
 
