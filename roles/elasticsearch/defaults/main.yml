@@ -87,3 +87,15 @@ ssl_minimal_file:
   - src: "/etc/letsencrypt/live/{{ ansible_host }}/privkey.pem"
     dest: "{{ elasticsearch_path_config }}/privkey.pem"
     user: elasticsearch
+
+elasticsearch_custom_become_method: sudo
+
+elasticsearch_gpg_key:
+  - https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+elasticsearch_yum_repo:
+  - src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
+
+elasticsearch_deb:
+  - https://artifacts.elastic.co/packages/8.x/apt stable main

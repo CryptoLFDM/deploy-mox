@@ -1,19 +1,21 @@
 ---
-- import_tasks: install.yml
+- ansible.builtin.import_tasks: gpg.yml
 
-- import_tasks: config.yml
+- ansible.builtin.import_tasks: install.yml
 
-- include_tasks: ssl.yml
+- ansible.builtin.import_tasks: config.yml
 
-- name: Force restart if needed
-  meta: flush_handlers
-
-- include_tasks: bootstrap.yml
-
-- include_tasks: roles.yml
-
-- include_tasks: users.yml
+- ansible.builtin.import_tasks: ssl.yml
 
 - name: Force restart if needed
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
+
+- ansible.builtin.import_tasks: bootstrap.yml
+
+- ansible.builtin.import_tasks: roles.yml
+
+- ansible.builtin.import_tasks: users.yml
+
+- name: Force restart if needed
+  ansible.builtin.meta: flush_handlers
 
