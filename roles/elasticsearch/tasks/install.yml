@@ -1,7 +1,7 @@
 ---
-- name: Install elasticsearch rpm
+- name: Install elasticsearch
   become: true
   become_method: "{{ custom_become_method }}"
-  yum:
-    name: "{{ elasticsearch_rpms }}"
+  ansible.builtin.package:
+    name: "{{ elasticsearch_packages }}"
     state: present
