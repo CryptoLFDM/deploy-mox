@@ -16,4 +16,4 @@ nibiru
 ternoa_alpha ansible_ssh_host="ternoa-alpha.local" ansible_host="ternoa-alpha.mythologic.fr"
 
 [nibiru]
-cosmos-alpha ansible_host="ternoa-alpha.mythologic.fr"
+cosmos-alpha ansible_host="cosmos-alpha.mythologic.fr"
