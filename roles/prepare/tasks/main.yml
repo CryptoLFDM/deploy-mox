@@ -14,9 +14,19 @@
     name: "{{ package_to_remove }}"
     state: absent
 
+- name: Add debian package
+  become: true
+  become_method: "{{ custom_become_method }}"
+  ansible.builtin.package:
+    state: present
+    name: xfsprogs
 
-- ansible.builtin.import_tasks: install_ubuntu.yml
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+- name: Add the xfs module
+  become: true
+  become_method: "{{ custom_become_method }}"
+  community.general.modprobe:
+    name: xfs
+    state: present
 
 - name: Set a hostname
   become: true
