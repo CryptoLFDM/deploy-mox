@@ -4,9 +4,6 @@ mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr"
 
 basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr"
 
-centaur_alpha ansible_host="centaur-alpha.mythologic.fr"
-centaur_beta ansible_host="centaur-beta.mythologic.fr"
-
 cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr"
 cyclops_beta ansible_host="cyclops-beta.mythologic.fr"
 cyclops_gamma ansible_host="mox09.mythologic.fr"
@@ -53,10 +50,6 @@ mermaid_alpha
 [basilisk]
 basilisk_alpha
 
-[centaur]
-centaur_alpha
-centaur_beta
-
 [cyclops]
 cyclops_theta
 cyclops_alpha
@@ -81,19 +74,6 @@ cerberus
 [grafana:children]
 mermaid
 
-[fedora:children]
-basilisk
-centaur
-
-[debian:children]
-cyclops
-
-[ubuntu:children]
-chimera
-cerberus
-mermaid
-pegasus
-
 [proxmox:children]
 cyclops
 
@@ -108,9 +88,6 @@ chimera_iota ansible_host="chimera-iota.mythologic.fr"
 
 [streamr]
 xav_streamr_node
-
-[chia:children]
-centaur
 
 [cosmos_node:children]
 nolus
