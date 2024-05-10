@@ -10,6 +10,7 @@ package_to_install:
   - iputils-ping
   - sudo
   - xfsprogs
+  - parted
 
 package_delimiter: "="
 
