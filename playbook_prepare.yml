@@ -26,7 +26,6 @@
 
 - hosts: hades
   tasks:
-
     - name: Generate local hosts templates
       become: true
       ansible.builtin.template:

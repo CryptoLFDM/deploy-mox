@@ -1,63 +1,42 @@
-[olympus]
+############################
+# Family Groups
 
-mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr"
-
-basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr"
-
-cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr"
-cyclops_beta ansible_host="cyclops-beta.mythologic.fr"
-cyclops_gamma ansible_host="mox09.mythologic.fr"
-cyclops_theta ansible_host="mox08.mythologic.fr"
-
-pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr"
-
+[chimera]
+chimera_zeta ansible_host="chimera-zeta.mythologic.fr"
+chimera_eta ansible_host="chimera-eta.mythologic.fr"
+chimera_mu ansible_host="chimera-mu.mythologic.fr"
+chimera_iota ansible_host="chimera-iota.mythologic.fr"
+ansible_host="xav.streamr.mythologic.fr"
 chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr"
 chimera_lambda ansible_host="chimera-lambda.mythologic.fr"
 chimera_nu ansible_host="chimera-nu.mythologic.fr"
 
+[cerberus]
 cerberus_beta ansible_host="cerberus-beta.mythologic.fr"
 cerberus_gamma ansible_host="cerberus-gamma.mythologic.fr"
 cerberus_delta ansible_host="cerberus-delta.mythologic.fr"
 cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr"
 
-xav_streamr_node ansible_host="xav.streamr.mythologic.fr"
-
-[certbot:children]
-pegasus
-mermaid
-cerberus
-basilisk
-
-[chimera]
-chimera_epsilon
-chimera_zeta
-chimera_lambda
-chimera_nu
-xav_streamr_node
-chimera_iota
-chimera_mu
-chimera_eta
-
-[cerberus]
-cerberus_alpha
-cerberus_beta
-cerberus_gamma
-cerberus_delta
-
 [mermaid]
-mermaid_alpha
+mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr"
 
 [basilisk]
-basilisk_alpha
+basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr"
 
 [cyclops]
-cyclops_theta
-cyclops_alpha
-cyclops_beta
-cyclops_gamma
+cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr"
+cyclops_beta ansible_host="cyclops-beta.mythologic.fr"
+cyclops_gamma ansible_host="mox09.mythologic.fr"
+cyclops_theta ansible_host="mox08.mythologic.fr"
 
 [pegasus]
-pegasus_alpha
+pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr"
+
+[hades]
+hades_alpha ansible_host="hades-alpha.mythologic.fr"
+
+############################
+# Application to family mapping
 
 [vault:children]
 basilisk
@@ -81,23 +60,28 @@ cyclops
 mermaid
 
 [subspace]
-chimera_zeta ansible_host="chimera-zeta.mythologic.fr"
-chimera_eta ansible_host="chimera-eta.mythologic.fr"
-chimera_mu ansible_host="chimera-mu.mythologic.fr"
-chimera_iota ansible_host="chimera-iota.mythologic.fr"
+chimera_zeta
+chimera_iota
+chimera_mu
+chimera_eta
 
 [streamr]
 xav_streamr_node
 
-[cosmos_node:children]
-nolus
-nibiru
 
-[nolus]
-chimera_epsilon
+############################
+# Strategic groups
 
-[nibiru]
-chimera_nu
+[olympus:children]
+chimera
+cerberus
+mermaid
+pegasus
+basilisk
+cyclops
 
-[hades]
-hades_alpha ansible_host="hades-alpha.mythologic.fr"
+[certbot:children]
+pegasus
+mermaid
+cerberus
+basilisk
