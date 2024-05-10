@@ -8,7 +8,6 @@
 - ansible.builtin.import_playbook: playbook_kibana.yml
 - ansible.builtin.import_playbook: playbook_haproxy.yml
 - ansible.builtin.import_playbook: playbook_grafana.yml
-- ansible.builtin.import_playbook: playbook_proxmox.yml
 
 - ansible.builtin.import_playbook: playbook_subspace.yml
 - ansible.builtin.import_playbook: playbook_streamr.yml
