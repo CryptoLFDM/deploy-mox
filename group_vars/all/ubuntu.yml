@@ -1,6 +1,16 @@
 ---
 package_to_remove: ''
-package_to_install: certbot,emacs-nox,python3-certbot-nginx,python3-certbot-dns-ovh,python3-pip,avahi-daemon,libnss-mdns,acl,net-tools,cron,iputils-ping,sudo
+package_to_install:
+  - emacs-nox
+  - avahi-daemon
+  - libnss-mdns
+  - acl
+  - net-tools
+  - cron
+  - iputils-ping
+  - sudo
+  - xfsprogs
+
 package_delimiter: "="
 
 package_suffix: .deb
