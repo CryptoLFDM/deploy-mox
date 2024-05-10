@@ -4,9 +4,10 @@
 # CERTBOT
 #==================================================================
 - hosts: certbot
+  tags:
+    - certbot
   roles:
     - role: tocard.utils.certbot
-      tags:
-        - certbot
+
 
 

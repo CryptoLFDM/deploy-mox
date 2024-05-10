@@ -2,16 +2,8 @@
 #==================================================================
 # GRAFANA
 #==================================================================
-- hosts: grafana
+- hosts: mermaid
+  tags:
+    - grafana
   roles:
-    - role: tocard.utils.user
-      user_name: grafana
-      user_group: grafana
-    - role: tocard.utils.filesystem
-      filesystem_list: "{{ grafana_filesystem_list }}"
-      tags:
-        - filesystem
-        - grafana
     - role: tocard.utils.grafana
-      tags:
-        - grafana

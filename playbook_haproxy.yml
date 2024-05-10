@@ -3,15 +3,8 @@
 # HAPROXY
 #==================================================================
 - hosts: pegasus
+  tags:
+    - haproxy
   roles:
-    - role: tocard.utils.user
-      user_name: "{{ haproxy_owner }}"
-      user_group: "{{ haproxy_group }}"
-    - role: tocard.utils.filesystem
-      filesystem_list: "{{ haproxy_filesystem_list }}"
-      tags:
-        - filesystem
-        - haproxy
-    - role: haproxy
-      tags:
-        - haproxy
+    - role: tocard.utils.haproxy
+

@@ -3,7 +3,7 @@
 # Centaur
 #==================================================================
 - hosts: centaur
+  tags:
+    - chia
   roles:
     - role: chia_rpc
-      tags:
-        - chia

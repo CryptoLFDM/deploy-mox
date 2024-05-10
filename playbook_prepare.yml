@@ -40,8 +40,9 @@
 
 
 - hosts: olympus
-  roles:
-    - role: prepare
   tags:
     - prepare
+  roles:
+    - role: prepare
+
 
