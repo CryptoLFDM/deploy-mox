@@ -82,10 +82,8 @@ cerberus
 mermaid
 
 [fedora:children]
-mermaid
 basilisk
 centaur
-pegasus
 
 [debian:children]
 cyclops
@@ -93,6 +91,8 @@ cyclops
 [ubuntu:children]
 chimera
 cerberus
+mermaid
+pegasus
 
 [proxmox:children]
 cyclops
