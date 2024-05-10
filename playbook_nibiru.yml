@@ -1,10 +1,11 @@
 ---
 #==================================================================
-# Nibir Automatic Deployment
+# Nibiru Automatic Deployment
 #==================================================================
 - hosts: nibiru
+  tags:
+    - nibiru
   roles:
     - role: tocard.utils.cosmos_node
-      tags:
-        - nibiru
+
 

@@ -2,12 +2,10 @@
 ## --------------------------------------------------------------------
 ## Metricbeat
 ## --------------------------------------------------------------------
-- hosts: metricbeat
+- hosts: olympus
   tags:
     - metricbeat
   roles:
-    - role: tocard.utils.filesystem
-      filesystem_list: "{{ metricbeat_filesystem_list }}"
     - role: tocard.utils.metricbeat
 
 

@@ -2,18 +2,8 @@
 ## --------------------------------------------------------------------
 ## Elasticsearch
 ## --------------------------------------------------------------------
-- hosts: elasticsearch
+- hosts: cerberus
   tags:
     - elasticsearch
   roles:
-    - role: tocard.utils.user
-      user_name: "{{ elasticsearch_owner }}"
-      user_group: "{{ elasticsearch_group }}"
-    - role: tocard.utils.filesystem
-      filesystem_list: "{{ elasticsearch_filesystem_list }}"
-      tags:
-        - elasticsearch
-    - role: elasticsearch
-      tags:
-        - elasticsearch
-
+    - role: tocard.utils.elasticsearch

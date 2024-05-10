@@ -2,15 +2,10 @@
 ## --------------------------------------------------------------------
 ## Kibana
 ## --------------------------------------------------------------------
-- hosts: kibana
+- hosts: mermaid
   tags:
     - kibana
   roles:
-    - role: tocard.utils.user
-      user_name: kibana
-      user_group: kibana
-    - role: tocard.utils.filesystem
-      filesystem_list: "{{ kibana_filesystem_list }}"
-    - role: kibana
+    - role: tocard.utils.kibana
 
 

@@ -3,8 +3,8 @@
 # Subspace Automatic Deployment
 #==================================================================
 - hosts: subspace
+  tags:
+    - subspace
   roles:
     - role: tocard.utils.subspace
-      tags:
-        - subspace
 
