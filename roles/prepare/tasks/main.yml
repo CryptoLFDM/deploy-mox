@@ -14,8 +14,6 @@
     name: "{{ package_to_remove }}"
     state: absent
 
-- ansible.builtin.import_tasks: install_fedora.yml
-  when: ansible_distribution == 'Fedora'
 
 - ansible.builtin.import_tasks: install_ubuntu.yml
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
