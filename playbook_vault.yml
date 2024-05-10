@@ -6,13 +6,6 @@
   tags:
     - vault
   roles:
-    - role: tocard.utils.user
-      user_name: "{{ vault_user }}"
-      user_group: "{{ vault_group }}"
-    - role: tocard.utils.filesystem
-      filesystem_list: "{{ vault_filesystem_list }}"
-      tags:
-        - vault
     - role: tocard.utils.vault
       tags:
         - vault
