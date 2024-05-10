@@ -2,8 +2,6 @@
 
 mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr"
 
-minotor_alpha ansible_host="minotor-alpha.mythologic.fr"
-
 basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr"
 
 centaur_alpha ansible_host="centaur-alpha.mythologic.fr"
@@ -27,6 +25,11 @@ cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr"
 
 xav_streamr_node ansible_host="xav.streamr.mythologic.fr"
 
+[certbot:children]
+pegasus
+mermaid
+cerberus
+basilisk
 
 [chimera]
 chimera_epsilon
@@ -38,23 +41,14 @@ chimera_iota
 chimera_mu
 chimera_eta
 
-[cerberus_fedora]
+[cerberus]
+cerberus_alpha
 cerberus_beta
 cerberus_gamma
 cerberus_delta
 
-[cerberus_ubuntu]
-cerberus_alpha
-
-[cerberus:children]
-cerberus_fedora
-cerberus_ubuntu
-
 [mermaid]
 mermaid_alpha
-
-[minotor]
-minotor_alpha
 
 [basilisk]
 basilisk_alpha
@@ -89,8 +83,6 @@ mermaid
 
 [fedora:children]
 mermaid
-minotor
-cerberus_fedora
 basilisk
 centaur
 pegasus
@@ -100,7 +92,7 @@ cyclops
 
 [ubuntu:children]
 chimera
-cerberus_ubuntu
+cerberus
 
 [proxmox:children]
 cyclops
