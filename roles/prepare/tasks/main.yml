@@ -4,8 +4,9 @@
   become: true
   become_method: "{{ custom_become_method }}"
   ansible.builtin.package:
-    name: "{{ package_to_install}}"
+    name: "{{ item }}"
     state: present
+  loop: "{{ package_to_install}}"
 
 - name: Remove useless / unwanted package
   become: true
@@ -13,13 +14,6 @@
   ansible.builtin.package:
     name: "{{ package_to_remove }}"
     state: absent
-
-- name: Add debian package
-  become: true
-  become_method: "{{ custom_become_method }}"
-  ansible.builtin.package:
-    state: present
-    name: xfsprogs
 
 - name: Add the xfs module
   become: true
