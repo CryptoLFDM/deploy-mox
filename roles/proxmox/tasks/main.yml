@@ -31,7 +31,7 @@
 - name: Template config file
   become: true
   become_method: "{{ custom_become_method }}"
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
