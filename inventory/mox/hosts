@@ -37,6 +37,7 @@ hades_alpha ansible_host="hades-alpha.mythologic.fr"
 
 [hephaestus]
 hephaestus_alpha ansible_hosts="hephaestus-alpha.mythologic.fr"
+hephaestus_beta ansible_hosts="hephaestus-beta.mythologic.fr"
 
 ############################
 # Application to family mapping
