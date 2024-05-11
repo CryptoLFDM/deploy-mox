@@ -1,4 +1,4 @@
-ansible==4.7.0
+ansible==5.10.0
 ansible-runner
 dnspython
 hvac

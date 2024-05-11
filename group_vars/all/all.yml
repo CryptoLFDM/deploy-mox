@@ -4,26 +4,26 @@ custom_become_method: sudo
 
 elk_version: "{{ package_delimiter }}8.9.0"
 
-hashi_connect: "{{ hashi_auth_method }} {{hashi_vault_url }}"
+hashi_connect: "{{ hashi_auth_method }} {{ hashi_vault_url }}"
 hashi_vault_url: url=https://basilisk-alpha.mythologic.fr:8200
-hashi_mount_point: secret/moz/data
+hashi_mount_point_api: "{{ hashi_mount }}/data"
 hashi_user: "{{ lookup('ansible.builtin.env', 'VAULT_USER') }}"
 hashi_password: "{{ lookup('ansible.builtin.env', 'VAULT_PASSWORD') }}"
-hashi_short_mount_point: secret/moz
+hashi_mount: secret/moz
 
 
 hashi_auth_method: "auth_method=userpass username={{ hashi_user }} password={{ hashi_password }}"
-hashi_elasticsearch_path: "{{ hashi_mount_point }}/elasticsearch"
-hashi_haproxy_path: "{{ hashi_mount_point }}/haproxy"
-hashi_chia_path: "{{ hashi_mount_point }}/chia"
-hashi_certbot_path: "{{ hashi_mount_point }}/certbot"
-hashi_babylon_path: "{{ hashi_mount_point }}/babylon"
-hashi_streamr_path: "{{ hashi_mount_point }}/chimera/streamr"
+hashi_elasticsearch_path: "{{ hashi_mount_point_api }}/elasticsearch"
+hashi_haproxy_path: "{{ hashi_mount_point_api }}/haproxy"
+hashi_chia_path: "{{ hashi_mount_point_api }}/chia"
+hashi_certbot_path: "{{ hashi_mount_point_api }}/certbot"
+hashi_babylon_path: "{{ hashi_mount_point_api }}/babylon"
+hashi_streamr_path: "{{ hashi_mount_point_api }}/chimera/streamr"
 
 metricbeat_password: "{{ elasticsearch_metricbeat_password }}"
 filebeat_password: "{{ elasticsearch_filebeat_password }}"
 packetbeat_password: "{{ elasticsearch_packetbeat_password }}"
 
-hashi_chimera_path: "{{ hashi_mount_point }}/chimera"
-hashi_subspace_path: "{{ hashi_mount_point }}/chimera/subspace"
+hashi_chimera_path: "{{ hashi_mount_point_api }}/chimera"
+hashi_subspace_path: "{{ hashi_mount_point_api }}/chimera/subspace"
 
