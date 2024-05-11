@@ -14,7 +14,7 @@
        vault_password: "{{ hashi_password }}"
        vault_url: https://basilisk-alpha.mythologic.fr:8200
        vault_path: freebox/app_token
-       vault_mount_point: "{{ hashi_short_mount_point }}"
+       vault_mount_point: "{{ hashi_mount }}"
 
    - name: freebox Lease module
      become: true
@@ -28,7 +28,7 @@
        vault_password: "{{ hashi_password }}"
        vault_url: https://basilisk-alpha.mythologic.fr:8200
        vault_path: freebox/app_token
-       vault_mount_point: "{{ hashi_short_mount_point }}"
+       vault_mount_point: "{{ hashi_mount }}"
 
    - name: freebox Port module
      become: true
@@ -42,4 +42,4 @@
        vault_password: "{{ hashi_password }}"
        vault_url: https://basilisk-alpha.mythologic.fr:8200
        vault_path: freebox/app_token
-       vault_mount_point: "{{ hashi_short_mount_point }}"
+       vault_mount_point: "{{ hashi_mount }}"
