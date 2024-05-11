@@ -1,4 +1,5 @@
 ---
-- name: install_golang
-  src: https://github.com/gantsign/ansible-role-golang.git
-  scm: git
+collections:
+- tocard.utils
+- community.general
+
