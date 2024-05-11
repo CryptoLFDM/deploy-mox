@@ -1,7 +1,7 @@
 ansible==5.10.0
 ansible-runner
 dnspython
-hvac
+hvac==2.2.0
 jmespath
 netaddr
 paramiko
