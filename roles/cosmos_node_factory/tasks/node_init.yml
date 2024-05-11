@@ -1,9 +1,0 @@
----
-
-- name: Init the node
-  ansible.builtin.shell: "{{ cosmos_node_factory_binaries }} init {{ cosmos_node_factory_moniker }} --chain-id {{ cosmos_node_factory_chain_id }} --home {{ cosmos_node_factory_home }}"
-  notify: cosmos_node_factory_need_restart
-
-- name: Config the node
-  ansible.builtin.shell: "{{ cosmos_node_factory_binaries }} config chain-id {{ cosmos_node_factory_chain_id }} --home {{ cosmos_node_factory_home }}"
-  notify: cosmos_node_factory_need_restart

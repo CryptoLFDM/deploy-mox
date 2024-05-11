@@ -1,9 +1,0 @@
----
-
-- name: Init the node
-  ansible.builtin.shell: babylon init "{{ babylon_name }}" --chain-id "{{ babylon_chain_id }}" --home "{{ babylon_home }}"
-  notify: babylon_need_restart
-
-- name: Config the node
-  ansible.builtin.shell: babylon config chain-id "{{ babylon_chain_id }}" --home "{{ babylon_home }}"
-  notify: babylon_need_restart

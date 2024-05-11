@@ -1,5 +1,0 @@
----
-cosmos_node_factory_keys_management_enabled: false
-cosmos_node_factory_key_name: "{{ ansible_hostname }}"
-cosmos_node_factory_key_password: "{{ lookup('hashi_vault', hashi_cosmos_node_factory_path ~ '/' ~ ansible_hostname  ~ hashi_connect) }}"
-

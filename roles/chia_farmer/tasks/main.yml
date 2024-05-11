@@ -10,7 +10,7 @@
 - name: Create directory
   become: true
   become_method: "{{ custom_become_method }}"
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ item.owner | default(chia_farmer_owner) }}"
     group: "{{ item.group | default(chia_farmer_group) }}"
@@ -34,9 +34,9 @@
 - name: Install binaries
   become: true
   become_method: "{{ custom_become_method }}"
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   loop: "{{ chia_farmer_packages }}"
 
-- import_tasks: chia_cli.yml
+- ansible.builtin.import_tasks: chia_cli.yml
