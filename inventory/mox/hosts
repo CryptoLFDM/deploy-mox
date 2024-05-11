@@ -35,6 +35,9 @@ pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr"
 [hades]
 hades_alpha ansible_host="hades-alpha.mythologic.fr"
 
+[dionysos]
+dionysos ansible_hosts="dionysos.mythologic.fr"
+
 ############################
 # Application to family mapping
 
@@ -68,6 +71,8 @@ chimera_eta
 [streamr]
 xav_streamr_node
 
+[nexus:children]
+dionysos
 
 ############################
 # Strategic groups
@@ -79,9 +84,11 @@ mermaid
 pegasus
 basilisk
 cyclops
+dionysos
 
 [certbot:children]
 pegasus
 mermaid
 cerberus
 basilisk
+dionysos
