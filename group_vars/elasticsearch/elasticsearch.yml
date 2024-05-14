@@ -1,30 +1,41 @@
 ---
-elasticsearch_users_custom:
-  - name: grafana
-    content: "{{ lookup('template', 'user/grafana.json.j2') }}"
-  - name: minotor
-    content: "{{ lookup('template', 'user/minotor.json.j2') }}"
-  - name: metricbeat
-    content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
-  - name: mozquito
-    content: "{{ lookup('template', 'user/mozquito.json.j2') }}"
-  - name: metricbeat-advanced
-    content: "{{ lookup('template', 'user/metricbeat-advanced.json.j2') }}"
-  - name: filebeat
-    content: "{{ lookup('template', 'user/filebeat.json.j2') }}"
-  - name: packetbeat
-    content: "{{ lookup('template', 'user/metricbeat.json.j2') }}"
 
-elasticsearch_roles_custom:
+elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
+elasticsearch_metricbeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
+
+elasticsearch_metricbeat_ext_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat_subspace:moz ' ~ hashi_connect) }}"
+
+
+elasticsearch_custom_users:
   - name: grafana
-    content: "{{ lookup('template', 'role/grafana.json.j2') }}"
-  - name: minotor
-    content: "{{ lookup('template', 'role/minotor.json.j2') }}"
+    password: "{{ elasticsearch_grafana_password }}"
+    roles: [grafana_role]
+    full_name: grafana user from olympus
+  - name: metricbeat_olympus
+    password: "{{ elasticsearch_metricbeat_password }}"
+    roles: [metricbeat_olympus]
+    full_name: metricbeat user from olympus
+  - name: metricbeat_ext
+    password: "{{ elasticsearch_metricbeat_ext_password }}"
+    roles: [metricbeat_role]
+    full_name: metricbeat_ext user from olympus
+
+
+elasticsearch_custom_roles:
+  - name: metricbeat_olympus
+    cluster_settings: [manage_index_templates, monitor, manage_ilm]
+    indices:
+      - names: [metricbeat*, .monitoring*, .ds-.monitoring-*]
+        privileges: [ write, create_index, manage, view_index_metadata ]
+
   - name: metricbeat
-    content: "{{ lookup('template', 'role/metricbeat.json.j2') }}"
-  - name: metricbeat-advanced
-    content: "{{ lookup('template', 'role/metricbeat-advanced.json.j2') }}"
-  - name: filebeat
-    content: "{{ lookup('template', 'role/filebeat.json.j2') }}"
-  - name: packetbeat
-    content: "{{ lookup('template', 'role/metricbeat.json.j2') }}"
+    cluster_settings: []
+    indices:
+      - names: [metricbeat*]
+        privileges: [ write, create_index, manage, view_index_metadata ]
+
+  - name: grafana
+    cluster_settings: []
+    indices:
+      - names: [flux-*, cosmos-*, defi-*, minotor-*, metricbeat*, .monitoring-*, osmosis-*]
+        privileges: [ read, monitor, view_index_metadata ]
