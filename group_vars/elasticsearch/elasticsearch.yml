@@ -1,9 +1,9 @@
 ---
 
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
-elasticsearch_metricbeat_password: "{{ lookup('hvac', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
+elasticsearch_metricbeat_password: "{{ lookup('tocard.utils.hvac', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
 
-elasticsearch_metricbeat_ext_password: "{{ lookup('hvac', hashi_elasticsearch_path ~ '/metricbeat_subspace:moz ' ~ hashi_connect) }}"
+elasticsearch_metricbeat_ext_password: "{{ lookup('tocard.utils.hvac', hashi_elasticsearch_path ~ '/metricbeat_subspace:moz ' ~ hashi_connect) }}"
 
 
 elasticsearch_custom_users:
