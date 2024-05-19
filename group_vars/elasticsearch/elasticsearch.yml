@@ -1,8 +1,8 @@
 ---
 
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
-elasticsearch_metricbeat_password: "{{ lookup('auto_pass', 'elasticsearch/metricbeat:moz') }}"
-elasticsearch_free_metricbeat_password: "{{ lookup('auto_pass', 'elasticsearch/free_metricbeat:moz') }}"
+elasticsearch_metricbeat_password: "{{ lookup('auto_pass', 'elasticsearch/metricbeat', key='moz') }}"
+elasticsearch_free_metricbeat_password: "{{ lookup('auto_pass', 'elasticsearch/free_metricbeat', key='moz') }}"
 
 elasticsearch_custom_users:
   - name: grafana
