@@ -2,7 +2,7 @@
 
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
 elasticsearch_metricbeat_password: "{{ lookup('hvac', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
-elasticsearch_metricbeat_ext_password: "{{ lookup('hvac', hashi_elasticsearch_path ~ '/metricbeat_subspace:moz ' ~ hashi_connect) }}"
+elasticsearch_free_metricbeat_password: "{{ lookup('hvac', hashi_elasticsearch_path ~ '/free_metricbeat:moz ' ~ hashi_connect) }}"
 
 elasticsearch_custom_users:
   - name: grafana
@@ -13,8 +13,8 @@ elasticsearch_custom_users:
     password: "{{ elasticsearch_metricbeat_password }}"
     roles: [metricbeat_olympus]
     full_name: metricbeat user from olympus
-  - name: metricbeat_ext
-    password: "{{ elasticsearch_metricbeat_ext_password }}"
+  - name: free_metricbeat
+    password: "{{ elasticsearch_free_metricbeat_password }}"
     roles: [metricbeat_role]
     full_name: metricbeat_ext user from olympus
 
@@ -26,7 +26,7 @@ elasticsearch_custom_roles:
       - names: [metricbeat*, .monitoring*, .ds-.monitoring-*]
         privileges: [ write, create_index, manage, view_index_metadata ]
 
-  - name: metricbeat
+  - name: free_metricbeat
     cluster_settings: []
     indices:
       - names: [metricbeat*]
