@@ -1,0 +1,25 @@
+############################
+# Family Groups
+
+[hermes]
+hermes_alpha ansible_host="hermes-alpha.mythologic.fr"
+hermes_beta ansible_host="hermes-beta.mythologic.fr"
+hermes_gamma ansible_host="hermes-gamma.mythologic.fr"
+
+############################
+# Application to family mapping
+
+[metricbeat:children]
+olympus
+
+[filebeat:children]
+olympus
+
+############################
+# Strategic groups
+
+[olympus:children]
+hermes
+
+[certbot:children]
+hermes
