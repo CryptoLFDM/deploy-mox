@@ -2,9 +2,9 @@
 # Family Groups
 
 [hermes]
-hermes_alpha ansible_host="hermes-alpha.mythologic.fr"
-hermes_beta ansible_host="hermes-beta.mythologic.fr"
-hermes_gamma ansible_host="hermes-gamma.mythologic.fr"
+hermes_alpha ansible_host="alpha.mythologic.fr"
+hermes_beta ansible_host="beta.mythologic.fr"
+hermes_gamma ansible_host="gamma.mythologic.fr"
 
 ############################
 # Application to family mapping
