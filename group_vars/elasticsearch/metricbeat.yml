@@ -1,19 +1,10 @@
 ---
-metricbeat_user: metricbeat-advanced
-metricbeat_password: "{{ elasticsearch_metricbeat_advanced_password }}"
+metricbeat_elasticsearch_user: metricbeat_olympus
+metricbeat_elasticsearch_password: "{{ elasticsearch_metricbeat_password }}"
 metricbeat_custom_templates:
   - src: elasticsearch-xpack.yml.j2
     dest: /etc/metricbeat/modules.d/elasticsearch-xpack.yml
-    owner: "{{ metricbeat_owner }}"
-    group: "{{ metricbeat_group }}"
-    mode: "0640"
   - src: metricbeat.yml.j2
     dest: /etc/metricbeat/metricbeat.yml
-    owner: "{{ metricbeat_owner }}"
-    group: "{{ metricbeat_group }}"
-    mode: "0640"
   - src: system.yml.j2
     dest: /etc/metricbeat/modules.d/system.yml
-    owner: "{{ metricbeat_owner }}"
-    group: "{{ metricbeat_group }}"
-    mode: "0640"
