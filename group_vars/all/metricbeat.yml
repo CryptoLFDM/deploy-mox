@@ -1,3 +1,6 @@
 ---
 metricbeat_elasticsearch_url: >-
   {% set comma = joiner(",") %}{% for host in groups['elasticsearch'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}
+
+metricbeat_ssl_files:
+  - /opt/certbot/eden/chain.pem
