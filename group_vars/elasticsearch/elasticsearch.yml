@@ -27,7 +27,7 @@ elasticsearch_custom_roles:
         privileges: [ write, create_index, manage, view_index_metadata ]
 
   - name: free_metricbeat
-    cluster_settings: [monitor]
+    cluster_settings: [monitor, manage_index_templates, manage_ilm]
     indices:
       - names: [metricbeat*]
         privileges: [ write, create_index, manage, view_index_metadata ]
