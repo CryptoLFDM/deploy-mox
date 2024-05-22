@@ -1,5 +1,9 @@
 ---
 
+metricbeat_elasticsearch_url: >-
+  {% set comma = joiner(",") %}{% for host in groups['elasticsearch'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}
+
+
 elasticsearch_elastic_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/elastic:moz ' ~ hashi_connect) }}"
 elasticsearch_kibana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/kibana:moz ' ~ hashi_connect) }}"
 elasticsearch_metricbeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/metricbeat:moz ' ~ hashi_connect) }}"
