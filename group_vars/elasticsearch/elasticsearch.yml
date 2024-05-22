@@ -15,7 +15,7 @@ elasticsearch_custom_users:
     full_name: metricbeat user from olympus
   - name: free_metricbeat
     password: "{{ elasticsearch_free_metricbeat_password }}"
-    roles: [metricbeat_role]
+    roles: [free_metricbeat]
     full_name: metricbeat_ext user from olympus
 
 
