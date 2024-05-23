@@ -1,0 +1,7 @@
+---
+
+certbot_final_name_pattern: "{{ ansible_hostname }}"
+certbot_main_domain: "{{ certbot_final_name_pattern }}.mythologic.fr"
+certbot_domain_to_claim:
+  - "{{ certbot_main_domain }}"
+  - mythologic.fr
