@@ -1,0 +1,3 @@
+---
+
+nats_password: "{{ lookup('auto_pass', 'nats', key='password') }}"
