@@ -1,9 +1,9 @@
 ---
 
-subspace_node_p2p_port: 70333
-subspace_node_dsn_port: 70433
+subspace_node_p2p_port: 30334
+subspace_node_dsn_port: 30434
 
-subspace_farmer_port: 70533
+subspace_farmer_port: 30534
 subspace_farmer_disks: []
 
 susbpace_cluster_enabled: true
