@@ -6,4 +6,4 @@ subspace_node_dsn_port: 30434
 subspace_farmer_port: 30534
 subspace_farmer_disks: []
 
-susbpace_cluster_enabled: true
+subspace_cluster_enabled: true
