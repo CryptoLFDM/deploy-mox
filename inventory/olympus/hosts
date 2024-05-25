@@ -1,6 +1,6 @@
 [olympus:children]
-ternoa
 nibiru
+subspace
 
 [metricbeat:children]
 olympus
@@ -9,11 +9,14 @@ olympus
 olympus
 
 [ubuntu:children]
-ternoa
 nibiru
-
-[ternoa]
-ternoa_alpha ansible_ssh_host="ternoa-alpha.local" ansible_host="ternoa-alpha.mythologic.fr"
+subspace
 
 [nibiru]
 cosmos-alpha ansible_host="cosmos-alpha.mythologic.fr"
+
+[subspace]
+chimera_alpha ansible_host="chimera-alpha.mythologic.fr"
+chimera_eta ansible_host="chimera-eta.mythologic.fr"
+chimera_mu ansible_host="chimera-mu.mythologic.fr"
+chimera_iota ansible_host="chimera-iota.mythologic.fr"
