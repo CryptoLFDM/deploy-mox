@@ -6,6 +6,7 @@ subspace_node_dsn_port: 40433
 subspace_farmer_port: 40533
 subspace_farmer_disks:
   - path=/mnt/subspace_001/hydras_alpha_fikwot4T_baie_top_left/alpha,size=3.7T
+  - path=/mnt/subspace_002/hydras_top_mid_bay,size=3.7T
 
 
 
