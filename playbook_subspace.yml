@@ -10,3 +10,5 @@
       subspace_farmer_install_enabled: false
     - role: tocard.utils.nats
     - role: tocard.utils.subspace_controller
+    - role: tocard.utils.subspace_cache
+    - role: tocard.utils.subspace_farmer
