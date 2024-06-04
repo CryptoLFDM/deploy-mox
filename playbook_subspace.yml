@@ -6,9 +6,8 @@
   tags:
     - subspace
   roles:
-    - role: tocard.utils.subspace
-      subspace_farmer_install_enabled: false
     - role: tocard.utils.nats
+    - role: tocard.utils.subspace_node
     - role: tocard.utils.subspace_controller
     - role: tocard.utils.subspace_cache
     - role: tocard.utils.subspace_farmer
