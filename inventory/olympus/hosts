@@ -18,5 +18,25 @@ cosmos-alpha ansible_host="cosmos-alpha.mythologic.fr"
 [subspace]
 chimera_alpha ansible_host="chimera-alpha.mythologic.fr"
 chimera_eta ansible_host="chimera-eta.mythologic.fr"
-chimera_mu ansible_host="chimera-mu.mythologic.fr"
 chimera_iota ansible_host="chimera-iota.mythologic.fr"
+
+[subspace_node]
+chimera_alpha
+chimera_eta
+chimera_iota
+
+[subspace_controller]
+chimera_alpha
+
+[subspace_cache]
+chimera_alpha
+
+[subspace_plotter]
+chimera_alpha
+chimera_eta
+chimera_iota
+
+[subspace_farmer]
+chimera_alpha
+chimera_eta
+chimera_iota

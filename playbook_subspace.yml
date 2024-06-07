@@ -2,13 +2,49 @@
 #==================================================================
 # Subspace Automatic Deployment
 #==================================================================
-- hosts: subspace
+- hosts: subspace_node:&subspace
   tags:
     - subspace
   roles:
     - role: tocard.utils.nats
+      tags:
+        - nats
     - role: tocard.utils.subspace_node
+      tags:
+        - subspace_node
+
+
+- hosts: subspace_controller:&subspace
+  tags:
+    - subspace
+  roles:
     - role: tocard.utils.subspace_controller
+      tags:
+        - subspace_controller
+
+
+- hosts: subspace_cache:&subspace
+  tags:
+    - subspace
+  roles:
     - role: tocard.utils.subspace_cache
+      tags:
+        - subspace_cache
+
+
+- hosts: subspace_farmer:&subspace
+  tags:
+    - subspace
+  roles:
     - role: tocard.utils.subspace_farmer
+      tags:
+        - subspace_farmer
+
+
+- hosts: subspace_plotter:&subspace
+  tags:
+    - subspace
+  roles:
     - role: tocard.utils.subspace_plotter
+      tags:
+        - subspace_plotter
