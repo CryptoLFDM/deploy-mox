@@ -6,9 +6,9 @@ subspace_node_dsn_port: 30434
 subspace_farmer_port: 30534
 
 subspace_farmer_disks:
-  - path: opt/chimera/farmer/ssd
+  - path: /mnt/disk01
     size: 800G
-  - path: /opt/chimera/farmer/nvme
+  - path: /mnt/disk02
     size: 900G
 
 subspace_farmer_filesystem_disk:
