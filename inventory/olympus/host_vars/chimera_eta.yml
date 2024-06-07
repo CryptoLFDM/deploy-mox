@@ -5,9 +5,21 @@ subspace_node_dsn_port: 60433
 
 subspace_farmer_port: 60533
 
-subspace_farmer_disks: {}
+subspace_farmer_disks:
+  - path: /mnt/disk01
+    size: 3.8T
+  - path: /mnt/disk02
+    size: 3.8T
 
-subspace_farmer_filesystem_disk: []
+subspace_farmer_filesystem_disk:
+  - disk: sdb
+    path: /mnt/disk01
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+  - disk: sdc
+    path: /mnt/disk02
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
 
 subspace_cluster_enabled: true
 
