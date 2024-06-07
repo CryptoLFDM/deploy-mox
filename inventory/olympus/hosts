@@ -22,8 +22,6 @@ chimera_iota ansible_host="chimera-iota.mythologic.fr"
 
 [subspace_node]
 chimera_alpha
-chimera_eta
-chimera_iota
 
 [subspace_controller]
 chimera_alpha
