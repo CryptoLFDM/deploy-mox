@@ -22,7 +22,7 @@ subspace_farmer_filesystem_disk:
     path: /mnt/disk02
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
-  - disk: sdd
+  - disk: sdd1
     path: /mnt/disk03
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
