@@ -1,0 +1,8 @@
+---
+
+subspace_nats_url: nats://pegasus-alpha.mythologic.fr:4222
+
+subspace_controller_nats_ip: "{{ subspace_nats_url }}"
+subspace_cache_nats_ip: "{{ subspace_nats_url }}"
+subspace_farmer_nats_ip: "{{ subspace_nats_url }}"
+subspace_plotter_nats_ip: "{{ subspace_nats_url }}"
