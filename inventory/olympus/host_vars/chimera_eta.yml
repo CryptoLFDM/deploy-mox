@@ -7,7 +7,7 @@ subspace_farmer_port: 60533
 
 subspace_farmer_disks: {}
 
-subspace_farmer_filesystem_disk: {}
+subspace_farmer_filesystem_disk: []
 
 subspace_cluster_enabled: true
 
