@@ -7,3 +7,5 @@ subspace_farmer_port: 30534
 subspace_farmer_disks: []
 
 subspace_cluster_enabled: true
+
+subspace_farmer_reward_adress: st8VCipcz7xezUnM73T7szCiyNau51YYJAGovKGETUjuPy5oj
