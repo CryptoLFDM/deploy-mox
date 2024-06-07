@@ -12,11 +12,11 @@ subspace_farmer_disks:
     size: 900G
 
 subspace_farmer_filesystem_disk:
-  - disk: /dev/sdd
+  - disk: sdd
     path: /mnt/disk01
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
-  - disk: /dev/sde
+  - disk: sde
     path: /mnt/disk02
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
