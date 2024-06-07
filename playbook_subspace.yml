@@ -11,3 +11,4 @@
     - role: tocard.utils.subspace_controller
     - role: tocard.utils.subspace_cache
     - role: tocard.utils.subspace_farmer
+    - role: tocard.utils.subspace_plotter
