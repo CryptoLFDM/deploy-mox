@@ -4,7 +4,22 @@ subspace_node_p2p_port: 30334
 subspace_node_dsn_port: 30434
 
 subspace_farmer_port: 30534
-subspace_farmer_disks: []
+
+subspace_farmer_disks:
+  - path: opt/chimera/farmer/ssd
+    size: 800G
+  - path: /opt/chimera/farmer/nvme
+    size: 900G
+
+subspace_farmer_filesystem_disk:
+  - disk: /dev/sdd
+    path: /mnt/disk01
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+  - disk: /dev/sde
+    path: /mnt/disk02
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
 
 subspace_cluster_enabled: true
 
