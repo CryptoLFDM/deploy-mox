@@ -2,6 +2,9 @@
 nibiru
 subspace
 
+[certbot:children]
+olympus
+
 [metricbeat:children]
 olympus
 
