@@ -10,16 +10,10 @@ subspace_nats_url: nats://127.0.0.1:4222
 subspace_farmer_disks:
   - path: /mnt/disk01
     size: 800G
-  - path: /mnt/disk02
-    size: 900G
 
 subspace_farmer_filesystem_disk:
   - disk: sdd
     path: /mnt/disk01
-    owner: "{{ subspace_farmer_user }}"
-    group: "{{ subspace_farmer_group }}"
-  - disk: sde
-    path: /mnt/disk02
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
 
