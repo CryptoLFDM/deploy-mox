@@ -9,6 +9,7 @@ subspace_farmer_disks:
   - path: /mnt/disk01
     size: 3.8T
   - path: /mnt/disk02
+    fstype: ext4
     size: 3.8T
 
 subspace_farmer_filesystem_disk:
