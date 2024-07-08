@@ -1,3 +1,2 @@
 ---
-filebeat_elasticsearch_url: >-
-  {% set comma = joiner(",") %}{% for host in groups['elasticsearch'] %}{{ comma() }}"https://{{ hostvars[host]['ansible_host'] }}:9200"{% endfor %}
+filebeat_elasticsearch_url: https://pegasus-alpha.mythologic.fr:9200

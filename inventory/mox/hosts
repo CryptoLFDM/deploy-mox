@@ -1,17 +1,9 @@
 ############################
 # Family Groups
 
-[chimera]
-xav_streamr_node ansible_host="xav.streamr.mythologic.fr"
-chimera_epsilon ansible_host="chimera-epsilon.mythologic.fr"
-chimera_lambda ansible_host="chimera-lambda.mythologic.fr"
-chimera_nu ansible_host="chimera-nu.mythologic.fr"
-
 [cerberus]
 cerberus_beta ansible_host="cerberus-beta.mythologic.fr"
 cerberus_gamma ansible_host="cerberus-gamma.mythologic.fr"
-cerberus_delta ansible_host="cerberus-delta.mythologic.fr"
-cerberus_alpha ansible_host="cerberus-alpha.mythologic.fr"
 
 [mermaid]
 mermaid_alpha ansible_host="mermaid-alpha.mythologic.fr"
@@ -58,10 +50,6 @@ cyclops
 [kibana:children]
 mermaid
 
-
-[streamr]
-xav_streamr_node
-
 [nexus:children]
 hephaestus
 
@@ -69,7 +57,6 @@ hephaestus
 # Strategic groups
 
 [olympus:children]
-chimera
 cerberus
 mermaid
 pegasus
