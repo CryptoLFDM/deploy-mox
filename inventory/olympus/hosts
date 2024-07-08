@@ -20,7 +20,7 @@ subspace
 chimera_lambda ansible_host="chimera-lambda.mythologic.fr"
 
 [nibiru]
-cosmos-alpha ansible_host="nibiru.mythologic.fr"
+nibiru-alpha ansible_host="nibiru.mythologic.fr"
 
 [subspace]
 chimera_alpha ansible_host="chimera-alpha.mythologic.fr"
