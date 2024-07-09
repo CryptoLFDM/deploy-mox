@@ -2,6 +2,7 @@
 
 - ansible.builtin.import_playbook: playbook_prepare.yml
 - ansible.builtin.import_playbook: playbook_certbot.yml
+- ansible.builtin.import_playbook: playbook_filebeat.yml
 
 - ansible.builtin.import_playbook: playbook_vault.yml
 - ansible.builtin.import_playbook: playbook_elasticsearch.yml
