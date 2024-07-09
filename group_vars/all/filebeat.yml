@@ -1,2 +1,4 @@
 ---
 filebeat_elasticsearch_url: https://pegasus-alpha.mythologic.fr:9200
+filebeat_ssl_files:
+  - /opt/certbot/eden/chain.pem
