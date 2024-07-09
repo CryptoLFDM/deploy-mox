@@ -1,3 +1,5 @@
 ---
 custom_become_method: su
 custom_vg_name: pve
+
+metricbeat_filesystem_enabled: false
