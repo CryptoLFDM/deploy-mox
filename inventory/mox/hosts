@@ -63,6 +63,7 @@ pegasus
 basilisk
 cyclops
 hephaestus
+hades
 
 [certbot:children]
 pegasus
@@ -71,3 +72,4 @@ cerberus
 basilisk
 hephaestus
 cyclops
+hades
