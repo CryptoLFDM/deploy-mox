@@ -18,13 +18,11 @@ subspace_farmer_filesystem_disk:
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
     fstype: ext4
-    opts: "m=0,T=largefile4"
   - disk: sdc
     path: /mnt/disk02
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
     fstype: ext4
-    opts: "m=0,T=largefile4"
 
 subspace_cluster_enabled: true
 
