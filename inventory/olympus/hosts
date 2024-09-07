@@ -1,5 +1,4 @@
 [olympus:children]
-nibiru
 subspace
 moi
 
@@ -13,14 +12,10 @@ olympus
 olympus
 
 [ubuntu:children]
-nibiru
 subspace
 
 [moi]
 moi-alpha ansible_host="moi.mythologic.fr"
-
-[nibiru]
-nibiru-alpha ansible_host="nibiru.mythologic.fr"
 
 [subspace]
 chimera_alpha ansible_host="chimera-alpha.mythologic.fr"

@@ -34,3 +34,7 @@ elasticsearch_free_metricbeat_password: "{{ lookup('auto_pass', 'elasticsearch/f
 elasticsearch_filebeat_password: "{{ lookup('auto_pass', 'elasticsearch/filebeat', key='moz') }}"
 elasticsearch_free_filebeat_password: "{{ lookup('auto_pass', 'elasticsearch/free_filebeat', key='moz') }}"
 
+certbot_credential_dns_ovh_endpoint: "{{ lookup('auto_pass', 'certbot/ovh', key='dns_ovh_endpoint') }}"
+certbot_credential_dns_ovh_application_key: "{{ lookup('auto_pass', 'certbot/ovh', key='dns_ovh_application_key') }}"
+certbot_credential_dns_ovh_application_secret: "{{ lookup('auto_pass', 'certbot/ovh', key='dns_ovh_application_secret') }}"
+certbot_credential_dns_ovh_consumer_key: "{{ lookup('auto_pass', 'certbot/ovh', key='dns_ovh_consumer_key') }}"
