@@ -54,4 +54,4 @@
   tags:
     - subspace_operator
   roles:
-    - role: tocard.utils.subspace
+    - role: tocard.utils.subspace_operator
