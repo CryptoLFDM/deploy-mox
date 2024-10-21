@@ -13,6 +13,7 @@ olympus
 
 [ubuntu:children]
 subspace
+subspace_operator
 
 [moi]
 moi-alpha ansible_host="moi.mythologic.fr"
@@ -40,3 +41,6 @@ chimera_iota
 chimera_alpha
 chimera_eta
 chimera_iota
+
+[subspace_operator]
+operator_subspace ansible_host="subspace-operator.mythologic.fr"

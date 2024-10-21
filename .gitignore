@@ -22,3 +22,5 @@ vault.key
 /*_local.sh
 
 *.cred
+
+.cred.yml

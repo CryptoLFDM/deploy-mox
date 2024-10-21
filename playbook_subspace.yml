@@ -48,3 +48,10 @@
     - role: tocard.utils.subspace_plotter
       tags:
         - subspace_plotter
+
+
+- hosts: subspace_operator
+  tags:
+    - subspace_operator
+  roles:
+    - role: tocard.utils.subspace
