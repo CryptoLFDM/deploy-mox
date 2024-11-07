@@ -7,16 +7,10 @@ subspace_farmer_port: 30534
 
 subspace_nats_url: nats://127.0.0.1:4222
 
-subspace_farmer_disks:
-  - path: /mnt/disk01
-    size: 800G
+subspace_farmer_disks: []
 
-subspace_farmer_filesystem_disk:
-  - disk: sdd
-    path: /mnt/disk01
-    owner: "{{ subspace_farmer_user }}"
-    group: "{{ subspace_farmer_group }}"
-
+subspace_farmer_filesystem_disk: []
 subspace_cluster_enabled: true
 
 subspace_farmer_reward_adress: st8VCipcz7xezUnM73T7szCiyNau51YYJAGovKGETUjuPy5oj
+subspace_farmer_binary: ubuntu-x86_64-skylake
