@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: Harvest static lease
-      freebox_dhcp:
+      tocard.utils.freebox_dhcp:
         app_id: fr.freebox.integration
         app_name: freebox_ansible
         app_version: 0.1

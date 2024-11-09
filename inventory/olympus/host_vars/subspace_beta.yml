@@ -1,15 +1,16 @@
 ---
 
-subspace_node_p2p_port: 60333
-subspace_node_dsn_port: 60433
+subspace_node_p2p_port: 50333
+subspace_node_dsn_port: 50433
 
-subspace_farmer_port: 60533
+subspace_farmer_port: 50533
 
 subspace_farmer_disks: []
 
 subspace_farmer_filesystem_disk: []
 
+
 subspace_cluster_enabled: true
 
 subspace_farmer_reward_adress: st8VCipcz7xezUnM73T7szCiyNau51YYJAGovKGETUjuPy5oj
-subspace_farmer_binary: ubuntu-x86_64-skylake
+

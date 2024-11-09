@@ -38,3 +38,4 @@
     group: root
     mode: "{{ item.mode | default('0640') }}"
   loop: "{{ proxmox_templates }}"
+

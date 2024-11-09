@@ -19,28 +19,26 @@ subspace_operator
 moi-alpha ansible_host="moi.mythologic.fr"
 
 [subspace]
-chimera_alpha ansible_host="chimera-alpha.mythologic.fr"
-chimera_eta ansible_host="chimera-eta.mythologic.fr"
-chimera_iota ansible_host="chimera-iota.mythologic.fr"
+subspace_alpha ansible_host="subspace-alpha.mythologic.fr"
+subspace_beta ansible_host="subspace-beta.mythologic.fr"
+subspace_gamma ansible_host="subspace-gamma.mythologic.fr"
 
 [subspace_node]
-chimera_alpha
+subspace_beta
 
 [subspace_controller]
-chimera_alpha
+subspace_beta
 
 [subspace_cache]
-chimera_alpha
+subspace_beta
 
 [subspace_plotter]
-chimera_alpha
-chimera_eta
-chimera_iota
+subspace_beta
 
 [subspace_farmer]
-chimera_alpha
-chimera_eta
-chimera_iota
+subspace_alpha
+subspace_beta
+subspace_gamma
 
 [subspace_operator]
 operator_subspace ansible_host="subspace-operator.mythologic.fr"
