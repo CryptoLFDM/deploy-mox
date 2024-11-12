@@ -25,15 +25,20 @@ subspace_gamma ansible_host="subspace-gamma.mythologic.fr"
 
 [subspace_node]
 subspace_beta
+subspace_gamma
 
 [subspace_controller]
 subspace_beta
+subspace_gamma
 
 [subspace_cache]
 subspace_beta
+subspace_gamma
 
 [subspace_plotter]
 subspace_beta
+subspace_alpha
+subspace_gamma
 
 [subspace_farmer]
 subspace_alpha

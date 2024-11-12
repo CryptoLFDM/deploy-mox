@@ -1,0 +1,21 @@
+---
+subspace_binary: ubuntu-x86_64-skylake
+
+
+subspace_node_p2p_port: 40333
+subspace_node_dsn_port: 40433
+
+subspace_farmer_port: 40533
+
+subspace_farmer_disks:
+  - path: /mnt/subspace_001
+    size: 4T
+
+subspace_farmer_filesystem_disk:
+  - disk: sdd
+    path: /mnt/subspace_001
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+
+
