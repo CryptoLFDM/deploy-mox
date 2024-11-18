@@ -1,5 +1,5 @@
 ---
 metricbeat_elasticsearch_url: https://pegasus-alpha.mythologic.fr:9200
 
-metricbeat_elasticsearch_password: "{{ lookup('auto_pass', 'elasticsearch/metricbeat', key='moz') }}"
+metricbeat_elasticsearch_password: "{{ lookup(' tocard.utils.auto_pass', 'elasticsearch/metricbeat', key='moz') }}"
 metricbeat_elasticsearch_user: metricbeat_olympus

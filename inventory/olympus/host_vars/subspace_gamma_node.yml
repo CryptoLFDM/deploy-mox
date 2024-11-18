@@ -1,0 +1,9 @@
+---
+subspace_binary: ubuntu-x86_64-skylake
+
+
+subspace_node_p2p_port: 40334
+subspace_node_dsn_port: 40434
+
+
+
