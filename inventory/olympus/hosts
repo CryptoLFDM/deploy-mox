@@ -1,6 +1,5 @@
 [olympus:children]
 subspace
-moi
 
 [certbot:children]
 olympus
@@ -15,16 +14,17 @@ olympus
 subspace
 subspace_operator
 
-[moi]
-moi-alpha ansible_host="moi.mythologic.fr"
-
 [subspace]
-subspace_alpha ansible_host="subspace-alpha.mythologic.fr"
+subspace_alpha_plotter ansible_host="subspace-alpha-plotter.mythologic.fr"
 subspace_alpha_node ansible_host="subspace-alpha-node.mythologic.fr"
-#subspace_beta ansible_host="subspace-beta.mythologic.fr"
+subspace_alpha_farmer ansible_host="subspace-alpha-farmer.mythologic.fr"
+
 subspace_beta_node ansible_host="subspace-beta-node.mythologic.fr"
-subspace_gamma ansible_host="subspace-gamma.mythologic.fr"
+subspace_beta_farmer ansible_host="subspace-beta-farmer.mythologic.fr"
+
+subspace_gamma_plotter ansible_host="subspace-gamma-plotter.mythologic.fr"
 subspace_gamma_node ansible_host="subspace-gamma-node.mythologic.fr"
+subspace_gamma_farmer ansible_host="subspace-gamma-farmer.mythologic.fr"
 
 [subspace_node]
 subspace_alpha_node
@@ -42,12 +42,13 @@ subspace_beta_node
 subspace_gamma_node
 
 [subspace_plotter]
-subspace_alpha
-subspace_gamma
+subspace_alpha_plotter
+subspace_gamma_plotter
 
 [subspace_farmer]
-subspace_alpha
-subspace_gamma
+subspace_alpha_farmer
+subspace_beta_farmer
+subspace_gamma_farmer
 
 [subspace_operator]
 operator_subspace ansible_host="subspace-operator.mythologic.fr"

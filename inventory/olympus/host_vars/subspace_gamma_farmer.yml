@@ -1,6 +1,4 @@
 ---
-subspace_binary: ubuntu-x86_64-skylake
-
 subspace_farmer_port: 40533
 
 subspace_farmer_disks:
@@ -8,7 +6,7 @@ subspace_farmer_disks:
     size: 4T
 
 subspace_farmer_filesystem_disk:
-  - disk: sdd
+  - disk: sdb
     path: /mnt/subspace_001
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"

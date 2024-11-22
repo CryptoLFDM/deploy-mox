@@ -1,0 +1,49 @@
+---
+subspace_farmer_port: 50533
+
+subspace_farmer_disks:
+  - path: /mnt/subspace_001
+    size: 980G
+  - path: /mnt/subspace_002
+    size: 2T
+  - path: /mnt/subspace_003
+    size: 4T
+  - path: /mnt/subspace_004
+    size: 4T
+  - path: /mnt/subspace_005
+    size: 4T
+  - path: /mnt/subspace_006
+    size: 4T
+
+subspace_farmer_filesystem_disk:
+  - disk: sdb
+    path: /mnt/subspace_001
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdc
+    path: /mnt/subspace_002
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdd
+    path: /mnt/subspace_003
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sde
+    path: /mnt/subspace_004
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdf
+    path: /mnt/subspace_005
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdg
+    path: /mnt/subspace_006
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+

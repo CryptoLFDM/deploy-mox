@@ -6,7 +6,7 @@
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  loop: "{{ package_to_install}}"
+  loop: "{{ package_to_install }}"
 
 - name: Remove useless / unwanted package
   become: true

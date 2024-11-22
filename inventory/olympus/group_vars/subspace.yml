@@ -9,13 +9,16 @@ subspace_plotter_nats_ip: "{{ subspace_nats_url }}"
 
 subspace_farmer_reward_adress: st8VCipcz7xezUnM73T7szCiyNau51YYJAGovKGETUjuPy5oj
 
+subspace_binary: ubuntu-x86_64-skylake
 subspace_farmer_binary: "{{ subspace_binary }}"
 subspace_plotter_binary: "{{ subspace_binary }}"
 subspace_cache_binary: "{{ subspace_binary }}"
 subspace_controller_binary: "{{ subspace_binary }}"
 
 subspace_nats_server:
-  - nats://subspace-gamma.mythologic.fr:4222
+  - nats://subspace-alpha-node.mythologic.fr:4222
+  - nats://subspace-beta-node.mythologic.fr:4222
+  - nats://subspace-gamma-node.mythologic.fr:4222
 
 subspace_controller_nats_server: "{{ subspace_nats_server }}"
 subspace_cache_nats_server: "{{ subspace_nats_server }}"

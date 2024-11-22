@@ -1,24 +1,20 @@
 ---
-subspace_binary: rocm-ubuntu-x86_64-skylake
-
-subspace_farmer_port: 50533
+subspace_farmer_port: 30533
 
 subspace_farmer_disks:
   - path: /mnt/subspace_001
-    size: 980G
+    size: 4T
   - path: /mnt/subspace_002
-    size: 2T
+    size: 4T
 
 subspace_farmer_filesystem_disk:
-  - disk: sdd
+  - disk: sdb
     path: /mnt/subspace_001
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
     fstype: ext4
-  - disk: sde
+  - disk: sdc
     path: /mnt/subspace_002
     owner: "{{ subspace_farmer_user }}"
     group: "{{ subspace_farmer_group }}"
     fstype: ext4
-
-

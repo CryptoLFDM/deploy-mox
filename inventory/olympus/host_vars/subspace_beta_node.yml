@@ -1,7 +1,4 @@
 ---
-subspace_binary: rocm-ubuntu-x86_64-skylake
-
-
 subspace_node_p2p_port: 50334
 subspace_node_dsn_port: 50434
 
