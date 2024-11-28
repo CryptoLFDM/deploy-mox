@@ -1,11 +1,8 @@
 ---
-subspace_farmer_port: 30533
 
-subspace_farmer_disks:
-  - path: /mnt/subspace_001
-    size: 4T
-  - path: /mnt/subspace_002
-    size: 4T
+subspace_node_p2p_port: 30333
+subspace_node_dsn_port: 30433
+subspace_controller_port: 30533
 
 subspace_farmer_filesystem_disk:
   - disk: sdb

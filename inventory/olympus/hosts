@@ -19,6 +19,7 @@ subspace_alpha_plotter ansible_host="subspace-alpha-plotter.mythologic.fr"
 subspace_alpha_node ansible_host="subspace-alpha-node.mythologic.fr"
 subspace_alpha_farmer ansible_host="subspace-alpha-farmer.mythologic.fr"
 
+subspace_beta_plotter ansible_host="subspace-beta-plotter.mythologic.fr"
 subspace_beta_node ansible_host="subspace-beta-node.mythologic.fr"
 subspace_beta_farmer ansible_host="subspace-beta-farmer.mythologic.fr"
 
@@ -43,6 +44,7 @@ subspace_gamma_node
 
 [subspace_plotter]
 subspace_alpha_plotter
+subspace_beta_plotter
 subspace_gamma_plotter
 
 [subspace_farmer]
