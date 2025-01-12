@@ -14,8 +14,9 @@ basilisk_alpha ansible_host="basilisk-alpha.mythologic.fr"
 [cyclops]
 cyclops_alpha ansible_host="cyclops-alpha.mythologic.fr"
 cyclops_beta ansible_host="cyclops-beta.mythologic.fr"
-cyclops_gamma ansible_host="mox09.mythologic.fr"
-cyclops_theta ansible_host="mox08.mythologic.fr"
+cyclops_gamma ansible_host="cyclops-gamma.mythologic.fr"
+cyclops_delta ansible_host="cyclops-delta.mythologic.fr"
+cyclops_epsilon ansible_host="cyclops-epsilon.mythologic.fr"
 
 [pegasus]
 pegasus_alpha ansible_host="pegasus-alpha.mythologic.fr"
