@@ -1,5 +1,35 @@
 ---
-subspace_node_p2p_port: 50334
-subspace_node_dsn_port: 50434
 
+subspace_controller_port: 30534
 
+subspace_farmer_filesystem_disk:
+  - disk: sdd
+    path: /mnt/subspace_001
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sde
+    path: /mnt/subspace_002
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdf
+    path: /mnt/subspace_003
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdg
+    path: /mnt/subspace_004
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdh
+    path: /mnt/subspace_005
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4
+  - disk: sdi
+    path: /mnt/subspace_006
+    owner: "{{ subspace_farmer_user }}"
+    group: "{{ subspace_farmer_group }}"
+    fstype: ext4

@@ -1,0 +1,5 @@
+---
+
+ansible_user: "{{ lookup('hashi_vault', hashi_mount_point_api ~ '/ansible:user ' ~ hashi_connect) }}"
+ansible_password: "{{ lookup('hashi_vault', hashi_mount_point_api ~ '/ansible:password ' ~ hashi_connect) }}"
+ansible_sudo_pass: "{{ lookup('hashi_vault', hashi_mount_point_api ~ '/ansible:password ' ~ hashi_connect) }}"

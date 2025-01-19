@@ -18,7 +18,6 @@ subspace_controller_binary: "{{ subspace_binary }}"
 subspace_nats_server:
   - nats://subspace-alpha-node.mythologic.fr:4222
   - nats://subspace-beta-node.mythologic.fr:4222
-  - nats://subspace-gamma-node.mythologic.fr:4222
 
 subspace_controller_nats_server: "{{ subspace_nats_server }}"
 subspace_cache_nats_server: "{{ subspace_nats_server }}"

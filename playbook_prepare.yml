@@ -2,6 +2,7 @@
 
 - hosts: localhost
   gather_facts: false
+  tags: freebox
   tasks:
     - name: Harvest static lease
       tocard.utils.freebox_dhcp:

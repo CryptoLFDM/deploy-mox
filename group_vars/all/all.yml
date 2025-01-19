@@ -12,7 +12,7 @@ hashi_password: "{{ lookup('ansible.builtin.env', 'VAULT_PASSWORD') }}"
 hashi_mount: secret/moz
 
 
-hashi_auth_method: "auth_method=userpass username={{ hashi_user }} password={{ hashi_password }}"
+hashi_auth_method: "auth_method=token"
 hashi_elasticsearch_path: "{{ hashi_mount_point_api }}/elasticsearch"
 hashi_haproxy_path: "{{ hashi_mount_point_api }}/haproxy"
 hashi_chia_path: "{{ hashi_mount_point_api }}/chia"
@@ -38,3 +38,8 @@ certbot_credential_dns_ovh_endpoint: "{{ lookup('tocard.utils.auto_pass', 'certb
 certbot_credential_dns_ovh_application_key: "{{ lookup('tocard.utils.auto_pass', 'certbot/ovh', key='dns_ovh_application_key') }}"
 certbot_credential_dns_ovh_application_secret: "{{ lookup('tocard.utils.auto_pass', 'certbot/ovh', key='dns_ovh_application_secret') }}"
 certbot_credential_dns_ovh_consumer_key: "{{ lookup('tocard.utils.auto_pass', 'certbot/ovh', key='dns_ovh_consumer_key') }}"
+
+
+ansible_user: "{{ lookup('hashi_vault', hashi_mount_point_api ~ '/ansible:user ' ~ hashi_connect) }}"
+ansible_password: "{{ lookup('hashi_vault', hashi_mount_point_api ~ '/ansible:password ' ~ hashi_connect) }}"
+ansible_sudo_pass: "{{ lookup('hashi_vault', hashi_mount_point_api ~ '/ansible:password ' ~ hashi_connect) }}"

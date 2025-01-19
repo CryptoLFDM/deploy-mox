@@ -8,4 +8,3 @@ elasticsearch_filebeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_p
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
 elasticsearch_mozquito_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/mozquito:moz ' ~ hashi_connect) }}"
 
-
