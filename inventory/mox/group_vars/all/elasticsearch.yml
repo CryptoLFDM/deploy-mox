@@ -8,3 +8,30 @@ elasticsearch_filebeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_p
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
 elasticsearch_mozquito_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/mozquito:moz ' ~ hashi_connect) }}"
 
+elasticsearch_version: 8.17.0
+
+elasticsearch_ssl_file:
+  - src: /opt/certbot/eden/cert.pem
+    dest: "{{ elasticsearch_ssl_path }}/cert.pem"
+    user: elasticsearch
+  - src: /opt/certbot/eden/chain.pem
+    dest: "{{ elasticsearch_ssl_path }}/chain.pem"
+    user: elasticsearch
+  - src: /opt/certbot/eden/fullchain.pem
+    dest: "{{ elasticsearch_ssl_path }}/fullchain.pem"
+    user: elasticsearch
+  - src: /opt/certbot/eden/fullchain.pem.key
+    dest: "{{ elasticsearch_ssl_path }}/fullchain.pem.key"
+    user: elasticsearch
+  - src: /etc/ssl/certs/ISRG_Root_X2.pem
+    dest: "{{ elasticsearch_ssl_path }}/ISRG_Root_X2.pem"
+    user: elasticsearch
+  - src: /etc/ssl/certs/ISRG_Root_X1.pem
+    dest: "{{ elasticsearch_ssl_path }}/ISRG_Root_X1.pem"
+    user: elasticsearch
+
+elasticsearch_ac_trusted:
+  - "{{ elasticsearch_ssl_path }}/chain.pem"
+  - "{{ elasticsearch_ssl_path }}/chain.pem"
+  - "{{ elasticsearch_ssl_path }}/ISRG_Root_X1.pem"
+  - "{{ elasticsearch_ssl_path }}/ISRG_Root_X2.pem"
