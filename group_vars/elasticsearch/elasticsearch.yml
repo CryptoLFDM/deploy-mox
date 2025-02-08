@@ -22,6 +22,9 @@ elasticsearch_custom_users:
     password: "{{ elasticsearch_free_filebeat_password }}"
     roles: [free_filebeat]
     full_name: filebeat_ext user from olympus
+  - name: minotor
+    password: "{{ elasticsearch_minotor_password }}"
+    roles: [minotor]
 
 elasticsearch_custom_roles:
   - name: metricbeat_olympus
@@ -52,4 +55,10 @@ elasticsearch_custom_roles:
     cluster_settings: [monitor, manage_index_templates, manage_ilm]
     indices:
       - names: [filebeat*]
+        privileges: [ write, create_index, manage, view_index_metadata ]
+
+  - name: minotor
+    cluster_settings: [manage_index_templates, monitor, manage_ilm]
+    indices:
+      - names: [minotor-*]
         privileges: [ write, create_index, manage, view_index_metadata ]

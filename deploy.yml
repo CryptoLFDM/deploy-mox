@@ -12,6 +12,9 @@
 - ansible.builtin.import_playbook: playbook_nexus.yml
 
 - ansible.builtin.import_playbook: playbook_subspace.yml
+- ansible.builtin.import_playbook: playbook_nfs.yml
+
+
 
 - ansible.builtin.import_playbook: playbook_metricbeat.yml
 

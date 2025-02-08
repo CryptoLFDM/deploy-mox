@@ -7,6 +7,8 @@ elasticsearch_kibana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_pat
 elasticsearch_filebeat_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/filebeat:moz ' ~ hashi_connect) }}"
 elasticsearch_grafana_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/grafana:moz ' ~ hashi_connect) }}"
 elasticsearch_mozquito_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/mozquito:moz ' ~ hashi_connect) }}"
+elasticsearch_minotor_password: "{{ lookup('hashi_vault', hashi_elasticsearch_path ~ '/minotor:moz ' ~ hashi_connect) }}"
+
 
 elasticsearch_version: 8.17.0
 

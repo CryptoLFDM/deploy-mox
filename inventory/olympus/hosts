@@ -1,5 +1,6 @@
 [olympus:children]
 subspace
+nfs_server
 
 [certbot:children]
 olympus
@@ -40,3 +41,6 @@ subspace_beta_node
 
 [subspace_operator]
 operator_subspace ansible_host="subspace-operator.mythologic.fr"
+
+[nfs_server]
+hydras_delta ansible_host="hydras-delta.mythologic.fr"
